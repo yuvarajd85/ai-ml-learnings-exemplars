@@ -3,6 +3,7 @@ Created on 2/22/2023 at 9:59 PM
 @author Yuvaraj Durairaj
 using PyCharm
 '''
+from sklearn.linear_model import LinearRegression
 def main():
     c=4
     r=3
