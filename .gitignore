@@ -2,3 +2,4 @@
 .idea/*
 .idea/*.iml
 .idea/*.xml
+notebooks/.ipynb_checkpoints/*
