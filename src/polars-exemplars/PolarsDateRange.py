@@ -29,7 +29,6 @@ def main():
     df = flatten_list_to_cols(df, "date_range")
 
     print(df.head(10))
-    df.upsample
 
 def flatten_list_to_cols(df, col_name):
     df = df.with_columns([
