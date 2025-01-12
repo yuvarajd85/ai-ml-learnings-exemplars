@@ -1,6 +1,6 @@
 import polars as pl
 from polars import DataFrame
-from bdateutil import isbday
+import polars_xdt as xdt
 
 def main():
     pl.Config.set_tbl_cols(200)
@@ -22,7 +22,8 @@ def main():
     print(df.head(3000))
 
     df = df.with_columns([
-        (pl.col("date").dt.weekday().is_in([6,7])).alias("non_bus_day")
+        (pl.col("date").dt.weekday().is_in([6,7])).alias("non_bus_day"),
+        xdt.is_workday("date").alias("bus_day")
     ])
 
     print(df.head(10))
