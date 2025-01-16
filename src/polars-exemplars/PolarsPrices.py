@@ -5,7 +5,7 @@ import polars_xdt as xdt
 def main():
     pl.Config.set_tbl_cols(200)
     pl.Config.set_tbl_rows(2000)
-    df : DataFrame = pl.read_csv("E://Practice-Datasets//archive//prices-split-adjusted.csv")
+    df : DataFrame = pl.read_csv("E://Sample-Datasets//Practice-Datasets//archive//prices-split-adjusted.csv")
 
     df = df.with_columns([
         pl.col("date").str.to_date().alias("date")
@@ -17,7 +17,7 @@ def main():
         ((pl.col("open") - pl.col("close")) / pl.col("open") * 100).alias("percentage_change")
     ])
 
-    df = df.upsample(time_column="date",every="1d",group_by=["symbol"]).select(pl.all().forward_fill()).sort(["symbol","date"])
+    df = df.sort(["symbol","date"]).upsample(time_column="date",every="1d",group_by=["symbol"]).select(pl.all().forward_fill()).sort(["symbol","date"])
 
     print(df.head(3000))
 
@@ -27,6 +27,15 @@ def main():
     ])
 
     print(df.head(10))
+
+    df = df.with_columns([
+        pl.col("date").dt.offset_by("-1mo").dt.truncate("1mo").dt.offset_by("-1d").alias("prev_month")
+    ]).with_columns([
+        (pl.col("prev_month") - pl.col("date")).dt.total_days().alias("diff_in_days")
+    ])
+
+    print(df.head(20))
+
 
 
 if __name__ == "__main__":
