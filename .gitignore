@@ -3,3 +3,6 @@
 .idea/*.iml
 .idea/*.xml
 notebooks/.ipynb_checkpoints/*
+.env
+venv
+venv/*
