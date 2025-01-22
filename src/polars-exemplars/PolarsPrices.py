@@ -37,6 +37,11 @@ def main():
     print(df.head(20))
 
 
+def dynamic_sum(row):
+    if row['diff_in_days'] >= 3:
+        return sum(row['low'].shift(offset).fill_null(0) for offset in range((1-row['diff_in_days']), 1) )
+    else:
+        return row['low']
 
 if __name__ == "__main__":
     main()
