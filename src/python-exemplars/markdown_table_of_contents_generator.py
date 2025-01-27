@@ -12,7 +12,8 @@ def main():
     toc = f"""## Table Of Contents
     """
 
-    with open(f"../resources/datasets/Learning-Journal-writeup.md",'r') as f:
+    # with open(f"../resources/datasets/Learning-Journal-writeup.md",'r') as f:
+    with open(f"../../docs/markdowns/file-type-id.md",'r') as f:
         for line in f:
             if (str(line).startswith("#") or str(line).startswith("*")):
                 header = line.replace("\n","").replace("\t","").strip()
