@@ -3,6 +3,14 @@ This repository hosts all the possible exemplars of data structures in python, p
 
 ----
 
+## README Tech Docs/ Tech Materials
+- [GenAI Data Scientist]("docs/markdowns/awesome-generative-ai-data-scientist-links.md")
+- [Coding Interview Prep]("docs/markdowns/coding-interview-prep.md")
+- [File Type ID]("docs/markdowns/file-type-id.md")
+- [Programming Language Resources]("docs/markdowns/programming-language-resources.md")
+- [System Design]("docs/markdowns/system-design-101-notes.md")
+
+----
 ## Environment Variables
 Run the below script once to set the environment variables 
 
@@ -43,3 +51,6 @@ flowchart TB
 ### Important URL's
 
 [coding-interview-university](https://github.com/jwasham/coding-interview-university)
+
+
+
