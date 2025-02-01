@@ -5,13 +5,16 @@ Module Name markdown_toc_generator_dynamic_order
 '''
 from functools import reduce
 
+import numpy as np
 from dotenv import load_dotenv
 
 load_dotenv()
 
 def main():
     paths = ["../../docs/markdowns/toc-test-1.md","../../docs/markdowns/toc-test.md"]
-    [generate_toc(file_path) for file_path in paths]
+    # [generate_toc(file_path) for file_path in paths]
+    vectorized_function = np.vectorize(generate_toc)
+    vectorized_function(paths)
 
 def generate_toc(file_path:str):
     tab_char = '  '
