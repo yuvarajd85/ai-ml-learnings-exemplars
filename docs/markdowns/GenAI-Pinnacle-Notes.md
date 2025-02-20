@@ -32,3 +32,21 @@
 ## Diffusion Models - How it works
 
 Input Image &rarr; Add Noise &rarr; Noisy Image Generated &rarr; De-Noising the Image &rarr; Required Image
+
+----
+
+## Training LLM From Scratch
+
+**Chinchilla Scaling laws**
+
+- Training data size Vs Model Size
+- No. of training tokens and model size should increase at the same rate. 
+- Token to Parameters Ratio &rarr; 20:1 
+
+**Parallel and Distributed paradigm**
+
+**Data Parallelism**
+
+**Model Parallelism**
+
+

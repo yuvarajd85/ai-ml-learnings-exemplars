@@ -1,0 +1,198 @@
+{
+  "join_spec": {
+    "Union _Relationship": [
+      {
+        "base_table": {
+          "cols":[] ,
+          "filters": [
+            {
+              "column": "grp_cd",
+              "operator": "IN",
+              "value" : "G010,G020"
+            }
+          ],
+          "table":"profile_db.profile_db_fund_unrestricted_distribution_groups_ap1"
+        },
+        "join_tables": [
+          {
+            "cols": [],
+            "filters": [
+              {
+                "column": "attribute_name",
+                "operator": "=",
+                "value": "Fund Seeded Flag"
+              },
+              {
+                "column": "attribute_value",
+                "operator": "=",
+                "value": "Y"
+              }
+            ],
+            "how": "inner",
+            "leftKeys" : [
+              "fund_port_id"
+            ],
+            "leftTable" : "profile_db.profile_db_fund_distr_groups",
+            "rightKeys": [
+              "fund_port_id"
+            ] ,
+            "table": "profile_db.profile_db_fund_attr_table"
+          },
+          {
+            "cols": [],
+            "filters": [
+              {
+                "column": "relationship_type_cd",
+                "operator": "IN",
+                "value": "FBPB,FBPC"
+              },
+              {
+                "column": "to_date",
+                "operator": ">",
+                "value": ":Current_Date"
+              }
+            ] ,
+            "how": "inner",
+            "leftKeys": [
+              "fund_port_id"
+            ],
+            "leftTable": "profile_db.profile_db_fund_attr_table",
+            "rightKeys": [
+              "fund_port_id"
+            ],
+            "table": "profile_db.profile_db_fund_unrestricted_benchmark_relationships_apl"
+          },
+          {
+            "cols": [
+              "benchmark_id",
+              "benchmark_short_name",
+              "benchmark_base_currency",
+              "benchmark_index_level_type"
+            ],
+            "filters": [],
+            "how": "inner",
+            "leftKeys": [
+              "benchmark_id"
+            ],
+            "leftTable" : "profile_db.profile_db_fund_unrestricted_benchmark_relationships_ap1",
+            "rightKeys" : [
+              "benchmark_id"
+            ],
+            "table": "profile_db.profile_db_bchmrk_attr_tablel"
+          },
+          {
+            "cols": [
+              "effective_date",
+              "return_percent"
+            ],
+            "filters": [
+              {
+                "column": "effective_date",
+                "operator": "IN",
+                "value": ": Input_Dates"
+              },
+              {
+                "column": "return_class",
+                "operator": "=",
+                "value": "RTOT"
+              },
+              {
+                "column": "time period _code",
+                "operator": "=",
+                "value": "D"
+              }
+            ],
+            "how": "inner",
+            "leftKeys": [
+              "benchmark_id"
+            ],
+            "leftTable" : "profile_db.profile_db_bchmrk_attr_tablel",
+            "rightKeys": [
+              "benchmark_id"
+            ],
+            "table": "performance_db.performance_db_returns_bchmrk_table"
+          }
+        ]
+      }
+    ],
+    "base_table": {
+      "cols": [
+        "benchmark_id",
+        "benchmark_short_name",
+        "benchmark_base_currency",
+        "benchmark_ index_level_type"
+      ],
+      "filters": [
+        {
+          "column": "custom_benchmark_flag",
+          "operator": "=",
+          "value": "Y"
+        },
+        {
+          "column": "benchmark_earliest_data_available_date",
+          "operator": "<",
+          "value": ":Current_Date"
+        }
+      ],
+      "table": "profile_db.profile_db_bchmrk_attr_table"
+    },
+    "input_daily_cutoff_time": 15,
+    "input _weekdays" : 10,
+    "join_tables": [
+      {
+        "cols": [
+          "effective_date",
+          "return percent"
+        ] ,
+        "filters": [
+          {
+            "column": "effective_date",
+            "operator": "IN",
+            "value": ": Input_Dates"
+          },
+          {
+            "column": "return_class",
+            "operator": "=",
+            "value": "RTOT"
+          },
+          {
+            "column": "time_period_code",
+            "operator": "=",
+            "value" : "D"
+          }
+        ],
+        "how": "inner",
+        "leftKeys": [
+          "benchmark_id"
+        ],
+        "leftTable": "profile_db.profile_db_bchmrk_attr_table",
+        "rightKeys": [
+          "benchmark_id"
+        ],
+        "table": "performance_db.performance_db_returns_bchmrk_table"
+      }
+    ],
+    "orderby_cols": [
+      {
+        "column": "benchmark_id",
+        "order": "ASC"
+      },
+      {
+        "column": "effective_date",
+        "order": "ASC"
+      }
+    ],
+    "output_columns_Rename_order" : {
+      "benchmark_id" : "SYMBOL",
+      "effective_date": "DATE",
+      "benchmark_short_name": "NAME",
+      "benchmark_base_currency" : "CCY",
+      "benchmark_index_level_type": "INDEX_LVL_TYP"
+    }
+  },
+  "output_delimiter": "|",
+  "output_format": "txt",
+  "transformations": {
+    "effective_date": "date_hyphen_to_slash"
+  }
+}
