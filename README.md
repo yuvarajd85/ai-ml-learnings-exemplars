@@ -1,4 +1,4 @@
-# ai-ml-learnings-exemplars
+# AI-ML-Learnings-Exemplars
 This repository hosts all the possible exemplars of data structures in python, polars, pandas, machine learning models etc
 
 ----
@@ -19,6 +19,8 @@ dotenv set dbhost ""
 dotenv set dbname ""
 dotenv set dbuser ""
 dotenv set dbcred ""
+dotenv set aws_access_key_id ""
+dotenv set aws_secret_access_key ""
 ```
 ----
 
@@ -50,7 +52,10 @@ flowchart TB
 
 ### Important URL's
 
-[coding-interview-university](https://github.com/jwasham/coding-interview-university)
+- [Coding-Interview-University](https://github.com/jwasham/coding-interview-university)
 
+- [AWS-SageMaker-Examples](https://github.com/aws/amazon-sagemaker-examples)
+
+- [Kaggle-Datasets](https://www.kaggle.com/datasets?fileType=csv)
 
 
