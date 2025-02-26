@@ -1,0 +1,10 @@
+{"instruction" : "Generate SQL query", "input" : "employee age is greater than 50", "output" : "SELECT * FROM employee WHERE age > 50;"}
+{"instruction" : "Generate SQL query", "input" : "retrieve all employees whose salary is greater than 50000", "output" : "SELECT * FROM employee WHERE salary > 50000;"}
+{"instruction" : "Generate SQL query", "input" : "fetch names and departments of employees working in IT department", "output" : "SELECT name, department FROM employee WHERE department = 'IT';"}
+{"instruction" : "Generate SQL query", "input" : "list all employees hired after 2020", "output" : "SELECT * FROM employee WHERE hire_date > '2020-01-01';"}
+{"instruction" : "Generate SQL query", "input" : "find employees who live in New York", "output" : "SELECT * FROM employee WHERE city = 'New York';"}
+{"instruction" : "Generate SQL query", "input" : "get count of employees in each department", "output" : "SELECT department, COUNT(*) FROM employee GROUP BY department;"}
+{"instruction" : "Generate SQL query", "input" : "fetch employees who have 'Manager' in their job title", "output" : "SELECT * FROM employee WHERE job_title LIKE '%Manager%';"}
+{"instruction" : "Generate SQL query", "input" : "retrieve employees sorted by their salaries in descending order", "output" : "SELECT * FROM employee ORDER BY salary DESC;"}
+{"instruction" : "Generate SQL query", "input" : "fetch employee details where department is HR and age is greater than 40", "output" : "SELECT * FROM employee WHERE department = 'HR' AND age > 40;"}
+{"instruction" : "Generate SQL query", "input" : "retrieve distinct job titles from the employee table", "output" : "SELECT DISTINCT job_title FROM employee;"}
