@@ -59,3 +59,6 @@ flowchart TB
 - [Kaggle-Datasets](https://www.kaggle.com/datasets?fileType=csv)
 
 
+```shell
+streamlit run src/streamlit-exemplars/file_search_chatbot.py
+```
