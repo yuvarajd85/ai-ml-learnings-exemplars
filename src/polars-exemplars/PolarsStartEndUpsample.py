@@ -3,6 +3,8 @@ Created on 4/28/2025 at 1:27 PM
 By yuvaraj
 Module Name: PolarsStartEndUpsample
 '''
+from datetime import date
+
 from dotenv import load_dotenv
 import polars as pl
 from polars import DataFrame
@@ -23,7 +25,11 @@ def main():
     print(df.head())
 
     df_end = df.with_columns([
-        pl.col("end_date").alias("effective_date")
+        pl.when(
+            pl.col("end_date") == date(year=9999, month=12, day=31)
+        ).then(
+            pl.lit(date.today())
+        ).otherwise(pl.col("end_date")).alias("effective_date")
     ])
 
     df = df.vstack(df_end).sort(by=["tckr","effective_date","code"]).upsample(time_column="effective_date",every="1d",group_by=["tckr","code"]).select(pl.all().forward_fill())
