@@ -6,3 +6,5 @@ notebooks/.ipynb_checkpoints/*
 .env
 venv
 venv/*
+src/*/__pycache__
+src/*/__pycache__/*
