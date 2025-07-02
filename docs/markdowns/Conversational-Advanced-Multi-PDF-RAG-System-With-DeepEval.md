@@ -1525,3 +1525,27 @@ project/
 
 ---
 
+Conversational Advanced Multi-PDF RAG System with DeepEval - 05/25/2025
+
+----
+
+## Contextual Precision Metric
+
+It measures how well your RAG pipeline’s retriever ranks relevant document chunks higher than irrelevant ones for a given input query.
+
+## Contextual Recall Metric 
+
+## Top-K 
+
+## Contextual Relevancy Metric 
+
+- Quantization
+- Freezing the parameters
+- Loss
+- Epochs 
+- Knowledge Distillation
+- Embedding fine tuning
+- N-grams / bag of words / Top-p & Top-n params 
+
+
+
