@@ -21,10 +21,11 @@ def main():
     openai.api_key = os.environ['OPENAI_API_KEY']
 
     # Initialize OpenAI Embeddings using LangChain
-    embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")  # Specify which embedding model
+    # embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")  # Specify which embedding model
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-large")  # Specify which embedding model
 
     # Connect to the Pinecone index using LangChain's Pinecone wrapper
-    pinecone_index_name = "sagemaker-guide-embeddings"
+    pinecone_index_name = "rag-text-embedding"
     vector_store = PineconeVectorStore(index_name=pinecone_index_name, embedding=embeddings)
 
     # Define the retrieval mechanism
@@ -47,7 +48,7 @@ def main():
     llm_chain = prompt_template | llm | StrOutputParser()
 
     # Retrieve documents
-    query = "What are the forcast for  Central Bay of Campeche tonight   Nov 29th, 2024?"
+    query = "What are the awards or achievements of Yuvaraj Durairaj?"
     docs = retriever.invoke(query)
     print(f"Docs: {docs}")
 

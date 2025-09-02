@@ -16,11 +16,11 @@ def main():
     pc = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
 
     print(pc.list_indexes().names())
-    pinecone_index_name = 'sagemaker-guide-embeddings'
+    pinecone_index_name = 'rag-text-embedding'
 
     if pinecone_index_name not in pc.list_indexes().names():
         pc.create_index(name=pinecone_index_name,
-                        dimension=1536,
+                        dimension=3072,
                         metric='cosine',
                         spec=ServerlessSpec(
                             cloud='aws',
