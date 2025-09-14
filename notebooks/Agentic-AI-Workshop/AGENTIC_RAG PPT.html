@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic RAG - Professional Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            overflow: hidden;
+            color: #2c3e50;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            width: 92%;
+            max-width: 1400px;
+            height: 88vh;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            padding: 50px 60px;
+            display: none;
+            animation: slideIn 0.4s ease-out;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #34495e;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #34495e;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .title-slide h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .agenda-list {
+            list-style: none;
+            padding: 15px;
+        }
+
+        .agenda-list li {
+            padding: 14px 20px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            font-size: 18px;
+            transition: all 0.3s;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .agenda-list li:hover {
+            transform: translateX(8px);
+            background: #ecf0f1;
+        }
+
+        /* LangGraph Architecture Styles */
+        .langgraph-container {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .graph-node {
+            display: inline-block;
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            margin: 10px;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .graph-node:hover {
+            background: #e8f4fd;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .node-start {
+            background: #d4edda;
+            border-color: #27ae60;
+        }
+
+        .node-condition {
+            background: #fff3cd;
+            border-color: #f39c12;
+            border-radius: 20px;
+        }
+
+        .node-action {
+            background: #e8f4fd;
+            border-color: #3498db;
+        }
+
+        .node-end {
+            background: #f8d7da;
+            border-color: #e74c3c;
+        }
+
+        .graph-arrow {
+            display: inline-block;
+            width: 40px;
+            position: relative;
+            margin: 0 -5px;
+        }
+
+        .graph-arrow::before {
+            content: '→';
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        .graph-flow {
+            text-align: center;
+            margin: 20px 0;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        .explanation-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .explanation-box h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .explanation-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #34495e;
+        }
+
+        /* RAG Process Visualization Styles */
+        .rag-pipeline {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .pipeline-step {
+            text-align: center;
+            position: relative;
+            flex: 1;
+            opacity: 0.3;
+            transition: all 0.5s;
+        }
+
+        .pipeline-step.active {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .pipeline-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 10px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .pipeline-step.active .pipeline-icon {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3); }
+        }
+
+        .pipeline-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .pipeline-arrow {
+            position: absolute;
+            right: -20px;
+            top: 35px;
+            color: #3498db;
+            font-size: 24px;
+        }
+
+        .chunks-visualization {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+
+        .chunk {
+            padding: 10px;
+            background: white;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .chunk.selected {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+        }
+
+        .chunk:hover {
+            border-color: #3498db;
+            background: #e8f4fd;
+        }
+
+        .chunk-box {
+            padding: 10px;
+            background: white;
+            border: 2px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .chunk-box.highlighted {
+            border-color: #27ae60;
+            background: #d4edda;
+            transform: scale(1.05);
+        }
+
+        .embedding-box {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .embedding-box code {
+            color: #e74c3c;
+            background: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* Enhanced Bot Demo Styles */
+        .bot-demo {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #dee2e6;
+        }
+
+        .chat-interface {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            height: 250px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+        }
+
+        .message {
+            margin: 8px 0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            animation: fadeIn 0.4s;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            margin-left: 25%;
+            text-align: right;
+        }
+
+        .bot-message {
+            background: #ecf0f1;
+            color: #2c3e50;
+            margin-right: 25%;
+        }
+
+        .system-message {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            text-align: center;
+            font-style: italic;
+            margin: 8px 15%;
+            font-size: 12px;
+        }
+
+        .retrieval-visual {
+            background: #e8f4fd;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+
+        .retrieval-visual .chunk-ref {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #3498db;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .send-btn {
+            padding: 10px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .query-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .query-btn {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #3498db;
+            border-radius: 15px;
+            color: #3498db;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .query-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 13px;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .workflow-diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .workflow-step {
+            display: inline-block;
+            background: white;
+            padding: 12px 20px;
+            margin: 8px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #dee2e6;
+        }
+
+        .workflow-arrow {
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: #3498db;
+            position: relative;
+            margin: 0 5px;
+        }
+
+        .workflow-arrow::after {
+            content: '▶';
+            position: absolute;
+            right: -8px;
+            top: -7px;
+            color: #3498db;
+            font-size: 12px;
+        }
+
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .demo-controls {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .control-btn {
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .control-btn.active {
+            background: #27ae60;
+        }
+
+        .vector-db-visual {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .db-collection {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            border: 2px solid #bdc3c7;
+            transition: all 0.3s;
+        }
+
+        .db-collection.highlighted {
+            border-color: #3498db;
+            background: #e8f4fd;
+            transform: scale(1.05);
+        }
+
+        .db-collection h4 {
+            font-size: 12px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .db-collection .doc-count {
+            font-size: 11px;
+            color: #7f8c8d;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .simple-explanation {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+
+        .simple-explanation h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .simple-explanation p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #34495e;
+        }
+
+        .analogy-box {
+            background: #fff8dc;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px dashed #f39c12;
+        }
+
+        .analogy-box::before {
+            content: "💡 Simple Analogy: ";
+            font-weight: bold;
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-number">1 / 13</div>
+            <div class="title-slide">
+                <h1>Agentic RAG Systems</h1>
+                <p class="subtitle">Advanced Retrieval-Augmented Generation Architecture</p>
+                <div style="margin-top: 40px;">
+                    <p style="font-size: 18px; color: #7f8c8d;">From Traditional to Adaptive Approaches</p>
+                    <p style="margin-top: 20px; color: #95a5a6; font-size: 16px;">Interactive Demonstration & Comprehensive Analysis</p>
+                </div>
+                <div style="margin-top: 60px;">
+                    <div style="display: flex; justify-content: center; gap: 30px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; color: #3498db; font-weight: bold;">4</div>
+                            <div style="font-size: 14px; color: #7f8c8d;">RAG Types</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; color: #27ae60; font-weight: bold;">8</div>
+                            <div style="font-size: 14px; color: #7f8c8d;">Key Metrics</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 32px; color: #e74c3c; font-weight: bold;">∞</div>
+                            <div style="font-size: 14px; color: #7f8c8d;">Possibilities</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide">
+            <div class="slide-number">2 / 13</div>
+            <h2>Presentation Agenda</h2>
+            <ul class="agenda-list">
+                <li>🔍 Understanding RAG Pipeline - Core Components</li>
+                <li>⚙️ RAG Process Flow - Interactive Demonstration</li>
+                <li>📚 Traditional RAG with Live Bot Example</li>
+                <li>🧠 Understanding Agentic RAG - LangGraph Architecture</li>
+                <li>🤖 Agentic RAG with Multi-Step Reasoning</li>
+                <li>🔍 Understanding Corrective RAG - LangGraph Architecture</li>
+                <li>🔧 Corrective RAG with Self-Validation</li>
+                <li>🎯 Understanding Adaptive RAG - LangGraph Architecture</li>
+                <li>⚡ Adaptive RAG with Dynamic Strategy</li>
+                <li>📊 Comprehensive Performance Comparison</li>
+                <li>🚀 Strategic Recommendations & Future Roadmap</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: RAG Pipeline Components -->
+        <div class="slide">
+            <div class="slide-number">3 / 13</div>
+            <h2>RAG Pipeline: Complete End-to-End Process</h2>
+            
+            <div class="rag-pipeline">
+                <div class="pipeline-step" id="step-1">
+                    <div class="pipeline-icon">📄</div>
+                    <div class="pipeline-label">Document</div>
+                    <div class="pipeline-arrow">→</div>
+                </div>
+                <div class="pipeline-step" id="step-2">
+                    <div class="pipeline-icon">✂️</div>
+                    <div class="pipeline-label">Chunking</div>
+                    <div class="pipeline-arrow">→</div>
+                </div>
+                <div class="pipeline-step" id="step-3">
+                    <div class="pipeline-icon">🔢</div>
+                    <div class="pipeline-label">Embedding</div>
+                    <div class="pipeline-arrow">→</div>
+                </div>
+                <div class="pipeline-step" id="step-4">
+                    <div class="pipeline-icon">💾</div>
+                    <div class="pipeline-label">Vector DB</div>
+                    <div class="pipeline-arrow">→</div>
+                </div>
+                <div class="pipeline-step" id="step-5">
+                    <div class="pipeline-icon">🔍</div>
+                    <div class="pipeline-label">Retrieval</div>
+                    <div class="pipeline-arrow">→</div>
+                </div>
+                <div class="pipeline-step" id="step-6">
+                    <div class="pipeline-icon">🧠</div>
+                    <div class="pipeline-label">LLM</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo" style="margin-top: 20px;">
+                <div class="demo-controls">
+                    <button class="control-btn" onclick="startFullPipelineDemo()">▶ Start Full Demo</button>
+                    <button class="control-btn" onclick="resetFullPipelineDemo()">↺ Reset</button>
+                    <input type="text" id="demo-query" class="chat-input" style="width: 300px; margin-left: 10px;" placeholder="Enter query..." value="What is the vacation policy for senior employees?">
+                </div>
+                
+                <!-- Document Display -->
+                <div id="document-display" style="display: none; margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db;">
+                    <h4 style="margin-bottom: 10px;">📄 Original Document: Employee Handbook 2024</h4>
+                    <div id="doc-content" style="font-size: 13px; line-height: 1.6; color: #2c3e50;">
+                        <strong>Section 1: Vacation Policy</strong><br>
+                        All employees are entitled to paid time off based on their tenure. Junior employees (0-3 years) receive 15 days annually. Senior employees (3+ years) receive 20 days, with an additional day for each year after 5 years of service, capped at 30 days.<br><br>
+                        <strong>Section 2: Remote Work Guidelines</strong><br>
+                        Our company supports flexible work arrangements. Employees may work remotely up to 3 days per week with manager approval. Full remote positions are available for senior roles and require quarterly office visits.<br><br>
+                        <strong>Section 3: Health Benefits</strong><br>
+                        Comprehensive health coverage includes medical, dental, and vision. Junior employees receive 80% coverage, while senior employees receive 90% coverage. Family plans are available with company contributing 70% of premiums.
+                    </div>
+                </div>
+
+                <!-- Chunks Display -->
+                <div id="chunks-display" style="display: none; margin: 15px 0;">
+                    <h4>✂️ Document Chunks</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+                        <div class="chunk-box" id="chunk-1">
+                            <strong>Chunk 1</strong><br>
+                            <small>"All employees are entitled to paid time off based on tenure. Junior employees (0-3 years) receive 15 days annually..."</small>
+                        </div>
+                        <div class="chunk-box" id="chunk-2">
+                            <strong>Chunk 2</strong><br>
+                            <small>"Senior employees (3+ years) receive 20 days, with additional day for each year after 5 years, capped at 30 days..."</small>
+                        </div>
+                        <div class="chunk-box" id="chunk-3">
+                            <strong>Chunk 3</strong><br>
+                            <small>"Our company supports flexible work arrangements. Employees may work remotely up to 3 days per week..."</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Embeddings Display -->
+                <div id="embeddings-display" style="display: none; margin: 15px 0;">
+                    <h4>🔢 Numerical Embeddings (1536-dimensional vectors)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;">
+                        <div class="embedding-box">
+                            <strong>Chunk 1 Vector</strong><br>
+                            <code style="font-size: 11px;">[0.023, -0.451, 0.832, 0.109, -0.234, 0.667, 0.445, -0.091...]</code>
+                        </div>
+                        <div class="embedding-box">
+                            <strong>Chunk 2 Vector</strong><br>
+                            <code style="font-size: 11px;">[0.156, -0.389, 0.721, 0.234, -0.198, 0.543, 0.612, -0.076...]</code>
+                        </div>
+                        <div class="embedding-box">
+                            <strong>Chunk 3 Vector</strong><br>
+                            <code style="font-size: 11px;">[0.089, -0.512, 0.445, 0.367, -0.421, 0.234, 0.789, -0.123...]</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vector DB Display -->
+                <div id="vectordb-display" style="display: none; margin: 15px 0;">
+                    <h4>💾 Vector Database Storage</h4>
+                    <div style="padding: 15px; background: #e8f4fd; border-radius: 8px; margin-top: 10px;">
+                        <table style="width: 100%; font-size: 12px;">
+                            <thead>
+                                <tr style="background: #3498db; color: white;">
+                                    <th style="padding: 8px;">Chunk ID</th>
+                                    <th style="padding: 8px;">Text Preview</th>
+                                    <th style="padding: 8px;">Vector (first 5 dims)</th>
+                                    <th style="padding: 8px;">Metadata</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: white;">
+                                    <td style="padding: 8px;">DOC_001_C1</td>
+                                    <td style="padding: 8px;">All employees are entitled...</td>
+                                    <td style="padding: 8px;">[0.023, -0.451, 0.832, 0.109, -0.234]</td>
+                                    <td style="padding: 8px;">topic: vacation, type: policy</td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td style="padding: 8px;">DOC_001_C2</td>
+                                    <td style="padding: 8px;">Senior employees receive...</td>
+                                    <td style="padding: 8px;">[0.156, -0.389, 0.721, 0.234, -0.198]</td>
+                                    <td style="padding: 8px;">topic: vacation, type: senior</td>
+                                </tr>
+                                <tr style="background: white;">
+                                    <td style="padding: 8px;">DOC_001_C3</td>
+                                    <td style="padding: 8px;">Our company supports flexible...</td>
+                                    <td style="padding: 8px;">[0.089, -0.512, 0.445, 0.367, -0.421]</td>
+                                    <td style="padding: 8px;">topic: remote, type: policy</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Query & Retrieval Display -->
+                <div id="retrieval-display" style="display: none; margin: 15px 0;">
+                    <h4>🔍 Query Processing & Retrieval</h4>
+                    <div style="padding: 15px; background: #fff3cd; border-radius: 8px; margin-top: 10px;">
+                        <p style="font-size: 13px; margin: 5px 0;"><strong>User Query:</strong> "What is the vacation policy for senior employees?"</p>
+                        <p style="font-size: 13px; margin: 5px 0;"><strong>Query Vector:</strong> <code>[0.142, -0.398, 0.756, 0.211, -0.187...]</code></p>
+                        <div style="margin-top: 10px;">
+                            <p style="font-size: 13px;"><strong>Cosine Similarity Scores:</strong></p>
+                            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                                <div style="padding: 8px; background: white; border-radius: 4px; flex: 1;">
+                                    Chunk 1: <strong>0.82</strong> ✓
+                                </div>
+                                <div style="padding: 8px; background: #d4edda; border-radius: 4px; flex: 1;">
+                                    Chunk 2: <strong>0.94</strong> ✓✓
+                                </div>
+                                <div style="padding: 8px; background: white; border-radius: 4px; flex: 1;">
+                                    Chunk 3: <strong>0.31</strong> ✗
+                                </div>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; margin-top: 10px;"><strong>Retrieved Chunks:</strong> Chunk 2 (0.94), Chunk 1 (0.82)</p>
+                    </div>
+                </div>
+
+                <!-- LLM Response Display -->
+                <div id="llm-display" style="display: none; margin: 15px 0;">
+                    <h4>🧠 LLM Generation</h4>
+                    <div style="padding: 15px; background: #d4edda; border-radius: 8px; margin-top: 10px;">
+                        <p style="font-size: 13px; margin-bottom: 10px;"><strong>Context provided to LLM:</strong></p>
+                        <div style="padding: 10px; background: white; border-radius: 4px; font-size: 12px; margin-bottom: 10px;">
+                            <em>Retrieved Context: "Senior employees (3+ years) receive 20 days, with additional day for each year after 5 years, capped at 30 days. All employees are entitled to paid time off based on tenure."</em>
+                        </div>
+                        <p style="font-size: 13px; margin-bottom: 10px;"><strong>Generated Response:</strong></p>
+                        <div style="padding: 10px; background: #e8f4fd; border-radius: 4px;">
+                            <strong>Senior employees at our company enjoy generous vacation benefits:</strong><br><br>
+                            • Base allocation: 20 days per year for employees with 3+ years of tenure<br>
+                            • Progressive increase: One additional day for each year after 5 years of service<br>
+                            • Maximum cap: 30 days total vacation time<br>
+                            • This compares favorably to junior employees who receive 15 days annually<br><br>
+                            The policy rewards long-term commitment and recognizes the value of experienced team members.
+                        </div>
+                    </div>
+                </div>
+
+                <div id="demo-status" style="text-align: center; margin-top: 15px; font-size: 14px; color: #7f8c8d; font-weight: 600;">
+                    Click "Start Full Demo" to see the complete RAG pipeline with a real example
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📊 Chunking Strategy</h3>
+                    <p style="font-size: 13px;">Documents split into 200-500 token chunks with 10-20% overlap to preserve context across boundaries</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔢 Vector Dimensions</h3>
+                    <p style="font-size: 13px;">1536-dim vectors (OpenAI) or 768-dim (BERT) encode semantic meaning for similarity matching</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Similarity Threshold</h3>
+                    <p style="font-size: 13px;">Cosine similarity >0.7 for retrieval, returning top-k chunks (typically k=3-5) to LLM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: RAG Process Flow -->
+        <div class="slide">
+            <div class="slide-number">4 / 13</div>
+            <h2>RAG Process: End-to-End Flow</h2>
+            
+            <div class="vector-db-visual" id="vector-db">
+                <div class="db-collection" id="col1">
+                    <h4>HR Policies</h4>
+                    <div class="doc-count">245 chunks</div>
+                </div>
+                <div class="db-collection" id="col2">
+                    <h4>Tech Docs</h4>
+                    <div class="doc-count">532 chunks</div>
+                </div>
+                <div class="db-collection" id="col3">
+                    <h4>Finance</h4>
+                    <div class="doc-count">189 chunks</div>
+                </div>
+                <div class="db-collection" id="col4">
+                    <h4>Legal</h4>
+                    <div class="doc-count">421 chunks</div>
+                </div>
+                <div class="db-collection" id="col5">
+                    <h4>Products</h4>
+                    <div class="doc-count">756 chunks</div>
+                </div>
+                <div class="db-collection" id="col6">
+                    <h4>Marketing</h4>
+                    <div class="doc-count">334 chunks</div>
+                </div>
+                <div class="db-collection" id="col7">
+                    <h4>Operations</h4>
+                    <div class="doc-count">267 chunks</div>
+                </div>
+                <div class="db-collection" id="col8">
+                    <h4>Strategy</h4>
+                    <div class="doc-count">198 chunks</div>
+                </div>
+            </div>
+
+            <div class="interactive-demo">
+                <h3>Query Processing Simulation</h3>
+                <div class="input-group">
+                    <input type="text" class="chat-input" id="process-input" placeholder="Enter your query..." value="What is our remote work policy?">
+                    <button class="send-btn" onclick="simulateRAGProcess()">Process Query</button>
+                </div>
+                
+                <div id="process-steps" style="margin-top: 20px;">
+                    <!-- Process steps will appear here -->
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>1️⃣ Query Embedding</h3>
+                    <p style="font-size: 13px;">Convert user query to vector representation using same embedding model as documents</p>
+                </div>
+                <div class="feature-card">
+                    <h3>2️⃣ Similarity Search</h3>
+                    <p style="font-size: 13px;">Find top-k most similar chunks using cosine similarity (threshold: 0.7+)</p>
+                </div>
+                <div class="feature-card">
+                    <h3>3️⃣ Context Formation</h3>
+                    <p style="font-size: 13px;">Combine retrieved chunks with query to form prompt context (max 4000 tokens)</p>
+                </div>
+                <div class="feature-card">
+                    <h3>4️⃣ Response Generation</h3>
+                    <p style="font-size: 13px;">LLM generates answer based on retrieved context and system instructions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Traditional RAG -->
+        <div class="slide">
+            <div class="slide-number">5 / 13</div>
+            <h2>Traditional RAG Architecture</h2>
+            
+            <div class="workflow-diagram">
+                <span class="workflow-step">User Query</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Vector Search</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Retrieve Top-K</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">LLM Generation</span>
+            </div>
+
+            <div class="bot-demo">
+                <h3>🤖 Traditional RAG Bot - Professional Demo</h3>
+                <div class="chat-interface" id="traditional-chat">
+                    <div class="message bot-message">Welcome! I'm a Traditional RAG assistant. I retrieve relevant documents and generate responses.</div>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="chat-input" id="traditional-input" placeholder="Enter your query...">
+                    <button class="send-btn" onclick="simulateTraditionalRAG()">Send</button>
+                </div>
+                <div class="query-buttons">
+                    <button class="query-btn" onclick="setTraditionalQuery('What is our vacation policy?')">Vacation Policy</button>
+                    <button class="query-btn" onclick="setTraditionalQuery('How do I submit expense reports?')">Expense Reports</button>
+                    <button class="query-btn" onclick="setTraditionalQuery('What are the security protocols?')">Security Protocols</button>
+                    <button class="query-btn" onclick="setTraditionalQuery('Explain our performance review process')">Performance Review</button>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📖 Architecture</h3>
+                    <p>Single-pass retrieval with fixed k=5 chunks, no query refinement or validation</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Performance</h3>
+                    <p>Response time: 100-300ms, Single LLM call, 75-80% accuracy on simple queries</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💡 Best For</h3>
+                    <p>FAQ systems, documentation search, simple factual queries with clear intent</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW Slide 6: Understanding Agentic RAG -->
+        <div class="slide">
+            <div class="slide-number">6 / 13</div>
+            <h2>Understanding Agentic RAG</h2>
+            
+            <div class="simple-explanation">
+                <h3>🤔 What is Agentic RAG?</h3>
+                <p>
+                    <strong>Agentic RAG</strong> is like having a smart research assistant instead of a simple search engine. 
+                    While Traditional RAG just searches and returns results, Agentic RAG can <strong>think, plan, and reason</strong> 
+                    about your question before searching.
+                </p>
+            </div>
+
+            <div class="analogy-box">
+                Imagine asking a librarian for information. A traditional librarian just brings you books matching your keywords. 
+                An "agentic" librarian first understands your real need, creates a research plan, checks multiple sources, 
+                verifies information, and then gives you a comprehensive answer.
+            </div>
+
+            <div class="langgraph-container">
+                <h3>🔄 LangGraph Architecture</h3>
+                <div class="graph-flow">
+                    <span class="graph-node node-start">Start</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Analyze Query</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-condition">Complex?</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Decompose</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Plan Strategy</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Multi-Retrieval</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Reason</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Synthesize</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-end">End</span>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🧠 Key Capabilities</h3>
+                    <p style="font-size: 14px;">
+                        • <strong>Query Understanding:</strong> Grasps intent and context<br>
+                        • <strong>Task Planning:</strong> Breaks complex questions into steps<br>
+                        • <strong>Iterative Search:</strong> Refines search based on findings<br>
+                        • <strong>Reasoning:</strong> Connects dots between information
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Real Example</h3>
+                    <p style="font-size: 14px;">
+                        <strong>Query:</strong> "Compare our benefits with competitors"<br><br>
+                        <strong>Agent Actions:</strong><br>
+                        1. Retrieve our benefits<br>
+                        2. Identify competitors<br>
+                        3. Search competitor data<br>
+                        4. Create comparison
+                    </p>
+                </div>
+            </div>
+
+            <div class="explanation-box">
+                <h4>✨ Why Use Agentic RAG?</h4>
+                <p>
+                    Perfect for complex questions requiring multiple steps, comparisons, analysis, or when you need 
+                    the system to "think" before answering. It's like upgrading from a search box to a research analyst.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Agentic RAG Implementation -->
+        <div class="slide">
+            <div class="slide-number">7 / 13</div>
+            <h2>Agentic RAG Architecture</h2>
+            
+            <div class="workflow-diagram">
+                <span class="workflow-step">Query Analysis</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Strategy Planning</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Multi-Step Retrieval</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Reasoning</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Synthesis</span>
+            </div>
+
+            <div class="bot-demo">
+                <h3>🤖 Agentic RAG Bot - Advanced Reasoning Demo</h3>
+                <div class="chat-interface" id="agentic-chat">
+                    <div class="message bot-message">Hello! I'm an Agentic RAG system with multi-step reasoning and planning capabilities.</div>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="chat-input" id="agentic-input" placeholder="Ask complex multi-part questions...">
+                    <button class="send-btn" onclick="simulateAgenticRAG()">Send</button>
+                </div>
+                <div class="query-buttons">
+                    <button class="query-btn" onclick="setAgenticQuery('Compare benefits between senior and junior employees')">Benefits Comparison</button>
+                    <button class="query-btn" onclick="setAgenticQuery('How has our remote policy evolved and what triggered changes?')">Policy Evolution</button>
+                    <button class="query-btn" onclick="setAgenticQuery('Analyze cost implications of our current vacation policy')">Cost Analysis</button>
+                    <button class="query-btn" onclick="setAgenticQuery('What training paths lead to senior positions?')">Career Paths</button>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🧠 Intelligent Planning</h3>
+                    <p>Decomposes complex queries into sub-tasks, creates retrieval strategy</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔄 Iterative Retrieval</h3>
+                    <p>5-10 retrieval cycles, dynamic chunk selection based on reasoning</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Advanced Synthesis</h3>
+                    <p>Combines multiple sources, handles contradictions, provides confidence scores</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW Slide 8: Understanding Corrective RAG -->
+        <div class="slide">
+            <div class="slide-number">8 / 13</div>
+            <h2>Understanding Corrective RAG (CRAG)</h2>
+            
+            <div class="simple-explanation">
+                <h3>🔍 What is Corrective RAG?</h3>
+                <p>
+                    <strong>Corrective RAG</strong> is like having a fact-checker built into your search system. 
+                    It doesn't just retrieve information - it <strong>evaluates and corrects</strong> its own results 
+                    to ensure you get accurate, relevant answers.
+                </p>
+            </div>
+
+            <div class="analogy-box">
+                Think of it like a GPS that double-checks its directions. If the first route seems wrong 
+                (road closed, too long), it automatically recalculates and finds a better path without you asking.
+            </div>
+
+            <div class="langgraph-container">
+                <h3>🔄 LangGraph Architecture</h3>
+                <div class="graph-flow">
+                    <span class="graph-node node-start">Start</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Retrieve</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-condition">Relevance Check</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-condition">Score > 0.7?</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Correct Query</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Re-retrieve</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Validate</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-action">Generate</span>
+                    <span class="graph-arrow"></span>
+                    <span class="graph-node node-end">End</span>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>✅ Self-Correction Steps</h3>
+                    <p style="font-size: 14px;">
+                        • <strong>Retrieve:</strong> Get initial results<br>
+                        • <strong>Evaluate:</strong> Score relevance (0-1)<br>
+                        • <strong>Correct:</strong> If score < 0.7, modify approach<br>
+                        • <strong>Verify:</strong> Ensure final results are accurate
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Real Example</h3>
+                    <p style="font-size: 14px;">
+                        <strong>Query:</strong> "Python policy"<br><br>
+                        <strong>CRAG Actions:</strong><br>
+                        1. Retrieves programming docs ❌<br>
+                        2. Low relevance (0.3)<br>
+                        3. Corrects: "vacation policy"<br>
+                        4. Retrieves HR docs ✅
+                    </p>
+                </div>
+            </div>
+
+            <div class="explanation-box">
+                <h4>✨ Why Use Corrective RAG?</h4>
+                <p>
+                    Ideal when accuracy is critical and you can't afford wrong answers. It catches and fixes 
+                    retrieval errors automatically, reducing misinformation and improving user trust.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Corrective RAG Implementation -->
+        <div class="slide">
+            <div class="slide-number">9 / 13</div>
+            <h2>Corrective RAG (CRAG) Architecture</h2>
+            
+            <div class="workflow-diagram">
+                <span class="workflow-step">Initial Retrieval</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Relevance Check</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Correction Logic</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Re-retrieval</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Validated Response</span>
+            </div>
+
+            <div class="langgraph-container" style="margin-top: 20px;">
+                <h4 style="margin-bottom: 15px;">LangGraph Implementation - Agent/Tool Pattern</h4>
+                <svg viewBox="0 0 700 300" style="width: 100%; height: 250px;">
+                    <!-- Agent Node -->
+                    <circle cx="100" cy="150" r="35" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                    <text x="100" y="145" text-anchor="middle" font-size="11">Agent</text>
+                    <text x="100" y="160" text-anchor="middle" font-size="11">(Node)</text>
+                    
+                    <!-- Function call -->
+                    <text x="100" y="200" text-anchor="middle" font-size="9" fill="#6c757d">[function_call]</text>
+                    <text x="100" y="215" text-anchor="middle" font-size="8" fill="#6c757d">Decides to execute</text>
+                    <text x="100" y="228" text-anchor="middle" font-size="8" fill="#6c757d">retrieval function</text>
+                    
+                    <!-- Should Retrieve Decision -->
+                    <polygon points="250,150 280,180 250,210 220,180" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
+                    <text x="250" y="175" text-anchor="middle" font-size="10">Should</text>
+                    <text x="250" y="190" text-anchor="middle" font-size="10">Retrieve?</text>
+                    <text x="250" y="130" text-anchor="middle" font-size="10" fill="#6c757d">(Conditional Edge)</text>
+                    
+                    <!-- Continue path -->
+                    <text x="300" y="160" font-size="10" fill="#27ae60">Continue →</text>
+                    
+                    <!-- Tool Node -->
+                    <circle cx="380" cy="150" r="35" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                    <text x="380" y="145" text-anchor="middle" font-size="11">Tool</text>
+                    <text x="380" y="160" text-anchor="middle" font-size="11">(Node)</text>
+                    
+                    <text x="380" y="195" text-anchor="middle" font-size="9" fill="#6c757d">[documents]</text>
+                    <text x="380" y="208" text-anchor="middle" font-size="8" fill="#6c757d">[function_call]</text>
+                    <text x="380" y="100" text-anchor="middle" font-size="9" fill="#6c757d">Calls retrieval tool</text>
+                    
+                    <!-- Check Relevance -->
+                    <polygon points="480,150 510,180 480,210 450,180" fill="#fff3cd" stroke="#f39c12" stroke-width="2"/>
+                    <text x="480" y="175" text-anchor="middle" font-size="10">Check</text>
+                    <text x="480" y="190" text-anchor="middle" font-size="10">Relevance</text>
+                    <text x="480" y="130" text-anchor="middle" font-size="10" fill="#6c757d">(Conditional Edge)</text>
+                    
+                    <!-- Generate Node -->
+                    <circle cx="590" cy="120" r="30" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                    <text x="590" y="125" text-anchor="middle" font-size="11">Generate</text>
+                    <text x="590" y="100" text-anchor="middle" font-size="9" fill="#6c757d">(Node)</text>
+                    
+                    <!-- Answer -->
+                    <text x="650" y="125" font-size="12">→ Answer</text>
+                    
+                    <!-- Rewrite Node -->
+                    <circle cx="380" cy="260" r="30" fill="#e8f4fd" stroke="#3498db" stroke-width="2"/>
+                    <text x="380" y="265" text-anchor="middle" font-size="11">Rewrite</text>
+                    <text x="380" y="245" text-anchor="middle" font-size="9" fill="#6c757d">(Node)</text>
+                    
+                    <!-- End Node -->
+                    <text x="250" y="260" text-anchor="middle" font-size="12" fill="#6c757d">← End</text>
+                    
+                    <!-- Arrows -->
+                    <path d="M 135 150 L 220 180" stroke="#3498db" stroke-width="2" marker-end="url(#arrow3)"/>
+                    
+                    <!-- Yes path from Should Retrieve -->
+                    <path d="M 280 180 L 345 150" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow3)"/>
+                    <text x="310" y="170" font-size="9" fill="#27ae60">Yes</text>
+                    
+                    <!-- No path from Should Retrieve -->
+                    <path d="M 250 210 L 250 250" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow3)"/>
+                    <text x="260" y="230" font-size="9" fill="#e74c3c">No</text>
+                    
+                    <!-- Tool to Check Relevance -->
+                    <path d="M 415 150 L 450 180" stroke="#3498db" stroke-width="2" marker-end="url(#arrow3)"/>
+                    
+                    <!-- Yes path from Check Relevance -->
+                    <path d="M 510 165 L 560 120" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow3)"/>
+                    <text x="535" y="145" font-size="9" fill="#27ae60">Yes</text>
+                    
+                    <!-- No path from Check Relevance -->
+                    <path d="M 480 210 L 410 260" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow3)"/>
+                    <text x="450" y="235" font-size="9" fill="#e74c3c">No</text>
+                    
+                    <!-- Rewrite back to start -->
+                    <path d="M 350 260 Q 200 300 100 185" stroke="#3498db" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrow3)"/>
+                    <text x="280" y="285" font-size="9" fill="#6c757d">Re-write</text>
+                    
+                    <!-- Arrow marker -->
+                    <defs>
+                        <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <polygon points="0 0, 10 3, 0 6" fill="#6c757d"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="bot-demo">
+                <h3>🤖 Corrective RAG Bot - Self-Validating Demo</h3>
+                <div class="chat-interface" id="corrective-chat">
+                    <div class="message bot-message">I'm a Corrective RAG system. I validate and correct my retrievals for optimal accuracy.</div>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="chat-input" id="corrective-input" placeholder="Ask questions that might need correction...">
+                    <button class="send-btn" onclick="simulateCorrectiveRAG()">Send</button>
+                </div>
+                <div class="query-buttons">
+                    <button class="query-btn" onclick="setCorrectiveQuery('What is our Mars office policy?')">Ambiguous Query</button>
+                    <button class="query-btn" onclick="setCorrectiveQuery('Benefits for contractors vs employees')">Comparative Query</button>
+                    <button class="query-btn" onclick="setCorrectiveQuery('Latest COVID guidelines')">Time-Sensitive Query</button>
+                    <button class="query-btn" onclick="setCorrectiveQuery('Blockchain integration roadmap')">Technical Query</button>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>✅ Validation Layer</h3>
+                    <p>Scores relevance (0-1), rejects chunks below 0.6 threshold, triggers correction</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔧 Correction Strategies</h3>
+                    <p>Query expansion, synonym replacement, fallback to web search if needed</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📈 Quality Metrics</h3>
+                    <p>85-90% accuracy, 2-3 LLM calls average, 500ms-1s response time</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW Slide 10: Understanding Adaptive RAG -->
+        <div class="slide">
+            <div class="slide-number">10 / 13</div>
+            <h2>Understanding Adaptive RAG</h2>
+            
+            <div class="simple-explanation">
+                <h3>🎯 What is Adaptive RAG?</h3>
+                <p>
+                    <strong>Adaptive RAG</strong> is like having a smart assistant that automatically chooses the best 
+                    approach for each question. It <strong>adapts its strategy</strong> based on query complexity - 
+                    using simple search for easy questions and advanced reasoning for complex ones.
+                </p>
+            </div>
+
+            <div class="analogy-box">
+                Like a smart car that switches between eco mode for city driving and sport mode for highways. 
+                It automatically adjusts its performance based on what you need, saving resources when possible 
+                and using full power when necessary.
+            </div>
+
+            <div class="langgraph-container">
+                <h3>🔄 LangGraph Architecture</h3>
+                <div class="graph-flow" style="white-space: normal;">
+                    <div style="text-align: center;">
+                        <span class="graph-node node-start">Start</span>
+                        <span class="graph-arrow"></span>
+                        <span class="graph-node node-action">Classify Query</span>
+                        <span class="graph-arrow"></span>
+                        <span class="graph-node node-condition">Complexity?</span>
+                    </div>
+                    <div style="margin-top: 20px; display: flex; justify-content: space-around;">
+                        <div>
+                            <span class="graph-node" style="background: #d4edda;">Simple</span><br>
+                            <span class="graph-arrow" style="transform: rotate(90deg); display: inline-block;"></span><br>
+                            <span class="graph-node node-action">Traditional RAG</span>
+                        </div>
+                        <div>
+                            <span class="graph-node" style="background: #fff3cd;">Medium</span><br>
+                            <span class="graph-arrow" style="transform: rotate(90deg); display: inline-block;"></span><br>
+                            <span class="graph-node node-action">Corrective RAG</span>
+                        </div>
+                        <div>
+                            <span class="graph-node" style="background: #f8d7da;">Complex</span><br>
+                            <span class="graph-arrow" style="transform: rotate(90deg); display: inline-block;"></span><br>
+                            <span class="graph-node node-action">Agentic RAG</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <span class="graph-arrow"></span>
+                        <span class="graph-node node-end">Optimized Response</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🚦 Smart Routing</h3>
+                    <p style="font-size: 14px;">
+                        • <strong>Simple (40%):</strong> Direct retrieval<br>
+                        • <strong>Medium (35%):</strong> With validation<br>
+                        • <strong>Complex (25%):</strong> Full reasoning<br>
+                        • <strong>Saves:</strong> 60-70% compute costs
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Real Example</h3>
+                    <p style="font-size: 14px;">
+                        <strong>"CEO email?"</strong> → Simple path (200ms)<br>
+                        <strong>"Policy differences?"</strong> → Corrective (800ms)<br>
+                        <strong>"Strategic analysis?"</strong> → Agentic (3s)<br><br>
+                        Right tool for each job!
+                    </p>
+                </div>
+            </div>
+
+            <div class="explanation-box">
+                <h4>✨ Why Use Adaptive RAG?</h4>
+                <p>
+                    Perfect for production systems handling diverse queries. It optimizes cost and speed for simple 
+                    questions while maintaining high quality for complex ones. Best of all worlds!
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Adaptive RAG Implementation -->
+        <div class="slide">
+            <div class="slide-number">11 / 13</div>
+            <h2>Adaptive RAG Architecture</h2>
+            
+            <div class="workflow-diagram">
+                <span class="workflow-step">Query Classification</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Strategy Router</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Dynamic Pipeline</span>
+                <span class="workflow-arrow"></span>
+                <span class="workflow-step">Optimized Response</span>
+            </div>
+
+            <div class="bot-demo">
+                <h3>🤖 Adaptive RAG Bot - Intelligent Routing Demo</h3>
+                <div class="chat-interface" id="adaptive-chat">
+                    <div class="message bot-message">I'm an Adaptive RAG system. I automatically select the optimal strategy for each query.</div>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="chat-input" id="adaptive-input" placeholder="Try any type of query...">
+                    <button class="send-btn" onclick="simulateAdaptiveRAG()">Send</button>
+                </div>
+                <div class="query-buttons">
+                    <button class="query-btn" onclick="setAdaptiveQuery('CEO email address')">Simple Lookup</button>
+                    <button class="query-btn" onclick="setAdaptiveQuery('Impact analysis of new regulations on our operations')">Complex Analysis</button>
+                    <button class="query-btn" onclick="setAdaptiveQuery('Team meeting schedule')">Moderate Query</button>
+                    <button class="query-btn" onclick="setAdaptiveQuery('Historical revenue trends and future projections')">Multi-faceted Query</button>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🎯 Query Classifier</h3>
+                    <p>ML model categorizes queries: Simple (40%), Moderate (35%), Complex (25%)</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🚦 Smart Routing</h3>
+                    <p>Routes to Traditional, Corrective, or Agentic pipeline based on complexity</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚖️ Optimal Balance</h3>
+                    <p>Minimizes cost for simple queries while maintaining quality for complex ones</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Comprehensive Comparison -->
+        <div class="slide">
+            <div class="slide-number">12 / 13</div>
+            <h2>Comprehensive Performance Analysis</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Traditional RAG</th>
+                        <th>Agentic RAG</th>
+                        <th>Corrective RAG</th>
+                        <th>Adaptive RAG</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cost per Query</strong></td>
+                        <td>💰 $0.01-0.02<br><small>Lowest cost</small></td>
+                        <td>💰💰💰 $0.10-0.30<br><small>Highest cost</small></td>
+                        <td>💰💰 $0.03-0.08<br><small>Moderate cost</small></td>
+                        <td>💰💰 $0.02-0.20<br><small>Variable cost</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accuracy Rate</strong></td>
+                        <td>⭐⭐⭐ 75-80%<br><small>Good for simple</small></td>
+                        <td>⭐⭐⭐⭐⭐ 90-95%<br><small>Excellent overall</small></td>
+                        <td>⭐⭐⭐⭐ 85-90%<br><small>Very good</small></td>
+                        <td>⭐⭐⭐⭐ 85-93%<br><small>Adaptive quality</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Response Latency</strong></td>
+                        <td>⚡ 100-300ms<br><small>Real-time</small></td>
+                        <td>🐢 2-5 seconds<br><small>Slow but thorough</small></td>
+                        <td>⚡⚡ 500ms-1s<br><small>Acceptable</small></td>
+                        <td>⚡⚡ 200ms-3s<br><small>Query dependent</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>LLM Calls</strong></td>
+                        <td>1 call<br><small>Single pass</small></td>
+                        <td>5-10+ calls<br><small>Multi-step</small></td>
+                        <td>2-3 calls<br><small>Validation loop</small></td>
+                        <td>1-8 calls<br><small>Dynamic</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Token Usage</strong></td>
+                        <td>2-4K tokens<br><small>Minimal</small></td>
+                        <td>15-30K tokens<br><small>Extensive</small></td>
+                        <td>5-10K tokens<br><small>Moderate</small></td>
+                        <td>3-20K tokens<br><small>Adaptive</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infrastructure</strong></td>
+                        <td>Basic<br><small>Vector DB only</small></td>
+                        <td>Complex<br><small>Multi-agent system</small></td>
+                        <td>Moderate<br><small>Validation layer</small></td>
+                        <td>Advanced<br><small>Router + pipelines</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maintenance</strong></td>
+                        <td>Low<br><small>Simple updates</small></td>
+                        <td>High<br><small>Complex tuning</small></td>
+                        <td>Medium<br><small>Threshold tuning</small></td>
+                        <td>High<br><small>Router optimization</small></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Use Cases</strong></td>
+                        <td>• FAQ bots<br>• Doc search<br>• Simple queries</td>
+                        <td>• Research<br>• Analysis<br>• Complex reasoning</td>
+                        <td>• Knowledge bases<br>• QA systems<br>• Support bots</td>
+                        <td>• Enterprise search<br>• Mixed workloads<br>• Production systems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scalability</strong></td>
+                        <td>Excellent<br><small>10K+ QPS</small></td>
+                        <td>Limited<br><small>100-500 QPS</small></td>
+                        <td>Good<br><small>1-5K QPS</small></td>
+                        <td>Very Good<br><small>5K+ QPS</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 13: Strategic Recommendations -->
+        <div class="slide">
+            <div class="slide-number">13 / 13</div>
+            <h2>Strategic Recommendations</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card" style="border-left-color: #27ae60;">
+                    <h3>🎯 For Startups</h3>
+                    <p><strong>Start with Traditional RAG</strong></p>
+                    <p style="font-size: 13px; margin-top: 10px;">Quick to implement, cost-effective, perfect for MVPs. Upgrade to Corrective RAG as you scale.</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #e74c3c;">
+                    <h3>🏢 For Enterprises</h3>
+                    <p><strong>Deploy Adaptive RAG</strong></p>
+                    <p style="font-size: 13px; margin-top: 10px;">Handles diverse query types, optimizes costs, provides consistent performance across departments.</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #f39c12;">
+                    <h3>🔬 For Research</h3>
+                    <p><strong>Leverage Agentic RAG</strong></p>
+                    <p style="font-size: 13px; margin-top: 10px;">Maximum accuracy for complex analysis, multi-hop reasoning, comprehensive research tasks.</p>
+                </div>
+                <div class="feature-card" style="border-left-color: #9b59b6;">
+                    <h3>💬 For Support Systems</h3>
+                    <p><strong>Implement Corrective RAG</strong></p>
+                    <p style="font-size: 13px; margin-top: 10px;">Self-correcting for ambiguous queries, maintains quality, reduces escalations.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; padding: 30px; background: #f8f9fa; border-radius: 10px;">
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">🚀 Future of RAG Systems</h3>
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                    <div style="margin: 10px;">
+                        <div style="font-size: 24px;">🌐</div>
+                        <div style="font-size: 14px; color: #7f8c8d;">Graph RAG</div>
+                    </div>
+                    <div style="margin: 10px;">
+                        <div style="font-size: 24px;">🔄</div>
+                        <div style="font-size: 14px; color: #7f8c8d;">Self-RAG</div>
+                    </div>
+                    <div style="margin: 10px;">
+                        <div style="font-size: 24px;">🎨</div>
+                        <div style="font-size: 14px; color: #7f8c8d;">Multi-Modal RAG</div>
+                    </div>
+                    <div style="margin: 10px;">
+                        <div style="font-size: 24px;">⚡</div>
+                        <div style="font-size: 14px; color: #7f8c8d;">Real-time RAG</div>
+                    </div>
+                    <div style="margin: 10px;">
+                        <div style="font-size: 24px;">🧬</div>
+                        <div style="font-size: 14px; color: #7f8c8d;">Hybrid RAG</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 16px; color: #34495e;">
+                    The evolution continues with emerging architectures pushing boundaries of<br>
+                    accuracy, efficiency, and intelligent information retrieval
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+        <span style="margin: 0 15px; color: #7f8c8d; font-size: 14px;">Navigate with arrow keys</span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) changeSlide(-1);
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) changeSlide(1);
+        });
+
+        // Enhanced Pipeline Demo Functions
+        let fullPipelineStep = 0;
+        let fullPipelineInterval;
+
+        function startFullPipelineDemo() {
+            fullPipelineStep = 0;
+            resetFullPipelineDemo();
+            
+            const steps = [
+                { delay: 0, action: showDocument },
+                { delay: 2000, action: showChunking },
+                { delay: 4000, action: showEmbeddings },
+                { delay: 6000, action: showVectorDB },
+                { delay: 8000, action: showRetrieval },
+                { delay: 10000, action: showLLMResponse }
+            ];
+            
+            steps.forEach(step => {
+                setTimeout(() => {
+                    step.action();
+                }, step.delay);
+            });
+        }
+
+        function resetFullPipelineDemo() {
+            // Hide all displays
+            document.getElementById('document-display').style.display = 'none';
+            document.getElementById('chunks-display').style.display = 'none';
+            document.getElementById('embeddings-display').style.display = 'none';
+            document.getElementById('vectordb-display').style.display = 'none';
+            document.getElementById('retrieval-display').style.display = 'none';
+            document.getElementById('llm-display').style.display = 'none';
+            
+            // Reset pipeline steps
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`step-${i}`).classList.remove('active');
+            }
+            
+            // Reset chunks
+            document.querySelectorAll('.chunk-box').forEach(chunk => {
+                chunk.classList.remove('highlighted');
+            });
+            
+            document.getElementById('demo-status').innerHTML = 'Click "Start Full Demo" to see the complete RAG pipeline with a real example';
+        }
+
+        function showDocument() {
+            document.getElementById('step-1').classList.add('active');
+            document.getElementById('document-display').style.display = 'block';
+            document.getElementById('demo-status').innerHTML = '📄 Step 1: Loading original document from knowledge base...';
+            
+            // Highlight relevant text
+            setTimeout(() => {
+                const docContent = document.getElementById('doc-content');
+                const html = docContent.innerHTML;
+                const highlighted = html.replace(
+                    /(Senior employees.*?30 days)/,
+                    '<span style="background: yellow;">$1</span>'
+                );
+                docContent.innerHTML = highlighted;
+            }, 1000);
+        }
+
+        function showChunking() {
+            document.getElementById('step-2').classList.add('active');
+            document.getElementById('chunks-display').style.display = 'block';
+            document.getElementById('demo-status').innerHTML = '✂️ Step 2: Splitting document into semantic chunks with overlap...';
+            
+            // Animate chunks appearing
+            const chunks = document.querySelectorAll('.chunk-box');
+            chunks.forEach((chunk, index) => {
+                setTimeout(() => {
+                    chunk.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        chunk.style.transform = 'scale(1)';
+                    }, 300);
+                }, index * 200);
+            });
+        }
+
+        function showEmbeddings() {
+            document.getElementById('step-3').classList.add('active');
+            document.getElementById('embeddings-display').style.display = 'block';
+            document.getElementById('demo-status').innerHTML = '🔢 Step 3: Converting text chunks to 1536-dimensional numerical vectors...';
+            
+            // Animate embedding boxes
+            const embBoxes = document.querySelectorAll('.embedding-box');
+            embBoxes.forEach((box, index) => {
+                setTimeout(() => {
+                    box.style.background = '#e8f4fd';
+                    setTimeout(() => {
+                        box.style.background = '#f8f9fa';
+                    }, 500);
+                }, index * 300);
+            });
+        }
+
+        function showVectorDB() {
+            document.getElementById('step-4').classList.add('active');
+            document.getElementById('vectordb-display').style.display = 'block';
+            document.getElementById('demo-status').innerHTML = '💾 Step 4: Storing vectors in database with metadata for efficient retrieval...';
+            
+            // Highlight database rows
+            const rows = document.querySelectorAll('#vectordb-display tbody tr');
+            rows.forEach((row, index) => {
+                setTimeout(() => {
+                    row.style.background = '#e8f4fd';
+                    setTimeout(() => {
+                        row.style.background = index % 2 === 0 ? 'white' : '#f8f9fa';
+                    }, 500);
+                }, index * 300);
+            });
+        }
+
+        function showRetrieval() {
+            document.getElementById('step-5').classList.add('active');
+            document.getElementById('retrieval-display').style.display = 'block';
+            document.getElementById('demo-status').innerHTML = '🔍 Step 5: Computing cosine similarity between query and stored vectors...';
+            
+            // Highlight matching chunks
+            setTimeout(() => {
+                document.getElementById('chunk-1').classList.add('highlighted');
+                document.getElementById('chunk-2').classList.add('highlighted');
+            }, 1000);
+        }
+
+        function showLLMResponse() {
+            document.getElementById('step-6').classList.add('active');
+            document.getElementById('llm-display').style.display = 'block';
+            document.getElementById('demo-status').innerHTML = '🧠 Step 6: LLM generates comprehensive response using retrieved context...';
+            
+            // Simulate typing effect for response
+            const responseDiv = document.querySelector('#llm-display .message');
+            if (responseDiv) {
+                responseDiv.style.animation = 'fadeIn 1s';
+            }
+        }
+
+        // RAG Process Simulation
+        function simulateRAGProcess() {
+            const input = document.getElementById('process-input').value;
+            const stepsDiv = document.getElementById('process-steps');
+            
+            stepsDiv.innerHTML = '';
+            
+            const steps = [
+                { delay: 500, content: '<div class="system-message">🔤 Converting query to embedding vector...</div>' },
+                { delay: 1000, content: '<div class="system-message">🔍 Searching vector database (cosine similarity)...</div>' },
+                { delay: 1500, content: '<div class="retrieval-visual">📊 Retrieved chunks: <span class="chunk-ref">HR-Policy-042</span> <span class="chunk-ref">Remote-Work-007</span> <span class="chunk-ref">Benefits-023</span></div>' },
+                { delay: 2000, content: '<div class="system-message">🧠 Sending to LLM with retrieved context...</div>' },
+                { delay: 2500, content: '<div class="bot-message" style="margin: 10px 0;">Based on retrieved documents, our remote work policy allows employees to work from home up to 3 days per week with manager approval. Full remote positions are available for certain roles.</div>' }
+            ];
+            
+            // Highlight relevant collections
+            setTimeout(() => {
+                document.getElementById('col1').classList.add('highlighted');
+                document.getElementById('col5').classList.add('highlighted');
+            }, 1000);
+            
+            steps.forEach(step => {
+                setTimeout(() => {
+                    stepsDiv.innerHTML += step.content;
+                }, step.delay);
+            });
+            
+            setTimeout(() => {
+                document.querySelectorAll('.db-collection').forEach(col => {
+                    col.classList.remove('highlighted');
+                });
+            }, 3000);
+        }
+
+        // Traditional RAG Simulation
+        function setTraditionalQuery(query) {
+            document.getElementById('traditional-input').value = query;
+        }
+
+        function simulateTraditionalRAG() {
+            const chat = document.getElementById('traditional-chat');
+            const input = document.getElementById('traditional-input');
+            const query = input.value;
+            
+            if (!query) return;
+            
+            chat.innerHTML += `<div class="message user-message">${query}</div>`;
+            
+            const responses = {
+                'What is our vacation policy?': {
+                    chunks: ['HR-POL-015', 'HR-POL-016', 'BENEFITS-003'],
+                    response: 'Employees receive 15 days PTO annually, increasing to 20 days after 3 years. Additional 10 public holidays. Unused PTO can be carried over (max 5 days).'
+                },
+                'How do I submit expense reports?': {
+                    chunks: ['FIN-PROC-008', 'FIN-PROC-009'],
+                    response: 'Submit expense reports via the Finance Portal within 30 days. Attach receipts for expenses over $25. Manager approval required for amounts over $500.'
+                },
+                'What are the security protocols?': {
+                    chunks: ['SEC-POL-001', 'SEC-POL-002', 'IT-GUIDE-045'],
+                    response: 'Mandatory 2FA for all systems, quarterly security training, clean desk policy, and encrypted storage for sensitive data. Report incidents to security@company.com immediately.'
+                },
+                'Explain our performance review process': {
+                    chunks: ['HR-PERF-001', 'HR-PERF-002'],
+                    response: 'Bi-annual reviews (June/December) with self-assessment, manager review, and 360 feedback. Ratings: Exceeds/Meets/Needs Improvement. Linked to compensation adjustments.'
+                }
+            };
+            
+            const defaultResponse = {
+                chunks: ['KB-GEN-001'],
+                response: 'Processing your query through our knowledge base. Please be more specific for better results.'
+            };
+            
+            const result = responses[query] || defaultResponse;
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">📚 Retrieving from vector database...</div>`;
+            }, 500);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="retrieval-visual">Retrieved chunks: ${result.chunks.map(c => `<span class="chunk-ref">${c}</span>`).join(' ')}</div>`;
+            }, 1000);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="message bot-message">${result.response}</div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1500);
+            
+            input.value = '';
+        }
+
+        // Agentic RAG Simulation
+        function setAgenticQuery(query) {
+            document.getElementById('agentic-input').value = query;
+        }
+
+        function simulateAgenticRAG() {
+            const chat = document.getElementById('agentic-chat');
+            const input = document.getElementById('agentic-input');
+            const query = input.value;
+            
+            if (!query) return;
+            
+            chat.innerHTML += `<div class="message user-message">${query}</div>`;
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">🤔 Analyzing query complexity and planning retrieval strategy...</div>`;
+            }, 500);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">📊 Step 1: Retrieving senior employee benefits...</div>`;
+            }, 1200);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="retrieval-visual">Retrieved: <span class="chunk-ref">BEN-SENIOR-001</span> <span class="chunk-ref">BEN-SENIOR-002</span> <span class="chunk-ref">COMP-TIER-005</span></div>`;
+            }, 1800);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">📊 Step 2: Retrieving junior employee benefits...</div>`;
+            }, 2400);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="retrieval-visual">Retrieved: <span class="chunk-ref">BEN-JUNIOR-001</span> <span class="chunk-ref">BEN-ENTRY-003</span> <span class="chunk-ref">ONBOARD-012</span></div>`;
+            }, 3000);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">🔄 Step 3: Cross-referencing and analyzing differences...</div>`;
+            }, 3600);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="message bot-message">
+                    <strong>Comprehensive Benefits Analysis:</strong><br><br>
+                    <strong>Senior Employees (5+ years):</strong><br>
+                    • 25 days PTO + 5 personal days<br>
+                    • Premium health plan (90% coverage)<br>
+                    • 401k match up to 8%<br>
+                    • Stock options vesting<br><br>
+                    <strong>Junior Employees (0-5 years):</strong><br>
+                    • 15-20 days PTO<br>
+                    • Standard health plan (80% coverage)<br>
+                    • 401k match up to 5%<br>
+                    • Restricted stock units<br><br>
+                    <strong>Key Differentiators:</strong> Seniority brings 40% more PTO, enhanced healthcare, and equity compensation advantages.
+                </div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 4500);
+            
+            input.value = '';
+        }
+
+        // Corrective RAG Simulation
+        function setCorrectiveQuery(query) {
+            document.getElementById('corrective-input').value = query;
+        }
+
+        function simulateCorrectiveRAG() {
+            const chat = document.getElementById('corrective-chat');
+            const input = document.getElementById('corrective-input');
+            const query = input.value;
+            
+            if (!query) return;
+            
+            chat.innerHTML += `<div class="message user-message">${query}</div>`;
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">🔍 Initial retrieval attempt...</div>`;
+            }, 500);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="retrieval-visual">Retrieved: <span class="chunk-ref">OFFICE-LOC-001</span> - Relevance: 0.23 ❌</div>`;
+            }, 1000);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">⚠️ Low relevance detected. Initiating correction...</div>`;
+            }, 1500);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="system-message">✅ Query reformulated: "remote international office policy"</div>`;
+            }, 2000);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="retrieval-visual">New retrieval: <span class="chunk-ref">REMOTE-POL-004</span> <span class="chunk-ref">INTL-WORK-002</span> - Relevance: 0.89 ✅</div>`;
+            }, 2500);
+            
+            setTimeout(() => {
+                chat.innerHTML += `<div class="message bot-message">
+                    No Mars office exists. However, our international remote work policy covers:<br><br>
+                    • Work from any country with proper visa<br>
+                    • Time zone overlap requirements (4 hours with HQ)<br>
+                    • Equipment shipping to 50+ countries<br>
+                    • Tax implications handled by our global mobility team<br><br>
+                    For extreme locations, contact HR for special arrangements.
+                </div>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 3000);
+            
+            input.value = '';
+        }
+
+        // Adaptive RAG Simulation
+        function setAdaptiveQuery(query) {
+            document.getElementById('adaptive-input').value = query;
+        }
+
+        function simulateAdaptiveRAG() {
+            const chat = document.getElementById('adaptive-chat');
+            const input = document.getElementById('adaptive-input');
+            const query = input.value;
+            
+            if (!query) return;
+            
+            chat.innerHTML += `<div class="message user-message">${query}</div>`;
+            
+            // Determine complexity
+            const isSimple = query.toLowerCase().includes('email') || query.toLowerCase().includes('schedule');
+            const isComplex = query.toLowerCase().includes('analysis') || query.toLowerCase().includes('projection');
+            
+            if (isSimple) {
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="system-message">🎯 Query classified as: SIMPLE - Using Traditional RAG (fast path)</div>`;
+                }, 500);
+                
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="retrieval-visual">Direct retrieval: <span class="chunk-ref">CONTACT-001</span></div>`;
+                }, 1000);
+                
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="message bot-message">CEO Email: john.doe@company.com<br>Response time: 287ms</div>`;
+                    chat.scrollTop = chat.scrollHeight;
+                }, 1500);
+            } else if (isComplex) {
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="system-message">🎯 Query classified as: COMPLEX - Engaging Agentic RAG</div>`;
+                }, 500);
+                
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="system-message">🧠 Planning multi-step analysis...</div>`;
+                }, 1200);
+                
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="message bot-message">
+                        <strong>Impact Analysis Results:</strong><br><br>
+                        • Regulatory compliance cost: +$2.3M annually<br>
+                        • Process changes: 12 departments affected<br>
+                        • Timeline: 6-month implementation<br>
+                        • Risk score: Medium (6.5/10)<br><br>
+                        Full report generated with 8 data sources analyzed.
+                    </div>`;
+                    chat.scrollTop = chat.scrollHeight;
+                }, 3000);
+            } else {
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="system-message">🎯 Query classified as: MODERATE - Using Corrective RAG</div>`;
+                }, 500);
+                
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="message bot-message">Processing with validation layer for optimal accuracy...</div>`;
+                    chat.scrollTop = chat.scrollHeight;
+                }, 1500);
+            }
+            
+            input.value = '';
+        }
+
+        // Initialize
+        document.getElementById('prevBtn').disabled = true;
+    </script>
+</body>
+</html>

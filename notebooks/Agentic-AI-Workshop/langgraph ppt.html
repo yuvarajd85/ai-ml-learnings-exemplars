@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangGraph Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVIGATION BAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #333;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff88;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #333, #444);
+            border: 2px solid #555;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: black;
+        }
+
+        .nav-btn:disabled {
+            background: #222;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+        }
+
+        .slide {
+            display: none;
+            padding: 40px;
+            min-height: calc(100vh - 70px);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .green {
+            color: #00ff88;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .purple {
+            color: #a855f7;
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        /* CHAT DEMO LAYOUT */
+        .chat-demo {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .chat-interface {
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+            border-radius: 20px;
+            padding: 25px;
+            width: 450px;
+            height: 600px;
+            border: 2px solid #444;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #444;
+            font-weight: 600;
+            color: #00ff88;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 10px;
+        }
+
+        .message {
+            margin: 15px 0;
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #007acc, #0056b3);
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .bot-message {
+            background: linear-gradient(135deg, #444, #555);
+            text-align: left;
+        }
+
+        .typing {
+            display: none;
+            background: linear-gradient(135deg, #444, #555);
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 85%;
+            margin: 15px 0;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .chat-input-area {
+            border-top: 1px solid #444;
+            padding-top: 15px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: black;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .suggestion {
+            background: #333;
+            border: 1px solid #555;
+            color: #ccc;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion:hover {
+            background: #444;
+            border-color: #00ff88;
+            color: white;
+        }
+
+        /* DIAGRAM AREA */
+        .diagram-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .diagram-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .flow-box {
+            background: #333;
+            padding: 18px 25px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            min-width: 120px;
+            text-align: center;
+            border: 2px solid #555;
+        }
+
+        .llm-box {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: black;
+            font-weight: 600;
+            border-color: #00ff88;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+        }
+
+        .tools {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tool {
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .pdf-tool { background: #ef4444; }
+        .api-tool { background: #6366f1; }
+        .db-tool { background: #8b5cf6; }
+        .calendar-tool { background: #3b82f6; }
+        .drive-tool { background: #10b981; }
+        .word-tool { background: #dc2626; }
+
+        /* TABLE STYLES */
+        .comparison-table {
+            width: 100%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #333, #2a2a2a);
+            font-weight: 600;
+            color: #00ff88;
+        }
+
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .check {
+            color: #00ff88;
+            font-size: 1.8rem;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-size: 1.8rem;
+        }
+
+        /* CHART STYLES */
+        .chart-container {
+            position: relative;
+            width: 80%;
+            height: 400px;
+            margin: 40px auto;
+        }
+
+        .chart-area {
+            position: absolute;
+            bottom: 60px;
+            left: 80px;
+            right: 60px;
+            top: 60px;
+        }
+
+        .y-axis, .x-axis {
+            position: absolute;
+            background: #00ff88;
+        }
+
+        .y-axis {
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+        }
+
+        .x-axis {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+
+        .chart-point {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00ff88;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .chart-label {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+        }
+
+        .axis-label {
+            position: absolute;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #00ff88;
+        }
+
+        .y-label {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+
+        .x-label {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* WORKFLOW STYLES */
+        .workflow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .workflow-step {
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 120px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .workflow-step.llm-step {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+            border-color: #00ff88;
+        }
+
+        /* FRAMEWORK COMPARISON */
+        .framework-comparison {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            max-width: 1100px;
+            align-items: flex-start;
+        }
+
+        .framework-section {
+            flex: 1;
+            text-align: left;
+        }
+
+        .framework-title {
+            background: linear-gradient(135deg, #00ff88, #00cc6a);
+            color: #000;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .framework-content {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .divider {
+            width: 3px;
+            background: linear-gradient(to bottom, #00ff88, #00cc6a);
+            border-radius: 2px;
+            margin: 0 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .chat-demo {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .chat-interface {
+                width: 100%;
+                max-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-title">LangGraph Tutorial</div>
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn" onclick="previousSlide()">← Previous</button>
+            <div class="slide-counter" id="slideCounter">1 / 17</div>
+            <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1><span class="green">LangGraph</span> Tutorial</h1>
+        </div>
+
+        <!-- Slide 2: Stock Market Analyst -->
+        <div class="slide">
+            <div class="chat-demo">
+                <div class="chat-interface">
+                    <div class="chat-header">Stock Market Analyst 📈</div>
+                    <div class="chat-messages" id="chatMessages2">
+                        <div class="message user-message">What is the current P/E ratio of Apple?</div>
+                        <div class="message bot-message">Apple's current P/E ratio is approximately 28.5, based on trailing twelve months earnings.</div>
+                        <div class="message user-message">What are the key financial metrics for Tesla?</div>
+                        <div class="message bot-message">Tesla's key metrics: Market Cap: $800B, P/E: 45.2, Revenue Growth: 18.7% YoY, Gross Margin: 19.3%</div>
+                    </div>
+                    <div class="typing" id="typingIndicator2">
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="input-row">
+                            <input type="text" class="chat-input" id="messageInput2" placeholder="Ask about stock analysis..." maxlength="150">
+                            <button class="send-btn" onclick="sendMessage(2)" id="sendButton2">Send</button>
+                        </div>
+                        <div class="suggestions">
+                            <button class="suggestion" onclick="askQuestion('What is Microsoft current dividend yield?', 2)">What is Microsoft current dividend yield?</button>
+                            <button class="suggestion" onclick="askQuestion('Compare Amazon and Google revenue?', 2)">Compare Amazon and Google revenue?</button>
+                            <button class="suggestion" onclick="askQuestion('What are the top performing tech stocks?', 2)">What are the top performing tech stocks?</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="diagram-area">
+                    <div class="diagram-title"><span class="green">RAG</span> Chatbot</div>
+                    <div class="flow-diagram">
+                        <div class="flow-box">Question</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-box llm-box">LLM</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-box">Answer</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                        <div class="tools">
+                            <div class="tool pdf-tool">📄 Financial Reports PDF</div>
+                        </div>
+                        <span class="arrow" style="font-size: 2.5rem;">↑</span>
+                        <div style="color: #00ff88; font-size: 0.9rem; text-align: center;">Knowledge feeds into LLM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Tool-Augmented Chatbot -->
+        <div class="slide">
+            <style>
+                .data-source-indicator {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    background: #00ff88;
+                    color: #000;
+                    padding: 4px 8px;
+                    border-radius: 12px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    display: none;
+                    animation: popIn 0.3s ease;
+                }
+                
+                @keyframes popIn {
+                    from { transform: scale(0); }
+                    to { transform: scale(1); }
+                }
+                
+                .tool-active {
+                    animation: toolPulse 1s ease-in-out;
+                    transform: scale(1.2);
+                    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+                }
+                
+                @keyframes toolPulse {
+                    0% { transform: scale(1); }
+                    50% { transform: scale(1.2); }
+                    100% { transform: scale(1); }
+                }
+                
+                .query-suggestion {
+                    background: #2a2a2a;
+                    border: 1px solid #444;
+                    color: #ccc;
+                    padding: 8px 12px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 0.85rem;
+                    margin: 4px;
+                    display: inline-block;
+                    transition: all 0.3s ease;
+                }
+                
+                .query-suggestion:hover {
+                    background: #333;
+                    border-color: #00ff88;
+                    color: white;
+                }
+                
+                .data-flow-line {
+                    position: absolute;
+                    height: 2px;
+                    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+                    animation: dataFlow 1s ease-in-out;
+                    display: none;
+                }
+                
+                @keyframes dataFlow {
+                    from { width: 0; opacity: 0; }
+                    50% { opacity: 1; }
+                    to { width: 100%; opacity: 0; }
+                }
+                
+                .retrieval-status {
+                    background: rgba(0, 255, 136, 0.1);
+                    border-left: 3px solid #00ff88;
+                    padding: 8px 12px;
+                    margin: 10px 0;
+                    border-radius: 4px;
+                    font-size: 0.85rem;
+                    color: #00ff88;
+                    display: none;
+                }
+                
+                .retrieval-status.show {
+                    display: block;
+                    animation: slideIn 0.3s ease;
+                }
+                
+                .suggestions-container {
+                    max-height: 150px;
+                    overflow-y: auto;
+                    padding: 10px 0;
+                }
+                
+                .suggestions-label {
+                    color: #888;
+                    font-size: 0.8rem;
+                    margin-bottom: 8px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+            </style>
+            
+            <div class="chat-demo">
+                <div class="chat-interface" style="position: relative;">
+                    <div class="chat-header">HR Assistant 👤</div>
+                    <div class="chat-messages" id="hrChatMessages" style="height: 350px;">
+                        <div class="message bot-message">
+                            Hello! I can help you with HR queries by accessing our employee handbook, 
+                            payroll system, and employee database. What would you like to know?
+                        </div>
+                    </div>
+                    <div class="typing" id="hrTypingIndicator">
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div id="retrievalStatus" class="retrieval-status"></div>
+                    <div class="chat-input-area">
+                        <div class="input-row">
+                            <input type="text" class="chat-input" id="hrMessageInput" placeholder="Ask about leaves, policies, payroll..." maxlength="150">
+                            <button class="send-btn" onclick="sendHRMessage()" id="hrSendButton">Send</button>
+                        </div>
+                        <div class="suggestions-container">
+                            <div class="suggestions-label">Quick Questions</div>
+                            <div>
+                                <span class="query-suggestion" onclick="askHRQuestion('How many leaves do I have left?')">Leave balance?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('What is my current salary?')">Current salary?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('What is the work from home policy?')">Work from home policy?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('Who is my reporting manager?')">My reporting manager?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('When is the next payroll date?')">Next payroll date?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('What are the company holidays for 2025?')">Company holidays?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('Show my last bonus amount')">Last bonus?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('What is my employee ID?')">Employee ID?</span>
+                                <span class="query-suggestion" onclick="askHRQuestion('What is the dress code policy?')">Dress code?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="diagram-area">
+                    <div class="diagram-title"><span class="green">Tool Augmented</span> Chatbot</div>
+                    <div class="flow-diagram" style="position: relative;">
+                        <div class="flow-box" id="questionBox">Question</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-box llm-box" id="llmBox">LLM</div>
+                        <span class="arrow">→</span>
+                        <div class="flow-box" id="answerBox">Answer</div>
+                        <div class="data-flow-line" id="dataFlowLine"></div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative;">
+                        <div class="tools" id="hrToolsContainer">
+                            <div class="tool pdf-tool" id="pdfTool" style="position: relative; transition: all 0.3s;">
+                                📄 PDF
+                                <span class="data-source-indicator" id="pdfIndicator">Retrieving...</span>
+                            </div>
+                            <div class="tool api-tool" id="apiTool" style="position: relative; transition: all 0.3s;">
+                                🔌 API
+                                <span class="data-source-indicator" id="apiIndicator">Retrieving...</span>
+                            </div>
+                            <div class="tool db-tool" id="dbTool" style="position: relative; transition: all 0.3s;">
+                                💾 Database
+                                <span class="data-source-indicator" id="dbIndicator">Retrieving...</span>
+                            </div>
+                        </div>
+                        <span class="arrow" style="font-size: 2.5rem;" id="dataArrow">↑</span>
+                        <div style="color: #00ff88; font-size: 0.9rem; text-align: center;">Tools provide data to LLM</div>
+                    </div>
+                    
+                    <!-- Mock Data Display -->
+                    <div style="margin-top: 30px; padding: 15px; background: rgba(0, 0, 0, 0.5); border-radius: 10px; border: 1px solid #333; display: none;" id="dataPreview">
+                        <div style="color: #00ff88; font-weight: 600; margin-bottom: 10px;">Data Retrieved:</div>
+                        <div id="dataContent" style="font-family: monospace; font-size: 0.85rem; color: #ccc;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                // HR Assistant Data Sources
+                const hrDataSources = {
+                    pdf: {
+                        'work from home policy': {
+                            response: 'According to the Employee Handbook (Section 3.2): Employees may work from home up to 2 days per week with manager approval. Full remote work requires VP approval and is reviewed quarterly.',
+                            data: 'PDF: Employee_Handbook_2025.pdf\nSection: 3.2 - Remote Work Policy\nPages: 45-47'
+                        },
+                        'company holidays': {
+                            response: 'Based on the Employee Handbook, 2025 company holidays include: New Year\'s Day, MLK Day, Presidents Day, Memorial Day, July 4th, Labor Day, Thanksgiving (2 days), Christmas (2 days). Total: 10 paid holidays.',
+                            data: 'PDF: Employee_Handbook_2025.pdf\nSection: 2.1 - Holiday Schedule\nPage: 23'
+                        },
+                        'dress code': {
+                            response: 'The Employee Handbook states: Business casual Monday-Thursday, casual Fridays. Client meetings require business professional attire. No torn jeans, flip-flops, or offensive graphics.',
+                            data: 'PDF: Employee_Handbook_2025.pdf\nSection: 4.5 - Dress Code Policy\nPages: 67-68'
+                        }
+                    },
+                    api: {
+                        'salary': {
+                            response: 'Your current salary retrieved from Payroll API: $95,000 per year, paid bi-weekly ($3,653.85 per paycheck before deductions).',
+                            data: 'API: /payroll/employee/12345/salary\nResponse: {salary: 95000, frequency: "bi-weekly", gross_per_period: 3653.85}'
+                        },
+                        'payroll date': {
+                            response: 'Next payroll date from the system: Friday, September 26, 2025. Direct deposit will be available by 6:00 AM.',
+                            data: 'API: /payroll/schedule/next\nResponse: {date: "2025-09-26", method: "direct_deposit", time: "06:00"}'
+                        },
+                        'bonus': {
+                            response: 'Your last bonus from Payroll API: $5,000 performance bonus paid on June 30, 2025.',
+                            data: 'API: /payroll/employee/12345/bonus/last\nResponse: {amount: 5000, type: "performance", date: "2025-06-30"}'
+                        }
+                    },
+                    database: {
+                        'leaves': {
+                            response: 'Database query shows: You have 12 vacation days and 3 sick days remaining for 2025. 5 vacation days already used.',
+                            data: 'Database: HR_Management\nTable: leave_balances\nQuery: SELECT * FROM leave_balances WHERE emp_id = 12345\nResult: {vacation: 12, sick: 3, used: 5}'
+                        },
+                        'manager': {
+                            response: 'Your reporting manager in the system: Sarah Johnson (Director of Engineering). Email: s.johnson@company.com',
+                            data: 'Database: HR_Management\nTable: org_structure\nQuery: SELECT manager_name, manager_email FROM org_structure WHERE emp_id = 12345'
+                        },
+                        'employee id': {
+                            response: 'Your employee ID from the database: EMP-12345. Department: Engineering. Start date: March 15, 2023.',
+                            data: 'Database: HR_Management\nTable: employees\nQuery: SELECT emp_id, department, start_date FROM employees WHERE user = current_user'
+                        }
+                    }
+                };
+                
+                function determineDataSource(query) {
+                    const lowerQuery = query.toLowerCase();
+                    
+                    // PDF queries
+                    if (lowerQuery.includes('policy') || lowerQuery.includes('handbook') || 
+                        lowerQuery.includes('holiday') || lowerQuery.includes('dress code') ||
+                        lowerQuery.includes('work from home')) {
+                        return 'pdf';
+                    }
+                    
+                    // API queries
+                    if (lowerQuery.includes('salary') || lowerQuery.includes('payroll') || 
+                        lowerQuery.includes('bonus') || lowerQuery.includes('pay')) {
+                        return 'api';
+                    }
+                    
+                    // Database queries
+                    if (lowerQuery.includes('leave') || lowerQuery.includes('manager') || 
+                        lowerQuery.includes('employee id') || lowerQuery.includes('balance')) {
+                        return 'database';
+                    }
+                    
+                    return 'database'; // default
+                }
+                
+                function getResponseForQuery(query) {
+                    const lowerQuery = query.toLowerCase();
+                    
+                    // Check PDF sources
+                    if (lowerQuery.includes('work from home') || lowerQuery.includes('wfh')) {
+                        return { source: 'pdf', ...hrDataSources.pdf['work from home'] };
+                    }
+                    if (lowerQuery.includes('holiday')) {
+                        return { source: 'pdf', ...hrDataSources.pdf['company holidays'] };
+                    }
+                    if (lowerQuery.includes('dress code')) {
+                        return { source: 'pdf', ...hrDataSources.pdf['dress code'] };
+                    }
+                    
+                    // Check API sources
+                    if (lowerQuery.includes('salary')) {
+                        return { source: 'api', ...hrDataSources.api['salary'] };
+                    }
+                    if (lowerQuery.includes('payroll')) {
+                        return { source: 'api', ...hrDataSources.api['payroll date'] };
+                    }
+                    if (lowerQuery.includes('bonus')) {
+                        return { source: 'api', ...hrDataSources.api['bonus'] };
+                    }
+                    
+                    // Check Database sources
+                    if (lowerQuery.includes('leave')) {
+                        return { source: 'database', ...hrDataSources.database['leaves'] };
+                    }
+                    if (lowerQuery.includes('manager')) {
+                        return { source: 'database', ...hrDataSources.database['manager'] };
+                    }
+                    if (lowerQuery.includes('employee id')) {
+                        return { source: 'database', ...hrDataSources.database['employee id'] };
+                    }
+                    
+                    // Default response
+                    return {
+                        source: 'database',
+                        response: 'I can help you with employee handbook policies, payroll information, and HR database queries. Please ask a specific question about leaves, policies, salary, or employee information.',
+                        data: 'No specific data retrieved'
+                    };
+                }
+                
+                function activateDataSource(source) {
+                    // Reset all tools
+                    ['pdfTool', 'apiTool', 'dbTool'].forEach(id => {
+                        const tool = document.getElementById(id);
+                        if (tool) {
+                            tool.classList.remove('tool-active');
+                            tool.style.opacity = '0.5';
+                        }
+                    });
+                    
+                    // Hide all indicators
+                    ['pdfIndicator', 'apiIndicator', 'dbIndicator'].forEach(id => {
+                        const indicator = document.getElementById(id);
+                        if (indicator) indicator.style.display = 'none';
+                    });
+                    
+                    // Activate the relevant tool
+                    let toolId, indicatorId;
+                    switch(source) {
+                        case 'pdf':
+                            toolId = 'pdfTool';
+                            indicatorId = 'pdfIndicator';
+                            break;
+                        case 'api':
+                            toolId = 'apiTool';
+                            indicatorId = 'apiIndicator';
+                            break;
+                        case 'database':
+                            toolId = 'dbTool';
+                            indicatorId = 'dbIndicator';
+                            break;
+                    }
+                    
+                    if (toolId) {
+                        const tool = document.getElementById(toolId);
+                        const indicator = document.getElementById(indicatorId);
+                        
+                        if (tool) {
+                            tool.classList.add('tool-active');
+                            tool.style.opacity = '1';
+                        }
+                        
+                        if (indicator) {
+                            indicator.style.display = 'block';
+                            setTimeout(() => {
+                                indicator.style.display = 'none';
+                                tool.classList.remove('tool-active');
+                                tool.style.opacity = '0.5';
+                            }, 2000);
+                        }
+                    }
+                    
+                    // Animate data arrow
+                    const arrow = document.getElementById('dataArrow');
+                    if (arrow) {
+                        arrow.style.color = '#00ff88';
+                        arrow.style.textShadow = '0 0 20px rgba(0, 255, 136, 0.8)';
+                        setTimeout(() => {
+                            arrow.style.textShadow = '0 0 10px rgba(0, 255, 136, 0.6)';
+                        }, 1000);
+                    }
+                }
+                
+                function showRetrievalStatus(source) {
+                    const status = document.getElementById('retrievalStatus');
+                    if (status) {
+                        let sourceText = source === 'pdf' ? 'Employee Handbook PDF' : 
+                                       source === 'api' ? 'Payroll API' : 'HR Database';
+                        status.textContent = `🔍 Retrieving data from ${sourceText}...`;
+                        status.classList.add('show');
+                        
+                        setTimeout(() => {
+                            status.textContent = `✅ Data retrieved successfully from ${sourceText}`;
+                            setTimeout(() => {
+                                status.classList.remove('show');
+                            }, 2000);
+                        }, 1000);
+                    }
+                }
+                
+                function showDataPreview(data) {
+                    const preview = document.getElementById('dataPreview');
+                    const content = document.getElementById('dataContent');
+                    
+                    if (preview && content) {
+                        content.textContent = data;
+                        preview.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            preview.style.display = 'none';
+                        }, 4000);
+                    }
+                }
+                
+                function addHRMessage(text, isUser = false) {
+                    const messagesContainer = document.getElementById('hrChatMessages');
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+                    messageDiv.innerHTML = text;
+                    messagesContainer.appendChild(messageDiv);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+                
+                function showHRTyping() {
+                    const typing = document.getElementById('hrTypingIndicator');
+                    if (typing) typing.style.display = 'block';
+                    return new Promise(resolve => setTimeout(resolve, 1500));
+                }
+                
+                function hideHRTyping() {
+                    const typing = document.getElementById('hrTypingIndicator');
+                    if (typing) typing.style.display = 'none';
+                }
+                
+                async function sendHRMessage() {
+                    const input = document.getElementById('hrMessageInput');
+                    const message = input.value.trim();
+                    if (!message) return;
+                    
+                    // Add user message
+                    addHRMessage(message, true);
+                    input.value = '';
+                    
+                    // Get response data
+                    const responseData = getResponseForQuery(message);
+                    
+                    // Show retrieval status
+                    showRetrievalStatus(responseData.source);
+                    
+                    // Activate data source visualization
+                    activateDataSource(responseData.source);
+                    
+                    // Show typing indicator
+                    await showHRTyping();
+                    hideHRTyping();
+                    
+                    // Add bot response
+                    addHRMessage(responseData.response);
+                    
+                    // Show data preview
+                    showDataPreview(responseData.data);
+                }
+                
+                function askHRQuestion(question) {
+                    document.getElementById('hrMessageInput').value = question;
+                    sendHRMessage();
+                }
+                
+                // Enter key support
+                document.getElementById('hrMessageInput')?.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendHRMessage();
+                    }
+                });
+            </script>
+        </div>
+
+        <!-- Slide 4: Agentic Chatbot -->
+        <div class="slide">
+            <style>
+                .workflow-status {
+                    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+                    border-radius: 15px;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    border: 2px solid #333;
+                }
+                
+                .workflow-stage {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 15px;
+                    padding: 12px;
+                    background: #222;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                }
+                
+                .workflow-stage.active {
+                    background: linear-gradient(135deg, #00ff88, #00cc6a);
+                    color: #000;
+                }
+                
+                .workflow-stage.completed {
+                    background: #1a4d2e;
+                    color: #00ff88;
+                }
+                
+                .stage-icon {
+                    font-size: 1.5rem;
+                    margin-right: 10px;
+                }
+                
+                .decision-box {
+                    background: rgba(0, 255, 136, 0.1);
+                    border: 2px solid #00ff88;
+                    padding: 15px;
+                    border-radius: 10px;
+                    margin: 15px 0;
+                    display: none;
+                }
+                
+                .decision-box.active {
+                    display: block;
+                    animation: slideIn 0.3s ease;
+                }
+                
+                @keyframes slideIn {
+                    from { opacity: 0; transform: translateY(-10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                
+                .decision-btn {
+                    background: linear-gradient(135deg, #00ff88, #00cc6a);
+                    color: #000;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                    margin: 5px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                }
+                
+                .decision-btn:hover {
+                    transform: scale(1.05);
+                }
+                
+                .reject-btn {
+                    background: linear-gradient(135deg, #ef4444, #dc2626);
+                    color: white;
+                }
+                
+                .agent-action {
+                    background: rgba(168, 85, 247, 0.1);
+                    border-left: 3px solid #a855f7;
+                    padding: 10px;
+                    margin: 10px 0;
+                    border-radius: 5px;
+                }
+                
+                .candidate-card {
+                    background: #333;
+                    border: 1px solid #555;
+                    padding: 10px;
+                    margin: 5px;
+                    border-radius: 8px;
+                    display: inline-block;
+                }
+                
+                .candidate-card.selected {
+                    border-color: #00ff88;
+                    background: rgba(0, 255, 136, 0.1);
+                }
+            </style>
+            
+            <div style="width: 100%; max-width: 1400px; margin: 0 auto;">
+                <h2 style="text-align: center; margin-bottom: 30px; color: #00ff88;">
+                    Agentic HR Recruitment Workflow
+                </h2>
+                
+                <div style="display: flex; gap: 40px; align-items: flex-start;">
+                    <!-- Left Panel: Workflow Status -->
+                    <div style="flex: 1; max-width: 600px;">
+                        <div class="workflow-status">
+                            <h3 style="color: #00ff88; margin-bottom: 15px;">Recruitment Pipeline Status</h3>
+                            
+                            <div id="stage1" class="workflow-stage">
+                                <div><span class="stage-icon">📝</span> Draft Job Description</div>
+                                <span id="stage1-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage2" class="workflow-stage">
+                                <div><span class="stage-icon">💼</span> LinkedIn Posting Approval</div>
+                                <span id="stage2-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage3" class="workflow-stage">
+                                <div><span class="stage-icon">📢</span> Post on LinkedIn</div>
+                                <span id="stage3-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage4" class="workflow-stage">
+                                <div><span class="stage-icon">📬</span> Monitor Applications</div>
+                                <span id="stage4-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage5" class="workflow-stage">
+                                <div><span class="stage-icon">🔍</span> Screen Resumes</div>
+                                <span id="stage5-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage6" class="workflow-stage">
+                                <div><span class="stage-icon">📅</span> Schedule Interviews</div>
+                                <span id="stage6-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage7" class="workflow-stage">
+                                <div><span class="stage-icon">✅</span> Send Offer Letter</div>
+                                <span id="stage7-status">⏳</span>
+                            </div>
+                            
+                            <div id="stage8" class="workflow-stage">
+                                <div><span class="stage-icon">🚀</span> Onboarding</div>
+                                <span id="stage8-status">⏳</span>
+                            </div>
+                        </div>
+                        
+                        <button id="startWorkflow" class="decision-btn" style="width: 100%; font-size: 1.1rem;">
+                            🤖 Start Recruitment Workflow
+                        </button>
+                        
+                        <button id="resetWorkflow" class="decision-btn reject-btn" style="width: 100%; font-size: 1.1rem; display: none;">
+                            🔄 Reset Workflow
+                        </button>
+                    </div>
+                    
+                    <!-- Right Panel: Agent Actions and Decisions -->
+                    <div style="flex: 1;">
+                        <div class="chat-interface" style="height: 650px;">
+                            <div class="chat-header">AI Recruitment Agent 🤖</div>
+                            <div class="chat-messages" id="agentMessages" style="padding: 15px;">
+                                <div class="message bot-message">
+                                    Ready to handle the complete recruitment process for your Data Science position. 
+                                    Click "Start Recruitment Workflow" to begin.
+                                </div>
+                            </div>
+                            
+                            <!-- Decision Points -->
+                            <div id="decision1" class="decision-box">
+                                <p style="margin-bottom: 10px;">Should I post this job description on the company LinkedIn page?</p>
+                                <button class="decision-btn" onclick="handleDecision('approve', 1)">✅ Yes, Post It</button>
+                                <button class="decision-btn reject-btn" onclick="handleDecision('reject', 1)">❌ No, Revise</button>
+                            </div>
+                            
+                            <div id="decision2" class="decision-box">
+                                <p style="margin-bottom: 10px;">3 candidates meet our criteria. Should I proceed with interview scheduling?</p>
+                                <div id="candidateList"></div>
+                                <button class="decision-btn" onclick="handleDecision('approve', 2)">✅ Schedule Interviews</button>
+                                <button class="decision-btn reject-btn" onclick="handleDecision('reject', 2)">❌ Wait for More</button>
+                            </div>
+                            
+                            <div id="decision3" class="decision-box">
+                                <p style="margin-bottom: 10px;">Interview feedback received. Candidate Sarah Chen scored highest. Send offer?</p>
+                                <button class="decision-btn" onclick="handleDecision('approve', 3)">✅ Send Offer</button>
+                                <button class="decision-btn reject-btn" onclick="handleDecision('reject', 3)">❌ Consider Others</button>
+                            </div>
+                        </div>
+                        
+                        <!-- System Integration Indicators -->
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div class="tools">
+                                <div id="tool-linkedin" class="tool api-tool" style="opacity: 0.3;">💼 LinkedIn API</div>
+                                <div id="tool-email" class="tool calendar-tool" style="opacity: 0.3;">📧 Email System</div>
+                                <div id="tool-ats" class="tool db-tool" style="opacity: 0.3;">💾 ATS Database</div>
+                                <div id="tool-calendar" class="tool calendar-tool" style="opacity: 0.3;">📅 Calendar</div>
+                                <div id="tool-docs" class="tool word-tool" style="opacity: 0.3;">📄 Doc Generator</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                let workflowState = {
+                    currentStage: 0,
+                    isRunning: false
+                };
+                
+                const workflowStages = [
+                    { id: 'stage1', message: '📝 Drafting job description for Senior Data Scientist position...', tool: 'tool-docs', delay: 2000 },
+                    { id: 'stage2', message: '✅ Job description created:\n\n<strong>Senior Data Scientist - PaiGPT</strong>\n• 5+ years ML experience\n• Python, TensorFlow, PyTorch\n• Statistical modeling expertise\n• $150k-200k + equity', decision: 1, delay: 1500 },
+                    { id: 'stage3', message: '📢 Posting to PaiGPT company LinkedIn page...', tool: 'tool-linkedin', delay: 2000 },
+                    { id: 'stage4', message: '📬 Monitoring applications... 10 candidates applied in the first 48 hours.', tool: 'tool-ats', delay: 2500 },
+                    { id: 'stage5', message: '🔍 Screening resumes using AI matching...\n\n<strong>Top 3 Candidates:</strong>\n1. Sarah Chen - 95% match\n2. Michael Rodriguez - 92% match\n3. Priya Sharma - 90% match', decision: 2, delay: 3000 },
+                    { id: 'stage6', message: '📅 Scheduling interviews with the technical team...\n\nEmails sent to candidates with calendar links.\nInterviews scheduled for next week.', tool: 'tool-calendar', delay: 2000 },
+                    { id: 'stage7', message: '📊 Interview feedback collected:\n• Sarah Chen: Excellent technical skills, great culture fit\n• Michael Rodriguez: Strong technical, concerns about availability\n• Priya Sharma: Good technical, needs mentoring', decision: 3, delay: 2500 },
+                    { id: 'stage8', message: '📧 Offer letter sent to Sarah Chen!\nSalary: $180,000 + 0.5% equity\nStart date: Next month', tool: 'tool-email', delay: 2000 },
+                    { id: 'stage9', message: '🎉 Sarah accepted! Initiating onboarding:\n✅ IT equipment ordered\n✅ Accounts created\n✅ Welcome packet sent\n✅ Buddy assigned\n✅ First week schedule created', tool: 'tool-docs', delay: 2000 }
+                ];
+                
+                function addAgentMessage(text) {
+                    const messagesContainer = document.getElementById('agentMessages');
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'agent-action';
+                    messageDiv.innerHTML = text;
+                    messagesContainer.appendChild(messageDiv);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+                
+                function activateTool(toolId) {
+                    const tool = document.getElementById(toolId);
+                    if (tool) {
+                        tool.style.opacity = '1';
+                        tool.style.transform = 'scale(1.1)';
+                        setTimeout(() => {
+                            tool.style.transform = 'scale(1)';
+                        }, 300);
+                    }
+                }
+                
+                function deactivateAllTools() {
+                    ['tool-linkedin', 'tool-email', 'tool-ats', 'tool-calendar', 'tool-docs'].forEach(id => {
+                        const tool = document.getElementById(id);
+                        if (tool) tool.style.opacity = '0.3';
+                    });
+                }
+                
+                async function runWorkflowStage(stageIndex) {
+                    if (stageIndex >= workflowStages.length) {
+                        addAgentMessage('✅ <strong>Recruitment workflow completed successfully!</strong>');
+                        document.getElementById('resetWorkflow').style.display = 'block';
+                        workflowState.isRunning = false;
+                        return;
+                    }
+                    
+                    const stage = workflowStages[stageIndex];
+                    const stageElement = document.getElementById(stage.id);
+                    
+                    if (stageElement) {
+                        stageElement.classList.add('active');
+                        
+                        // Deactivate all tools, then activate current one
+                        deactivateAllTools();
+                        if (stage.tool) {
+                            activateTool(stage.tool);
+                        }
+                        
+                        addAgentMessage(stage.message);
+                        
+                        await new Promise(resolve => setTimeout(resolve, stage.delay));
+                        
+                        if (stage.decision) {
+                            // Show decision box
+                            document.getElementById(`decision${stage.decision}`).classList.add('active');
+                            
+                            if (stage.decision === 2) {
+                                // Show candidate cards
+                                document.getElementById('candidateList').innerHTML = `
+                                    <div class="candidate-card selected">👩 Sarah Chen - 95% match</div>
+                                    <div class="candidate-card selected">👨 Michael Rodriguez - 92% match</div>
+                                    <div class="candidate-card selected">👩 Priya Sharma - 90% match</div>
+                                `;
+                            }
+                        } else {
+                            // Mark as completed and continue
+                            stageElement.classList.remove('active');
+                            stageElement.classList.add('completed');
+                            const statusSpan = document.getElementById(`${stage.id}-status`);
+                            if (statusSpan) statusSpan.textContent = '✅';
+                            
+                            workflowState.currentStage++;
+                            runWorkflowStage(workflowState.currentStage);
+                        }
+                    }
+                }
+                
+                function handleDecision(action, decisionNumber) {
+                    const decisionBox = document.getElementById(`decision${decisionNumber}`);
+                    decisionBox.classList.remove('active');
+                    
+                    const currentStageElement = document.getElementById(workflowStages[workflowState.currentStage].id);
+                    currentStageElement.classList.remove('active');
+                    currentStageElement.classList.add('completed');
+                    const statusSpan = document.getElementById(`${workflowStages[workflowState.currentStage].id}-status`);
+                    if (statusSpan) statusSpan.textContent = '✅';
+                    
+                    if (action === 'approve') {
+                        addAgentMessage(`✅ HR approved - proceeding with next step...`);
+                        workflowState.currentStage++;
+                        setTimeout(() => runWorkflowStage(workflowState.currentStage), 1000);
+                    } else {
+                        addAgentMessage(`⚠️ HR requested revision - adjusting approach...`);
+                        setTimeout(() => {
+                            addAgentMessage(`📝 Revising based on feedback...`);
+                            workflowState.currentStage++;
+                            setTimeout(() => runWorkflowStage(workflowState.currentStage), 1500);
+                        }, 1000);
+                    }
+                }
+                
+                document.getElementById('startWorkflow').addEventListener('click', function() {
+                    if (!workflowState.isRunning) {
+                        workflowState.isRunning = true;
+                        workflowState.currentStage = 0;
+                        this.style.display = 'none';
+                        document.getElementById('agentMessages').innerHTML = '';
+                        addAgentMessage('🚀 <strong>Starting recruitment workflow for Data Science position...</strong>');
+                        setTimeout(() => runWorkflowStage(0), 1000);
+                    }
+                });
+                
+                document.getElementById('resetWorkflow').addEventListener('click', function() {
+                    // Reset all stages
+                    for (let i = 1; i <= 8; i++) {
+                        const stage = document.getElementById(`stage${i}`);
+                        if (stage) {
+                            stage.classList.remove('active', 'completed');
+                            document.getElementById(`stage${i}-status`).textContent = '⏳';
+                        }
+                    }
+                    
+                    // Hide decision boxes
+                    for (let i = 1; i <= 3; i++) {
+                        const decision = document.getElementById(`decision${i}`);
+                        if (decision) decision.classList.remove('active');
+                    }
+                    
+                    // Reset tools
+                    deactivateAllTools();
+                    
+                    // Reset UI
+                    document.getElementById('agentMessages').innerHTML = `
+                        <div class="message bot-message">
+                            Ready to handle the complete recruitment process for your Data Science position. 
+                            Click "Start Recruitment Workflow" to begin.
+                        </div>
+                    `;
+                    
+                    this.style.display = 'none';
+                    document.getElementById('startWorkflow').style.display = 'block';
+                    
+                    workflowState = { currentStage: 0, isRunning: false };
+                });
+                
+                // Make handleDecision globally accessible
+                window.handleDecision = handleDecision;
+            </script>
+        </div>
+
+        <!-- Slide 5: AI Agent Definition -->
+        <div class="slide">
+            <h1><span class="green">AI Agent</span> can make decisions and take actions on its own to achieve a goal without being told exactly what to do at every step.</h1>
+        </div>
+
+        <!-- Slide 6: Agentic AI Definition -->
+        <div class="slide">
+            <h1><span class="green">AI Agent</span> can make decisions and take actions on its own to achieve a goal without being told exactly what to do at every step.</h1>
+            <br><br>
+            <h1><span class="green">Agentic AI</span> is a system using one or more agents</h1>
+        </div>
+
+        <!-- Slide 7: Capabilities Comparison -->
+        <div class="slide">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Reactive</th>
+                        <th>Tool Use</th>
+                        <th>Reasoning</th>
+                        <th>Planning</th>
+                        <th>Proactivity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>RAG Chatbot</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tool-Augmented Chatbot</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agentic AI</strong></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 8: Reliability vs Control Chart -->
+        <div class="slide">
+            <div class="chart-container">
+                <div class="axis-label y-label">Reliability</div>
+                <div class="axis-label x-label">Agent's level of control</div>
+                
+                <div class="chart-area">
+                    <div class="y-axis"></div>
+                    <div class="x-axis"></div>
+                    
+                    <div class="chart-point" style="top: 20%; left: 20%;"></div>
+                    <div class="chart-label" style="top: 15%; left: 10%;">Simple Agent</div>
+                    
+                    <div class="chart-point" style="top: 70%; right: 20%;"></div>
+                    <div class="chart-label" style="top: 75%; right: 10%;">Autonomous Agent</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: LangGraph Positioning -->
+        <div class="slide">
+            <div class="chart-container">
+                <div class="axis-label y-label">Reliability</div>
+                <div class="axis-label x-label">Agent's level of control</div>
+                
+                <div class="chart-area">
+                    <div class="y-axis"></div>
+                    <div class="x-axis"></div>
+                    
+                    <div class="chart-point" style="top: 20%; left: 20%;"></div>
+                    <div class="chart-label" style="top: 15%; left: 10%;">Simple Agent</div>
+                    
+                    <div class="chart-point" style="top: 40%; left: 50%; background: #a855f7;"></div>
+                    <div class="chart-label" style="top: 35%; left: 40%; background: rgba(168, 85, 247, 0.2); border-color: #a855f7;">LangGraph</div>
+                    
+                    <div class="chart-point" style="top: 70%; right: 20%;"></div>
+                    <div class="chart-label" style="top: 75%; right: 10%;">Autonomous Agent</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: LangGraph Value Proposition -->
+        <div class="slide">
+            <h1><span class="green">LangGraph</span> helps you build reliable agents</h1>
+        </div>
+
+        <!-- Slide 11: Framework Comparison -->
+        <div class="slide">
+            <div class="framework-comparison">
+                <div class="framework-section">
+                    <div class="framework-title">LangGraph</div>
+                    <div class="framework-content">
+                        Provides a more expressive framework to build highly customizable, complex agents
+                        <br><br>
+                        LangGraph excels at graph-based, stateful orchestration - e.g. multi-step, workflows with memory, streaming, human-in-the-loop control
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="framework-section">
+                    <div class="framework-title" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">Other Frameworks</div>
+                    <div class="framework-content">
+                        <div style="margin-bottom: 20px;">
+                            <div style="background: #333; color: #00ff88; padding: 10px 15px; margin-bottom: 8px; border-radius: 8px; display: inline-block; font-weight: 600;">AgNo</div>
+                            <span style="margin-left: 15px;">Lightweight, fast</span>
+                        </div>
+                        <div>
+                            <div style="background: #333; color: #00ff88; padding: 10px 15px; margin-bottom: 8px; border-radius: 8px; display: inline-block; font-weight: 600;">Google ADK</div>
+                            <span style="margin-left: 15px;">Tight GCP, Multi-agent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: LangChain vs LangGraph Title -->
+        <div class="slide">
+            <h1><span class="purple">LangChain</span> vs <span class="green">LangGraph</span></h1>
+        </div>
+
+        <!-- Slide 13: Linear Chain -->
+        <div class="slide">
+            <div class="workflow-container">
+                <div class="workflow-step">Start</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">Step 1</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">Step 2</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step llm-step">LLM</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">End</div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Chain Concept -->
+        <div class="slide">
+            <div style="position: relative; width: 100%; max-width: 1200px;">
+                <div class="workflow-container">
+                    <div class="workflow-step">Start</div>
+                    <span class="arrow">→</span>
+                    <div class="workflow-step">Step 1</div>
+                    <span class="arrow">→</span>
+                    <div class="workflow-step">Step 2</div>
+                    <span class="arrow">→</span>
+                    <div class="workflow-step llm-step">LLM</div>
+                    <span class="arrow">→</span>
+                    <div class="workflow-step">Step 3</div>
+                    <span class="arrow">→</span>
+                    <div class="workflow-step llm-step">LLM</div>
+                    <span class="arrow">→</span>
+                    <div class="workflow-step">End</div>
+                </div>
+                <div style="position: absolute; top: 80px; left: 50%; transform: translateX(-50%); border: 3px dashed #00ff88; border-radius: 30px; padding: 30px 40px; width: 90%; background: rgba(0, 255, 136, 0.05);">
+                    <div style="color: #00ff88; font-size: 2rem; font-weight: 600; text-align: center; margin-top: 20px;">Chain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: RAG Chain Example -->
+        <div class="slide">
+            <div class="workflow-container" style="margin-bottom: 40px;">
+                <div class="workflow-step">Start</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">Documents<br>Retrieval</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">Split Docs into<br>Chunks</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">Vector<br>DB</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">Retrieval</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step llm-step">LLM</div>
+                <span class="arrow">→</span>
+                <div class="workflow-step">End</div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 40px; font-size: 1rem; color: #ccc;">
+                <div style="text-align: center;">
+                    <div style="font-weight: 600; color: #00ff88;">TextLoader</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-weight: 600; color: #00ff88;">CharacterTextSplitter</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-weight: 600; color: #00ff88;">FAISS</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-weight: 600; color: #00ff88;">RetrievalQAWithSourcesChain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Stateful Workflows as Graphs - FIXED -->
+        <div class="slide">
+            <div style="display: flex; align-items: center; gap: 80px; width: 100%; max-width: 1300px;">
+                <div style="flex: 1; position: relative; height: 400px;">
+                    <!-- Graph visualization with nodes and implied connections -->
+                    <div style="position: absolute; top: 50px; left: 50px; background: #00ff88; color: #000; padding: 15px 25px; border-radius: 12px; font-weight: 600;">Start</div>
+                    <div style="position: absolute; top: 120px; left: 200px; background: #333; border: 2px solid #00ff88; color: white; padding: 15px 25px; border-radius: 12px;">LLM</div>
+                    <div style="position: absolute; top: 50px; right: 100px; background: #333; border: 2px solid #555; color: white; padding: 15px 25px; border-radius: 12px;">Step A</div>
+                    <div style="position: absolute; top: 200px; left: 50px; background: #333; border: 2px solid #555; color: white; padding: 15px 25px; border-radius: 12px;">Step B</div>
+                    <div style="position: absolute; top: 200px; left: 200px; background: #333; border: 2px solid #555; color: white; padding: 15px 25px; border-radius: 12px;">Step C</div>
+                    <div style="position: absolute; top: 200px; right: 50px; background: #333; border: 2px solid #555; color: white; padding: 15px 25px; border-radius: 12px;">Step D</div>
+                    <div style="position: absolute; top: 280px; right: 100px; background: #333; border: 2px solid #555; color: white; padding: 15px 25px; border-radius: 12px;">Step E</div>
+                    <div style="position: absolute; bottom: 50px; left: 200px; background: #333; border: 2px solid #00ff88; color: white; padding: 15px 25px; border-radius: 12px;">LLM</div>
+                    
+                    <!-- Connection lines to show graph structure -->
+                    <svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                        <!-- Start to LLM -->
+                        <line x1="120" y1="75" x2="200" y2="145" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                        <!-- Start to Step A -->
+                        <line x1="120" y1="75" x2="350" y2="75" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                        <!-- LLM to Step B -->
+                        <line x1="225" y1="170" x2="100" y2="220" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                        <!-- LLM to Step C -->
+                        <line x1="250" y1="170" x2="250" y2="220" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                        <!-- Step A to Step D -->
+                        <line x1="400" y1="100" x2="400" y2="220" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                        <!-- Step D to Step E -->
+                        <line x1="400" y1="250" x2="400" y2="305" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                        <!-- Steps to bottom LLM -->
+                        <line x1="250" y1="250" x2="250" y2="320" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+                    </svg>
+                </div>
+                <div style="flex: 1; text-align: left;">
+                    <h2 style="color: #00ff88; margin-bottom: 30px; font-size: 2.5rem;">Stateful workflows represented as graphs</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: LangChain vs LangGraph Comparison Table -->
+        <div class="slide">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>LangChain</th>
+                        <th>LangGraph</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Purpose</strong></td>
+                        <td>Toolkit to build LLM apps (chains, tools, agents)</td>
+                        <td>Framework to manage complex workflows with state</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Style</strong></td>
+                        <td>Linear or reactive chains</td>
+                        <td>Graph-based, supports loops, retries, memory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best Use Case</strong></td>
+                        <td>Simple chatbots, RAG apps, tool usage</td>
+                        <td>Multi-step workflows, agents with memory, conditional paths</td>
+                    </tr>
+                    <tr>
+                        <td><strong>State Handling</strong></td>
+                        <td>Stateless or partially stateful</td>
+                        <td>Fully stateful; remembers and transitions based on logic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Example Use</strong></td>
+                        <td>"Book a flight" using a flight API</td>
+                        <td>"Plan a vacation" (ask budget → choose flights → book hotel → loop if error)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 17; // Fixed from 16 to 17
+        const slides = document.querySelectorAll('.slide');
+
+        // Stock responses database
+        const responses = {
+            'What is Microsoft current dividend yield?': 'Microsoft (MSFT) current dividend yield is 0.68%. They pay quarterly dividends of $0.75 per share, with a payout ratio of 24.8%.',
+            'Compare Amazon and Google revenue?': 'Amazon (AMZN) Q4 2024 revenue: $170B vs Google (GOOGL) Q4 2024 revenue: $86B. Amazon leads with 2x revenue, driven by AWS and retail operations.',
+            'What are the top performing tech stocks?': 'Top YTD performers: NVDA +195%, AMD +87%, TSLA +65%, MSFT +32%, AAPL +28%. AI and semiconductor stocks leading the rally.',
+            'default': 'I can provide stock analysis, financial metrics, and market insights based on financial reports and market data. What would you like me to analyze?'
+        };
+
+        function updateSlideDisplay() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlideDisplay();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlideDisplay();
+            }
+        }
+
+        function addMessage(text, isUser = false, slideNum = 2) {
+            const messagesContainer = document.getElementById(`chatMessages${slideNum}`);
+            if (!messagesContainer) return; // Only works on slide 2
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTyping(slideNum = 2) {
+            const typingIndicator = document.getElementById(`typingIndicator${slideNum}`);
+            if (typingIndicator) {
+                typingIndicator.style.display = 'block';
+            }
+            return new Promise(resolve => setTimeout(resolve, 1500));
+        }
+
+        function hideTyping(slideNum = 2) {
+            const typingIndicator = document.getElementById(`typingIndicator${slideNum}`);
+            if (typingIndicator) {
+                typingIndicator.style.display = 'none';
+            }
+        }
+
+        function sendMessage(slideNum = 2) {
+            const input = document.getElementById(`messageInput${slideNum}`);
+            if (!input) return;
+            
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true, slideNum);
+            input.value = '';
+
+            // Show typing and respond
+            showTyping(slideNum).then(() => {
+                hideTyping(slideNum);
+                const response = responses[message] || responses['default'];
+                addMessage(response, false, slideNum);
+            });
+        }
+
+        function askQuestion(question, slideNum = 2) {
+            const input = document.getElementById(`messageInput${slideNum}`);
+            if (input) {
+                input.value = question;
+                sendMessage(slideNum);
+            }
+        }
+
+        // Enter key support for slide 2
+        const messageInput2 = document.getElementById('messageInput2');
+        if (messageInput2) {
+            messageInput2.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage(2);
+                }
+            });
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
+
+        // Initialize
+        updateSlideDisplay();
+    </script>
+</body>
+</html>
