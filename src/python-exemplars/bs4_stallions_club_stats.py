@@ -14,7 +14,7 @@ import pandas as pd
 
 load_dotenv()
 
-output_filename = f"../resources/datasets/Stallions-Stats-2024.xlsx"
+output_filename = f"../resources/datasets/Stallions-Stats-2025.xlsx"
 
 def main():
     pl.Config.set_tbl_cols(200)
@@ -32,7 +32,8 @@ def get_page_data(url:str) -> pl.DataFrame:
     bs4_obj: bs4.BeautifulSoup = BeautifulSoup(response.text, features='html.parser')
     table = bs4_obj.find(name='table', attrs={'class': ['table table-striped table-active2 playersData sortable',
                                                         'table table-striped table-active4 playersData sortable',
-                                                        'table table-striped table-active3 playersData sortable'
+                                                        'table table-striped table-active3 playersData sortable',
+                                                        'table table-striped table-active3 playersData sortable dataTable no-footer'
                                                         ]})
     headers = []
     table_head = table.find('thead').find_all('th')
@@ -106,12 +107,12 @@ def get_bat_agg(df:pl.DataFrame) -> pl.DataFrame:
     return df
 
 def process_bowling_stats() -> Dict:
-    f40_bowl_urls = [f"https://cricclubs.com/GPCL/bowlingRecords.do?league=40&teamId=723&year=2024&clubId=48"]
-    t30_bowl_urls = [f"https://cricclubs.com/PMCL/bowlingRecords.do?league=20&teamId=496&year=2024&clubId=585"]
-    t20_bowl_urls = [f"https://cricclubs.com/GPCL/bowlingRecords.do?league=39&teamId=694&year=2024&clubId=48",
-                     f"https://cricclubs.com/DelawareCup/bowlingRecords.do?league=13&teamId=233&year=2024&clubId=341",
-                     f"https://cricclubs.com/TurboCup/bowlingRecords.do?league=6&teamId=73&year=2024&clubId=6930",
-                     f"https://cricclubs.com/UCL2024/bowlingRecords.do?league=13&teamId=196&year=2024&clubId=1092362"
+    f40_bowl_urls = [f"https://cricclubs.com/GPCL/bowlingRecords.do?league=41&teamId=749&year=2025&clubId=48"]
+    t30_bowl_urls = [f"https://cricclubs.com/PMCL/bowlingRecords.do?league=25&teamId=530&year=2025&clubId=585"]
+    t20_bowl_urls = [f"https://cricclubs.com/PMCL/bowlingRecords.do?league=24&teamId=585&year=2025&clubId=585",
+                     f"https://cricclubs.com/DelawareCup/bowlingRecords.do?league=14&teamId=260&year=2025&clubId=341",
+                     f"https://cricclubs.com/TurboCup/bowlingRecords.do?league=7&teamId=83&year=2025&clubId=6930",
+                     # f"https://cricclubs.com/UCL2024/bowlingRecords.do?league=13&teamId=196&year=2024&clubId=1092362"
                      ]
 
     f40_bowl_data = get_bowl_agg(df=pl.concat(items=[get_bowler_data(url) for url in f40_bowl_urls], how='vertical'))
