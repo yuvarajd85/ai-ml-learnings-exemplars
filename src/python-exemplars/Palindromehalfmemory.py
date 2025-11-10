@@ -9,7 +9,8 @@ load_dotenv()
 
 
 def main():
-    word = "malayalam"
+    # word = "malayalam"
+    word = "hannah"
     char_array = list(word)
     word_len = len(char_array)
 
