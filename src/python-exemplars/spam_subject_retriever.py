@@ -2,6 +2,7 @@ from __future__ import print_function
 import base64
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
+import polars as pl
 
 def get_spam_subjects():
     # Load OAuth credentials (you must generate them once using Google's OAuth flow)
@@ -33,4 +34,13 @@ def get_spam_subjects():
 
     return subjects
 
-print(get_spam_subjects())
+spam_subject = get_spam_subjects()
+print(spam_subject)
+
+spam_dict = [{"subject": sub, "spam_label" : 1} for sub in spam_subject]
+
+df = pl.from_dicts(spam_dict)
+
+print(df.head())
+
+df.write_csv(f"../resources/datasets/daily_spam.csv")
