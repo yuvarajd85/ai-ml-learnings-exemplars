@@ -50,7 +50,7 @@ app.layout = html.Div(
         "fontFamily": "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
     },
     children=[
-        html.H2("Gemini Chatbot (LangChain + Dash)", style={"marginBottom": "8px"}),
+        html.H2("Skynet Chatbot (LangChain + Dash + Gemini)", style={"marginBottom": "8px"}),
 
         # Stores chat history as list of dicts: [{"role": "...", "content": "..."}]
         dcc.Store(id="chat-store", data=[]),
