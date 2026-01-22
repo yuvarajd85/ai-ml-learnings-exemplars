@@ -18,8 +18,6 @@ sys.path.insert(0, SRC_DIR) # project root
 
 import LDDashRagChatbot
 
-print(LDDashRagChatbot.__file__)
-
 os.environ["SPHINX_BUILD"] = "1"
 
 project = 'LDDashRagChatbot'
