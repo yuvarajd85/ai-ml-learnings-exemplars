@@ -31,3 +31,4 @@ requests~=2.32.5
 streamlit~=1.51.0
 langchain-aws~=1.0.0
 rich~=13.9.4
+langchain-chroma~=1.1.0

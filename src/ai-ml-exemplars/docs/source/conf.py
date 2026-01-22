@@ -8,7 +8,9 @@
 import os
 import sys
 
-REPO_ROOT = os.path.abspath(os.path.join(__file__, "..", "..", "..","..",".."))
+HERE_ROOT = os.path.abspath(os.path.dirname(__file__))
+print(HERE_ROOT)
+REPO_ROOT = os.path.abspath(os.path.join(__file__, "..", "..", "..","..","..",".."))
 print(REPO_ROOT)
 SRC_DIR = os.path.join(REPO_ROOT, "src","ai-ml-exemplars")
 print(SRC_DIR)
