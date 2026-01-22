@@ -1,5 +1,5 @@
 Module Reference
-=============
+================
 
 .. automodule:: LDDashRagChatbot
    :members:

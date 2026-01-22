@@ -33,7 +33,8 @@ jobs:
           SPHINX_BUILD: "1"
         run: |
           cd src/ai-ml-exemplars/docs
-          make html
+          sphinx-build -b html -W --keep-going source build/html
+#          make html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

@@ -88,16 +88,20 @@ MAX_TURNS = int(os.getenv("MAX_TURNS", "12"))  # chat history window
 # -----------------------------
 # LLM + Embeddings
 # -----------------------------
-llm = ChatGoogleGenerativeAI(
-    model=GEMINI_MODEL,
-    temperature=TEMPERATURE,
-    google_api_key=GOOGLE_API_KEY,
-)
+if not IS_SPHINX:
+    llm = ChatGoogleGenerativeAI(
+        model=GEMINI_MODEL,
+        temperature=TEMPERATURE,
+        google_api_key=GOOGLE_API_KEY,
+    )
 
-embeddings = GoogleGenerativeAIEmbeddings(
-    model=EMBEDDING_MODEL,
-    google_api_key=GOOGLE_API_KEY,
-)
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model=EMBEDDING_MODEL,
+        google_api_key=GOOGLE_API_KEY,
+    )
+else:
+    llm = None
+    embeddings = None
 
 # -----------------------------
 # RAG prompt + chain builder (LCEL)
