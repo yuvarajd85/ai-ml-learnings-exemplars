@@ -9,11 +9,11 @@ import os
 import sys
 
 HERE_ROOT = os.path.abspath(os.path.dirname(__file__))
-print(HERE_ROOT)
-REPO_ROOT = os.path.abspath(os.path.join(__file__, "..", "..", "..","..","..",".."))
-print(REPO_ROOT)
+print(f"HERE_ROOT: {HERE_ROOT}")
+REPO_ROOT = os.path.abspath(os.path.join(__file__, "..", "..", "..","..",".."))
+print(f"REPO_ROOT: {REPO_ROOT}")
 SRC_DIR = os.path.join(REPO_ROOT, "src","ai-ml-exemplars")
-print(SRC_DIR)
+print(f"SRC_DIR: {SRC_DIR}")
 sys.path.insert(0, SRC_DIR) # project root
 
 import LDDashRagChatbot
