@@ -8,7 +8,10 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../.."))  # project root
+REPO_ROOT = os.path.abspath(os.path.join(__file__, "..", "..", ".."))
+SRC_DIR = os.path.join(REPO_ROOT, "src","ai-ml-exemplars")
+sys.path.insert(0, SRC_DIR) # project root
+
 os.environ["SPHINX_BUILD"] = "1"
 
 project = 'LDDashRagChatbot'
