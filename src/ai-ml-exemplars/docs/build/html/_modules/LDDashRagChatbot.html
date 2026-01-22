@@ -1,0 +1,966 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LDDashRagChatbot &mdash; LDDashRagChatbot 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            LDDashRagChatbot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">LDDashRagChatbot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">LDDashRagChatbot</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for LDDashRagChatbot</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">LDDashRagChatbot</span>
+<span class="sd">================</span>
+
+<span class="sd">A Dash-based chatbot UI backed by Google Gemini (via LangChain) with optional</span>
+<span class="sd">Retrieval-Augmented Generation (RAG) over an uploaded document.</span>
+
+<span class="sd">The application supports uploading common document types (txt/md/csv/json/pdf/docx),</span>
+<span class="sd">building a per-session vector index (Chroma), and answering questions using a</span>
+<span class="sd">LangChain Expression Language (LCEL) RAG chain.</span>
+
+<span class="sd">.. warning::</span>
+<span class="sd">   This implementation stores vector indexes in a process-level in-memory dict</span>
+<span class="sd">   (``RAG_SESSIONS``). This is suitable for local development and demos, but is</span>
+<span class="sd">   not safe for multi-worker deployments (e.g., Gunicorn with multiple workers)</span>
+<span class="sd">   without persistence or an external store.</span>
+
+<span class="sd">Environment Variables</span>
+<span class="sd">---------------------</span>
+<span class="sd">- ``GOOGLE_API_KEY`` (required): Google Gemini API key.</span>
+<span class="sd">- ``GEMINI_MODEL`` (optional): Gemini chat model name. Default: ``gemini-2.5-flash-lite``.</span>
+<span class="sd">- ``EMBEDDING_MODEL`` (optional): Google embedding model. Default: ``models/text-embedding-004``.</span>
+<span class="sd">- ``TEMPERATURE`` (optional): LLM temperature. Default: ``0.2``.</span>
+<span class="sd">- ``CHUNK_SIZE`` (optional): Chunk size for text splitting. Default: ``1000``.</span>
+<span class="sd">- ``CHUNK_OVERLAP`` (optional): Chunk overlap for text splitting. Default: ``150``.</span>
+<span class="sd">- ``TOP_K`` (optional): Number of retrieved chunks for RAG. Default: ``5``.</span>
+<span class="sd">- ``MAX_TURNS`` (optional): Rolling window of chat turns kept in UI memory. Default: ``12``.</span>
+
+<span class="sd">Running</span>
+<span class="sd">-------</span>
+<span class="sd">Run locally:</span>
+
+<span class="sd">.. code-block:: bash</span>
+
+<span class="sd">   python LDDashRagChatbot.py</span>
+
+<span class="sd">Then open:</span>
+
+<span class="sd">- http://127.0.0.1:8050</span>
+
+<span class="sd">Created on 1/20/26 at 9:24 PM</span>
+<span class="sd">By yuvarajdurairaj</span>
+<span class="sd">Module Name LDDashRagChatbot</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dash</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span><span class="p">,</span> <span class="n">State</span><span class="p">,</span> <span class="n">callback_context</span><span class="p">,</span> <span class="n">no_update</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">docx</span><span class="w"> </span><span class="kn">import</span> <span class="n">Document</span> <span class="k">as</span> <span class="n">DocxDocument</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_google_genai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">,</span> <span class="n">GoogleGenerativeAIEmbeddings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.documents</span><span class="w"> </span><span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_text_splitters</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_chroma</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chroma</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.runnables</span><span class="w"> </span><span class="kn">import</span> <span class="n">RunnablePassthrough</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.output_parsers</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrOutputParser</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Config</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">IS_SPHINX</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SPHINX_BUILD&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span>
+
+<span class="n">GOOGLE_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;GOOGLE_API_KEY&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">GOOGLE_API_KEY</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">IS_SPHINX</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Missing GOOGLE_API_KEY in env/.env&quot;</span><span class="p">)</span>
+
+<span class="n">GEMINI_MODEL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;GEMINI_MODEL&quot;</span><span class="p">,</span> <span class="s2">&quot;gemini-2.5-flash-lite&quot;</span><span class="p">)</span>
+<span class="n">EMBEDDING_MODEL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;EMBEDDING_MODEL&quot;</span><span class="p">,</span> <span class="s2">&quot;models/text-embedding-004&quot;</span><span class="p">)</span>
+
+<span class="n">TEMPERATURE</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;TEMPERATURE&quot;</span><span class="p">,</span> <span class="s2">&quot;0.2&quot;</span><span class="p">))</span>
+<span class="n">CHUNK_SIZE</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CHUNK_SIZE&quot;</span><span class="p">,</span> <span class="s2">&quot;1000&quot;</span><span class="p">))</span>
+<span class="n">CHUNK_OVERLAP</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;CHUNK_OVERLAP&quot;</span><span class="p">,</span> <span class="s2">&quot;150&quot;</span><span class="p">))</span>
+<span class="n">TOP_K</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;TOP_K&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">))</span>
+
+<span class="n">MAX_TURNS</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;MAX_TURNS&quot;</span><span class="p">,</span> <span class="s2">&quot;12&quot;</span><span class="p">))</span>  <span class="c1"># chat history window</span>
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># LLM + Embeddings</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatGoogleGenerativeAI</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">GEMINI_MODEL</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="n">TEMPERATURE</span><span class="p">,</span>
+    <span class="n">google_api_key</span><span class="o">=</span><span class="n">GOOGLE_API_KEY</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">GoogleGenerativeAIEmbeddings</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">EMBEDDING_MODEL</span><span class="p">,</span>
+    <span class="n">google_api_key</span><span class="o">=</span><span class="n">GOOGLE_API_KEY</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># RAG prompt + chain builder (LCEL)</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">SYSTEM_PROMPT</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;You are a precise senior engineering mentor. &quot;</span>
+    <span class="s2">&quot;Use the provided context to answer. &quot;</span>
+    <span class="s2">&quot;If the context does not contain the answer, say so explicitly and then answer from general knowledge &quot;</span>
+    <span class="s2">&quot;while clearly labeling it as &#39;General knowledge&#39; vs &#39;From document&#39;. &quot;</span>
+    <span class="s2">&quot;Keep it concise and correct.&quot;</span>
+<span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="n">SYSTEM_PROMPT</span><span class="p">),</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;human&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Question:</span><span class="se">\n</span><span class="si">{question}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Context:</span><span class="se">\n</span><span class="si">{context}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Answer:&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="format_docs">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.format_docs">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_docs</span><span class="p">(</span><span class="n">docs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Format retrieved documents into a single context string.</span>
+
+<span class="sd">    This function is intended for use in an LCEL chain as a post-processing step</span>
+<span class="sd">    after retrieval. It includes basic source metadata when available.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    docs:</span>
+<span class="sd">        A list of LangChain ``Document`` objects returned by a retriever.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A formatted context string suitable for insertion into a prompt. If no</span>
+<span class="sd">        documents are provided, returns ``&quot;NO_RELEVANT_CONTEXT&quot;``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">docs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;NO_RELEVANT_CONTEXT&quot;</span>
+
+    <span class="n">chunks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">src</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; (page </span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">page</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">loc</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">page_content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="build_rag_chain">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.build_rag_chain">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_rag_chain</span><span class="p">(</span><span class="n">retriever</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build an LCEL Retrieval-Augmented Generation (RAG) chain.</span>
+
+<span class="sd">    The chain follows this conceptual structure:</span>
+
+<span class="sd">    - Retrieve relevant documents for a question</span>
+<span class="sd">    - Format documents into a promptable context string</span>
+<span class="sd">    - Combine ``{context}`` and ``{question}`` into a chat prompt</span>
+<span class="sd">    - Invoke the Gemini chat model</span>
+<span class="sd">    - Parse the model output into a plain string</span>
+
+<span class="sd">    LCEL equivalent:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       (</span>
+<span class="sd">         {&quot;context&quot;: retriever | format_docs, &quot;question&quot;: RunnablePassthrough()}</span>
+<span class="sd">         | prompt</span>
+<span class="sd">         | llm</span>
+<span class="sd">         | StrOutputParser()</span>
+<span class="sd">       )</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    retriever:</span>
+<span class="sd">        A LangChain retriever implementing the Runnable interface and returning</span>
+<span class="sd">        a list of ``Document`` objects.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Runnable</span>
+<span class="sd">        An LCEL runnable chain that accepts a question string and returns an</span>
+<span class="sd">        answer string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">retriever</span> <span class="o">|</span> <span class="n">format_docs</span><span class="p">,</span>
+            <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">RunnablePassthrough</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="o">|</span> <span class="n">prompt</span>
+        <span class="o">|</span> <span class="n">llm</span>
+        <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Upload decoding + parsing</span>
+<span class="c1"># -----------------------------</span>
+<div class="viewcode-block" id="decode_upload">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.decode_upload">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">decode_upload</span><span class="p">(</span><span class="n">contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decode Dash ``dcc.Upload`` contents into raw bytes.</span>
+
+<span class="sd">    Dash upload contents are provided as a data URL:</span>
+
+<span class="sd">    ``data:&lt;mime&gt;;base64,&lt;payload&gt;``</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    contents:</span>
+<span class="sd">        The upload contents string from ``dcc.Upload(contents=...)``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bytes</span>
+<span class="sd">        The decoded file contents.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_header</span><span class="p">,</span> <span class="n">b64data</span> <span class="o">=</span> <span class="n">contents</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">b64data</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="parse_txt_like">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.parse_txt_like">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_txt_like</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decode bytes into text for plain-text-like files.</span>
+
+<span class="sd">    Attempts UTF-8 first and falls back to Latin-1 with replacement.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    raw:</span>
+<span class="sd">        Raw bytes for a text-like file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Decoded text content.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">raw</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">raw</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;replace&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="parse_json">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.parse_json">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_json</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parse JSON bytes into a pretty-printed text representation.</span>
+
+<span class="sd">    If JSON parsing fails, falls back to text decoding.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    raw:</span>
+<span class="sd">        Raw bytes for a JSON file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        Pretty-printed JSON string or decoded text fallback.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">parse_txt_like</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="parse_pdf">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.parse_pdf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_pdf</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract text from a PDF and return it as a list of Documents.</span>
+
+<span class="sd">    Each PDF page becomes a separate ``Document``. Pages with no extractable</span>
+<span class="sd">    text are skipped.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    raw:</span>
+<span class="sd">        Raw bytes of the PDF file.</span>
+<span class="sd">    filename:</span>
+<span class="sd">        The original filename, stored in ``Document.metadata[&#39;source&#39;]``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[Document]</span>
+<span class="sd">        One ``Document`` per page containing extractable text.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">PdfReader</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
+    <span class="n">docs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">page</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">pages</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">extract_text</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">text</span><span class="p">:</span>
+            <span class="n">docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Document</span><span class="p">(</span>
+                    <span class="n">page_content</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+                    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;page&quot;</span><span class="p">:</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">},</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">docs</span></div>
+
+
+
+<div class="viewcode-block" id="parse_docx">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.parse_docx">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_docx</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract text from a DOCX and return it as a list of Documents.</span>
+
+<span class="sd">    The DOCX content is extracted from paragraphs, joined, and returned as a</span>
+<span class="sd">    single ``Document`` (which will later be chunked by the text splitter).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    raw:</span>
+<span class="sd">        Raw bytes of the DOCX file.</span>
+<span class="sd">    filename:</span>
+<span class="sd">        The original filename, stored in ``Document.metadata[&#39;source&#39;]``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[Document]</span>
+<span class="sd">        A single ``Document`` containing extracted DOCX text, or an empty list</span>
+<span class="sd">        if no text was found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">DocxDocument</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
+    <span class="n">paragraphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">paragraphs</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">paragraphs</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">})]</span></div>
+
+
+
+<div class="viewcode-block" id="load_documents_from_upload">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.load_documents_from_upload">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_documents_from_upload</span><span class="p">(</span><span class="n">contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load an uploaded file into LangChain Documents based on extension.</span>
+
+<span class="sd">    Supported extensions:</span>
+<span class="sd">    - ``txt``, ``md``, ``csv`` -&gt; single Document</span>
+<span class="sd">    - ``json`` -&gt; single Document (pretty-printed)</span>
+<span class="sd">    - ``pdf`` -&gt; one Document per page</span>
+<span class="sd">    - ``docx`` -&gt; single Document</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    contents:</span>
+<span class="sd">        The Dash upload contents string from ``dcc.Upload``.</span>
+<span class="sd">    filename:</span>
+<span class="sd">        The uploaded filename (used to infer file type and stored as metadata).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list[Document]</span>
+<span class="sd">        Extracted Documents representing the file content.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the file extension is unsupported.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">decode_upload</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+    <span class="n">ext</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">filename</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;txt&quot;</span><span class="p">,</span> <span class="s2">&quot;md&quot;</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="n">parse_txt_like</span><span class="p">(</span><span class="n">raw</span><span class="p">),</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">})]</span>
+    <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;json&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="n">parse_json</span><span class="p">(</span><span class="n">raw</span><span class="p">),</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">})]</span>
+    <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;pdf&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">parse_pdf</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s2">&quot;docx&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">parse_docx</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported file type: .</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">. Supported: txt/md/csv/json/pdf/docx&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Chunk + vectorstore build</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="n">CHUNK_SIZE</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span><span class="o">=</span><span class="n">CHUNK_OVERLAP</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="build_vectorstore">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.build_vectorstore">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_vectorstore</span><span class="p">(</span><span class="n">docs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Document</span><span class="p">],</span> <span class="n">collection_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chroma</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a Chroma vector store from Documents.</span>
+
+<span class="sd">    Documents are chunked using the module-level ``splitter`` and embedded using</span>
+<span class="sd">    the module-level Gemini embedding model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    docs:</span>
+<span class="sd">        Input Documents to index.</span>
+<span class="sd">    collection_name:</span>
+<span class="sd">        Name of the Chroma collection.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Chroma</span>
+<span class="sd">        A Chroma vector store containing the embedded chunks.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="n">splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+    <span class="n">vs</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span>
+        <span class="n">documents</span><span class="o">=</span><span class="n">chunks</span><span class="p">,</span>
+        <span class="n">embedding</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span>
+        <span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">vs</span></div>
+
+
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Simple in-memory per-session storage (DEV ONLY)</span>
+<span class="c1"># -----------------------------</span>
+<span class="c1">#: In-memory store mapping a Dash session id to its RAG index state.</span>
+<span class="c1">#:</span>
+<span class="c1">#: Keys are session ids (strings). Values are dicts with at least:</span>
+<span class="c1">#:</span>
+<span class="c1">#: - ``vs``: Chroma vector store</span>
+<span class="c1">#: - ``retriever``: Retriever derived from the vector store</span>
+<span class="c1">#: - ``filename``: Uploaded filename</span>
+<span class="c1">#: - ``doc_count``: Number of source Documents produced by parsing</span>
+<span class="n">RAG_SESSIONS</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<div class="viewcode-block" id="trim_history">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.trim_history">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">trim_history</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Trim chat history to a rolling window of recent turns.</span>
+
+<span class="sd">    The UI stores messages as dicts of the form ``{&quot;role&quot;: &quot;...&quot;, &quot;content&quot;: &quot;...&quot;}``.</span>
+<span class="sd">    This function keeps only the last ``MAX_TURNS * 2`` entries (user+assistant).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    history:</span>
+<span class="sd">        List of chat message dicts.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        Trimmed history list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">history</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">history</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">MAX_TURNS</span> <span class="o">*</span> <span class="mi">2</span><span class="p">):]</span></div>
+
+
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Dash UI</span>
+<span class="c1"># -----------------------------</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">server</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+    <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;maxWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;900px&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="s2">&quot;0 auto&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="s2">&quot;16px&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fontFamily&quot;</span><span class="p">:</span> <span class="s2">&quot;system-ui, -apple-system, Segoe UI, Roboto, sans-serif&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">H2</span><span class="p">(</span><span class="s2">&quot;Dash Chatbot (Gemini + LangChain RAG)&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;marginBottom&quot;</span><span class="p">:</span> <span class="s2">&quot;8px&quot;</span><span class="p">}),</span>
+
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Store</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;session-id&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Store</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;chat-store&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[]),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;chat-window&quot;</span><span class="p">,</span>
+            <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;520px&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;overflowY&quot;</span><span class="p">:</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;#fafafa&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">}),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;display&quot;</span><span class="p">:</span> <span class="s2">&quot;flex&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">:</span> <span class="s2">&quot;10px&quot;</span><span class="p">,</span> <span class="s2">&quot;alignItems&quot;</span><span class="p">:</span> <span class="s2">&quot;center&quot;</span><span class="p">},</span>
+            <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">dcc</span><span class="o">.</span><span class="n">Upload</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;upload-file&quot;</span><span class="p">,</span>
+                    <span class="n">children</span><span class="o">=</span><span class="n">html</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                        <span class="s2">&quot;Attach (build RAG index)&quot;</span><span class="p">,</span>
+                        <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="s2">&quot;pointer&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="s2">&quot;8px 12px&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;fontWeight&quot;</span><span class="p">:</span> <span class="s2">&quot;600&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">),</span>
+                    <span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                    <span class="s2">&quot;Clear attachment&quot;</span><span class="p">,</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;clear-attachment-btn&quot;</span><span class="p">,</span>
+                    <span class="n">n_clicks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="s2">&quot;pointer&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="s2">&quot;8px 12px&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">),</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;attachment-status&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#666&quot;</span><span class="p">},</span> <span class="n">children</span><span class="o">=</span><span class="s2">&quot;No attachment indexed.&quot;</span><span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;10px&quot;</span><span class="p">}),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;display&quot;</span><span class="p">:</span> <span class="s2">&quot;flex&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">:</span> <span class="s2">&quot;8px&quot;</span><span class="p">},</span>
+            <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">dcc</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;user-input&quot;</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+                    <span class="n">placeholder</span><span class="o">=</span><span class="s2">&quot;Type a message… (Enter to send)&quot;</span><span class="p">,</span>
+                    <span class="n">debounce</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;flex&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;44px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="s2">&quot;0 12px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">),</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                    <span class="s2">&quot;Send&quot;</span><span class="p">,</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;send-btn&quot;</span><span class="p">,</span>
+                    <span class="n">n_clicks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="s2">&quot;110px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="s2">&quot;pointer&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;fontWeight&quot;</span><span class="p">:</span> <span class="s2">&quot;600&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;10px&quot;</span><span class="p">}),</span>
+
+        <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;display&quot;</span><span class="p">:</span> <span class="s2">&quot;flex&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">:</span> <span class="s2">&quot;8px&quot;</span><span class="p">},</span>
+            <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+                    <span class="s2">&quot;Clear chat&quot;</span><span class="p">,</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;clear-btn&quot;</span><span class="p">,</span>
+                    <span class="n">n_clicks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                    <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;cursor&quot;</span><span class="p">:</span> <span class="s2">&quot;pointer&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">),</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+                    <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#666&quot;</span><span class="p">,</span> <span class="s2">&quot;paddingTop&quot;</span><span class="p">:</span> <span class="s2">&quot;6px&quot;</span><span class="p">},</span>
+                    <span class="n">children</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Model: </span><span class="si">{</span><span class="n">GEMINI_MODEL</span><span class="si">}</span><span class="s2"> | Embeddings: </span><span class="si">{</span><span class="n">EMBEDDING_MODEL</span><span class="si">}</span><span class="s2"> | top_k=</span><span class="si">{</span><span class="n">TOP_K</span><span class="si">}</span><span class="s2"> | chunk=</span><span class="si">{</span><span class="n">CHUNK_SIZE</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">CHUNK_OVERLAP</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="render_chat">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.render_chat">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">render_chat</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Render chat messages as simple &quot;bubble&quot; components.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    history:</span>
+<span class="sd">        List of chat message dicts with keys ``role`` and ``content``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of Dash HTML components representing the chat history.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bubbles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;role&quot;</span><span class="p">,</span> <span class="s2">&quot;assistant&quot;</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">is_user</span> <span class="o">=</span> <span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;user&quot;</span>
+
+        <span class="n">bubbles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+                <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;display&quot;</span><span class="p">:</span> <span class="s2">&quot;flex&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;justifyContent&quot;</span><span class="p">:</span> <span class="s2">&quot;flex-end&quot;</span> <span class="k">if</span> <span class="n">is_user</span> <span class="k">else</span> <span class="s2">&quot;flex-start&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;marginBottom&quot;</span><span class="p">:</span> <span class="s2">&quot;10px&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">children</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+                        <span class="n">content</span><span class="p">,</span>
+                        <span class="n">style</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s2">&quot;maxWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;80%&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;whiteSpace&quot;</span><span class="p">:</span> <span class="s2">&quot;pre-wrap&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="s2">&quot;10px 12px&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;borderRadius&quot;</span><span class="p">:</span> <span class="s2">&quot;12px&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;border&quot;</span><span class="p">:</span> <span class="s2">&quot;1px solid #ddd&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;background&quot;</span><span class="p">:</span> <span class="s2">&quot;#e8f0fe&quot;</span> <span class="k">if</span> <span class="n">is_user</span> <span class="k">else</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bubbles</span><span class="p">:</span>
+        <span class="n">bubbles</span> <span class="o">=</span> <span class="p">[</span><span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="s2">&quot;Upload a doc (optional) and ask a question.&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#888&quot;</span><span class="p">})]</span>
+
+    <span class="k">return</span> <span class="n">bubbles</span></div>
+
+
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Callbacks: Upload -&gt; Build RAG index</span>
+<span class="c1"># -----------------------------</span>
+<div class="viewcode-block" id="on_upload">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.on_upload">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;attachment-status&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;upload-file&quot;</span><span class="p">,</span> <span class="s2">&quot;contents&quot;</span><span class="p">),</span>
+    <span class="n">State</span><span class="p">(</span><span class="s2">&quot;upload-file&quot;</span><span class="p">,</span> <span class="s2">&quot;filename&quot;</span><span class="p">),</span>
+    <span class="n">State</span><span class="p">(</span><span class="s2">&quot;session-id&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span>
+    <span class="n">prevent_initial_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_upload</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dash callback: handle file upload and build the RAG vector index.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    contents:</span>
+<span class="sd">        Dash upload contents string (base64 data URL).</span>
+<span class="sd">    filename:</span>
+<span class="sd">        Uploaded filename.</span>
+<span class="sd">    session_id:</span>
+<span class="sd">        Per-browser session identifier.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A status message describing index build success/failure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">contents</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">no_update</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">docs</span> <span class="o">=</span> <span class="n">load_documents_from_upload</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">docs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[Attachment error] No extractable text found in </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">collection_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rag_</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">vs</span> <span class="o">=</span> <span class="n">build_vectorstore</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">collection_name</span><span class="o">=</span><span class="n">collection_name</span><span class="p">)</span>
+        <span class="n">retriever</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;k&quot;</span><span class="p">:</span> <span class="n">TOP_K</span><span class="p">})</span>
+
+        <span class="n">RAG_SESSIONS</span><span class="p">[</span><span class="n">session_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;vs&quot;</span><span class="p">:</span> <span class="n">vs</span><span class="p">,</span>
+            <span class="s2">&quot;retriever&quot;</span><span class="p">:</span> <span class="n">retriever</span><span class="p">,</span>
+            <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span>
+            <span class="s2">&quot;doc_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Quick stats: number of indexed chunks (internal API; fine for dev)</span>
+        <span class="n">chunk_count</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">_collection</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Indexed: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2"> | pages/docs=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="si">}</span><span class="s2"> | chunks=</span><span class="si">{</span><span class="n">chunk_count</span><span class="si">}</span><span class="s2"> | top_k=</span><span class="si">{</span><span class="n">TOP_K</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[Attachment error] </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="clear_attachment">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.clear_attachment">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;attachment-status&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">,</span> <span class="n">allow_duplicate</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;clear-attachment-btn&quot;</span><span class="p">,</span> <span class="s2">&quot;n_clicks&quot;</span><span class="p">),</span>
+    <span class="n">State</span><span class="p">(</span><span class="s2">&quot;session-id&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span>
+    <span class="n">prevent_initial_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clear_attachment</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dash callback: clear the RAG index for the current session.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n:</span>
+<span class="sd">        Number of clicks on the &quot;Clear attachment&quot; button.</span>
+<span class="sd">    session_id:</span>
+<span class="sd">        Per-browser session identifier.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        A status message indicating no attachment is indexed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">no_update</span>
+
+    <span class="k">if</span> <span class="n">session_id</span> <span class="ow">in</span> <span class="n">RAG_SESSIONS</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">RAG_SESSIONS</span><span class="p">[</span><span class="n">session_id</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="s2">&quot;No attachment indexed.&quot;</span></div>
+
+
+
+<span class="c1"># -----------------------------</span>
+<span class="c1"># Callbacks: Chat</span>
+<span class="c1"># -----------------------------</span>
+<div class="viewcode-block" id="on_send_or_clear">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.on_send_or_clear">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;chat-store&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;user-input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;send-btn&quot;</span><span class="p">,</span> <span class="s2">&quot;n_clicks&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;clear-btn&quot;</span><span class="p">,</span> <span class="s2">&quot;n_clicks&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;user-input&quot;</span><span class="p">,</span> <span class="s2">&quot;n_submit&quot;</span><span class="p">),</span>
+    <span class="n">State</span><span class="p">(</span><span class="s2">&quot;user-input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">State</span><span class="p">(</span><span class="s2">&quot;chat-store&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span>
+    <span class="n">State</span><span class="p">(</span><span class="s2">&quot;session-id&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span>
+    <span class="n">prevent_initial_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">on_send_or_clear</span><span class="p">(</span><span class="n">send_clicks</span><span class="p">,</span> <span class="n">clear_clicks</span><span class="p">,</span> <span class="n">n_submit</span><span class="p">,</span> <span class="n">user_text</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="n">session_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dash callback: send a user message (or clear chat) and return updated history.</span>
+
+<span class="sd">    If a RAG index exists for the current session, the callback uses the LCEL RAG</span>
+<span class="sd">    chain to answer the user question. Otherwise it falls back to a plain LLM call.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    send_clicks:</span>
+<span class="sd">        Number of clicks on the &quot;Send&quot; button.</span>
+<span class="sd">    clear_clicks:</span>
+<span class="sd">        Number of clicks on the &quot;Clear chat&quot; button.</span>
+<span class="sd">    n_submit:</span>
+<span class="sd">        ``dcc.Input`` submit count (triggered when pressing Enter).</span>
+<span class="sd">    user_text:</span>
+<span class="sd">        Current text in the user input box.</span>
+<span class="sd">    history:</span>
+<span class="sd">        Chat history stored in ``dcc.Store``.</span>
+<span class="sd">    session_id:</span>
+<span class="sd">        Per-browser session identifier.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple[list, str]</span>
+<span class="sd">        Updated chat history and the cleared input box value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">callback_context</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">triggered</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">no_update</span><span class="p">,</span> <span class="n">no_update</span>
+
+    <span class="n">triggered_id</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">triggered</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;prop_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">triggered_id</span> <span class="o">==</span> <span class="s2">&quot;clear-btn&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user_text</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">user_text</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">no_update</span><span class="p">,</span> <span class="n">no_update</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="n">history</span> <span class="ow">or</span> <span class="p">[]</span>
+    <span class="n">user_text</span> <span class="o">=</span> <span class="n">user_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_text</span><span class="p">})</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">trim_history</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">rag_state</span> <span class="o">=</span> <span class="n">RAG_SESSIONS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rag_state</span> <span class="ow">and</span> <span class="n">rag_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;retriever&quot;</span><span class="p">):</span>
+            <span class="n">rag_chain</span> <span class="o">=</span> <span class="n">build_rag_chain</span><span class="p">(</span><span class="n">rag_state</span><span class="p">[</span><span class="s2">&quot;retriever&quot;</span><span class="p">])</span>
+            <span class="n">assistant_text</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">user_text</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">assistant_text</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">user_text</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+
+        <span class="n">assistant_text</span> <span class="o">=</span> <span class="p">(</span><span class="n">assistant_text</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;[No response]&quot;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">assistant_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[ERROR] </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">assistant_text</span><span class="p">})</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">trim_history</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">history</span><span class="p">,</span> <span class="s2">&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="update_chat_window">
+<a class="viewcode-back" href="../api.html#LDDashRagChatbot.update_chat_window">[docs]</a>
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;chat-window&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;chat-store&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_chat_window</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dash callback: render the chat window from stored history.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    history:</span>
+<span class="sd">        Chat history stored in ``dcc.Store``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        Rendered chat components.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_chat</span><span class="p">(</span><span class="n">history</span> <span class="ow">or</span> <span class="p">[])</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Prefer run_server() for Dash apps. app.run() is not consistently supported.</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Yuvi Durairaj.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

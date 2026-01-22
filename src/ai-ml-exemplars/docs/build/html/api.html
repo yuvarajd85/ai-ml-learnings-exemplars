@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; LDDashRagChatbot 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="LDDashRagChatbot documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LDDashRagChatbot
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lddashragchatbot">LDDashRagChatbot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running">Running</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.RAG_SESSIONS"><code class="docutils literal notranslate"><span class="pre">RAG_SESSIONS</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.build_rag_chain"><code class="docutils literal notranslate"><span class="pre">build_rag_chain()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.build_vectorstore"><code class="docutils literal notranslate"><span class="pre">build_vectorstore()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.clear_attachment"><code class="docutils literal notranslate"><span class="pre">clear_attachment()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.decode_upload"><code class="docutils literal notranslate"><span class="pre">decode_upload()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.format_docs"><code class="docutils literal notranslate"><span class="pre">format_docs()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.load_documents_from_upload"><code class="docutils literal notranslate"><span class="pre">load_documents_from_upload()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.on_send_or_clear"><code class="docutils literal notranslate"><span class="pre">on_send_or_clear()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.on_upload"><code class="docutils literal notranslate"><span class="pre">on_upload()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.parse_docx"><code class="docutils literal notranslate"><span class="pre">parse_docx()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.parse_json"><code class="docutils literal notranslate"><span class="pre">parse_json()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.parse_pdf"><code class="docutils literal notranslate"><span class="pre">parse_pdf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.parse_txt_like"><code class="docutils literal notranslate"><span class="pre">parse_txt_like()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.render_chat"><code class="docutils literal notranslate"><span class="pre">render_chat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.trim_history"><code class="docutils literal notranslate"><span class="pre">trim_history()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LDDashRagChatbot.update_chat_window"><code class="docutils literal notranslate"><span class="pre">update_chat_window()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LDDashRagChatbot</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-LDDashRagChatbot">
+<span id="api-reference"></span><h1>API Reference<a class="headerlink" href="#module-LDDashRagChatbot" title="Link to this heading"></a></h1>
+<section id="lddashragchatbot">
+<h2>LDDashRagChatbot<a class="headerlink" href="#lddashragchatbot" title="Link to this heading"></a></h2>
+<p>A Dash-based chatbot UI backed by Google Gemini (via LangChain) with optional
+Retrieval-Augmented Generation (RAG) over an uploaded document.</p>
+<p>The application supports uploading common document types (txt/md/csv/json/pdf/docx),
+building a per-session vector index (Chroma), and answering questions using a
+LangChain Expression Language (LCEL) RAG chain.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This implementation stores vector indexes in a process-level in-memory dict
+(<code class="docutils literal notranslate"><span class="pre">RAG_SESSIONS</span></code>). This is suitable for local development and demos, but is
+not safe for multi-worker deployments (e.g., Gunicorn with multiple workers)
+without persistence or an external store.</p>
+</div>
+<section id="environment-variables">
+<h3>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GOOGLE_API_KEY</span></code> (required): Google Gemini API key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GEMINI_MODEL</span></code> (optional): Gemini chat model name. Default: <code class="docutils literal notranslate"><span class="pre">gemini-2.5-flash-lite</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EMBEDDING_MODEL</span></code> (optional): Google embedding model. Default: <code class="docutils literal notranslate"><span class="pre">models/text-embedding-004</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TEMPERATURE</span></code> (optional): LLM temperature. Default: <code class="docutils literal notranslate"><span class="pre">0.2</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHUNK_SIZE</span></code> (optional): Chunk size for text splitting. Default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CHUNK_OVERLAP</span></code> (optional): Chunk overlap for text splitting. Default: <code class="docutils literal notranslate"><span class="pre">150</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TOP_K</span></code> (optional): Number of retrieved chunks for RAG. Default: <code class="docutils literal notranslate"><span class="pre">5</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_TURNS</span></code> (optional): Rolling window of chat turns kept in UI memory. Default: <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+</ul>
+</section>
+<section id="running">
+<h3>Running<a class="headerlink" href="#running" title="Link to this heading"></a></h3>
+<p>Run locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>LDDashRagChatbot.py
+</pre></div>
+</div>
+<p>Then open:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://127.0.0.1:8050">http://127.0.0.1:8050</a></p></li>
+</ul>
+<p>Created on 1/20/26 at 9:24 PM
+By yuvarajdurairaj
+Module Name LDDashRagChatbot</p>
+</section>
+</section>
+<dl class="py data">
+<dt class="sig sig-object py" id="LDDashRagChatbot.RAG_SESSIONS">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">RAG_SESSIONS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></span><a class="headerlink" href="#LDDashRagChatbot.RAG_SESSIONS" title="Link to this definition"></a></dt>
+<dd><p>In-memory store mapping a Dash session id to its RAG index state.</p>
+<p>Keys are session ids (strings). Values are dicts with at least:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">vs</span></code>: Chroma vector store</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">retriever</span></code>: Retriever derived from the vector store</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filename</span></code>: Uploaded filename</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc_count</span></code>: Number of source Documents produced by parsing</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.build_rag_chain">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">build_rag_chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retriever</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#build_rag_chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.build_rag_chain" title="Link to this definition"></a></dt>
+<dd><p>Build an LCEL Retrieval-Augmented Generation (RAG) chain.</p>
+<p>The chain follows this conceptual structure:</p>
+<ul class="simple">
+<li><p>Retrieve relevant documents for a question</p></li>
+<li><p>Format documents into a promptable context string</p></li>
+<li><p>Combine <code class="docutils literal notranslate"><span class="pre">{context}</span></code> and <code class="docutils literal notranslate"><span class="pre">{question}</span></code> into a chat prompt</p></li>
+<li><p>Invoke the Gemini chat model</p></li>
+<li><p>Parse the model output into a plain string</p></li>
+</ul>
+<p>LCEL equivalent:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span>
+  <span class="p">{</span><span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">retriever</span> <span class="o">|</span> <span class="n">format_docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">RunnablePassthrough</span><span class="p">()}</span>
+  <span class="o">|</span> <span class="n">prompt</span>
+  <span class="o">|</span> <span class="n">llm</span>
+  <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>retriever</strong> – A LangChain retriever implementing the Runnable interface and returning
+a list of <code class="docutils literal notranslate"><span class="pre">Document</span></code> objects.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An LCEL runnable chain that accepts a question string and returns an
+answer string.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Runnable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.build_vectorstore">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">build_vectorstore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Document</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Chroma</span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#build_vectorstore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.build_vectorstore" title="Link to this definition"></a></dt>
+<dd><p>Build a Chroma vector store from Documents.</p>
+<p>Documents are chunked using the module-level <code class="docutils literal notranslate"><span class="pre">splitter</span></code> and embedded using
+the module-level Gemini embedding model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>docs</strong> – Input Documents to index.</p></li>
+<li><p><strong>collection_name</strong> – Name of the Chroma collection.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Chroma vector store containing the embedded chunks.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Chroma</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.clear_attachment">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">clear_attachment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#clear_attachment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.clear_attachment" title="Link to this definition"></a></dt>
+<dd><p>Dash callback: clear the RAG index for the current session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> – Number of clicks on the “Clear attachment” button.</p></li>
+<li><p><strong>session_id</strong> – Per-browser session identifier.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A status message indicating no attachment is indexed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.decode_upload">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">decode_upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#decode_upload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.decode_upload" title="Link to this definition"></a></dt>
+<dd><p>Decode Dash <code class="docutils literal notranslate"><span class="pre">dcc.Upload</span></code> contents into raw bytes.</p>
+<p>Dash upload contents are provided as a data URL:</p>
+<p><code class="docutils literal notranslate"><span class="pre">data:&lt;mime&gt;;base64,&lt;payload&gt;</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contents</strong> – The upload contents string from <code class="docutils literal notranslate"><span class="pre">dcc.Upload(contents=...)</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded file contents.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.format_docs">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">format_docs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Document</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#format_docs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.format_docs" title="Link to this definition"></a></dt>
+<dd><p>Format retrieved documents into a single context string.</p>
+<p>This function is intended for use in an LCEL chain as a post-processing step
+after retrieval. It includes basic source metadata when available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>docs</strong> – A list of LangChain <code class="docutils literal notranslate"><span class="pre">Document</span></code> objects returned by a retriever.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted context string suitable for insertion into a prompt. If no
+documents are provided, returns <code class="docutils literal notranslate"><span class="pre">&quot;NO_RELEVANT_CONTEXT&quot;</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.load_documents_from_upload">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">load_documents_from_upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contents</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Document</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#load_documents_from_upload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.load_documents_from_upload" title="Link to this definition"></a></dt>
+<dd><p>Load an uploaded file into LangChain Documents based on extension.</p>
+<p>Supported extensions:
+- <code class="docutils literal notranslate"><span class="pre">txt</span></code>, <code class="docutils literal notranslate"><span class="pre">md</span></code>, <code class="docutils literal notranslate"><span class="pre">csv</span></code> -&gt; single Document
+- <code class="docutils literal notranslate"><span class="pre">json</span></code> -&gt; single Document (pretty-printed)
+- <code class="docutils literal notranslate"><span class="pre">pdf</span></code> -&gt; one Document per page
+- <code class="docutils literal notranslate"><span class="pre">docx</span></code> -&gt; single Document</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contents</strong> – The Dash upload contents string from <code class="docutils literal notranslate"><span class="pre">dcc.Upload</span></code>.</p></li>
+<li><p><strong>filename</strong> – The uploaded filename (used to infer file type and stored as metadata).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Extracted Documents representing the file content.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[Document]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the file extension is unsupported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.on_send_or_clear">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">on_send_or_clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">send_clicks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_clicks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_submit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#on_send_or_clear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.on_send_or_clear" title="Link to this definition"></a></dt>
+<dd><p>Dash callback: send a user message (or clear chat) and return updated history.</p>
+<p>If a RAG index exists for the current session, the callback uses the LCEL RAG
+chain to answer the user question. Otherwise it falls back to a plain LLM call.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>send_clicks</strong> – Number of clicks on the “Send” button.</p></li>
+<li><p><strong>clear_clicks</strong> – Number of clicks on the “Clear chat” button.</p></li>
+<li><p><strong>n_submit</strong> – <code class="docutils literal notranslate"><span class="pre">dcc.Input</span></code> submit count (triggered when pressing Enter).</p></li>
+<li><p><strong>user_text</strong> – Current text in the user input box.</p></li>
+<li><p><strong>history</strong> – Chat history stored in <code class="docutils literal notranslate"><span class="pre">dcc.Store</span></code>.</p></li>
+<li><p><strong>session_id</strong> – Per-browser session identifier.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated chat history and the cleared input box value.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[list, str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.on_upload">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">on_upload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#on_upload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.on_upload" title="Link to this definition"></a></dt>
+<dd><p>Dash callback: handle file upload and build the RAG vector index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contents</strong> – Dash upload contents string (base64 data URL).</p></li>
+<li><p><strong>filename</strong> – Uploaded filename.</p></li>
+<li><p><strong>session_id</strong> – Per-browser session identifier.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A status message describing index build success/failure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.parse_docx">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">parse_docx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Document</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#parse_docx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.parse_docx" title="Link to this definition"></a></dt>
+<dd><p>Extract text from a DOCX and return it as a list of Documents.</p>
+<p>The DOCX content is extracted from paragraphs, joined, and returned as a
+single <code class="docutils literal notranslate"><span class="pre">Document</span></code> (which will later be chunked by the text splitter).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw</strong> – Raw bytes of the DOCX file.</p></li>
+<li><p><strong>filename</strong> – The original filename, stored in <code class="docutils literal notranslate"><span class="pre">Document.metadata['source']</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A single <code class="docutils literal notranslate"><span class="pre">Document</span></code> containing extracted DOCX text, or an empty list
+if no text was found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[Document]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.parse_json">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">parse_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#parse_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.parse_json" title="Link to this definition"></a></dt>
+<dd><p>Parse JSON bytes into a pretty-printed text representation.</p>
+<p>If JSON parsing fails, falls back to text decoding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raw</strong> – Raw bytes for a JSON file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pretty-printed JSON string or decoded text fallback.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.parse_pdf">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">parse_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Document</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#parse_pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.parse_pdf" title="Link to this definition"></a></dt>
+<dd><p>Extract text from a PDF and return it as a list of Documents.</p>
+<p>Each PDF page becomes a separate <code class="docutils literal notranslate"><span class="pre">Document</span></code>. Pages with no extractable
+text are skipped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>raw</strong> – Raw bytes of the PDF file.</p></li>
+<li><p><strong>filename</strong> – The original filename, stored in <code class="docutils literal notranslate"><span class="pre">Document.metadata['source']</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>One <code class="docutils literal notranslate"><span class="pre">Document</span></code> per page containing extractable text.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[Document]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.parse_txt_like">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">parse_txt_like</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/LDDashRagChatbot.html#parse_txt_like"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.parse_txt_like" title="Link to this definition"></a></dt>
+<dd><p>Decode bytes into text for plain-text-like files.</p>
+<p>Attempts UTF-8 first and falls back to Latin-1 with replacement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>raw</strong> – Raw bytes for a text-like file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decoded text content.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.render_chat">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">render_chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">history</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#render_chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.render_chat" title="Link to this definition"></a></dt>
+<dd><p>Render chat messages as simple “bubble” components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>history</strong> – List of chat message dicts with keys <code class="docutils literal notranslate"><span class="pre">role</span></code> and <code class="docutils literal notranslate"><span class="pre">content</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of Dash HTML components representing the chat history.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.trim_history">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">trim_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">history</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#trim_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.trim_history" title="Link to this definition"></a></dt>
+<dd><p>Trim chat history to a rolling window of recent turns.</p>
+<p>The UI stores messages as dicts of the form <code class="docutils literal notranslate"><span class="pre">{&quot;role&quot;:</span> <span class="pre">&quot;...&quot;,</span> <span class="pre">&quot;content&quot;:</span> <span class="pre">&quot;...&quot;}</span></code>.
+This function keeps only the last <code class="docutils literal notranslate"><span class="pre">MAX_TURNS</span> <span class="pre">*</span> <span class="pre">2</span></code> entries (user+assistant).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>history</strong> – List of chat message dicts.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trimmed history list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LDDashRagChatbot.update_chat_window">
+<span class="sig-prename descclassname"><span class="pre">LDDashRagChatbot.</span></span><span class="sig-name descname"><span class="pre">update_chat_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">history</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LDDashRagChatbot.html#update_chat_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LDDashRagChatbot.update_chat_window" title="Link to this definition"></a></dt>
+<dd><p>Dash callback: render the chat window from stored history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>history</strong> – Chat history stored in <code class="docutils literal notranslate"><span class="pre">dcc.Store</span></code>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered chat components.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="LDDashRagChatbot documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Yuvi Durairaj.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

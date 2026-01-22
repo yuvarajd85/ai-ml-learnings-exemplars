@@ -1,0 +1,9 @@
+langchain
+langchain-chroma
+langchain-core
+langchain-community
+langchain-classic
+langchain-google-genai
+langchain-pinecone
+langchain-text-splitters
+langchain-openai
