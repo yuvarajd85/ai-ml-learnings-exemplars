@@ -1,32 +1,36 @@
-from mcp.server.fastmcp import FastMCP 
+from mcp.server.fastmcp import FastMCP
+import math
 
-mcp=FastMCP("Math")
+mcp = FastMCP("Math")
 
 @mcp.tool()
 def add(a: int, b: int) -> int:
-    """Adds two numbers."""
+    """Add two integers."""
     return a + b
 
 @mcp.tool()
 def subtract(a: int, b: int) -> int:
-    """Subtracts two numbers."""
+    """Subtract b from a."""
     return a - b
 
 @mcp.tool()
 def multiply(a: int, b: int) -> int:
-    """Multiplies two numbers."""
+    """Multiply two integers."""
     return a * b
 
 @mcp.tool()
 def divide(a: int, b: int) -> float:
-    """Divides two numbers."""
+    """Divide a by b."""
     if b == 0:
-        return 0
+        raise ZeroDivisionError("Division by zero is not allowed")
     return a / b
 
-#the transport ="stdio" argument is used to specify the communication method for the MCP server.
-#use standard ip/op (stdin and stdout) to receive and respond to tool function
-
+@mcp.tool()
+def sqrt(x: float) -> float:
+    """Return the square root of a non-negative number."""
+    if x < 0:
+        raise ValueError("Square root of negative number is not supported")
+    return math.sqrt(x)
 
 if __name__ == "__main__":
     mcp.run(transport="stdio")

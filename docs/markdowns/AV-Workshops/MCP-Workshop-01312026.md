@@ -21,3 +21,6 @@
 - Transport Layer 
 - FastMCP
 - Google DB MCP 
+
+## <u> Day-2 Notes
+
