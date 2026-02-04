@@ -34,7 +34,7 @@ class Claude:
         self,
         messages,
         system=None,
-        temperature=1.0,
+        temperature=0.5,
         stop_sequences=[],
         tools=None,
         thinking=False,
