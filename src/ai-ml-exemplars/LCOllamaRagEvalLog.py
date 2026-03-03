@@ -141,7 +141,7 @@ ANSWER:
     # 6) Ask a question
     # -----------------------------
     question = "When should I prefer Polars over Pandas, and why?"
-    k = 3
+    k = 5
 
     t0 = time.perf_counter()
 
