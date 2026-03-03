@@ -19,8 +19,8 @@ output_filename = f"../resources/datasets/Stallions-Stats-2025.xlsx"
 def main():
     pl.Config.set_tbl_cols(200)
     pl.Config.set_tbl_rows(200)
-    batting_data : Dict = process_bowling_stats()
-    bowling_data: Dict = process_batting_stats()
+    bowling_data : Dict = process_bowling_stats()
+    batting_data: Dict = process_batting_stats()
     total_data = batting_data | bowling_data
 
     with pd.ExcelWriter(output_filename, engine="openpyxl") as writer:
@@ -29,6 +29,8 @@ def main():
 
 def get_page_data(url:str) -> pl.DataFrame:
     response = requests.get(url)
+    print(f"Page Response: {response}")
+
     bs4_obj: bs4.BeautifulSoup = BeautifulSoup(response.text, features='html.parser')
     table = bs4_obj.find(name='table', attrs={'class': ['table table-striped table-active2 playersData sortable',
                                                         'table table-striped table-active4 playersData sortable',
@@ -52,24 +54,27 @@ def get_page_data(url:str) -> pl.DataFrame:
     return df
 
 def process_batting_stats() -> Dict:
-    f40_bat_urls = [f"https://cricclubs.com/GPCL/battingRecords.do?league=40&teamId=723&year=2024&clubId=48"]
-    t30_bat_urls = [f"https://cricclubs.com/PMCL/battingRecords.do?league=20&teamId=496&year=2024&clubId=585"]
-    t20_bat_urls = [f"https://cricclubs.com/GPCL/battingRecords.do?league=39&teamId=694&year=2024&clubId=48",
-                     f"https://cricclubs.com/DelawareCup/battingRecords.do?league=13&teamId=233&year=2024&clubId=341",
-                     f"https://cricclubs.com/TurboCup/battingRecords.do?league=6&teamId=73&year=2024&clubId=6930",
-                     f"https://cricclubs.com/UCL2024/battingRecords.do?league=13&teamId=196&year=2024&clubId=1092362"
+    f40_bat_urls = [f"https://cricclubs.com/GPCL/battingRecords.do?league=41&teamId=749&year=2025&clubId=48"]
+    # t30_bat_urls = [f"https://cricclubs.com/PMCL/battingRecords.do?league=20&teamId=496&year=2024&clubId=585"]
+    t20_bat_urls = [
+                     # f"https://cricclubs.com/GPCL/battingRecords.do?league=39&teamId=694&year=2024&clubId=48",
+                     f"https://cricclubs.com/DelawareCup/battingRecords.do?league=14&teamId=260&year=2025&clubId=341",
+                     f"https://cricclubs.com/TurboCup/battingRecords.do?league=7&teamId=83&year=2025&clubId=6930",
+                     # f"https://cricclubs.com/UCL2024/battingRecords.do?league=13&teamId=196&year=2024&clubId=1092362"
                      ]
 
     f40_bat_data = get_bat_agg(df=pl.concat(items=[get_batter_data(url) for url in f40_bat_urls], how='vertical'))
     print(f"{f40_bat_data.head()=}")
-    t30_bat_data = get_bat_agg(df=pl.concat(items=[get_batter_data(url) for url in t30_bat_urls], how='vertical'))
-    print(f"{t30_bat_data.head()=}")
+    # t30_bat_data = get_bat_agg(df=pl.concat(items=[get_batter_data(url) for url in t30_bat_urls], how='vertical'))
+    # print(f"{t30_bat_data.head()=}")
     t20_bat_data = get_bat_agg(df=pl.concat(items=[get_batter_data(url) for url in t20_bat_urls], how='vertical'))
     print(f"{t20_bat_data.head()=}")
-    bat_overall_data = get_bat_agg(df=pl.concat(items=[f40_bat_data,t30_bat_data,t20_bat_data]))
+    # bat_overall_data = get_bat_agg(df=pl.concat(items=[f40_bat_data,t30_bat_data,t20_bat_data]))
+    bat_overall_data = get_bat_agg(df=pl.concat(items=[f40_bat_data,t20_bat_data]))
     print(f"{bat_overall_data.head(30)=}")
 
-    bat_data_dict = {"F40-Bat": f40_bat_data, "T30-Bat": t30_bat_data, "T20-Bat" : t20_bat_data, "Bat-Overall" : bat_overall_data}
+    # bat_data_dict = {"F40-Bat": f40_bat_data, "T30-Bat": t30_bat_data, "T20-Bat" : t20_bat_data, "Bat-Overall" : bat_overall_data}
+    bat_data_dict = {"F40-Bat": f40_bat_data, "T20-Bat" : t20_bat_data, "Bat-Overall" : bat_overall_data}
     return bat_data_dict
 
 
@@ -108,8 +113,9 @@ def get_bat_agg(df:pl.DataFrame) -> pl.DataFrame:
 
 def process_bowling_stats() -> Dict:
     f40_bowl_urls = [f"https://cricclubs.com/GPCL/bowlingRecords.do?league=41&teamId=749&year=2025&clubId=48"]
-    t30_bowl_urls = [f"https://cricclubs.com/PMCL/bowlingRecords.do?league=25&teamId=530&year=2025&clubId=585"]
-    t20_bowl_urls = [f"https://cricclubs.com/PMCL/bowlingRecords.do?league=24&teamId=585&year=2025&clubId=585",
+    # t30_bowl_urls = [f"https://cricclubs.com/PMCL/bowlingRecords.do?league=25&teamId=530&year=2025&clubId=585"]
+    t20_bowl_urls = [
+                    # f"https://cricclubs.com/PMCL/bowlingRecords.do?league=24&teamId=585&year=2025&clubId=585",
                      f"https://cricclubs.com/DelawareCup/bowlingRecords.do?league=14&teamId=260&year=2025&clubId=341",
                      f"https://cricclubs.com/TurboCup/bowlingRecords.do?league=7&teamId=83&year=2025&clubId=6930",
                      # f"https://cricclubs.com/UCL2024/bowlingRecords.do?league=13&teamId=196&year=2024&clubId=1092362"
@@ -118,16 +124,18 @@ def process_bowling_stats() -> Dict:
     f40_bowl_data = get_bowl_agg(df=pl.concat(items=[get_bowler_data(url) for url in f40_bowl_urls], how='vertical'))
     print(f"{f40_bowl_data.head()=}")
 
-    t30_bowl_data = get_bowl_agg(df=pl.concat(items=[get_bowler_data(url) for url in t30_bowl_urls], how='vertical'))
-    print(f"{t30_bowl_data.head()=}")
+    # t30_bowl_data = get_bowl_agg(df=pl.concat(items=[get_bowler_data(url) for url in t30_bowl_urls], how='vertical'))
+    # print(f"{t30_bowl_data.head()=}")
 
     t20_bowl_data = get_bowl_agg(df=pl.concat(items=[get_bowler_data(url) for url in t20_bowl_urls], how='vertical'))
     print(f"{t20_bowl_data.head()=}")
 
-    bowl_overall_data = get_bowl_agg(df=pl.concat(items=[f40_bowl_data, t30_bowl_data, t20_bowl_data], how='vertical'))
+    # bowl_overall_data = get_bowl_agg(df=pl.concat(items=[f40_bowl_data, t30_bowl_data, t20_bowl_data], how='vertical'))
+    bowl_overall_data = get_bowl_agg(df=pl.concat(items=[f40_bowl_data, t20_bowl_data], how='vertical'))
     print(f"{bowl_overall_data.head(30)=}")
 
-    bowl_data_dict = {"F40-Bowl": f40_bowl_data, "T30-Bowl": t30_bowl_data, "T20-Bowl": t20_bowl_data,
+    # bowl_data_dict = {"F40-Bowl": f40_bowl_data, "T30-Bowl": t30_bowl_data, "T20-Bowl": t20_bowl_data,
+    bowl_data_dict = {"F40-Bowl": f40_bowl_data, "T20-Bowl": t20_bowl_data,
                      "Bowl-Overall": bowl_overall_data}
     return bowl_data_dict
 
