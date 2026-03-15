@@ -19,6 +19,7 @@ def main():
         Document(page_content="Pandas is the most common Python DataFrame library; great ecosystem, slower on huge data."),
         Document(page_content="RAG retrieves relevant documents and feeds them to an LLM to reduce hallucinations."),
         Document(page_content="Gradient boosting (e.g., XGBoost/LightGBM) often wins on tabular data."),
+        Document(page_content="Yuvi is an architect, cricketer, airplane modeler, good human being etc."),
     ]
 
     # 2) Embeddings via Ollama
@@ -66,7 +67,7 @@ ANSWER:
         | StrOutputParser()
     )
 
-    question = "When should I prefer Polars over Pandas, and why?"
+    question = "describe yuvi"
     answer = chain.invoke(question)
     print(answer)
 
