@@ -1,0 +1,133 @@
+{
+    "StartAt": "Train",
+    "States": {
+      "Train": {
+        "ResultPath": "$.train_step_result",
+        "Resource": "arn:aws:states:::sagemaker:createTrainingJob.sync",
+        "Parameters": {
+          "AlgorithmSpecification": {
+            "TrainingImage.$": "$$.Execution.Input['ECRArn']",
+            "TrainingInputMode": "File"
+          },
+          "OutputDataConfig": {
+            "S3OutputPath": "s3://modelartifactbucket-us-west-2-6462452545596592/"
+          },
+          "StoppingCondition": {
+            "MaxRuntimeInSeconds": 300
+          },
+          "ResourceConfig": {
+            "VolumeSizeInGB": 10,
+            "VolumeKmsKeyId": "1207b6fc-3ebd-4d78-8f23-d214dc9ea3da",
+            "InstanceCount": 1,
+            "InstanceType": "ml.m5.large"
+          },
+          "RoleArn": "arn:aws:iam::495025962146:role/LabVPC-notebook-role",
+          "InputDataConfig": [
+            {
+              "DataSource": {
+                "S3DataSource": {
+                  "S3DataType": "S3Prefix",
+                  "S3Uri.$": "$$.Execution.Input['DataBucketPath']",
+                  "S3DataDistributionType": "FullyReplicated"
+                }
+              },
+              "ContentType": "csv",
+              "ChannelName": "training"
+            }
+          ],
+          "TrainingJobName.$": "$$.Execution.Input['Job']",
+          "DebugHookConfig": {
+            "S3OutputPath": "s3://modelartifactbucket-us-west-2-6462452545596592/"
+          }
+        },
+        "Type": "Task",
+        "Next": "Create model",
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "ThrottlingException",
+              "SageMaker.AmazonSageMakerException"
+            ],
+            "IntervalSeconds": 5,
+            "MaxAttempts": 60,
+            "BackoffRate": 1.25
+          }
+        ]
+      },
+      "Create model": {
+        "ResultPath": "$.create_step_result",
+        "Parameters": {
+          "ExecutionRoleArn": "arn:aws:iam::495025962146:role/LabVPC-notebook-role",
+          "ModelName.$": "$$.Execution.Input['Model']",
+          "PrimaryContainer": {
+            "Environment": {},
+            "Image.$": "$$.Execution.Input['ECRArn']",
+            "ModelDataUrl.$": "$['train_step_result']['ModelArtifacts']['S3ModelArtifacts']"
+          }
+        },
+        "Resource": "arn:aws:states:::sagemaker:createModel",
+        "Type": "Task",
+        "Next": "Create endpoint configuration",
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "ThrottlingException",
+              "SageMaker.AmazonSageMakerException"
+            ],
+            "IntervalSeconds": 5,
+            "MaxAttempts": 60,
+            "BackoffRate": 1.25
+          }
+        ]
+      },
+      "Create endpoint configuration": {
+        "ResultPath": "$.endpoint_config_step_result",
+        "Resource": "arn:aws:states:::sagemaker:createEndpointConfig",
+        "Parameters": {
+          "EndpointConfigName.$": "$$.Execution.Input['Model']",
+          "ProductionVariants": [
+            {
+              "InitialInstanceCount": 1,
+              "InstanceType": "ml.m5.large",
+              "ModelName.$": "$$.Execution.Input['Model']",
+              "VariantName": "AllTraffic"
+            }
+          ]
+        },
+        "Type": "Task",
+        "Next": "Create endpoint",
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "ThrottlingException",
+              "SageMaker.AmazonSageMakerException"
+            ],
+            "IntervalSeconds": 5,
+            "MaxAttempts": 60,
+            "BackoffRate": 1.25
+          }
+        ]
+      },
+      "Create endpoint": {
+        "ResultPath": "$.endpoint_step_result",
+        "Resource": "arn:aws:states:::sagemaker:createEndpoint",
+        "Parameters": {
+          "EndpointConfigName.$": "$$.Execution.Input['Model']",
+          "EndpointName.$": "$$.Execution.Input['Endpoint']"
+        },
+        "Type": "Task",
+        "End": true,
+        "Retry": [
+          {
+            "ErrorEquals": [
+              "ThrottlingException",
+              "SageMaker.AmazonSageMakerException"
+            ],
+            "IntervalSeconds": 5,
+            "MaxAttempts": 60,
+            "BackoffRate": 1.25
+          }
+        ]
+      }
+    }
+  }
