@@ -1,0 +1,770 @@
+<mxfile host="app.diagrams.net" version="24.0.0" type="device">
+  <diagram id="insurance-claim-arch" name="Insurance Claim Intake &amp; Adjuster Workspace">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10"
+                  pageWidth="2400" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════════════════════════════
+             ZONE CONTAINERS
+        ═══════════════════════════════════════════════════════════ -->
+
+        <!-- Client Zone -->
+        <mxCell id="client-zone" value="Client"
+          style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;
+                 container=1;collapsible=0;recursiveResize=0;
+                 fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=2;
+                 fontSize=14;fontStyle=1;align=center;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="220" height="860" as="geometry" />
+        </mxCell>
+
+        <!-- AWS Account Zone -->
+        <mxCell id="aws-zone" value="AWS Account — us-east-1"
+          style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;
+                 container=1;collapsible=0;recursiveResize=0;
+                 fillColor=#fff2cc;strokeColor=#FF8000;strokeWidth=2;
+                 fontSize=14;fontStyle=1;align=center;"
+          vertex="1" parent="1">
+          <mxGeometry x="260" y="20" width="1880" height="860" as="geometry" />
+        </mxCell>
+
+        <!-- External Systems Zone -->
+        <mxCell id="ext-zone" value="External Systems"
+          style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;
+                 container=1;collapsible=0;recursiveResize=0;
+                 fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=2;
+                 fontSize=14;fontStyle=1;align=center;"
+          vertex="1" parent="1">
+          <mxGeometry x="2160" y="20" width="220" height="860" as="geometry" />
+        </mxCell>
+
+        <!-- Legend Zone -->
+        <mxCell id="legend-zone" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;
+                 container=1;collapsible=0;recursiveResize=0;
+                 fillColor=#ffffff;strokeColor=#999999;strokeWidth=1;
+                 fontSize=12;align=left;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="900" width="2360" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- Legend content -->
+        <mxCell id="legend-title" value="Legend"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;fontSize=13;fontStyle=1;"
+          vertex="1" parent="legend-zone">
+          <mxGeometry x="10" y="10" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-sync-line" value=""
+          style="endArrow=block;endFill=1;strokeColor=#545B64;strokeWidth=2;fontSize=11;"
+          edge="1" parent="legend-zone">
+          <mxGeometry x="120" y="30" width="80" height="20" as="geometry">
+            <Array as="points"/>
+            <mxPoint x="120" y="40" as="sourcePoint"/>
+            <mxPoint x="200" y="40" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-sync-label" value="Sync call (HTTPS / SQL)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;"
+          vertex="1" parent="legend-zone">
+          <mxGeometry x="210" y="25" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-async-line" value=""
+          style="endArrow=block;endFill=1;strokeColor=#CD2264;strokeWidth=2;dashed=1;fontSize=11;"
+          edge="1" parent="legend-zone">
+          <mxGeometry x="120" y="80" width="80" height="20" as="geometry">
+            <Array as="points"/>
+            <mxPoint x="120" y="90" as="sourcePoint"/>
+            <mxPoint x="200" y="90" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend-async-label" value="Async / event / batch"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;"
+          vertex="1" parent="legend-zone">
+          <mxGeometry x="210" y="72" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legend-zone-colors" value="Zone colors:   Client (#dae8fc)   AWS Account (#fff2cc)   External (#e1d5e7)"
+          style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=11;"
+          vertex="1" parent="legend-zone">
+          <mxGeometry x="450" y="40" width="600" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             CLIENT ZONE ACTORS
+        ═══════════════════════════════════════════════════════════ -->
+
+        <mxCell id="customer" value="Customer&#xa;(web / mobile)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;
+                 fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="client-zone">
+          <mxGeometry x="30" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="adjuster" value="Adjuster&#xa;(browser)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;
+                 fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="client-zone">
+          <mxGeometry x="30" y="300" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="opsmgr" value="Ops Manager&#xa;(browser)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;
+                 fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="client-zone">
+          <mxGeometry x="30" y="520" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             AWS ZONE — EDGE / API LAYER (relative to aws-zone)
+        ═══════════════════════════════════════════════════════════ -->
+
+        <!-- WAF -->
+        <mxCell id="waf" value="WAF"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="20" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- CloudFront -->
+        <mxCell id="cloudfront" value="CloudFront"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="20" y="200" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- API Gateway — Customer -->
+        <mxCell id="apigw-c" value="API GW HTTP&#xa;claims-customer-api"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="20" y="370" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Cognito — Customer -->
+        <mxCell id="cognito-c" value="Cognito&#xa;Customer Pool"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cognito;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="110" y="370" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- API Gateway — Adjuster -->
+        <mxCell id="apigw-a" value="API GW HTTP&#xa;claims-adjuster-api"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="20" y="530" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Cognito — Adjuster -->
+        <mxCell id="cognito-a" value="Cognito&#xa;Adjuster Pool (SAML)"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cognito;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="110" y="530" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             VPC GROUP (relative to aws-zone)
+        ═══════════════════════════════════════════════════════════ -->
+
+        <mxCell id="vpc" value="VPC — us-east-1"
+          style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_vpc;
+                 strokeColor=#248814;fillColor=none;fontColor=#248814;
+                 container=1;pointerEvents=0;collapsible=0;recursiveResize=0;
+                 verticalAlign=top;align=left;spacingLeft=30;fontSize=12;fontStyle=1;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="210" y="40" width="760" height="800" as="geometry" />
+        </mxCell>
+
+        <!-- Private Subnet — Compute (relative to vpc) -->
+        <mxCell id="sn-compute" value="Private subnet — compute"
+          style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;
+                 strokeColor=#7AA116;fillColor=none;fontColor=#7AA116;dashed=1;
+                 container=1;pointerEvents=0;collapsible=0;recursiveResize=0;
+                 verticalAlign=top;align=left;spacingLeft=30;fontSize=11;"
+          vertex="1" parent="vpc">
+          <mxGeometry x="20" y="50" width="450" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda: claim-intake-handler (relative to sn-compute) -->
+        <mxCell id="lambda-intake" value="Lambda&#xa;claim-intake-handler"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda_function;"
+          vertex="1" parent="sn-compute">
+          <mxGeometry x="20" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda: adjuster-api-handler (relative to sn-compute) -->
+        <mxCell id="lambda-adj" value="Lambda&#xa;adjuster-api-handler"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda_function;"
+          vertex="1" parent="sn-compute">
+          <mxGeometry x="190" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda: finance-report-gen (relative to sn-compute) -->
+        <mxCell id="lambda-fin" value="Lambda&#xa;finance-report-gen"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda_function;"
+          vertex="1" parent="sn-compute">
+          <mxGeometry x="360" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Private Subnet — Data (relative to vpc) -->
+        <mxCell id="sn-data" value="Private subnet — data"
+          style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;
+                 strokeColor=#7AA116;fillColor=none;fontColor=#7AA116;dashed=1;
+                 container=1;pointerEvents=0;collapsible=0;recursiveResize=0;
+                 verticalAlign=top;align=left;spacingLeft=30;fontSize=11;"
+          vertex="1" parent="vpc">
+          <mxGeometry x="20" y="250" width="450" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- ElastiCache (relative to sn-data) -->
+        <mxCell id="elasticache" value="ElastiCache Valkey&#xa;t4g.medium"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.elasticache;"
+          vertex="1" parent="sn-data">
+          <mxGeometry x="20" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- DynamoDB idempotency (relative to sn-data) -->
+        <mxCell id="dynamodb" value="DynamoDB&#xa;idempotency table"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;"
+          vertex="1" parent="sn-data">
+          <mxGeometry x="190" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Isolated Subnet — Database (relative to vpc) -->
+        <mxCell id="sn-isolated" value="Isolated subnet — database"
+          style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_security_group;
+                 strokeColor=#7AA116;fillColor=none;fontColor=#7AA116;dashed=1;
+                 container=1;pointerEvents=0;collapsible=0;recursiveResize=0;
+                 verticalAlign=top;align=left;spacingLeft=30;fontSize=11;"
+          vertex="1" parent="vpc">
+          <mxGeometry x="20" y="450" width="450" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Aurora (relative to sn-isolated) -->
+        <mxCell id="aurora" value="Aurora PostgreSQL 16&#xa;r6g.large Multi-AZ"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.aurora;"
+          vertex="1" parent="sn-isolated">
+          <mxGeometry x="20" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- OpenSearch (relative to sn-isolated) -->
+        <mxCell id="opensearch" value="OpenSearch Serverless&#xa;insurance-claims"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.opensearch_service;"
+          vertex="1" parent="sn-isolated">
+          <mxGeometry x="190" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Async Pipeline Group (relative to vpc) -->
+        <mxCell id="grp-async" value="Async Pipeline (via VPC endpoints)"
+          style="shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_account;
+                 strokeColor=#CD2264;fillColor=none;fontColor=#CD2264;dashed=1;
+                 container=1;pointerEvents=0;collapsible=0;recursiveResize=0;
+                 verticalAlign=top;align=left;spacingLeft=30;fontSize=11;"
+          vertex="1" parent="vpc">
+          <mxGeometry x="490" y="50" width="250" height="730" as="geometry" />
+        </mxCell>
+
+        <!-- SQS (relative to grp-async) -->
+        <mxCell id="sqs" value="SQS Standard&#xa;document-intake-queue"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sqs;"
+          vertex="1" parent="grp-async">
+          <mxGeometry x="95" y="50" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Step Functions: Document Ingestion (relative to grp-async) -->
+        <mxCell id="sfn-ing" value="Step Functions&#xa;DocumentIngestionWF"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.step_functions;"
+          vertex="1" parent="grp-async">
+          <mxGeometry x="95" y="180" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Textract (relative to grp-async) -->
+        <mxCell id="textract" value="AWS Textract&#xa;AnalyzeDocument"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.textract;"
+          vertex="1" parent="grp-async">
+          <mxGeometry x="10" y="330" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Bedrock (relative to grp-async) -->
+        <mxCell id="bedrock" value="Bedrock Runtime&#xa;Claude Haiku"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#01A88D;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.bedrock;"
+          vertex="1" parent="grp-async">
+          <mxGeometry x="180" y="330" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Step Functions: Triage (relative to grp-async) -->
+        <mxCell id="sfn-tri" value="Step Functions&#xa;TriageAndRoutingWF"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.step_functions;"
+          vertex="1" parent="grp-async">
+          <mxGeometry x="95" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             AWS GLOBAL SERVICES (relative to aws-zone, outside VPC)
+        ═══════════════════════════════════════════════════════════ -->
+
+        <!-- EventBridge -->
+        <mxCell id="eventbridge" value="EventBridge&#xa;insurance-domain-events"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1010" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- SNS -->
+        <mxCell id="sns" value="SNS&#xa;claim-status-notifications"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sns;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1130" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- SES -->
+        <mxCell id="ses" value="Amazon SES&#xa;(transactional email)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E7157B;strokeColor=#ffffff;
+                 fontColor=#ffffff;fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1250" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- SNS Mobile Push -->
+        <mxCell id="snspush" value="SNS Mobile Push&#xa;APNs / FCM"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sns;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1410" y="60" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- S3: claims-documents -->
+        <mxCell id="s3-docs" value="S3 claims-documents&#xa;Object Lock 7yr"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1010" y="240" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- S3: claims-audit-log -->
+        <mxCell id="s3-audit" value="S3 claims-audit-log&#xa;Object Lock 7yr"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1130" y="240" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- S3: claims-analytics -->
+        <mxCell id="s3-analytics" value="S3 claims-analytics&#xa;Parquet"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1250" y="240" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Glue -->
+        <mxCell id="glue" value="AWS Glue 4.0&#xa;Spark ETL"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.glue;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1010" y="440" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Redshift Serverless -->
+        <mxCell id="redshift" value="Redshift Serverless&#xa;BI fact tables"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.redshift;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1130" y="440" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Athena -->
+        <mxCell id="athena" value="Amazon Athena&#xa;ad-hoc queries"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.athena;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1250" y="440" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- QuickSight -->
+        <mxCell id="quicksight" value="Amazon QuickSight&#xa;SPICE dashboards"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.quicksight;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1410" y="440" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- EventBridge Scheduler -->
+        <mxCell id="eb-sched" value="EventBridge Scheduler&#xa;(nightly + monthly)"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1530" y="440" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- CloudTrail -->
+        <mxCell id="cloudtrail" value="AWS CloudTrail&#xa;(org trail)"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudtrail;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1010" y="640" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- CloudWatch -->
+        <mxCell id="cloudwatch" value="Amazon CloudWatch&#xa;metrics + alarms"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch_2;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1130" y="640" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Secrets Manager -->
+        <mxCell id="secrets" value="Secrets Manager&#xa;+ KMS CMK"
+          style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.secrets_manager;"
+          vertex="1" parent="aws-zone">
+          <mxGeometry x="1250" y="640" width="60" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             EXTERNAL SYSTEMS ZONE
+        ═══════════════════════════════════════════════════════════ -->
+
+        <!-- Corporate IdP -->
+        <mxCell id="corpidp" value="Corporate IdP&#xa;(SAML 2.0)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;
+                 fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="ext-zone">
+          <mxGeometry x="30" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- APNs / FCM -->
+        <mxCell id="apnsfcm" value="iOS APNs&#xa;Android FCM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;
+                 fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="ext-zone">
+          <mxGeometry x="30" y="280" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Payment Platform API -->
+        <mxCell id="payment-api" value="Payment Platform API&#xa;(downstream)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;
+                 fontSize=11;verticalAlign=middle;align=center;"
+          vertex="1" parent="ext-zone">
+          <mxGeometry x="30" y="480" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             EDGES — all parented to root "1"
+             Sync: strokeColor=#545B64, dashed=0
+             Async/batch: strokeColor=#CD2264, dashed=1
+        ═══════════════════════════════════════════════════════════ -->
+
+        <!-- Customer → CloudFront (sync HTTPS) -->
+        <mxCell id="e-cust-cf" value="HTTPS"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="customer" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CloudFront → API GW Customer (sync HTTPS/JWT) -->
+        <mxCell id="e-cf-apigwc" value="HTTPS / JWT"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="cloudfront" target="apigw-c">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- WAF → CloudFront (sync, security layer) -->
+        <mxCell id="e-waf-cf" value="filter"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#DD344C;fontSize=10;"
+          edge="1" parent="1" source="waf" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Cognito Customer → API GW Customer (JWT) -->
+        <mxCell id="e-cogc-apigwc" value="JWT"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="cognito-c" target="apigw-c">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- API GW Customer → Lambda intake (sync invoke) -->
+        <mxCell id="e-apigwc-lambda" value="invoke"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="apigw-c" target="lambda-intake">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda intake → Aurora (sync SQL INSERT) -->
+        <mxCell id="e-lambda-aurora" value="INSERT claim SQL"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="lambda-intake" target="aurora">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda intake → ElastiCache (sync policy lookup) -->
+        <mxCell id="e-lambda-valkey" value="policy lookup"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="lambda-intake" target="elasticache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Customer → S3 docs (async PUT upload) -->
+        <mxCell id="e-cust-s3docs" value="multipart PUT (pre-signed)"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="customer" target="s3-docs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- S3 docs → SQS (async S3 event) -->
+        <mxCell id="e-s3docs-sqs" value="S3 event notification"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="s3-docs" target="sqs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SQS → Step Functions Ingestion (async trigger) -->
+        <mxCell id="e-sqs-sfning" value="trigger workflow"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sqs" target="sfn-ing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Ingestion → Textract (async AnalyzeDocument) -->
+        <mxCell id="e-sfning-textract" value="AnalyzeDocument"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-ing" target="textract">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Ingestion → Bedrock (async classify) -->
+        <mxCell id="e-sfning-bedrock" value="classify complexity"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-ing" target="bedrock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Ingestion → Aurora (async INSERT extraction) -->
+        <mxCell id="e-sfning-aurora" value="INSERT extraction SQL"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-ing" target="aurora">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Ingestion → OpenSearch (async index) -->
+        <mxCell id="e-sfning-opensearch" value="index document"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-ing" target="opensearch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Ingestion → EventBridge (async extraction.completed) -->
+        <mxCell id="e-sfning-eb" value="extraction.completed"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-ing" target="eventbridge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EventBridge → SFN Triage (async extraction.completed rule) -->
+        <mxCell id="e-eb-sfntri" value="extraction.completed"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="eventbridge" target="sfn-tri">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Triage → Bedrock (async complexity scoring) -->
+        <mxCell id="e-sfntri-bedrock" value="complexity scoring"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-tri" target="bedrock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Triage → Aurora (async pool query + UPDATE status) -->
+        <mxCell id="e-sfntri-aurora" value="adjuster pool query + UPDATE status"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-tri" target="aurora">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SFN Triage → EventBridge (async claim.status.changed) -->
+        <mxCell id="e-sfntri-eb" value="claim.status.changed"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sfn-tri" target="eventbridge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EventBridge → SNS (async claim.status.changed) -->
+        <mxCell id="e-eb-sns" value="claim.status.changed"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="eventbridge" target="sns">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SNS → SES (async email fanout) -->
+        <mxCell id="e-sns-ses" value="email fanout"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sns" target="ses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SNS → SNS Mobile Push (async push fanout) -->
+        <mxCell id="e-sns-push" value="push fanout"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="sns" target="snspush">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SES → Customer (async email) -->
+        <mxCell id="e-ses-cust" value="email notification"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="ses" target="customer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SNS Mobile Push → APNs/FCM (async push) -->
+        <mxCell id="e-push-apns" value="push notification"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="snspush" target="apnsfcm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Corporate IdP → Cognito Adjuster (SAML) -->
+        <mxCell id="e-corpidp-coga" value="SAML assertion"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#9673a6;fontSize=10;"
+          edge="1" parent="1" source="corpidp" target="cognito-a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Cognito Adjuster → API GW Adjuster (JWT) -->
+        <mxCell id="e-coga-apigwa" value="JWT"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="cognito-a" target="apigw-a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Adjuster → API GW Adjuster (sync HTTPS) -->
+        <mxCell id="e-adj-apigwa" value="HTTPS / JWT"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="adjuster" target="apigw-a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- API GW Adjuster → Lambda adjuster (sync invoke) -->
+        <mxCell id="e-apigwa-lambdaadj" value="invoke"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="apigw-a" target="lambda-adj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda adjuster → OpenSearch (sync search) -->
+        <mxCell id="e-lambdaadj-os" value="full-text search"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="lambda-adj" target="opensearch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda adjuster → Aurora (sync claim detail + UPDATE) -->
+        <mxCell id="e-lambdaadj-aurora" value="claim detail / UPDATE status SQL"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="lambda-adj" target="aurora">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda adjuster → S3 docs (sync pre-signed GET URL) -->
+        <mxCell id="e-lambdaadj-s3docs" value="pre-signed GET URL"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="lambda-adj" target="s3-docs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda adjuster → EventBridge (async claim.status.changed) -->
+        <mxCell id="e-lambdaadj-eb" value="claim.status.changed"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="lambda-adj" target="eventbridge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda adjuster → DynamoDB (sync idempotency check) -->
+        <mxCell id="e-lambdaadj-ddb" value="idempotency check"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="lambda-adj" target="dynamodb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Ops Manager → QuickSight (sync HTTPS) -->
+        <mxCell id="e-ops-qs" value="HTTPS"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="opsmgr" target="quicksight">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EventBridge Scheduler → Glue (batch cron) -->
+        <mxCell id="e-ebsched-glue" value="cron 02:00 UTC"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="eb-sched" target="glue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Glue → Aurora (batch JDBC read) -->
+        <mxCell id="e-glue-aurora" value="JDBC read"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="glue" target="aurora">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Glue → S3 analytics (batch Parquet write) -->
+        <mxCell id="e-glue-s3an" value="Parquet write"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="glue" target="s3-analytics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Glue → Redshift (batch COPY) -->
+        <mxCell id="e-glue-redshift" value="COPY"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="glue" target="redshift">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- QuickSight → Redshift (sync SPICE refresh) -->
+        <mxCell id="e-qs-redshift" value="SPICE refresh"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#545B64;fontSize=10;"
+          edge="1" parent="1" source="quicksight" target="redshift">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- EventBridge Scheduler → Lambda finance (monthly batch) -->
+        <mxCell id="e-ebsched-fin" value="monthly trigger"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="eb-sched" target="lambda-fin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda finance → Athena (batch SQL query) -->
+        <mxCell id="e-fin-athena" value="SQL query"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="lambda-fin" target="athena">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Athena → S3 analytics (batch read Parquet) -->
+        <mxCell id="e-athena-s3an" value="read Parquet"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="athena" target="s3-analytics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda finance → SES (async CSV email) -->
+        <mxCell id="e-fin-ses" value="CSV via SES"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#CD2264;dashed=1;fontSize=10;"
+          edge="1" parent="1" source="lambda-fin" target="ses">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- CloudTrail → S3 audit (compliance events) -->
+        <mxCell id="e-ct-s3audit" value="management + data events"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#879196;dashed=1;fontStyle=2;fontSize=10;"
+          edge="1" parent="1" source="cloudtrail" target="s3-audit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda intake → S3 audit (per-claim event record) -->
+        <mxCell id="e-lambdaint-audit" value="per-claim event record"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#879196;dashed=1;fontStyle=2;fontSize=10;"
+          edge="1" parent="1" source="lambda-intake" target="s3-audit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Lambda adjuster → S3 audit (per-claim event record) -->
+        <mxCell id="e-lambdaadj-audit" value="per-claim event record"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#879196;dashed=1;fontStyle=2;fontSize=10;"
+          edge="1" parent="1" source="lambda-adj" target="s3-audit">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

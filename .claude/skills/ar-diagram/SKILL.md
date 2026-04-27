@@ -1,8 +1,7 @@
 ---
 name: ar-diagram
 description: Create architecture diagrams for software systems, cloud infrastructure, data pipelines, and distributed systems. Use this skill whenever the user mentions "architecture diagram", "system diagram", "component diagram", "data flow", "sequence diagram", "C4", or asks to visualize a system, AWS/cloud setup, microservices, RAG pipeline, ingestion flow, or any ML/data pipeline — even when they don't say "diagram" explicitly (e.g., "show me how this fits together", "sketch the flow", "draw what this looks like"). Also trigger when the user asks to convert an existing codebase, Terraform module, CloudFormation template, or verbal description into a visual. Covers Mermaid, PlantUML, D2, Graphviz, and the Python `diagrams` library with AWS / GCP / Azure / Kubernetes icons. Prefer this skill over freehand ASCII art or prose descriptions any time a diagram would actually help.
-allowed-tools: Read, Grep, Glob, Bash
-model: sonnet
+allowed-tools: Read, Grep, Glob, Bash, Write, Edit
 ---
 
 # Architecture Diagram Skill
@@ -31,7 +30,7 @@ Do not start generating a diagram until the following are clear. If any are miss
 
 If the user says something vague like "draw my system", pick the most useful default (usually C4 Container-level, static, engineer audience) and state the assumption in one line before producing output. Don't ping-pong.
 
-## Step 1: Pick the right toolexit
+## Step 1: Pick the right tool
 
 Pick one tool. Do not mix in a single diagram.
 
