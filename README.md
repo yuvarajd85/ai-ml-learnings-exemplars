@@ -1,5 +1,14 @@
-# AI-ML-Learnings-Exemplars
-This repository hosts all the possible exemplars of data structures in python, polars, pandas, machine learning models etc
+### Repository Overview and Exemplar Scope
+
+This repository is a curated educational sandbox, designed as a comprehensive resource library for modern AI/ML and Data Engineering best practices. It showcases best-practice exemplars across the entire ML lifecycle, from raw data ingestion to advanced LLM-powered applications.
+
+**Key Focus Areas (Exemplars):**
+*   **Generative AI & LLM Applications:** Implementing advanced conversational AI (e.g., file search chatbots) and leveraging Retrieval-Augmented Generation (RAG).
+*   **Data Engineering Pipelines:** Examples focusing on robust ETL/ELT processes, data validation, and executing complex business rules via a Rules Engine.
+*   **High-Performance Data Manipulation:** Best practices using leading data science libraries, primarily **Polars** and **Pandas**.
+*   **System Architecture:** Showcasing blueprints for end-to-end ML systems, as seen in the linked documentation.
+
+The included notebooks, `src/`, and `docs/` form a learning continuum, allowing users to study specific components or build entire systems.
 
 ----
 

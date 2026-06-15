@@ -46,7 +46,7 @@ def call_websearch(search_query: str):
 
 # ── 2. Agent Graph Setup ──────────────────────────────────────────────────────
 
-llm_model = ChatOllama(model="llama3.2")
+llm_model = ChatOllama(model="gemma4:latest")
 
 class AgentState(TypedDict):
     messages: Annotated[list, add_messages]
