@@ -1,0 +1,22 @@
+{
+  "env": {
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(grep -A 20 \"| \\\\`/init\\\\`\")",
+      "Skill(ar-diagram)",
+      "Skill(generate-tech-spec)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(pip list *)",
+      "Bash(pip show *)",
+      "Bash(python *)",
+      "Bash(pip install *)",
+      "Bash(curl *)",
+      "Bash(chmod +x *)",
+      "Bash(timeout 10 uvicorn main:app --host 0.0.0.0 --port 8000 --log-level error)"
+    ]
+  }
+}
