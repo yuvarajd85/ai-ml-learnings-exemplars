@@ -1,0 +1,59 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/block_destructive.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/allow_safe.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/format_and_test.py"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pytest *)",
+      "Bash(python -m pytest *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log)",
+      "Bash(git log *)",
+      "Bash(git show)",
+      "Bash(git show *)",
+      "Bash(python -m ticketflow.*)",
+      "Bash(python scripts/*)",
+      "Bash(streamlit run *)",
+      "Bash(pip install *)",
+      "Bash(black *)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git reset*)",
+      "Bash(git checkout *)",
+      "Bash(git branch -D*)",
+      "Bash(git clean*)",
+      "Bash(rm *)",
+      "Bash(del *)",
+      "Bash(Remove-Item*)"
+    ]
+  }
+}

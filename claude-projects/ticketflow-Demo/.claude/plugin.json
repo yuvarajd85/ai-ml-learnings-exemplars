@@ -1,0 +1,94 @@
+{
+  "name": "ticketflow-devtools",
+  "version": "1.0.0",
+  "description": "Spec-driven development toolset for TicketFlow. Provides slash commands for the spec→implement→verify workflow, safety hooks that block destructive SQL and auto-format on save, sub-agents for spec review, test generation, and security auditing, and skills for seeding demo data and generating branded CSV/PDF exports.",
+  "author": "Rahul Tiwari <dsrahul0822@gmail.com>",
+  "license": "MIT",
+
+  "commands": "commands/",
+  "agents": "agents/",
+  "skills": "skills/",
+
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/block_destructive.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/allow_safe.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/format_and_test.py"
+          }
+        ]
+      }
+    ]
+  },
+
+  "permissions": {
+    "allow": [
+      "Bash(pytest *)",
+      "Bash(python -m pytest *)",
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log)",
+      "Bash(git log *)",
+      "Bash(git show)",
+      "Bash(git show *)",
+      "Bash(python -m ticketflow.*)",
+      "Bash(python scripts/*)",
+      "Bash(streamlit run *)",
+      "Bash(pip install *)",
+      "Bash(black *)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git reset*)",
+      "Bash(git checkout *)",
+      "Bash(git branch -D*)",
+      "Bash(git clean*)",
+      "Bash(rm *)",
+      "Bash(del *)",
+      "Bash(Remove-Item*)"
+    ]
+  },
+
+  "contents": {
+    "commands": [
+      "commands/spec.md",
+      "commands/implement.md",
+      "commands/verify.md",
+      "commands/seed-data.md"
+    ],
+    "agents": [
+      "agents/spec-reviewer.md",
+      "agents/testwriter.md",
+      "agents/security-auditor.md"
+    ],
+    "hooks": [
+      "hooks/block_destructive.py",
+      "hooks/allow_safe.py",
+      "hooks/format_and_test.py"
+    ],
+    "skills": [
+      "skills/brand-styling/SKILL.md",
+      "skills/csv-export/SKILL.md",
+      "skills/pdf-export/SKILL.md"
+    ]
+  }
+}
