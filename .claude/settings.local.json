@@ -16,7 +16,8 @@
       "Bash(pip install *)",
       "Bash(curl *)",
       "Bash(chmod +x *)",
-      "Bash(timeout 10 uvicorn main:app --host 0.0.0.0 --port 8000 --log-level error)"
+      "Bash(timeout 10 uvicorn main:app --host 0.0.0.0 --port 8000 --log-level error)",
+      "Bash(git commit *)"
     ]
   }
 }
