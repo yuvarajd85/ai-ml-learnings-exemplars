@@ -1,0 +1,176 @@
+# HPNc7OsM_oI
+# https://youtu.be/HPNc7OsM_oI
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as uh plt. And
+dear friends, of course we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And yes, dear
+friends, we have included the warnings.
+We have this import Python's built-in
+warnings modules also, which allow
+control over warning messages generated
+during execution. And yes, we have just
+included the default parameters. Yes,
+for
+the font size and enabling the grids and
+setting the transparency of the grid
+lines to 30%. And of course, the font
+size for all text in plot to 12 points.
+Yes, and yeah, closing the dictionary
+and applies all the configuration
+updates. We have just Let me include
+this and execute this. Yes, of course,
+we have the version as NumPy version
+with 2.3.5.
+Dear friends, previously we have seen
+about a matrix T transforms geometric
+coordination, that is via Q is equal to
+TP.
+Here the inverse the T inverse undoes
+the transformation. So, U which is equal
+to T inverse of Q, which is T inverse
+TP, which is identity P, and which is P.
+And here, why single matrix have no
+inverse? That is geometrically. Yes, of
+course, a singular transformation
+collapses at at least one dimension.
+Once a 3D shape is flattened to a 2D
+surface, the lost dimension cannot be
+recovered. This one we have already
+discussed. Okay, let me just visualize
+by using the code here. So, this exact
+code provides a geometric demonstration
+of matrix inverse. Applying a linear
+transformation, and then it inverse
+recover the original shape. So, exactly
+up to numerical precision. Let me just
+to see here. Okay, so yeah, here we have
+a representation of
+six vertices in two dimension, and of
+course, the shape is a simple house
+polygon. Okay, so that is what here it
+is specified, and it just going to store
+2 into 6 matrix. So, columns is the
+point of our form. And let me just have
+our transformation matrix. Okay, so here
+it just interprets 1.5, 0.5, 0.3, and
+1.2. So, what it happens? Of course, it
+just going to have the combination of
+scaling, shearing, rotations like
+distortions. And here's we are just
+going to have the determinant
+functionality. So, when on just taking
+towards determinant, first of all, let I
+just
+have the matrix T. So, T is equal to
+1.5, 0.5,
+0.3, 1.2. Okay, and when on just making
+the determinant of T here, 1.5 into 1.2
+minus 0.5 into 0.3.
+So, which equals 1.8
+minus 0.15, which is equal to 1.65. So,
+here it is a non-zero, so it is an
+invertible. And of course, area scaling
+factor, it just leads to 1.65. And of
+course, it is an positive orientation
+preserves also. Okay. Now, next we just
+go for forward transformation. So,
+forward transformation here it just
+going to specify as like Q is equal to
+TP. Okay. So, here applies the T
+to every vertex. And it just going to
+produce a disaster house. Disaster means
+of course, it can be
+skewed or stretched. Let me just check
+over when on execution. And we are just
+going to have an inverse transformation
+also. So, inverse transformation here it
+is mathematically
+specified as like P, which is equal to T
+inverse Q.
+And of course, it just going to apply
+its inverse transformation. So, should
+recover original points. Let me just
+see. And yeah, here we just go with the
+visualization point. So, first one it is
+going to be original. Second, it is
+transformed. And next, it is going to be
+recovered. And last but not least, we
+are just going to verify. Okay. So, we
+are just going to verify all the things
+and let me just have a comparative
+whether it is true or not. Okay. So,
+once I just execute it, so kindly just
+see here.
+The first one, yes, original, it is an
+undistorted house.
+And the second one, we have a skewed and
+scaled version. It just demonstrate
+effect of this transformation.
+And the last one, yes, we have a
+recovered matches original shape.
+Conforms correctness of inverse.
+So, how about the conversion? Recovered?
+Yes, of course, it is true.
+And uh dear friends, when on just uh
+specifying this collinear functionality,
+so here, when we just go towards the
+core linear algebra principle, so here T
+inverse T, which is equal to I, and
+towards the mathematical applies, it is
+exactly under T inverse of T * X, which
+is equal to X.
+So, when on making this apply
+transformation, exactly it undoes the
+functionality.
+And when on coming towards geometric
+infor- informations, yes, T that maps
+the space, so even though distorted
+coordinate system, and here T inverse
+maps back original coordinate the
+systems.
+And here, kindly just have Keep it in
+mind, dear friends, uh important
+functionality, transformation acts on
+entire space, not just point.
+The shape follows because each points
+are transformed. And when this works,
+yes, exactly when the T is invertible. T
+is invertible is in the sense the
+determinant is not equal to zero.
+That time alone this exactly works, this
+undoes the transformation.
+And here, no information is lost because
+transformation is bijective.
+So, yes, dear friends, kindly just keep
+it in mind, this exact code demonstrate
+the linear transformation as geometric
+mapping, inverse matrices as exact undo
+operation, determinant as criterias of
+reversibility, and visually confirm as T
+inverse
+of TP, which is equal to P. So, I think
+uh this exact session it would be
+useful. So, kindly like this video,
+share it with someone starting their
+data science or machine learning or
+generative AI journey, and subscribe to
+Demystify with Ajay for more such real
+world explanation. Thanks for watching,
+dear friends. See you in the next video.

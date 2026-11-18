@@ -1,0 +1,349 @@
+# on9kiAUV3jk
+# https://youtu.be/on9kiAUV3jk
+
+Happy morning dear friends, here's Dr.
+Rachinta, welcome to demystify with
+Ajay. Dear friends, today in this
+session we are just going to discuss on
+orthogonal matrix. In linear algebra,
+the foundation is orthogonality. And let
+we just begin our by understanding one
+of the most special objects in
+mathematics, that is orthogonal matrix.
+Dear friends, a matrix that can rotate
+data without stretching it. A matrix
+that preserves distance, angles, and
+geometry. A matrix whose inverse is
+simply its transpose.
+Think about that for a moment. Most
+matrix distort information.
+Orthogonal matrix preserves it.
+So, we will discuss why the equation, of
+course, Q transpose Q, which is equal to
+one. This is one of the most important
+equation in numerical computing.
+Then we will just move on to the world
+of
+QR decomposition, a powerful technique
+that transforms any matrix into A equals
+QR.
+Where Q captures pure geometry and R
+captures the structure.
+And here the QR decomposition quietly
+powers
+least square regression, matrix
+inversion, numerical optimization,
+eigenvalue algorithms, scientific
+computing. But, that's only the
+beginning. Because once we understand
+orthogonality and the QR decomposition,
+we are ready for one of the greatest
+idea in all of applied mathematics. So,
+before going on to the discussion, so
+let I just include the necessary
+libraries. And here we have the NumPy.
+Yes, NumPy provides efficient numerical
+array operations and is a foundational
+for linear algebra computation. And here
+for
+Matplotlib, yes, it is used for creating
+visualization such as graphs and figure.
+Next, we just uh
+the warnings. Yes, dear friends,
+uh this controls over warning message
+generated during execution. And here the
+line begins updating matplotlib runtime
+configuration parameter using a
+dictionary. And yes, this exact sets the
+default size of all figures to
+8-in wide and 5-in tall. And it enables
+the grid grid lines on all plots by
+default. And here we have an uh
+transparency of grid lines to 30% making
+them subtle and uh less visual dominant.
+And of course, to the last yes,
+uh sets the default font size for all
+text in the plots to 12.
+And uh dear friends, of course, we have
+just included that
+uh version. Yes, it prints the installed
+versions of NumPy by accessing the
+versions attribute. Okay? So, let me
+execute and uh see what is the exact uh
+version. Yes, here NumPy version, it is
+a 2.3.5.
+Okay, dear friends, let me just uh
+discuss on uh QR decomposition and
+matrix inverse. This
+QR decomposition provides a more
+numerical stable path to A inverse than
+the MC algorithm. Which we have already
+discussed. And here, the starting from A
+is equal to QR, let me just apply the
+live rule. So, here, if we just apply A
+inverse, so yes, of course, the QR the
+whole inverse it would be.
+And yes, further equalizing, R inverse
+multiplied by Q inverse.
+And kindly just observe, dear friends,
+this Q inverse, yeah, you can directly
+just specify as like R inverse
+multiplied by Q transpose. Dear friends,
+as it is specified, yes, here Q inverse
+directly you can just equalize with Q
+transpose. Yes, it's free and exact.
+Just transpose, that's it.
+And towards this R inverse, yes, is the
+inverse of an upper triangular matrix
+which can be computed efficiently and
+stable via back substitution.
+And dear friends, both Q, that is from
+Householder reflection, and R from Q
+transpose A are numerical stable.
+Let me just compare the exact function
+by using this code.
+So, kindly just observe, dear friends,
+this exact code compares two methods for
+computing the inverse of square matrix
+A.
+So, one is direct inverse. Yes, we are
+just going to use the NumPy
+functionality. And the next, it is all
+about QR-based inverse, where we are
+just going to use the
+factorization as A is equal to QR. So,
+let me just start with initiating the
+matrix A. So, generate a random 5 into 5
+matrix. So, here the determinant is
+printed to confirm invertibility. That
+is determinant of A, which is not equal
+to zero. So, that is A is invertibility.
+So, next, yes, here we are initiating
+the direct inverse. So, it just computes
+the A inverse directly.
+And generally use LU decomposition or
+similar stable method.
+And next, we are just going to initiate
+the QR-based inverse. So, the first
+step, it is all about factorization. So,
+here it just decomposes A is equal to
+QR. Yes, Q is orthogonal, R is upper
+triangular.
+And next, it is going to make the
+inverse by using structure. Yes, of
+course, we have already discussed with
+the structure, that is A is equal to QR,
+where of course, A inverse
+which is equal to R inverse Q transpose.
+So, inverting R is efficient due to its
+triangular structure. And yes, dear
+friends, we are just going to compare
+the result. Yes, we are just going to
+make the difference between methods. And
+here it just measures that A sub direct
+inverse minus A sub QR inverse and the
+Frobenius norms. Okay? Actually, it
+should be very small. That is
+10 to the power of nearing 10 to the
+power of minus 15, which is indicating
+numerical agreement.
+And next, kindly just observe we are
+just going to make the accuracy check.
+And here for accuracy check, yes, we are
+just going to make kindly just observe
+this A multiple by A direct, that is
+A multiple by A inverse, which is equal
+to identity. So, both methods should
+produce non-zero errors. Both approach
+computes the same mathematical object A
+inverse, but by a different
+factorization, that is a direct method
+general purpose inversion and QR method
+as leveraging with
+orthogonality of Q and a triangular
+structure of R. Okay, let me just
+execute and view the output. So, yes,
+dear friends, kindly just observe here
+for well-conditioned
+matrix that that as like
+a random Gaussian. Both methods give
+essentially the same result. And kindly
+just observe yes, it is
+nearing to that 10 to the power of minus
+15.
+And here the QR advantages become
+significant for ill-conditioned matrices
+where direct inversion accumulates
+error.
+And yes, dear friends,
+from this again I just specify yes,
+with both are accurate here in practice.
+And yes, of course, the QR based
+method are often more stable than
+direct inversion. Difference, while both
+are accurate here in practice, QR based
+method are often more stable than direct
+inversion. And however, explicitly
+forming A inverse is usually discrete.
+Instead, one typical solves that is AX
+which is equal to B.
+And by using R X which is equal to Q
+transpose B. So, which avoids forming
+the inverse entirely. And here one thing
+I have to just to specify, dear friends,
+kindly just observe an important point.
+Yes, this R inverse, of course, this
+step is not optimal in practice.
+See, better approach solve triangular
+system that is back substitution, avoid
+explicit inversion.
+And yes, dear friends, from this
+uh code, yes, this demonstrate that A
+inverse which is equal to R inverse
+multiplied by Q transpose via QR
+decomposition.
+Both direct and QR based inverse agree
+numerically and orthogonality simplifies
+inversion. And here QR provides a
+structured and often more stable
+pathway. And next, let me just discuss
+on the same comparative that is direct
+matrix inversion and QR based matrix
+inversion on a
+performing and numerical stability
+stress test.
+So, here exactly this exact code
+performs a numerical stability stress
+test comparing the first method, it is
+for direct, and the second, it is all
+about the QR based inversion. So, let me
+just to discuss on by using Hilbert
+matrices which are a canonical example
+of severely ill-conditioned matrix.
+And dear friends, here yes, we have
+included the uh import functionality for
+Hilbert matrix. And this exact one has
+an entries as like mathematically, it
+just specifies. So, uh H sub IJ which is
+equal to 1 / I + J - 1.
+And here, symmetric and positive defines
+an extremely ill conditions or as N
+grows. So, N exactly, it is the number.
+And yeah, let I just uh specify the
+exact size also. So, small numerical
+errors get massively amplified. And dear
+friends, kindly just observe here this
+line that is condition which is equal
+to. So, this measure sensitivity to
+perturbation.
+So, which is specified mathematically as
+K of H which is equal to yes, H norms
+multiplied by H inverse norms. And here,
+the interpretation yes, of course, if
+you just have the exactly K, yes, it
+just means 10 to the power of K up to K
+digits of precision can be lost. And
+yeah, coming towards the direct method,
+kindly just observe dear friends. It
+computes the inverse explicitly. And it
+just measures the error as like H
+multiplied by H inverse minus identity
+under Frobenius norms. So, for
+ill-conditioned matrix, this error grows
+rapidly. And when you're just going
+towards this QR-based method, yes dear
+friends, kindly just observe it just
+uses the mathematical functionality as
+like H inverse which is equal to R
+inverse multiplied by Q transpose.
+So, the error computed similarly as by H
+multiplied by H sub QR inverse minus
+identity under Frobenius norms. And uh
+dear friends, kindly just observe this
+exact line. Yes, it just gives us the
+output in a tabular manner. So, here it
+just prints the matrix size N and we
+have the conditional number and the next
+it is all about error of direct inverse
+and the next error of QR based inverse
+and lastly whether QR performance better
+or no.
+And here we are just expecting the
+behavior as like if N is that is the
+number of N if it is increases, the
+condition number grows exponentially.
+And here both method degrades, but
+typical pattern here it is QR based
+inverse often yield smaller error. And
+direct inversions becomes highly
+unstable.
+And uh dear friends, kindly just observe
+even though both compute H inverse,
+okay, the numerical pathway differs.
+Here the direct inversion, yes, it
+implicitly relies on LU factorization.
+Error propagates can be severe.
+And when coming towards this QR based,
+yes, it uses orthogonal transformation.
+Yes, as like a QT which is equal to Q
+inverse is numerically stable and here
+reduces error amplification.
+And here again one more thing I just
+want to specify. Yes, the important
+line. The still performance and explicit
+inverse.
+So, this is not the most stable QR based
+approach. A better method is solving
+with RX which is equal to Q transpose.
+See, using back substitution. Okay, so
+let me just execute and
+uh visualize the output. So, here we
+have it in a tabular manner.
+And on observing
+see, the for the for small n both method
+would be similar.
+Both method are similar.
+And here for larger n
+error explodes, and here QR often wins,
+but not always dramatically. So, this
+reflects a deep but true that is when a
+matrix is extremely ill-conditioned, no
+method can fully recover accuracy.
+And difference for Hilbert matrices,
+direct inverse and a QR-based inverse
+produce comparable errors. Neither
+method significantly out-performance the
+other on these particular matrices. Both
+fail badly. And kindly just see here at
+n which is equal to 12. Okay? So, here
+it is 10 to the power of 16. And here
+kindly just observe both it just has the
+error towards the same.
+So, this exact code demonstrate Hilbert
+matrices are numerically challenging.
+Inversion amplifies instability.
+QR-based approaches are generally more
+stable. And however, avoiding explicit
+inversion entirely is the real best
+practice. So, let's summarize, dear
+friends. So, here today we have
+discussed about uh QR and inverse. A
+inverse which is equal to R inverse
+multiplied by Q transpose is more stable
+than direct inversion because Q
+transpose is exact, and R inverse, that
+is triangular, is efficiently computed
+via back substitution. Dear friends, as
+we continue our journey, we will begin
+to notice that many machine learning
+algorithms are simply clever ways. to
+So, behind every recommendation engine,
+behind every PCA visualization, behind
+every compressed image, behind every AI
+model, there is linear algebra quietly
+doing the heavy lifting. The goal of
+mathematics is not to memorize equation.
+The goal is to discover the hidden
+structure behind data and the world
+around us. Thanks for watching, dear
+friends. Happy learning.

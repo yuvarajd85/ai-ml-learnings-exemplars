@@ -1,0 +1,1807 @@
+# J83SusYlB10
+# https://youtu.be/J83SusYlB10
+
+So this is what the exact entry uh
+actually this is what the interpretation
+that makes uh diagonal entries as like
+variance of each features and offdagonal
+entries as like pairwise covariance.
+Dear friends actually this matrix
+rotates points while preserving their
+length. Okay. And here kindly just
+observe dear friends this one we have a
+standard counterclockwise rotation where
+that exact standard counterclockwise
+rotation it just shows here it is cos
+theta minus sin theta and to the second
+row it would be the sin theta and cos
+theta. So actually this code flips the
+sign of the sin term to rotate in the
+opposite direction. Kindly have a note
+on towards this and here kindly just
+note a difference about this sigma. Uh
+actually uh it is slightly different
+from the standard one. What is the exact
+standard one is e ^ of that is rised x²
++ y² divided by 2 sigma the square.
+Actually this is what the standard one
+and here we have slightly differed from
+the standard to make it radially
+symmetric Gaussian like function scale
+dependent relationship where larger
+magnitude values for higher variance
+features and when on just going with the
+correlation matrix. So that is
+normalized version that is skill
+invariant. Kindly observe and clearly
+structured. Clearly structured. Yes. Uh
+here it this is what the orthogonality
+and yes when on just specifying the
+determinant of that t which is equal to
+one. Yes this specifies the rotation not
+a reflection. And here kindly just
+observe the vertical line of points is
+rotated 36°. Okay. So 36° clockwise
+without any stretching. Every points
+maintains its distance from the exact
+origin.
+Okay. So this exact uh gradient ma uh
+magnitude let specify it mathematically.
+So actually it is square root of
+horizontal edge the whole square plus
+vertical edges the whole square. So
+horizontal edges yes it is do I by dox
+the whole square plus do I by dy the
+whole square. So this is what the
+mathematical interpretation. So it just
+combines directional derivatives into a
+rotation invariant edge strength. Happy
+morning dear friends. Yours Dr. Rajenta
+welcome to demystify with Azai. Dear
+friends, previously we have discussed
+about the theoretical machinery of
+matrixes and this session puts that ma
+machinery to work on three applications
+that are central to data science or
+machine learning or deep learning
+generative way mainly on computer
+graphics. So let me just start with
+coariant matrix. Dear friends, coariant
+matrix is represented as xrpose multiple
+by x. So these matrices help us
+understands the relationship and
+correlation between different features
+in the data. Next we are going to
+discuss on geometric transformation. If
+these includes operations such as
+translation, rotation, scaling and
+flipping allowing images to be viewed
+from different perspective while
+preserving meaningful information.
+Finally image filtering. This is the
+core operation in computer vision where
+a kernel or filter slides across an
+image to extract important features such
+as edges, textures and pas. And before
+that let we include our important
+necessary libraries and here we just go
+dear friends we have already discussed
+this uh in our previous sessions also.
+He has the numpy for mathematical. So,
+numerical python mattplot for plotting.
+Yes, we have already uh discussed about
+this warnings and there's default
+parameters. And dear friends, we have
+just included that random seed. So, this
+fixes the random number generate states
+which ensure reproducibility.
+And yes, let we just execute and uh let
+we check what is the version of numpy.
+Yes, it is a 2.3.5.
+Okay. So, we are just going to start
+with the multivariant data coariance
+matrix. Yes. Starting with from bariant
+to multivariant.
+Friends, previously we have computed the
+PS and correlations between two
+variables using the dotproduct of mean
+centered vector normalized by their
+norms.
+With P variables, we all need pair-wise
+correlation.
+And kindly just observe, dear friends,
+when we just specify the pair wise
+correlation, yes, it would always be as
+P into P matrix rather than looping over
+p matrix multiplication computes
+everything at once.
+And yes, coariance is the unnormalized
+version of correlation. So the
+dotproduct of mean centered variable
+would be divided by n minus one. Kindly
+just keep it in mind. And here we just
+go with the equation. Observe dear
+friends. So here covariance between
+variable a and b equals 1 / n -1
+multiplied by the sum of from i = 1 to n
+of x sub i - xr multiple y sub i - y
+bar. Okay. Here 8 equ= 1 / n -1 * x tilt
+transpose multiple by x tilt. So here
+kindly just observe dear friends where x
+tild which is equal to x - xar is the
+mean centered variable and yes dear
+friends when we just pack all p
+variables as a column of an n into p
+matrix x. So here mean enter each column
+to get X type and here we just get the
+exact equation as I have already
+specified C= 1 / N minus one multiple by
+XY transpose
+multiple by Xile so this equation
+computes all pair wise covariance among
+variables simultaneously here actually
+dear friends element we are just
+specifying I or whatever be the J is
+exactly yes that is Xile transpose
+multiple by XY which is the coariance
+numerator and here the result is always
+symmetric symmetric is in the sense yes
+of course here we can just say C A B
+which is equal to C B comma A and when
+we just speak on towards yeah so this is
+what the symmetric and when just we
+speak about this square matrix of Of
+course, here we just took P into P
+matrix because we already discussed
+about that is A transpose A is always a
+square symmetric. So we have already
+discussed uh previously. Okay. Now let
+me just discuss about this multivariant.
+Okay. Multivariant data set with known
+structure using code. So here we are
+just starting with of course anyhow we
+have just already previously included
+about this uh random C. Okay. So this
+fixes that random number generator
+stator as 42 and ensures reproducibility
+that is every execution produces
+identical data and we have just uh given
+the dimension the data set dimension as
+n is equal to 500 observations. So here
+number of samples is that and P is equal
+to 6. Yes, these are the number of
+variables and when we just go for this
+latent variable. Yes, this is what
+hidden factor. So we have two
+independent standard normal form is one
+and is at two. So these act as Latin
+factor that induce correlations among
+observed feature. Actually conceptually
+they represent hidden source influencing
+multiple variable. And dear friends here
+we have an X that is the features with
+controlled correlation. Each feature is
+uh constructed as like kindly just
+observe. So here it would be as like uh
+future which is equal to loading into
+latent factor and plus noise. And dear
+friends kindly just observe here we have
+already specified that is X0 this
+strongly depends on is one with small
+noise. So here high correlations with is
+one. Okay. And next it is X1. Yes
+moderately depends on Az. So I'm just
+specifying this moderately or highly by
+using this constant variable. Okay. So
+here it is still correlated but noiser.
+Next we are just going to have x2
+actually it is an negatively dependent
+on this is one negatively dependent on
+is one. So here uh it is correlated with
+x0 and x1 and next x3. Yes it is
+strongly dependent on e2
+and correlated with x4. Next moderately
+dependent on is it 2. Yes, that is what
+the X4 and last but not least X5. Yes,
+it is the pure noise that is independent
+of all others. Dear friends, this
+consection produce two correlated
+feature groups. Yes, of course, uh let I
+just give you one thing. So here uh this
+group one, yes, it is is one which is
+driven with X0, X1 and X2. And this is
+strong internal correlation. And here x2
+it is negatively correlated with x0 and
+x1. And the group two yes it is 2
+driven. And here we have x3 and x4. So
+both are positively correlated with each
+other. And last but not least yes the
+noise feature x5. So no systematic
+correlation with any feature. So these
+resembles a factor model with the two
+latent dimension. And dear friends
+kindly just observe here we have just
+specified the feature names. Yes. The
+these are labels formatted by uh latex
+cell rendering and actually it is for
+plotting. Okay. So next let we just have
+the exact output. Okay. So the output
+statement that is confirms the shape of
+the data set and let we just execute and
+uh see what is the output. Yes, kindly
+just observe dear friends here we have
+yes 500 comma 6 that is we have 500
+observation with six features. So this
+one we have created 500 into 6 data
+matrix where feature x0 x1 x2 sh has a
+common latent factor is at one with x2
+loading negatively and here feature x3
+x4 sh has 2 and xy is pure noise. So the
+covariance matrix should reveal these
+block structure and dear friends I just
+add one more thing. So dear friends when
+we just have this code simulates
+actually this data following a linear
+latent factor model that is x which is
+equal to is w + epsilon. So here this
+exact is yes these have two latent
+variables is 1 and is 2. Of course we
+have already discussed this and here's
+this W it which it just specify as
+feature loading and here we have the
+Gaussian noise and dear friends yes to
+test PCA or validate factor analysis
+methods and of course it is used
+commonly used to benchmark clustering or
+dimensionality reduction algorithm. So
+kindly keep it in mind. Okay. Now let me
+just uh discuss about computing the
+coariance matrix from first principle.
+Let me just start with defining this
+column means dear friends actually this
+computes the mean of each feature that
+is column wise and of course we have
+already seen that is we have the feature
+six. So yes it just rs the shape with
+six and exactly this corresponds to the
+uh equation of course we have already
+seen that is uh mean j which is equal to
+1 by n summation of i which is equal to
+1 to n x sub i j. So this is what
+exactly this is what corresponds to this
+column wise uh centering the step. Next
+let we just move on to define this uh X
+type. Yes, this is what the mean
+centered data actually this X type which
+is equal to subtract the column means
+from every row wise using broadcasting.
+And of course we have already know the
+uh shape. Yes, it is 500A 6. Yet it is
+just going to remains the same. And
+mathematically we can just express it as
+like yes x subig j type which is equal
+to x subig j minus mean j. So this
+ensures each column has zero mean which
+is required for covariance computation.
+Okay. Now next let me just uh uh define
+the manual coariance matrix which is
+equal to C. Actually this was the exact
+equation which we have already
+discussed. Yes. So here the C manual
+which is equal to C equals 1 by NUS1.
+Okay. Xile transpose multiple by XY. So
+that is what given here. Okay. So dear
+friends actually this uh this is the
+exact standard sample coariance formula
+and here we have already know this x
+child is exactly 500a 6 we have already
+seen but here it is specified as like t
+that is transpose so here it would be as
+like 6a 500 okay so multiple with xyl so
+multiple with 500a 6 Okay. So it is
+divided by n minus one. So here the
+results it would be 6a 6 and for each
+entry how this would be calculated. So
+this would be calculated as like okay.
+So here c jk k let i just specify like
+this. Okay. So 1 by n -1 summation of i
+which is equal to 1 to n and here x sub
+i j minus mean j into x sub i k minus
+mean k. So this is what the exact entry
+actually this is what the interpretation
+that makes uh diagonal entries as like
+variance of each features and offdagonal
+entries as like pairwise covariance.
+Okay. So yes dear friends now let me
+just go with the numpy coariance here.
+Okay. So this is what the covariance
+calculated using numpy. So this computes
+coariant using numpy implementation cov.
+Okay. And here we have just specified as
+row v uh row variance which is equal to
+false. Yes. This indicates that columns
+are variables that is the features. And
+here also uses normalization by n minus
+one by default. Okay. So let me just see
+the exact resultant by yeah providing
+this uh uh output that is shape and
+value here. Here it is the shape and
+value. So it just displays the coariant
+matrix rounded to uh three decimals.
+Okay. And here this one yes it just
+verifies numerical equivalence between
+manual and numpy results. So if it is
+both match it just expected result would
+be true. Let me check and yes the next
+one the same by using symmetric and here
+it just confirms the matrix in
+symmetric. So we have already seen what
+is the symmetric case. Anyhow I just let
+you know it is C subj K which is equal
+to C sub KJ. Okay. So let me just see
+this whether it is matching or not. So
+expecting a true value and next we are
+just going to have the variance that is
+the D diagonal factors. Okay. So this
+extracts the variance of each feature.
+Actually dear friends these reflects uh
+higher variance for features with
+stronger latent signal and inclusion of
+noise and here this independent noise
+feature X5 of course should have
+variance which is equal to one. Okay. So
+let me just see how this is happening
+and let I execute. So kindly just see
+here we have the covariance matrix 6x 6.
+Okay. So this is what 6x6 symmetric and
+computed as uh we have already know we
+have 500
+uh observations. So in such case yeah it
+would be as like 1 by that is n minus
+one. So here 1x 499 and yes uh xile
+transpose multiple by xtile okay so it
+matches towards this uh exact to
+covariance we're using this numpy okay
+to machine precision and here this
+diagonal contains the variance of each
+features so this is what the exact
+diagonal that contains the exact
+features and the coariance of a var
+variable with itself and the off
+diagonal other than the diagonal
+elements or the pair wise covariance
+and here I just want to specify one
+thing mostly usually some would ask why
+this uh n minus one actually this is
+bezel's corrections I just specify yes
+this is bashel's correction see actually
+dividing by n minus one instead of n
+gives an unbiased estimate
+So mainly for population coariance when
+working with a sample. So that is what
+we are using here n minus one. So kindly
+just keep it in mind. Anyhow I just
+added with that. Okay. And dear friends
+of course uh by using this uh code. Yes
+we have uh seen yes how covariance
+arises from mean centered interroducts.
+And yeah we have just seen both are
+matching both are symmetry and this is
+the exact diagonal variance also. So
+this equivalence between yes linear
+algebra formulation and library
+implementation and of course I just add
+up with this uh the key properties of
+this coariance matrix. Yes, mainly it is
+of symmetry. And second one, yeah, we
+have just seen about the uh variance on
+this diagonal. And last but not least,
+yeah, structured correlation from latent
+variables. Okay. Now let me visualize
+and numerical representation of this
+coariance and correlation structure of
+this data set X. Okay. And dear friends,
+this is what the figure comma axis. Yes.
+Uh this creates a figures with the two
+subplots side by side. Yes. That is what
+subplot 1 comma 2. So here uh let me
+just have one on coariance matrix plot
+and another correlation matrix plot.
+Okay. So here let me just go with this
+coariance matrix. So yes dear friends
+here we have uh axis zero and we have
+just specified np.max
+uh that is npi.mmax and here I just uh
+defined this IM see actually this shows
+displays the covariant matrix as a heat
+map okay and uh dear friends uh kindly
+just observe this one here we have just
+specified uh color map as like uh uh red
+blue positive correlations and negative
+correlations correspondingly. And here I
+have just specified this uh v min which
+is equal to minus vax and vax which is
+equal to vax that is ensures a symmetric
+color scale around zero. Okay. So this
+is to uh know about the exact uh
+plotting. So I just want to set up this
+before uh uh making the execution. So I
+have just given this and next it is all
+about the color bar. Of course it adds a
+legend for uh interpreting color
+intensity. And uh next we just gone
+towards axis labels. Okay. So yes,
+labels, rows and columns with features
+as like uh x0 to x5 that is also we have
+just seen and yes of course we are going
+to have it within a loop that is uh this
+writes numerical coariance value inside
+each shell and uh of course we have just
+given the uh text color so that adapts
+for uh contracts. So here white text for
+uh strong value and black test for uh
+weak and next we have just included the
+title. Okay. So this is the exact title
+of that uh plot. Okay we are moving on
+to this correlation matrix. So kindly
+just observe dear friends here we have
+that is actually we have defined the
+standard deviation just defined this r
+manual. Yes. Which is just specify
+matrix of all paths of sigma 1 comma
+sigma J. Okay. So let I just specify by
+using an equation. Kindly just observe
+dear friends. It is R subig which is
+equal to C subig divided by sigma I
+multiplied by sigma J. So actually the
+correlation between variables I and J
+equals their covariance divided by the
+product of their standard deviation.
+That is what it is uh specified. Okay.
+So here we are just going to calculate
+it by using this one. And of course dear
+friends this one uh correlation
+coefficient. Yes, this is built-in PSN
+correlation computation which we just
+implement by using this numpy. And uh
+next here correlation matrix
+visualization. So I have just given this
+one. So kindly just see here v min which
+is equal to minus1. So perfect negative
+correlation and uh this one vax which is
+one. So here it is for perfect positive
+correlation. And of course we have
+included the uh correlation color bar
+also. Okay. And uh next we have included
+the labels for exactly as I have already
+specified. And this is the exact loop.
+Yes. It just highlights the moderate to
+strong correlation. So hydrate to uh
+strong correlation is in the sense yes.
+So here it would be as like uh uh the p
+which is greater than 0.5. Okay. And
+last but not least here I have just
+specified the title. Okay. So let me
+just visualize the final layout. Okay.
+And here we are just going to have our
+uh tight layout because to prevent
+overlap of labels and plots. Okay. And
+uh last but not least let me just save
+the visualization as an image file. And
+let we execute and display the image. So
+kindly just observe DFS the block
+structure of course is exactly what we
+designed. This upper left 3 into 3
+matrix block that is what x0 x1 x2 shows
+the iset factor and here x0 and x1 are
+positively correlated while x2 is
+negatively correlated with both. Now the
+center block x3 and x4 shows the is2
+factor and here the x5 yes has near zero
+covariance with all other features that
+is independent noise and this crosslock
+entries that is example from uh x0 to x
+3 or near zero uh which is the exact two
+factors or independently
+and here when we Just discuss about this
+uh interpretation within this covariance
+and correlation. Kindly just see here
+dear friends this dividing each element
+by the product of the feature standard
+deviation normalization to minus1 to +1
+scale. So that is what here it is each
+and every value that is between minus1
+to + one. So this it would specify as
+like which we just say here. Yes. R
+subig J which is equal to C subig
+divided by sigma I multiple by sigma J.
+So in mathematical notation it is
+specified as like kindly just observe
+here dear friends
+this is r which is equals to d inverse
+ult* by c multiple by
+d inverse.
+So here d is the diagonal matrix
+containing standard deviation. Kindly
+just observe this one.
+And when we just say towards the D,
+kindly just observe this is the diagonal
+matrix of sigma 2 till sigma P. Okay. So
+the correlation matrix always has ones
+on the diagonal. So here we have once
+again I just show you. So yes that is
+what here in diagonal we have all ones.
+And dear friends, this coariant matrix
+appears everywhere as the core of PCA
+and in Gaussian mixture model also. So
+in portfolio risk analysis and in uh
+KMAN filters also. Okay. So here kindly
+just observe here with this coariant
+matrix it just reflects the scale
+dependent relationship where larger
+magnitude values for higher variance
+features. And when on just going with
+the correlation matrix. So that is
+normalized version that is skill
+invariant. Kindly observe and clearly
+structured. Clearly structured. Yes. Uh
+here it as
+so here it is as like x0
+x0 and x1 as positive correlated and of
+course x3 and x4 also positively
+correlated. and went on just taking
+towards the strongly negative
+correlation as like uh x2 vises x0 and
+x1 and one thing nearing zero
+correlation is also there where between
+x0 x1 and x2 and to x3 and x4. So any
+feature with X5 that is also it is
+nearing zero correlation and dear
+friends this code demonstrate how to
+visualize coariance versus correlation.
+So here while we have just uh
+correlation often we are just preferring
+correlation is yes is it comparably
+across features and it is bounded kindly
+observe the value it is already bounded
+within minus1 to one and here of course
+it is mainly important how latent
+structures appears as block patterns in
+this heat map. Next we are going to
+discuss on geometric transformation is
+these includes operations such as
+translation, rotation, scaling and
+flipping allowing images to be viewed
+from different perspective while
+preserving meaningful information. Okay
+dear friends, this code constructs and
+visualize a 2D rotation transformation.
+So verifies its mathematical properties
+and demonstrates its geometric effect on
+a set of points.
+Okay, before going to coding, I just
+want to specify one thing. Dear friends,
+dear friends, actually this matrix has
+uh two remarkable properties. Yes, one
+is uh columns are orthogonal. So kindly
+just see here cos theta multiple by sin
+theta plus - sin theta into cos theta
+which is equal to zero. So this is what
+specified as columns are orthogonal. And
+the second property yes of course
+columns are unit vector. It it would be
+just specified as like an pythagorian
+identity. What is it? As of course cos
+square theta plus sin square theta which
+is equal to 1. So a matrix with this
+orthogonal unit norm is called as
+orthogonal matrix. an orthogonal matrix
+if it satisfies
+tanspose multiple by t which is equal to
+1 which means yes of course t inverse
+which is equal to t transpose so let me
+just see what the exact code defines so
+dear friends actually here this theta
+which is equal to npi
+divided by 5 so actually this is what
+the degree clockwise that is 36°
+clockwise
+And here we have the matrix that is the
+exact t matrix T of theta which is
+equals to a matrix whose first row is uh
+cos theta
+sin theta
+and the second row is negative sin theta
+cos theta difference actually this
+matrix rotates points while preserving
+their length. Okay. And here kindly just
+observe dear friends this one we have a
+standard counterclockwise rotation where
+that exact standard counterclockwise
+rotation it just shows here it is cos
+theta minus sin theta and to the second
+row it would be the sin theta and cos
+theta. So actually this code flips the
+sign of the sine term to rotate in the
+opposite direction. Kindly have a note
+on towards this. Okay. So this is what
+and here this would be the 2D rotation.
+Okay. And here this what makes the
+opposite side of the rotation. Okay.
+Yes. Let me just move on to the next
+line of the coding. Yes. Here it just
+shows the exact numerical verification
+of the property that is orthogonality.
+Okay. Now let me just verify the
+orthogonality property by using exact
+equation that we have already discussed.
+Yes. Uh tree transpose. Okay. Matrix T
+transpose multiple by T which is equal
+to identity that is the exact uh
+numerical verification of property which
+is an orthogonality. Okay. So this
+exactly shows as like t transpose
+multiple by t which is equal to the
+identity actually this confirms columns
+are orthogonal and yes this implies
+kindly just observe the length would be
+preserved and the angle
+the angle are preserved and next of
+course kindly just observe dear friends
+here we have the numerical python that
+is Numpai functionalities. This it just
+to shows the determinant. Yes, for the
+property of rotation we are just going
+to have as like determinant of t
+which is equal to one. And here kindly
+just see here dear friends if this
+interpretation is a positive one yes it
+just a rotation but no reflection. But
+if it is a negative one of course it
+just makes the reflection. So this is
+rotation and this negative one it will
+be the uh reflection. Okay. Now let me
+just move on to the next line. Yes, this
+exact construct the uh input geometry.
+Okay. So here of course kindly just
+observe we have a ver vertical line of
+points and this shows the exact one and
+this generate eight points along the
+yaxis. So along the yaxis here it would
+be as like so kindly just observe it
+would be like 0 comma yi. So yes it has
+the shape of points would be 2a 8. Okay
+next let me just apply the exact
+rotation. Dear friends this matrix
+multiplication rotates all points
+simultaneously.
+So each column is transformed. Each
+column is transformed. How? Yes exactly.
+So the x rotation which is equal to t *
+x. Now let me just visualize the
+plot originally and rotate points also.
+Okay. So that is what here it is given
+and kindly just observe the original yes
+it is in black circle and towards the
+rotated yes it's in blue that is what it
+is specified and here we have that blue
+and kindly just see here this wood
+results with an uh line becomes a
+tiltered line that is rotated clockwise
+uh in 36°. So that is what here we have
+specified.
+Okay. And uh next one kindly just
+observe dear friends we are just having
+a rotation arc not annotation. Okay an
+arc annotation. Yes it just draws a
+small arc indicating the rotation angle
+and starts at 90° vertical direction and
+moves clockwise. Okay. Now let we just
+have our axis and styling. Yes, we have
+just specified just equal scaling
+ensures uh geometric accuracy and axis
+lines emphasize the rotation about the
+or
+dear friends. Yes, let me just have this
+is the exact title and we just uh shave
+the uh figure and saves this uh
+visualization. Let I execute and see
+what's the output. Okay, so kindly just
+observe here. So this is our t and yeah
+we have the orthogonality as uh t
+transpose multiple by tree which is an
+identity. So that is what here it is
+specified and with this resultant. Yes
+dear friends. So here what is it just
+shows is the rotation matrix T with
+by 5 that is 36° it just satisfies that
+is T transpose dot T which is equal to
+identity
+this is what the orthogonality and yes
+when on just specifying the determinant
+of that T which is equal to one yes this
+specifies the rotation not a reflection.
+And here kindly just observe the
+vertical line of points is rotated 36°.
+Okay. So 36° clockwise without any
+stretching. Every points maintains its
+distance from the exact origin.
+And one thing I just want to specify
+here dear friends for counterclockwise.
+Okay, actually the exact rotation here
+it is specified as like a
+counterclockwise rotation where it just
+negate uh at theta that is equivalently
+and makes the transpose of the matrix t
+matrix of minus theta which is equal to
+t of theta the whole transpose. So this
+is what it is specified as like
+counterclockwise
+and dear friends kindly just observe
+dear friends here the rotation property
+whichever we just specified here I just
+want to make you a simple point. Yes
+first of all according to the rotation
+property the length is preserved. Yes,
+of course the length is preserved by
+yeah the norm of matrix T of X which is
+equal to the norm of X.
+So with this the length is preserved and
+of course the angle is preserved but
+there is no distortion. Okay. So the no
+distortion is in the same no that is it
+is a rigid transformation and when just
+coming towards the uh geometric effect
+kindly just observe dear friends the
+second one we are just going to discuss
+on geometric effect yes the original
+point lies on a vertical line of course
+after transformation yes the line
+rotates rotates according towards 36°
+okay so the line rotates and the
+distance between Each point kindly
+observe remains unchanged.
+And here orientation changes but not the
+shape. The shape remains also the same.
+Okay. Now next it is all about a broader
+context. Dear friends, this is an
+example of an orthogonal transformation.
+What is it? Yes, of course t inverse
+which is equal to t transpose. So such
+transformation are fundamental in uh
+PCA, computer graphics, robotics and
+coordinate transformation.
+So of course it is also used in Asian
+vector based decomposition.
+Okay. Now next of course K just observed
+here friends we have just discussed a
+pure rotation matrix preserves length.
+Yes, of course the same. And here a
+general 2 into two transformation matrix
+can both rotate and stretch.
+Rotate and stretch. Yes, that is what
+specified as like the wobbly circle.
+And here towards the exact matrix dear
+friends it is specified as like yes
+t pi which is equal to matrix with first
+row as 1 1 - pi and second row it is
+zero and one
+and dear friends the diagonal element
+scales the axis both one here. Yes. So
+no scaling but while the off diagonal
+that is off diagonal kindly just observe
+it is 1 minus pi. So shares the x-axis
+based on the ycoordinates.
+So here if the pi which is equal to 1 of
+course t would be one no transformation.
+And here if this pi moves
+away from one yes the circle also get
+sheared. So that is what shear
+transformation.
+Okay. Now let me just discuss with the
+code. Yes this exact code visualize a
+family of sheer transformation applied
+to the unit circle and verifies a key
+algebraic property that is determinant.
+Okay. So this uh result is the so-called
+wobbly circle. Let me just see. And uh
+of course this is an ellipse like shape.
+Okay. Yes. Dear friends kindly just see
+here this exact let me just define
+theta. And here we have an uh line space
+with 100 coordinates. Okay. And uh yes
+and here we have the circle and which it
+just has uh a shape of 2 into 100. Okay.
+And when on just making this two things
+yes this just gives us
+kindly just observe here the parametric
+of representation of x which is equal to
+cos theta and y of course it defines the
+sin theta. Okay. So that is what here it
+is specified as like a theta. And here
+when coming towards the circle yes it
+has the shape of 2 into 100 where it
+just shows that is row zero it would be
+the x coordinate and the row one it
+would be the ycoordinate
+and dear friends kindly just observe
+here this is the exact parameterized
+shri transformation. Okay, so
+parameterized transformation and here
+each value of pi defines a different
+transformation matrix and that is
+specified here. So for each different
+values we are just going to have this
+loop functionality and yeah this is what
+which I have already specified. So this
+is what the exact equation which has the
+general form as like uh which we have
+already discussed. Yes t of pi equals a
+matrix with the first row as like 1 and
+1 minus of pi and second row as 0 and 1.
+Okay. Now let me just move on the
+interpretation of the transformation. So
+here it is what applied. So transformed
+which is equal to t at circle. So dear
+friends actually this a point for a
+point x comm y the transformation would
+becomes as like so this exact equation
+would be just specified. So here
+whenever we have a point at x y so this
+would be transformed as like uh xdash
+which is equal to x + 1 -
+into y and here y dash it would be the
+same y so what would just it resembles
+like yes dear friends the ycoordinates
+remains unchanged but the x coordinate
+is shifted proportionally to the y okay
+So this is a horizontal shear that is
+what it shows. Okay. And I just want to
+give you a small uh information also.
+Kindly just have a note on towards dear
+friends. If uh here let me have a pi and
+this is 1 minus pi what happens when
+this is affected. Okay. So here in such
+a case
+if the pi is 1 and to the 1 minus pi if
+it is zero. Okay. So it is specified as
+like no shear would be done and it is as
+like a perfect circle
+and if the same pi has a value of 0.5
+and 1 pi also has the same value of 0.5
+okay a mild shear transformation occurs
+and kindly just observe if the pi is
+zero and 1 minus pi is 1 so that would
+be a moderate shear would be applied and
+here to the last it is -.5
+and here it is 1.5 under 1 - pi a strong
+sheer transformation would appear. So
+kindly just observe this exact 1 - pi if
+it is increases
+if it is increases yes the circle
+becomes increasingly tilted and
+stretched horizontally.
+So the shape resembles an ellipse skewed
+to the right. Okay. So let me just
+visualize that. Okay. And here kindly
+just observe the exact plot that
+transformed points as like a scattered.
+Okay. So here we let we just uh uh set
+the axis of fixed and equally scale and
+this ensures geometric disions are
+accurately represented and let me just
+have the title. Okay. So just displays
+the uh of course displays the parameter
+value and explicit matrix formation and
+kindly just observe we have the uh one
+important functionality I have to
+specify here dear friends. Uh this one
+it is to check the determinant whether
+the area is preserved or not. Okay. And
+for this what we are just going to have
+is a yeah we are just going to have a
+value of a. So that would gives you
+kindly just observe that would just show
+that is t which is equal to one a matrix
+of one and a as a first row and zero and
+one as our second row where this gives
+our determinant of t which is equal to
+1. So let me just see what is the output
+here and let me just go towards the
+visualization tool. So here we just got
+the exact uh output. Kindly just observe
+dear friends as I have already said yes
+the pi one okay and kindly just see here
+the t determinant of t is also one and
+the circle is und distorted
+as this pi value is getting decreases
+the off diagonal element of this uh uh 0
+that is 1 minus pi introduce as shear
+that If the upper half of the circle is
+pushed to the right side, pushed to the
+right side and the lower half is pushed
+to the left side. So all frame has
+determinant of t which is equal to 1.
+That is meaning the area is preserved
+even though the shape changes. So the
+area of this circle, the area of this
+ellipse, this ellipse, this ellipse of
+course this is what the wobbly circle.
+Yes. the area is preserved but the shape
+changes accordingly. So this is what a
+sheer transformation. So one of the
+fundamental transformation type. So with
+this yes dear friends I have to uh
+specify one important aspect. So when on
+just executing this coding yes this
+exact codes gives us yes of course it
+has an area preservation that is
+determinant of t which is equal to one.
+So area is unchanged even though the
+shape disserts its area remains
+constant. And the next one of course it
+is a nonorththogonal transformation.
+Yes, unlike rotation here the angle is
+not preserved and the lengths are also
+not preserved. So the circle becomes a
+sheared ellipse- like figure. Okay. And
+uh next one of course kindly just
+observe dear friends
+the third one it is all about linear
+transformation. So linear transformation
+yes of course this is a unipotent
+matrix. So here we have the aian values
+as like lambda 1 which is equal to
+lambda 2 which is equal to 1. So no
+diagonizable that is in general and yes
+this represent a pure sheer not scaling
+or rotation.
+Okay. Now let me just move on to a
+determinant as a area or volume scale
+factor. Dear friends, actually this
+exact code provides a geometric
+demonstration of a central linear
+algebra result.
+Actually what is that? Yes. So kindly
+just observe determinant of matrix T
+which is equal to area scaling factor of
+the transformation. So that is what said
+to be central linear algebra result.
+So it visualizes has different 2 into
+two matrix that transforms the unit
+square and how their determines relates
+to the resulting area. So that is what
+we are just going to visualize it. Okay.
+So kindly just observe we are just going
+to have our uh plotting and here we are
+just going to have four subplots one per
+transformation. Okay. And what is that
+exact transformation? Yes. One is
+identity and next one it is going to be
+a scaling of two types and uh yes
+rotation and last but not least it is
+singular. Okay. And here let I just give
+you the exact transformation
+functionality. So if it is an identity.
+So exactly so t it would be equal to
+one. And here to the same determinant
+would also be there. And yes dear
+friends this is what said to be no
+change in shape or area. The next one we
+just say yes it is going to be a uniform
+scaling. So what is uniform scaling is?
+Yes. Exactly. So here t it would be the
+two times of identity and here our
+determinant would be four. So here each
+axis doubles. Okay. So area it just
+becomes 2 into 2 which is equal to 4.
+And next we are just going to have the
+rotation. Okay. So next it is all about
+the rotation. And kindly just see here
+we are having 45° rotation. So yes. So
+that 45° clockwise rotation. Okay. So
+here determinant it would be equal to
+one. So pure rotation shape preserved
+and area also would be preserved. And
+last but not least yes we are just going
+to discuss about the singular matrix. So
+here singular matrix of course we have
+an array as like 1 comma 2 and 0.5 and
+1. So here if I just compute the
+determinant for this. Okay. Okay. So let
+I just have the first matrix here. So 1
+comma 2 and 0.5 comma 1. Okay. So this
+is the matrix exactly. So if I just uh
+evaluate the determinant which is equal
+to 1 into 1 - 2 into 0.5. So which is
+equals to 1 into 1 sorry 1 - 1. So that
+is equals to zero. So this matrix is
+purely singular. So it collapses 2D
+space onto a line that is zero area
+and dear friends based on the uh unit
+square. Okay. So based on this unit
+square let me just have this one. So
+this defines a closed polygon. So that
+is returns to warism that is area which
+is equal to one. And let we just apply
+the transformation. What is the
+transformation? Of course all these four
+inside a loop. Let we just apply the
+transformation and here this applies
+transformation for each vertex. Okay.
+And here once it is done yes it produce
+a new uh correl that is degenerated
+shape also. And uh dear friends this one
+it's just going to visualization of
+logic functionalities that is uh as like
+whether it is a gray color and of course
+it is a light gray color and we are just
+going to have a dashed border. Okay. So
+that is also here it is specified and
+the exact uh transformed shape it would
+be as like blue and red. So here when
+just comes towards blue yes it is non
+zero determinant which is area preserved
+or scaled and for red of course it just
+specify as like near zero determinant
+that is area ed is collapsed. Okay and
+here we have the exact uh title and
+which is just displays the
+transformation type and determinant.
+Okay. So let I just say execute and uh
+let we observe the result. And here we
+have so this one it is identity. So yes
+there is no change we have. Of course
+area is also preserved. Okay no changes
+there area is preserved. And when coming
+towards the scaling as 2 * scaling okay
+here our determinant which is equal to
+four. So each axis is doubled. So as I
+have already specified yes uh this is
+what here okay so each one it is uh
+doubled so we have 2 into 2 which is
+equal to four times larger okay that is
+what we just got here and the next one
+rotation of 45° rotation of 45° and here
+dear friends the shape is rotated area
+is preserved so the rotation is volume
+preserving that is also keep it in time.
+Okay. The volume is that is area is uh
+preserved. The shape is also there. But
+one and only the angle. Exactly. We have
+only the angle. So the shape may rotate
+but not disord area. And last but not
+the one it is singular. So the square
+collapses into a line. So one dimension
+is completely flattened here. So this is
+what the determinant is equal to zero.
+So that is what here we have just
+discussed. So that is what it is
+specified as determinant is zero means
+geometrically.
+So yes dear friends with this
+visualization what we have just observed
+is yeah determinant as area multiplier
+for any region if I just specify any
+region as like a. So here it would be
+area of t of a which is equal to yes
+absolute determinant of t multiple by
+area of a. So this is what it's said to
+be determinant as area multiplier.
+Next when I'm just going as with an uh
+sign of determinant dear friends if it
+is a positive yes it is a orientation
+preserved and if it is a negative of
+course orientation it is flipped
+that is reflection happens. Okay and uh
+next we have just discussed about uh
+shearing of course scaling of course we
+have just seen the rotation also. So
+here rotation it just preserves area and
+shape. Okay. So area and shape it is
+preserved. And when coming towards
+scaling changes of course area uniformly
+and when coming towards this shear yes
+uh from the previous example what we
+have just seen is yeah it just preserves
+area but disords the shape. And last but
+not the least, yeah, we have also
+discussed about the uh singular which
+destroys the dimensionality itself. So
+yes, dear friends, of course, uh this
+this exact code demonstrate that the
+determinant is not just an algebraic
+quantity. It has a direct geometric
+meaning area scaling in 2D or volume
+scaling in higher dimension. And of
+course here linear transformation can uh
+preserve area scale area collapse space
+everything of course uh these are the
+exact importancy when we just uh
+visualize it. Okay, by this we are just
+able to uh see yes dear friends this
+geometric transformation use matrix
+vector multiplication
+uh and mainly this uh uh transverse of
+this uh matrix vector multiplication to
+rotate or scale and uh sheer coordinate
+and here pure rotation matrix orthogonal
+that is also we have just discussed okay
+and uh which which preserves the length
+and dear friends the determinant of the
+transformation matrix that gives the uh
+area or volume scale factor and last but
+not least determinant which is equal to
+zero means the dimension is collapsed
+and of course we have also discussed
+about wobbly circle demonstrated how
+parameterized transformation creates
+animation finally dear friends in this
+uh session we are just going to discuss
+about the image feature deduction yes it
+is about the important application
+matrix application used mainly in
+computer graphics and in this session we
+are just going to discuss about uh uh 2D
+convolutional with Gaussian and edge
+direction kernels dear friends we have
+already discussed about the filtered
+time series by sliding a one-dimensional
+kernel and computing dot products and
+here image filtering extend this to
+twodimensional this two-dimensional
+uh kernel slides across the image and at
+each position we compute a hadamad
+product and make the summation. What is
+that hadamad product? Yes dear friends
+kindly just to see here output of row
+and column output at row R and column C
+that equals the double summation over I
+and J of K subig J multiplied by S sub R
++ I T + J. Actually this is what the
+exact one which we just specified
+hadamat product and the summation and
+dear friends this is nothing but a
+simple thing say multiply the kernel
+that is the kernel values with the image
+patch value then add it then add
+everything together that is the exact
+functionality so which it just converts
+the onedimensional to two-dimensional
+convolutional okay so this is the same
+element wise is multiply and sum
+operation as a dot product but apply to
+an matrix that is what had product and
+summation and dear friends the kernel K
+here yes this exact kernel K determines
+what future is dedected let me just move
+on to this Gaussian smooning kernel a
+two-dimensional Gaussian kernel acts as
+a smoothener so here it replaces each
+pixel with a weighted average of its
+neighbor. So here yeah you can just
+specify as like uh g of x y which equ= e
+rise to the power of
+x² + y² divided by sigma. Actually dear
+friends, this one is what the exact
+functionality which we just specify
+mathematically as Gaussian smooning
+kernel. And here kindly just one thing
+this exact sigma controls the width
+where if it is larger sigma it just
+means more smoonening. So here we have
+actually creates a 21 into 21. So kindly
+just see here 21 into 21 grid over the
+square of -3a 3 and minus3a 3 and here
+this x grid and y grid stores coordinate
+for each kernel element and kindly dear
+friends this grid defines the spatial
+support of the kernel and here next of
+course this is the exact one which
+provides the gaussian kernel definition.
+So this is what the exact uh equation
+which we just got. So g of x y = e
+raised ^ of - x² + y² divided by the
+sigma and dear friends this one is
+specified as radially symmetric gaussian
+like function and here kindly just note
+a difference about this sigma uh
+actually uh it is slightly different
+from the standard one. What is the exact
+standard one is? E to the power of that
+is rised x² + y² divided by 2 sigma the
+square. Actually this is what the
+standard one and here we have slightly
+deferred from the standard to make it
+radially symmetric gausian like
+function. And again I just specify this
+exact parameterized that is sped
+parameterized sigma. Okay. It is not a
+standard deviation. It is acts like a
+spread parameter and uh next line it is
+all about normalization. So kernel
+gazian. Okay. So this exactly ensures so
+this exactly specifies as like summation
+of I J of K subig which is equal to 1.
+So actually why why this matters is it
+just preserves overall image intensity.
+Actually it is not about the uh
+brightness shift. Okay. It just makes
+the kernel a proper average filtering.
+Okay. So this is what to make as
+normalization. Okay. Now let we just
+move on to this. Yeah we are just going
+to uh diagonalize our uh kernel. So yes,
+we want to know what is the shape and
+what about the summation whether after
+normalization what is the exact value
+and uh next about the peak. Okay, so
+what would be the uh central value also?
+Okay, so that is what we want to
+diagnose. So and we are just going to
+display it and next it just comes about
+generate a noisy image and of course you
+already know. So here we are just going
+to uh create an 100 into 100 gazian
+image. Okay. And each pixel is
+independent and dear friends high
+frequency content dominates. Next we
+just going on smoothening. Okay. So this
+is what for convolutional smooning and
+yes this is what it just interpretates
+about the average functionality. So here
+of course what we just get is what I
+already specified that is output of I
+comma J which is equal to summation of U
+and V and K of U comma V and with the
+input of I - U comma J minus V. Dear
+friends, this one each pixel becomes a
+weighted average of its neighbor. So
+nearby pixel contributes more mainly due
+to the Gaussian weight. Okay. So
+Gaussian waiting and uh dear friends
+here we have just specified mode is
+equal to same. Yes here output which is
+equal to 100 100 comma 100. So it would
+be going to be the same as like the
+input size as 100 comma 100. And the
+next one we have just done the boundary
+which is equal to wrap. So image wraps
+around edges. So that is what specified
+as like a periodic boundary. Okay. So
+next it is all about to visualize. So
+first of all it is going to visualize an
+original image. So it is all about an
+random noise image. Okay. And next it is
+all about a Gaussian kernel. Okay. And
+kindly just to see here here I just want
+to specify it is original with appears
+as high frequency noise. And uh next it
+is all about the gauian. So it just
+makes a brighter uh center and
+smoothness. Okay. And uh smooth radially
+decay when it just goes outer and uh
+represents spatial waiting also. So
+kindly just uh uh keep it in mind. And
+next we are just going to have the
+smoothened image. So in this yes noise
+is reduced image appears blurred blurred
+in a sense low pass filtered. Okay. So
+let me just execute and uh see the exact
+output. So kindly just see dear friends.
+So observe here. So the Gaussian so this
+is the exact original 100 into 100
+image. Okay. And this one it is all
+about the Kausian kernel in 21A 21
+matrix where the bright center that
+faded towards the edges. Observe here
+and here when uh convolute with a random
+noise image the result is blurred
+version and here high frequency pixel
+pixel noise is averaged out. So living
+smooth low frequency patterns difference
+the kernel is normalized that is sums to
+one. So the exact so the exact see
+kindly just see here the kernel is
+normalized that is sums to one. So the
+convolutional computes a weighted
+average rather than a weighted sum and
+this preserves the original intensities.
+Okay. And here I just want to specify
+one thing dear friends. uh when you
+previously we have just seen about uh an
+uh 1D sming okay 1D smooning kernel
+where K is equal to 1 by M with all the
+values as like one the whole transpose
+see was a uniform average but here in
+the twodimensional Gaussian kernel is a
+weighted average whereby nearby pixels
+contribute more than the distant one. So
+a more sophisticated version of a same
+same idea. So here I just want to add
+one thing dear friends kindly just
+observe uh dear friends whenever we just
+uh go on to this uh low pass filter.
+Okay. So here high frequency variations
+are suppressed. So low frequency
+structure is preserved.
+And when going towards the local
+averaging each pixel becomes weighted
+average of nearby that is what I have
+just previously specified. And uh the
+third important thing about the sigma
+yes the role of the sigma here it is not
+a standard deviation it just makes the
+spread parameter. And here I just want
+to specify kindly just see here if the
+sigma it is larger so the exact kernel
+would be flattened and a blur would be
+stronger and if the same sigma would be
+small okay so here the exact sharper
+would be the peak and blur would be
+reduced that is less brill
+I just want to specify about the uh
+convolutional convolutional as linear
+operator. Dear friends, actually this
+exact operation it is mainly used in uh
+linear functionalities and shift
+invariant and of course equivalent to
+multiplication in the 4year domain also
+and one thing I have to specify dear
+friends whenever you just have of course
+I just give you in a pipeline so
+whenever you just have this noise yes
+with a gauian convolutional yes you just
+get a smoothened signal. Okay, so a
+Gaussian kernel acts as like an
+probability distribution over the near
+neighborhood and here the convolutional
+performs a local expectation that is
+weighted average. Okay, now let me just
+move on to the edge deduction kernel. Uh
+dear friends, actually uh different
+kernels deduct different feature. Uh
+actually here we are just going to
+construct a synthetic image uh with uh
+structured futures and applies soel edge
+deduction to extract intensity
+transition. And here kindly just observe
+this exact code demonstrate how
+convolutional kernels approximate
+spatial derivations. Okay. So yes uh
+observe here dear friends here we are
+just going to have and initialize a
+blank grayscale image. Okay. So this is
+exactly a zeros. Okay, we are just going
+to create an blank uh grayscale image.
+And uh next we are just going to add a
+geometric shape. And here three regions
+with different intensity. Yes, one it is
+all about bright square and that is 1.0.
+Next it is all about the medium
+rectangle. It is 0.7 and it's next it is
+dimension rectangle. it is of 0.5. So
+these introduced sharp edges that is
+discontinuous. Okay. So now let me just
+add a horizontal gradient and here it
+just adds a smooth left to right
+intensity increasing. So it just
+introduce a low frequency component. So
+kindly have a note on towards this. And
+yeah here we are just going to uh
+include our soil edge deduction kernel
+and kindly observe dear friends we are
+going to have a horizontal soel
+deduction. So this is what a horizontal
+soel deduction of approximation of do I
+by dox. So it just responds strongly
+where intensity changes from left to
+right and here it just comes the
+vertical. Okay. So this deduct
+horizontal edges. Soel horizontal it
+just deducts vertical edges and soel
+vertical it just deducts the horizontal
+edges. Kindly just don't confusion with
+it and it just approximate as do I
+divided by do y and it just responds
+only for top to bottom changes. Now let
+me just apply the convolutional. So here
+we are just going to make the uh edge
+extraction and this exactly applies
+discrete derivative filters and observe
+kindly see here the mode is same okay it
+just preserves the image size and the
+boundary it's also as like filled so it
+pads edges with zero and yeah here we
+have the gradient magnitude and uh
+kindly just observe this exact gradient
+magnitude combines uh directional
+derivatives into a rotation invariant
+edge strength. Okay. So this exact uh
+gradient ma uh magnitude let just
+specify it mathematically. So actually
+it is square root of horizontal edge the
+whole square plus vertical edges the
+whole square. So horizontal exes yes it
+is do I by dox the whole square plus do
+I by dy the whole square. So this is
+what the mathematical interpretation. So
+it just combines directional derivatives
+into a rotation invariant edge strength.
+Okay. Now let we just have the
+visualization. So kindly just observe
+dear friends. This is how the
+visualization and the first one it is
+all about the original image. F it just
+shows shapes and gradient and here the
+displayed uh with color coding. Okay. So
+here uh we are just going to have the
+color coding as like positive versus uh
+negative uh weights and uh yes of course
+here we are just going to have our
+annotations also annotations uh uh
+numerically. And uh next we are just
+going to have the bottom row okay as
+like uh vertical edges, horizontal edges
+and uh edge magnitude. And dear friends
+this
+vertical edges it just highlights
+boundaries where intensity changes
+horizontally. And uh horizontal edges of
+course it detects top and bottom edge of
+the shapes. And last but not least the
+edge magnitude. It just combines both
+fully edged map. Let me just visualize
+it. Okay. And here dear friends kindly
+just observe we are just going to have
+the summation summation of uh uh that is
+kernel property zero sum. So here when
+we just make the summation of this soel
+h and so v okay we just get both equals
+to zero. So here I just want to specify
+the kernel property. So both it would be
+equal that is when on mathematically
+interpreted it is summation of k subig
+which is equal to zero. So it ensures no
+response to constant region only reacts
+to changes not absolute intensity. Okay.
+So let me just see this by executing the
+code and uh yeah here we go. So this is
+what the top row where we just get the
+original and soal horizontal and soal
+vertical and towards the bottom row.
+Yes, kindly just observe these are the
+vertical edges of this val and these are
+the horizontal edges of the val. And
+last but not least, it is all about the
+edge magnitude combining both vertical
+and horizontal. Dear friends, this edge
+deduction. Yes, of course, it is
+corresponds to high partial derivatives.
+And here so filtering approximates
+gradient using finite differences. And
+if I just want to specify it with this
+value which we have just uh defined when
+I'm just making this mathematically. So
+kindly just observe DFS. DFS is actually
+this soel operator we have 3 into three
+kernel that deducts edges in specific
+orientation. One thing horizontal
+orientation and here what is the exact
+horizontal orientation? Yes. So it is -
+1 0 1 - 2 0 2 -1 0 1. So it exactly
+deducts the vertical edges and here
+changes in the horizontal direction. So
+it just goes for left to right and of
+course the left to right as computes an
+approximation of do I by do x and when
+on just going towards the vertical so
+kindly just observe here when we just go
+for vertical soel. So here we have -1 -2
+-1 and uh 0 0 0 and next it is all about
+1 2 1 and this one deducts the exact
+horizontal edges with approximation of
+do I divided by do y and when coming
+with the edge magnitude kindly just
+observe when coming towards this edge
+magnitude yes we have the square root of
+edge horizontal on the whole square plus
+edge vertical the whole square. So
+combines both orientation highlighting
+all edges regardless of this direction.
+Dear friends, both kernel sums to zero.
+Yes, that is what we just got. Both one
+it sums to zero which means they have no
+response in flat region. So add to the
+last what we just have is larger the sum
+that is larger positive value appears on
+bright to dark transition and larger
+negative values or dark to bright
+transition. So this is what the both the
+things you have to keep it in mind.
+Okay. And this would be connected
+towards convolutional neural network.
+Yes. It just learns these kernels
+automatically from the data. The first
+layer of trained image classifiers
+typically discover this sober like edge
+detector or gabberlike orientation
+filter and color contrast filter. The
+same primitives used in classical
+computer vision but optimized for the
+task at hand. Okay. Now let me just
+implement this uh by using an 2D
+convolutional here. Okay. So to
+reinforce the connection of this dot
+product filtering we implement the
+double loop explicitly. Okay. So that is
+what we are just going to do here.
+Kindly just observe dear friends. So
+this exact code actually implements uh
+2D convolutional. Okay. So using a
+sliding window and verifies it according
+uh against this sky crossorrelation. And
+of course dear friends it explicitly
+exposed the mechanism behind
+convolutional as a sequence of which I
+have already specified. Yes had uh that
+is element wise products plus summation.
+Okay that is what we are just going to
+do. So let we just first define the
+function this exact function it just
+gives the convolutional 2D and here we
+have the parameter as like image and
+kernel. Okay. And here this two are the
+inputs where image it has a 2D uh height
+and width array. And here this kernel it
+is as like a 2D filter. And what would
+be the output is? Yeah, we are just
+going to have a filtered image of the
+same size. Kindly keep it in mind. Okay.
+And uh in this we are just going to have
+our kernel geometry. Okay. So here we
+have the kernel geometry. It just
+determines the kernel size and its uh
+center offset and it just assumes
+oddsized kernel that is as like 3 into
+three matrix or 3 into 3 so like that.
+Okay. And uh let we just uh have our
+image padding. And uh dear friends, this
+enables applying the kernel at B border
+pixel. And it just uses the zero padding
+which is equivalent to which we have
+already specified in a boundary which is
+equal to fill. Okay. Now next we are
+just going to have a sliding window
+computation. So this is sliding window
+computation it just has to extract a
+local patch and element wise multiple
+and next is summation. So this is what
+the exact one we are expecting. So what
+it is I just uh let you know the first
+one it is all about uh local patching is
+extracted. So the patch which would be
+uh got from the row wise and column
+wise. And next one it is all about
+element wise multiple. Element wise
+multiple. Yes it patch dot matrix with
+the kernel. And uh next it is all about
+the summation. the summation. Yes, we
+are just going to have the summation of
+IG that is patch of IG and kernel subig.
+And yes, this is what the exactly which
+we are just going to have as like image
+into kernel with row and column. Okay.
+So, row comma column. Okay. Dear
+friends, let me just uh have the next
+one. It is what the crossorrelation one.
+Okay. So that is what here we are making
+it with a flipped functionality
+crossorrelations versus convolutional.
+So here cross correlation we are just
+going to calculate it by correlated 2D
+and convolutional by using this
+convolutional 2D manually. Okay. And
+here this convolutional 2D it just flips
+the kernel and correlates the 2D. Yes,
+it does not flip it. Okay. So yes, let
+me just validate it by using this uh
+results sky by this uh correlated 2D and
+we all just think we are going to have
+our output and let me just check what is
+the confirms the numerical evaluation.
+So once I execute let me just give what
+it is. Yeah, here we go. And kindly just
+to see here dear friends the output here
+uh we have the shape of course we
+already know 100 to 100 and the kernel
+shape yeah it is 3 into 3. Okay. And
+output it is the same as like uh uh the
+input images. And here kindly just
+observe whether it is matches. Of course
+both are matching. So it is true. And
+next it all gives the near machine
+precision. So this is what the maximum
+difference and actually see here dear
+friends when we just have this
+implementation. Okay. So the manual
+implementation confirms that 2D
+convolutional is exactly what we
+described at each position. Extract a
+patch the same size as a kernel. Compute
+the hardat product. Okay. So that is
+what here it is provided. And next it
+just makes the summation. Okay. So here
+that is what but when coming towards
+this uh convolutional uh output so
+formally convolutional flips the kernel
+before sliding. So crossorrelation does
+not for symmetric kernel like this
+Gaussian they are identical and of
+course I want to add one thing for
+asymmetric uh kernels like soel the sign
+can differ. Okay so here of course I
+have to specify as I have already
+previously specified that we have
+applied with an uh double loop. So yes
+this exact double loop we just have it
+towards the big method of uh nr into nc
+and to the same kr into kc for this if
+we just have as 1,000 into th00and an
+image with a 21 into 21 kernel okay so
+this is image and this is a kernel and
+that is approximately ely what we just
+get is approximately 4.1 into 10 ^ of 8
+operations. So this the convolutional
+theorem offers a faster path
+convolutional in the spatial domain that
+equals multiplications in the frequency
+domain that reducing the complexity of
+this we go via using this fft.
+Okay. So that is what dear friends.
+Okay. So let me just uh move on to the
+next one. Yes, we are going to have the
+effect of Gaussian width difference.
+Previously I have just specified about
+the parameter sigma. Yes, uh this exact
+code it just illustrate how this
+parameter sigma here controlling the
+spread of a Gaussian kernel that affects
+the strength of the image smooning. So
+it applies Gaussian filtering with
+increasing spread to a noisy image and
+compares the result. Okay. So let me
+just make it and here is of course dear
+friends we are just going to uh generate
+an 80 into 80 image of independent
+guardian noise. So that contains a
+predominantly high frequency component.
+And here we have our uh sigma value.
+Okay. So 2a 10a 40. So these controls
+the spread of gazian kernel. So larger
+value border kernel strong smoonening.
+Kindly keep it in mind. Okay. Now let we
+just go with the Gaussian kernel
+construction. Okay. So here this exact
+Gaussian kernel constructions as per the
+sigma value and here I have already
+specified previously. Anyhow I just
+remind you again. So yes k of x y which
+is equal to expression that is rised to
+- x² + y² / sigma and here it just
+defines on of course 15 into 15 uh fixed
+grid. Okay. And here it is normalized to
+sum of uh k which is equal to 1. Okay.
+So that is what here it is uh specified.
+Okay. Now let we just go for smooning
+and here when on just making the
+smoothening that is applies this
+Gaussian smooning each pixel becomes a
+weighted average of the neighbor and
+here we have the boundary as wrap. So it
+treats the image as periodic that is
+edges wraps around and uh let me just
+have this as an uh uh visualization
+output. So here we have the uh panel
+one. So original noise and other three
+that is from two to four we are just
+going to have the smoothened results of
+increasing this sigma that is 2 10 and
+40. Let me just see here. Okay. So let I
+execute and we observe the value of
+sigma is small. The kernel is sharply
+peaked and here only nearby pixel
+contributes. So here slightly smoothened
+but noise still prominent. Okay. Next
+let me just go for sigma which is 10. Of
+course it is moderate. So kernel spreads
+out and here more neighbors contribute.
+And what was the resultant? Of course,
+noticeably there is a blur is there.
+Noise reduced but emerging smooth
+structure emerging here, here, here and
+all that. Okay. Last but not least, the
+sigma which is equal to 40. Yes, kernel
+becomes very flat and large neighborhood
+average. So here it has resulted with
+the smooth strong smoonening and image
+approach low frequency field. So fine
+detail completely removed difference
+here I want to specify an important
+functionality whenever we just go for uh
+this uh uh sigma functionalities as here
+sigma increases the gausian kernel
+becomes wider that is flatter averaging
+over a large neighborhood. So the effect
+progresses from light den noising to
+aggressive blurring. Okay. So that
+reveals only the coet structure. And
+here I have already specified one thing.
+Dear friends, we have used the exact
+kernel we have used as like the
+expression - x² + y² divided by sigma.
+But that is a standard one. Yes, the
+standard one a is the expression rised
+to minus x square + y square divided by
+2 sigma the square. So this is the exact
+one. So here this sigma is not a
+statistical standard deviation. It is
+still monotonically controlled smthening
+strength. And here we have a fixed
+kernel size as like 15 into 15. We have
+already specified that. And this
+implication yes the very large sigma.
+Yes. Here the gaussian is truncated.
+Kernel becomes nearly uniform within the
+window. So true large sigma behavior
+would require a large kernel support. So
+for that we have just used this. Okay.
+And dear friends yes u by by practicing
+yes the choice of this sigma depends on
+the application. when you just go
+towards anything as like uh uh image uh
+image noise den noising so here the
+small sigma would preserve the details
+okay and if you just go for anything as
+like an background estimation so here
+large sigma to capture border trends so
+kindly make use of a larger sigma and if
+it is a scale or space analysis here we
+just need multiple sigma values
+simultaneously to detect features at a
+different scale used in uh SFT uh or any
+other key key detectors. Okay. So yes
+dear friends so I think uh in this
+session we have discussed about the uh
+convolutional functionalities that is
+image filtering that extended from those
+uh uh onedimensional to two-dimensional
+functionalities by using those uh
+hadamad
+product and the summation that sliding
+2D kernels and here gazian kernel
+smooths images soel kernels detect edges
+and the kernels
+shape determines what future is detected
+and here modern CNN learns optimal
+kernels through gradient descent. So
+dear friends uh we can from this uh hold
+the session we have understood that
+matrix operations are organized
+collection of dotproduct and norms
+and here we have just uh discussed about
+the co-variance. So the exact covariant
+matrix is a matrix of dotproduct and
+convolutional is a matrix of local
+dotproduct and when coming towards the
+transformation yes is a matrix encoding
+a specific rotation or scaling applied
+via that dot product. So linear algebra
+becomes more powerful as we scale from
+vectors to matrices but the foundation
+remains the same. Hope this session
+would be very useful for you and uh
+kindly just uh like this video, share it
+with someone starting with their uh AI
+journey. Okay dear friends, thanks for
+watching and see you in the next

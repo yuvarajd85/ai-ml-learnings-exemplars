@@ -1,0 +1,160 @@
+# lx1uhgxh-C0
+# https://youtu.be/lx1uhgxh-C0
+
+Happy morning dear friends. Here your
+Dr. Rajenta welcome to demestify with
+Azai. Let me just start with uh uh
+implementing the necessary libraries.
+Dear friends, of course we have already
+seen this in the previous session as
+importing the numpy skypi. Of course
+here we are using uh Skypy for null
+space function and we have included that
+macro lab and warnings of course uh to
+suppress all warning messages and we
+have also uh used those parameter that
+is a configuration parameter using with
+dictionary for default size and
+transparency and uh of course the size
+of the font. Okay. So let uh just make
+use of this uh print function and let I
+just display the exact or execute that
+exact uh import functionalities. Here we
+are going to uh discuss it with a code.
+So kindly just have it dear friends. We
+are going to define a matrix A
+with 3 into three 3 into two matrix. So
+here we have two columns and uh each
+vectors is of three dimensional. Okay.
+And uh next let we just construct a
+linear combination of that column. So
+here what it just specify is uh kindly
+just observe this one. Okay. It just
+shows 1 3 3 1 5 1 0. So here what we
+just get is so the linear combination of
+column a here v_sub_1 which is equal to
+2 into column 1 + 1 into column 2. So
+that is what the exact vector here it is
+specifying. So that one it is uh given.
+So therefore v_sub_1 is guaranteed to be
+a column space. Okay. Now let me just
+define the vector 2. So this one it
+shows which is not constructed from the
+columns. So it may or may not lie in the
+column space. So we will test it. Okay.
+So now let me just print the uh matrix
+and let me just compute the rank of
+matrix A. Okay. So here of course we
+know rank is equal to two. So columns
+are independent. Okay. And column space
+is 2D uh with threedimensional. And here
+we and here we are just going to have
+our loop. Okay. This exact loop we are
+just going to go through both test
+vectors that is vector 1 and two. And uh
+this augment it just forms the augmented
+matrix. that adds vector v as a new
+column. Okay. And uh compute the rank of
+the matrix. So rank of original matrix
+and here rank of argumented matrix. And
+let me just uh check the condition if
+rank does not increase then what it is.
+Okay. So we are just going to check
+whether it is uh increasing. So if rank
+increases so it not in column space.
+Kindly keep it in mind. And uh let me
+print the uh vector by using this one.
+And let me just uh display both the
+ranks. And last but not least, let me
+just print our result. Okay. So kindly
+just observe here dear friends. So here
+we have this is our matrix A and we have
+our rank is equal to two. Okay. And uh
+with this it just specify that is no
+rank change. So vector is already in
+span and when on we are just having that
+is vector 2 kindly just observe here
+rank is increases. So rank increases of
+course we have a new direction and not
+in span. Okay. So kindly just observe
+here vector 1 is constructed for the
+columns. So stay in space and here
+vector 2 is outside the plane as it
+increases the rank. Okay. And last but
+not least a vector lies in the column
+space. If adding it does not increase
+the rank otherwise it introduce a new
+independent direction. Okay. Let I just
+summarize what we have just discussed in
+this session. So dear friends, this
+exact session introduced the concept
+that transform matrices from simple
+array of numbers into powerful
+structures with deep mathematical
+meaning. Yeah, first we have discussed
+about norms. Of course, norms provide
+scalar summarizations of matrix size.
+And here we just gone towards the uh
+forbinous norms. Uh kindly just observe
+the forbinous norms of uh matrix A
+equals to the square root of double
+summation. Okay. I 1 to M and summation
+Z 1 to N. Okay. of matrix A sub I J
+squared is the most common used in uh
+regularization of course uh lasso and
+ridge regularization and matrix distance
+also kindly keep it in mind and next we
+just gone towards trace yes dear friends
+here we just discussed about the trace
+of uh A equals summation of I1 to M A
+sub I I so is the sum of diagonal
+element it equals the sum of EN values
+and connects to the forbinous norms.
+Okay. And next we just discussed about
+the third one. Yeah it's all about
+matrix spaces. So which it defines what
+a matrix can reach. And here we just
+discussed about uh column space that is
+all vectors b satisfies a * x for some x
+okay a is a * x which is equal to b and
+next we just gone towards uh row space
+of a and here yeah it is all linear
+combinations of row and next null space
+of a matrix All y satisfies
+a which is equal to zero that is
+invisible direction. Okay. Now next uh
+we just gone towards the fourth one that
+is rank which it just quantifies the
+independent information. Yes. whether
+the rank number of linearly independent
+column that equals towards the dimension
+of column space of a matrix which is
+equal to dimension of row space of uh
+matrix A. So full rank means invertible
+rank deficients means singular and here
+also we just gone towards uh shifting
+also. So sifting here a + lambda i that
+resource full rank with minimal
+information change. Uh determinant yes
+dear friends determinant of a is zero
+for singular matrix and non zero for
+full matrix. So it is defined only for
+uh kindly just observe it is only
+defined for square matrix and is
+computed as like a diagonal of matrix
+minus di uh of diagonal matrix. Okay. So
+for 2 into two matrix here I have
+already specified and last but not least
+the characteristic polomial. So here we
+have already uh discussed about this
+determinant of matrix A minus lambda I
+which is equal to zero connects all
+these concepts its root or the EG value
+of A and the null space of the shifted
+matrix or the EGN vector. Hope I think
+so this uh session would be helpful for
+you. So like this video, share it with
+some other who just start or interest on
+learning machine learning or genera and
+subscribe dear friends. So see you in
+the next session. Happy learning dear

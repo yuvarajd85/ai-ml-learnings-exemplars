@@ -1,0 +1,417 @@
+# Machine Learning Mathematics Ep 37 | Symmetric Matrices | Real Eigenvalues & Orthogonal Eigenvectors
+# https://youtu.be/VgSEoPXlQds
+
+Happy morning dear friends. Here yours
+is Dr. Rajenta. Welcome to demystify
+with Ajek. Dear friends, today we are
+going to discuss on agent decomposition
+which is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure that
+is a set of special direction which we
+just say een vectors and associated
+scaling factor. Yes, that is what each
+inn value the together tells us
+everything about what the matrix does
+and yes dear friends here it is what a
+simple looking equation a multiple by v
+which equals lambda multiple v it looks
+small but this single equation powers
+yes principal component analysis noise
+reduction data compression graphic
+analysis dynamical systems yes of course
+a lot and lot and this exact equation
+yes when matrix A multiplies a special
+vector V the result is simply that same
+vector scaled by this number that is
+lambda here the vector V is an EGN
+vector and the scale lambda is its
+corresponding EG value finding all such
+paths that is lambda and V is what EN
+decomposition is all about and dear
+friends of course There is a
+prerequisite also. Yes, you should be
+comfortable with the matrix
+multiplication, determinance, the null
+space, a matrix rank and we will also
+use the concept of matrix shifting.
+Okay. Now let we just discuss on
+symmetric matrices. Symmetric matrices
+that is a which is equal to a transpose
+have two remarkable properties for agent
+decomposition. Yes, that makes them the
+rockar of linear algebra in data
+science. difference property one yes all
+een vectors are pairwise orthogonal yes
+that is what the perpendicular and
+property two yes all een values are real
+value that is no complex number
+difference these properties are not
+shared by general non-ymmetric matrices
+they make symmetric matrices much easier
+to work with and give their eg
+decomposition a beautiful geometric
+structure let me just discuss this
+directly by the coding so kindly just
+observe dear friends yes This exact
+script demonstrate a central theorem in
+linear algebra. Yes, real symmetric
+matrices have orthogonal eian vectors
+and admit an orthogonal diagonalization.
+Here matrix r yes it is an arbitrary 3
+into 3 integer matrix and here we just
+specified a which is equal to r
+transpose r and towards this properties
+of construction. Yes, the first one it
+is all about the symmetry. Yes, kindly
+just observe here A which is equal to R
+transpose R. That is what here we just
+define it. But when on just going for
+symmetry yes kindly just observe it is A
+transpose which is equal to R transpose
+multiple by R the whole transpose. So
+which is equal to R transpose multiple R
+which is equals to A. So here the second
+one it is all about positive
+semi-definite. Yes, kindly just
+observed. Dear friends, here we are just
+going to take the xrpose multiple by a
+multiple x. And here, yeah, with the
+same thing, kindly just observe xrpose
+multiple by ranspose multiple r multiple
+x. So, which is equal to norms of r
+multiple x towards the square. Yeah.
+Greater than or equal to zero. So here
+this exact a is guaranteed to be
+symmetric with real non- negative een
+values and let me just move on here to
+define the een decomposition. Yes dear
+friends here we are just defining the
+een values which are real and een
+vectors. Yeah can be chosen orthonormal.
+Okay and let we just move on here for
+orthogonality check. Yes, this is the
+loop for orthogonality check. And here
+this exact uh dot functionality yes this
+computes that v transpose v. So kindly
+just observe v transpose v which is
+equal to identity. So here this one we
+are just expecting it with the eian
+values and vectors. So kindly just
+observe. So with i and j functionality.
+So we are just going to have v sub i the
+transpose multiple by v subj. And here
+the exact expected value it would be V
+sub I transpose multiple by V subj which
+is equal to so if I which is not equal
+to J so it would be zero and if I which
+is equal to J that would be Y and yes if
+it is normalized and here we just get
+the resultant to be 10 ^ of -16 so
+indicates numerically zero and kindly
+just observe dear friends here we are
+just going to have our matrix
+orthogonality. Yes, for checking matrix
+[clears throat] orthogonality v
+transpose v which is equal to identity.
+So yes dear friends, so this is what so
+if e vectors are normal v transpose v
+which is equal to identity. So this
+means columns are mutually perpendicular
+and each has unit length and yes here we
+just go for the for an orthogonal matrix
+V. So here we are just going to specify
+as like v inverse which is equal to
+vranspose. So this is computationally
+significant. Okay. So let me just
+execute. So yes here we have the exact a
+and yes it is a symmetric. Yes, of
+course it is a symmetric and it is a
+real and when we just go towards the
+Eian values yes here also we just get a
+real and non- negative EN values and
+towards the Eian vectors yes we just get
+an orthonormal functionality and when we
+just make the pair wise orthogonality
+check so by using this V subpose
+multiple by V subj yeah yeah we are just
+having the orthogonality check and
+kindly just observe the exact values and
+as I have already specified yes it would
+be an 10 ^ of minus 16 that indicates
+numerically zero and if I is not equal
+to J it would be zero and if I is equal
+to J so we just get one and kindly just
+observe the V transpose multiple by V
+yes here it is an identity so that is
+also We are just getting it as like an
+matrix orthogonality and yes it's V is
+an orthogonal yes of course it is done
+and observe one thing dear friends here
+we are having an huge practical
+implement that is uh when we just make
+it as like V inverse which is equal to V
+transpose yes that's true because this
+is computationally significant and here
+transpose is far cheaper and more stable
+than inversion I have already specified
+and how this is happening. Yes. So
+kindly just observe dear friends here
+when EGN vectors are orthogonal and unit
+normalized the Asian vector matrix V is
+a orthogonal matrix that is meaning V
+transpose V which is equal to I and
+therefore V inverse which is equal to
+VRpose and we have already discussed
+previously. Yes. And orthogonal
+diagonalization. Yes. Instead of a which
+is equal to v * lambda multiple by v
+inverse. Yes, we can get the stronger
+result as like a which is equal to v
+multiple by lambda multiple by v
+transverse. And dear friends, kindly
+just observe this is called the spectral
+theorem. And why is such a big deal is
+yes dear friends actually computing a
+matrix inverse is expensive. So when we
+just to say yes big w of m cube yes
+operations and numerical unstable a
+transpose is essentially free you just
+swap row and column indices and here for
+symmetric matrices we never need to
+compute v inverse we simply use v
+transpose this is faster more stable and
+more memory efficient and in data
+science the matrix v e compose are
+almost always covariant matrix which are
+symmetric by definition as like uh
+kindly just observe C which is equal to
+X transpose multiple by X. So this
+simplification applies to virtually
+every PCA computations you will ever
+run. So if you know your matrix is
+symmetry instead of this kindly just use
+of course uh np do linear algebra ei h
+of a because here h stands for hermitian
+that is the complex generalization of
+symmetric and here this ei gh yes this a
+is very faster more numerical stable and
+returns egen values stored in ascending
+order like here I just give you a proof
+also dear friends kindly just observe.
+See this is one of the most important
+proof in applied linear algebra. Let us
+walk through in step by step. So as we
+have already given yes kindly just
+observe a which is equal to a transpose
+with the two distinct EN values that is
+lambda 1 and lambda 2. Okay. And here
+kindly just observe this lambda 1 which
+is not equal to lambda_2 and their eian
+vectors v_ub_1 and v_sub_2. So here we
+our exact uh goal is we have to specify
+that is v_sub_1 transpose multiple by
+v_sub_2 which is equal to zero that is
+an orthogonal. So let me just start with
+step one. So start from the EGN value
+equation for v_sub_1 and left multiple
+by v_sub_2 transpose. So here kindly
+just observe lambda 1 v_sub_1 transpose
+and v_sub_2 which is equal to a multiple
+by v_sub_1 the whole transpose multiple
+by v_sub_2. So here what happens? So
+v_ub_1 transpose a transpose multiple by
+v_sub_2 because of a is symmetric we
+already know a transpose which is equal
+to a. So we can replace a transpose with
+a and then use the e value equation for
+v_sub_2. So kindly just observe. So
+v_sub_1 transpose a transpose v_sub_2
+which is equal to v_sub_1 transpose a
+v_sub_2. So here what we just get
+v_sub_1 transpose multiple by lambda 2
+v_sub_2 and kindly observe the exact
+resultant is lambda_2 v_sub_1 transpose
+and v_sub_2. Now here combining this
+first step and second step lambda 1 here
+and this is lambda 2. Okay. So we are
+just going to equalize the both one. So
+the third one here it is lambda 1
+v_sub_1 transpose
+v_sub_2 which is equal to lambda 2
+v_sub_1 transpose v_sub_2.
+So yes, this implies lamb lambda 1 minus
+lambda 2 the whole v1 transpose v_sub_2
+which is equal to zero. And yes since
+lambda 1 and lambda_2 are not equal and
+the factor lambda 1 minus lambda 2 which
+is not equal to zero. Okay. Therefore
+v_ub_1 transpose multiple by v_sub_2
+which is equal to zero.
+So that makes this proof work is the
+substitution that is a transpose which
+is equal to a that is what we have just
+done in the step two and for a
+non-ymmetric matrix a transpose is not
+equal to a and the chain of equalities
+breaks. So this is why non-ymmetric
+matrix do not have orthogonal eian
+values in general. So by this yes this
+exact code verifies that for symmetric
+matrices each and vectors are orthogonal
+and here v transpose v which is equal to
+identity and here v is an orthogonal and
+next one v inverse which is equal to
+vranspose and diagonalizing simplifies
+kindly just observe a which is equal to
+v ult* lambda multiple by vranspose
+post. So this is one of the most
+powerful structural result in linear
+algebra. So turning matrix
+transformation into independent scaling
+along perpendicular direction. And here
+is the second special property that is
+symmetric matrix always have real valued
+een values. So yes generally
+non-ymmetric matrix can have complex
+valued een values. So even if the matrix
+itself contains only real numbers. Yes
+dear friends directly let me just go to
+the code and yes this script contrast
+non-ymmetric with a symmetric matrix in
+terms of their EG values and empirically
+verifies a key key theorem that is real
+symmetric matrix always have real EG
+value whereas nonseymmetric matrix may
+have complex EN value okay so here
+kindly just observe let me just go to
+define yes a non-sm symmetric matrix A
+and here we just go with an uh
+functionality that confirms the matrix
+is not symmetric not symmetric yes of
+course as we have already seen
+previously that is non symmetric that is
+a which is not equal to a transpose okay
+and uh next we are just having the een
+value computation yes this produces een
+values that may include complex numbers
+And here is the exact uh key
+observation. Kindly just observe dear
+friends. So this exact functionality
+returns false that is not all EN values
+are real. And here we have the complex
+conjugation pair. And yes dear friends
+for an uh real valued matrix complex EN
+values must appear in conjugate pair. If
+lambda which is equal to a + b i so is
+an een value then lambda bar which is
+equal to a minus b i yes yes is also an
+een value. So this arises because the
+characteristic polomial has real
+coefficients and here we have the exact
+symmetric versions of the matrix. Okay.
+So as sim which is equal to and here
+kindly just observe we are going to
+return true matrix is symmetric. Okay.
+So that is also here it is specified and
+when on evaluating this also kindly just
+observe there is also going to return
+true because all een values are real.
+Okay let me just see when on execution.
+So here we have an empirical via
+verification that is by using Monte
+Carlo test and here this exact loops
+just generate the symmetric matrices via
+yes which is equal to R transpose
+multiple by R. So here it is the
+properties as like symmetric and
+positive semidefinite
+and yes of course kindly just observe
+dear friends this exact line yes it just
+makes the check of eian values it
+confirms all eian values are real and
+here all thousand symmetric matrices
+have uh real een value and it is going
+to return the true okay so let me just
+execute so here on execution kindly just
+observe dear So this is what the
+non-symmetric okay it just may have
+complex een values non orthogonal eian
+vectors even defective cases that is
+nondagonalizable
+and here when we just go towards the
+symmetric matrices yes for real
+symmetric matrix a all eian values are
+real een vectors can be chosen
+orthonormal and matrix is orthogonally
+diagonizable yes of course orthogonally
+diagonizable It is as like a which is
+equal to v * lambda multiple by v
+transpose and here for symmetry it just
+forces a real een values. So kindly just
+observe dear friends here for symmetric
+a lambda which is equal to v transpose
+multiple a multiple v divided by v
+transpose multiple by v. So here right
+hand side is always real. Therefore,
+Egen values must be real. And dear
+friends, kindly just observe here we are
+going to have a non-symmetric cases.
+Yes, transformation can include a
+rotation, shear and this can produce a
+complex uh agent values and yes dear
+friends with this uh uh thing symmetric
+cases here transformation is pure
+scaling along orthogonal directions no
+rotational component and hence egen
+values remain real. So this exact code
+demonstrate non-symmetric matrices that
+they produce complex EGN values. Complex
+values occurs in conjugate pair. And
+when coming towards symmetric mat
+matrices always have real values that is
+real een values or structural well-
+behaved and here empirically thousand
+symmetric matrices are all real een
+values. So this distinctions is
+foundational for understanding when
+agent decomposition yields stable
+interpretable results. And that's a
+wrap. Dear friends, today we explored
+one of the most elegant concept in
+mathematics and data science. We begin
+with a simple question. What happens
+when a matrix transforms a vector? And
+that questions leads us into the
+fascinating world of een values and een
+vectors. We have discussed egen vectors
+are special directions that remains
+unchanged in orientation. Egen values
+tells us how much those directions
+stretch or shrink. And here the most
+important lesson is yes each
+decomposition is not about mattresses.
+It is about finding hidden patterns.
+When data becomes complicated een vector
+reveals the important direction. When
+data set becomes highdimensional, PCA
+uses EEN vector to simplify them. When
+noise hides useful information, EG
+values helps separate signals from
+noise. So that's why Egen decomposition
+powers PCA, machine learning, computer
+vision, signal processing, network
+analysis, financial modeling, scientific
+computing. Of course, dear friends,
+every time a machine learning model
+discovers hidden structure in data,
+agent decomposition is often working
+quietly behind the scenes. I hope I
+think so this session would be very much
+useful. Yes, dear friends, the true
+power of mathematics lies not in solving
+equation but in discovering the hidden
+patents behind them. So, thanks for
+watching. See you in the next session,
+dear friends. Happy learning.

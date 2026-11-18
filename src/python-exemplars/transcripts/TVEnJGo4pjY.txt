@@ -1,0 +1,687 @@
+# TVEnJGo4pjY
+# https://youtu.be/TVEnJGo4pjY
+
+Happy morning dear friends. Here's yours
+Dr. Rajenta. Welcome to demystify with
+Ajay. Dear friends, previously we have
+discussed about the theoretical
+machinery of matrixes and this session
+puts that machinery to work on three
+applications that are central to data
+science or machine learning or deep
+learning generative way mainly on
+computer graphics. Image filtering. This
+is the core operation in computer vision
+where a kernel or filter slides across
+an image to extract important features
+such as edges, textures and pas. And
+before that let we include our important
+necessary libraries. And here we just go
+dear friends we have already discussed
+this uh in our previous sessions also.
+Yes, the numpy for mathematical. So
+numerical python map plot loop for
+plotting. Yes we have already uh
+discussed about this warnings and this
+default parameters and dear friends we
+have just included that random seed. So
+this fixes the random number generate
+states which ensure reproducibility
+and yes let we just execute and uh let
+we check what is the version of numpy.
+Yes it is 2.3.5.
+Uh okay dear friends in this uh session
+we are just going to discuss about the
+image feature deduction. Yes it is what
+the important application matrix
+application used mainly in computer
+graphics. And in this session we are
+just going to discuss about uh uh 2D
+convolutional with Gaussian and edge
+direction kernels. Dear friends, we have
+already discussed about the filtered
+time series by sliding a one-dimensional
+kernel and computing dot products and
+here image filtering extend this to two
+dimensional. This two-dimensional uh
+kernel slides across the image and at
+each position we compute a hadamad
+product and make the summation. What is
+that had product? Yes, dear friends,
+kindly just to see here output of row
+and column output at row R and column C
+that equals the double summation over I
+and J of K subig multiplied by S sub R +
+I T + J. Actually this is what the exact
+one which we just specified hadamat
+product and the summation and dear
+friends this is nothing but a simple
+thing say multiply the kernel that is
+the kernel values with the image patch
+value then add it then add everything
+together that is the exact functionality
+so which it just converts the
+onedimensional to twodimensional
+convolutional okay so this is the same
+element element wise multiply and sum
+operation as a dot product but apply to
+an matrix that is what had product and
+summation and dear friends the kernel K
+here yes this exact kernel K determines
+what future is dedected let me just move
+on to this Gaussian smooning kernel a
+two-dimensional Gaussian kernel acts as
+a smoothe
+replaces each pixel with a weighted
+average of its neighbor. So here yeah
+you can just specify as like uh g of x y
+which equals e rise to the power of
+x² + y² divided by sigma. Actually dear
+friends, this one is what the exact
+functionality which we just specify
+mathematically as Gaussian smooning
+kernel. And here kindly just one thing
+this exact sigma controls the width
+where if it is larger sigma it just
+means more smoothening. So here we have
+actually creates a 21 into 21. So kindly
+just see here 21 into 21 grid over the
+square of -3a 3 and minus3a 3 and here
+this x grid and y grid stores coordinate
+for each kernel element and kindly dear
+friends this grid defines the spatial
+support of the kernel and here next of
+course this is the exact one which
+provides the gaussian kernel definition.
+So this is what the exact uh equation
+which we just got. So g of x y = e
+raised to ^ of x² + y² divided by the
+sigma. And dear friends this one is
+specified as radially symmetric gaussian
+like function. And here kindly just note
+a difference about this sigma. Uh
+actually uh it is slightly different
+from the standard one. What is the exact
+standard one is? E to the power of that
+is rised x² + y² divided by 2 sigma the
+square.
+Actually this is what the standard one
+and here we have slightly differed from
+the standard to make it radially
+symmetric gausian like function. And
+again I just specify this exact
+parameterized that is sped parameterized
+sigma. Okay, it is not a standard
+deviation. It is acts like a spread
+parameter and next line it is all about
+normalization. So kernel gazian. Okay.
+So this exactly ensures so this exactly
+specifies as like summation of J of K
+subig which is equal to 1. So actually
+why why this matters is it just
+preserves overall image intensity.
+Actually it is not about the uh
+brightness shift. Okay. It just makes
+the kernel a proper average filtering.
+Okay. So this is what to make as
+normalization. Okay. Now let we just
+move on to this. Yeah we are just going
+to uh diagnize our uh kernel. So yes, we
+want to know what is the shape and what
+about the summation whether after
+normalization what is the exact value
+and uh next about the peak. Okay, so
+what would be the uh central value also?
+Okay, so that is what we want to
+diagnose. So and we are just going to
+display it and next it just comes about
+generate a noisy image and of course you
+already know. So here we are just going
+to uh create an 100 into 100 Gaussian
+image. Okay. And each pixel is
+independent and dear friends high
+frequency content dominates. Next we
+just going on smooning. Okay. So this is
+what for convolutional smooning and yes
+this is what it just interpretates about
+the average functionality. So here of
+course what we just get is what I
+already specified that is output of I
+comma J which is equal to summation of U
+and V and K of U comma V and with the
+input of I - U comma J minus V. Dear
+friends, this one each pixel becomes a
+weighted average of its neighbor. So
+nearby pixel contributes more mainly due
+to the Gaussian weight. Okay. So
+Gaussian waiting and uh dear friends
+here we have just specified mode is
+equal to same. Yes here output which is
+equal to 100 100 comma 100. So it would
+be going to be the same as like the
+input size as 100 comma. And the next
+one we have just done the boundary which
+is equal to wrap. So image wraps around
+edges. So that is what specified as like
+a periodic boundary. Okay. So next it is
+all about to visualize. So first of all
+it is going to visualize an original
+image. So it is all about an random
+noise image. Okay. And next it is all
+about a Gaussian kernel. Okay. And
+kindly just see here here I just want to
+specify it is original with appears as
+high frequency noise. And uh next it is
+all about the gauian. So it just makes a
+brighter uh center and smoothness. Okay.
+And uh smooth radially decay when it
+just goes outer and uh represents
+spatial waiting also. So kindly just uh
+uh keep it in mind. And next we are just
+going to have the smoothened image. So
+in this yes noise is reduced image
+appears blurred blurred in the sense low
+pass filtered. Okay. So let me just
+execute and uh see the exact output. So
+kindly just see dear friends. So observe
+here. So the Gaussian so this is the
+exact original 100 into 100 image. Okay.
+And this one it is all about the Kausian
+kernel in 21A 21 matrix where the bright
+center that faded towards the edges.
+Observe here and here when uh convolute
+with a random noise image the result is
+blurred version and here high frequency
+pixel pixel noise is averaged out. So
+leaving smooth low frequency patterns.
+If the kernel is normalized that is sums
+to one. So the exact so the exact see
+kindly just see here the kernel is
+normalized that is sums to one. So the
+convolutional computes a weighted
+average rather than a weighted sum and
+this preserves the original intensity
+scale. And here I just want to specify
+one thing dear friends. uh when you
+previously we have just seen about uh an
+uh 1D smooning okay 1D smooning kernel
+where K is equal to 1 by M with all the
+values as like one the whole transpose
+see it was a uniform average but here in
+the twodimensional Gazian kernel is a
+weighted average whereby nearby pixels
+contribute more than the distant one. So
+a more sophisticated version of a same
+same idea. So here I just want to add
+one thing dear friends kindly just
+observe uh dear friends whenever we just
+uh go on to this uh low pass filter.
+Okay. So here high frequency variations
+are suppressed. So low frequency
+structure is preserved.
+And when going towards the local
+averaging each pixel becomes weighted
+average of nearby that is what I have
+just previously specified. And uh the
+third important thing about the sigma
+yes the role of the sigma here it is not
+a standard deviation it just makes the
+spread parameter. And here I just want
+to specify kindly just see here if the
+sigma it is larger so the exact kernel
+would be flattened and a blur would be
+stronger and if the same sigma would be
+small okay so here the exact sharper
+would be the peak and blur would be
+reduced that is less br would be there
+okay and uh here the next I just want to
+specify about the uh convolutional
+convolutional as linear operator. Dear
+friends, actually this exact operation
+it is mainly used in uh linear
+functionalities and shift invariant and
+of course equivalent to multiplication
+in the 4year domain also. And one thing
+I have to specify dear friends whenever
+you just have of course I just give you
+in a pipeline. So whenever you just have
+this noise, yes, with a Gaussian
+convolutional, yes, you just get a
+smoothened signal. Okay. So a Gaussian
+kernel acts as like an probability
+distribution over the near neighborhood.
+And here the convolutional performs a
+local expectation that is weighted
+average. Okay. Now let me just move on
+to the edge deduction kernel. Uh
+difference actually uh different kernels
+detect different feature. Uh actually
+here we are just going to construct a
+synthetic image uh with uh structured
+features and applies soel edge deduction
+to extract intensity transition. And
+here kindly just observe this exact code
+demonstrate how convolutional kernels
+approximate spatial derivations. Okay.
+So yes uh observe here dear friends here
+we are just going to have and uh
+initialize a blank grayscale image.
+Okay. So this is exactly a zeros. Okay.
+We are just going to create an blank uh
+grayscale image. And next we are just
+going to add add geometric shape. And
+here three regions with different
+intensity. Yes. One it is all about
+bright square and that is 1.0. 0. Next
+it is all about the medium rectangle. It
+is 0.7 and it's next it is dimension
+rectangle it is of 0.5. So these
+introduced sharp edges that is
+discontinuous. Okay. So now let me just
+add a horizontal gradient and here it
+just adds a smooth left to right
+intensity increasing. So it just
+introduced a low frequency component. So
+kindly have a note on towards this and
+yeah here we are just going to uh
+include our soil edge deduction kernel
+and kindly observe dear friends we are
+going to have a horizontal soel
+deduction. So this is what a horizontal
+soel deduction of approximation of do I
+by dox. So it just responds strongly um
+where intensity changes from left to
+right and here it just comes the
+vertical okay so this detect horizontal
+edges soel horizontal it just deducts
+vertical edges and soel vertical it just
+deducts the horizontal edges kindly just
+don't confusion with it and it just
+approximate as do I divided by do y and
+it just responds only for top to bottom
+changes. Now let me just apply the
+convolutional. So here we are just going
+to make the uh edge extraction and this
+exactly applies discrete derivative
+filters and observe kindly see here the
+mode is same. Okay, it just preserves
+the image size and the boundary it's
+also as like filled. So it pads edges
+with zero. And yeah, here we have the
+gradient magnitude. And uh kindly just
+observe this exact gradient magnitude
+combines uh directional derivatives into
+a rotation invariant edge strength.
+Okay. So this exact uh gradient ma uh
+magnitude let specify it mathematically.
+So actually it is square root of
+horizontal edge [snorts] the whole
+square plus vertical edges the whole
+square. So horizontal edges yes it is do
+I by dox the whole square plus do I by
+dy the whole square. So this is what the
+mathematical interpretation. So it just
+combines directional derivatives into a
+rotation invariant edge strength. Okay.
+Now let we just have the visualization.
+So kindly just observe dear friends.
+This is how the visualization and the
+first one it is all about the original
+image. Yes, it just shows shapes and
+gradient and here the displayed uh with
+color coding. Okay. So here uh we are
+just going to have the color coding as
+like positive versus uh negative uh
+weights. And uh yes of course uh here we
+are just going to have our annotations
+also annotations uh uh numerically. And
+uh next we are just going to have the
+bottom row okay as like uh vertical
+edges, horizontal edges and uh edge
+magnitude. And dear friends this
+vertical edges it just highlights
+boundaries where intensity changes
+horizontally. And uh horizontal edges of
+course it detects top and the bottom
+edge of the shapes. And last but not
+least the edge magnitude. It just
+combines both fully edged map. Let me
+just visualize it. Okay. And here dear
+friends kindly just observe we are just
+going to have the summation summation of
+uh uh that is kernel property zero sum.
+So here when we just make the summation
+of this soel h and soel v okay we just
+get both equals to zero. So here I just
+want to specify the kernel property. So
+both it would be equal that is when on
+mathematically interpreted it is
+summation of k subig which is equal to
+zero. So it ensures no response to
+constant region only reacts to changes
+not absolute intensity. Okay. So let me
+just see this by executing the code and
+uh yeah here we go. So this is what the
+top row where we just get the original
+and soal horizontal and soal ventricle
+and towards the bottom row. Yes, kindly
+just observe these are the vertical
+edges of this vaginal and these are the
+horizontal edges of the val. And last
+but not least, it is all about the edge
+magnitude combining both vertical and
+horizontal. Dear friends, this edge
+deduction. Yes, of course, it is
+corresponds to high partial derivatives.
+And here so filtering approximates
+gradient using finite differences. And
+if I just want to specify it with this
+value which we have just uh defined when
+I'm just making this mathematically. So
+kindly just observe dear friends. Dear
+friends, actually this soel operator we
+have 3 into three kernel that deducts
+edges in specific orientation. One thing
+horizontal orientation and here what is
+the exact horizontal orientation? Yes.
+So it is - 1 0 1 - 2 0 2 -1 0 1. So it
+exactly deducts the vertical edges and
+here changes in the horizontal
+direction. So it just goes for left to
+right and of course the left to right as
+computes an approximation of do I by dox
+and when on just going towards the
+vertical so kindly just observe here
+when we just go for vertical soel so
+here we have -1 -2 -1 and uh 0 0 0 and
+next it is all about 1 2 one and this
+one deducts the exact horizontal edges
+with approximation of do I divided by dy
+and when coming with the edge magnitude
+kindly just observe when coming towards
+this edge magnitude yes we have the
+square root of edge horizontal the whole
+square plus edge vertical the whole
+square so combines both orientation
+highlighting all edges regardless of
+this direction. Dear friends, both
+kernels sums to zero. Yes, that is what
+we just got. Both one it sums to zero
+which means they have no response in
+flat region. So add to the last what we
+just have is larger the sum that is
+larger positive value appears on bright
+to dark transition and larger negative
+values or dark to bright transition. So
+this is what the both the things you
+have to keep it in mind. Okay. And this
+would be connected towards convolutional
+neural network. Yes. It just learns
+these kernels automatically from the
+data. The first layer of trained image
+classifiers typically discover this
+sober like edge detector or gabberl like
+orientation filter and color contrast
+filter. The same primitives used in
+classical computer vision but optimized
+for the task at hand. Okay. Now let me
+just implement this uh by using an 2D
+convolutional here. Okay. So to
+reinforce the connection of this dot
+product filtering we implement the
+double loop explicitly. Okay. So that is
+what we are just going to do here.
+Kindly just observe dear friends. So
+this exact code actually implements uh
+2D convolutional. Okay. So using a
+sliding window and verifies it according
+uh against this sky crossorrelation. And
+of course dear friends it explicitly
+exposed the mechanism behind
+convolutional as a sequence of which I
+have already specified. Yes had uh that
+is element wise products plus summation.
+Okay that is what we are just going to
+do. So let we just first define the
+function this exact function it just
+gives the convolutional 2D and here we
+have the parameter as like image and
+kernel. Okay. And here this two are the
+inputs where image it has a 2D uh height
+and width array. And here this kernel it
+is as like a 2D filter. And what would
+be the output is? Yeah, we are just
+going to have a filtered image of the
+same size. Kindly keep it in mind. Okay.
+And uh in this we are just going to have
+our kernel geometry. Okay. So here we
+have the kernel geometry. It just
+determines the kernel size and its uh
+center offset and it just assumes
+oddsized kernel that is as like 3 into
+three matrix or 3 into 3 so like that.
+Okay. And uh let we just uh have our
+image padding. And uh dear friends, this
+enables applying the kernel at B border
+pixel. And it just uses the zero padding
+which is equivalent to which we have
+already specified a boundary which is
+equal to fill. Okay. Now next we are
+just going to have a sliding window
+computation. So this is sliding window
+computation it just has to extract a
+local page and element wise multiple and
+next is summation. So this is what the
+exact one we are expecting. So what it
+is I just uh let you know the first one
+it is all about uh local patching is
+extracted. So the patch which would be
+uh got from the row wise and column
+wise. And next one it is all about
+elementwise multiple. Element wise
+multiple yes it patch dot matrix with
+the kernel. And uh next it is all about
+the summation. the summation. Yes, we
+are just going to have the summation of
+IG that is patch of IG and kernel subig.
+And yes, this is what the exactly which
+we are just going to have as like image
+into kernel with row and column. Okay,
+so row comma column. Okay, dear friends,
+let me just uh have the next one. It is
+what the crossorrelation one. Okay. So
+that is what here we are making it with
+a flipped functionality crossorrelations
+versus convolutional. So here cross
+correlation we are just going to
+calculate it by correlated 2D and
+convolutional by using this
+convolutional 2D manually. Okay. And
+here this convolutional 2D it just flips
+the kernel and correlates a 2D. Yes, it
+does not flip it. Okay. So yes, let me
+just validate it by using this uh
+results sky uh by this uh correlated 2D
+and we all just think we are going to
+have our output and let me just check
+what is the confirms the numerical
+evaluation. So once I execute let me
+just give what it is. Yeah, here we go.
+And kindly just to see here dear friends
+the output here uh we have the shape of
+course we already know 100 to 100 and
+the kernel shape yeah it is 3 into 3.
+Okay. And output it is the same as like
+uh uh the input images. And here kindly
+just observe whether it is matches. Of
+course both are matching. So it is true.
+And next it all gives the near machine
+precision. So this is what the maximum
+difference and actually see here
+difference when we just have this
+implementation. Okay. So the manual
+implementation confirms that 2D
+convolutional is exactly what we
+described at each position. Extract a
+patch the same size as a kernel. Compute
+the hardat product. Okay. So that is
+what here it is provided. And next it
+just makes the summation. Okay. So here
+that is what but when coming towards
+this uh convolutional uh output so
+formally convolutional flips the kernel
+before sliding. So crossorrelation does
+not for symmetric kernel like this
+gauian they are identical and of course
+I want to add one thing for asymmetric
+uh kernels like soel the sign can
+differ. Okay so here of course I have to
+specify as I have already previously
+specified that we have applied with an
+uh double loop. So yes this exact double
+loop we just have it towards the big
+method of uh nr into nc and to the same
+kr into kc for this if we just have as
+1,000 into th00and an image with a 21
+into 21 kernel okay so this is image and
+this is a kernel and that is
+approximately ly what we just get is
+approximately 4.1 into 10 ^ of 8
+operations. So this the convolutional
+theorem offers a faster path
+convolutional in the spatial domain that
+equals multiplications in the frequency
+domain that reducing the complexity of
+this we go by using this f of t. Okay.
+So that is what dear friends. Okay. So
+let me just uh move on to the next one.
+Yes, we are going to have the effect of
+Gaussian width difference. Previously I
+have just specified about the parameter
+sigma. Yes, uh this exact code it just
+illustrate how this parameter sigma here
+controlling the spread of a Gaussian
+kernel that affects the strength of the
+image smooning. So it applies Gaussian
+filtering with increasing spread to a
+noisy image and compares the result.
+Okay. So let me just make it and here is
+of course dear friends we are just going
+to uh generate an 80 into 80 image of
+independent Gaussian noise. So that
+contains a predominantly high frequency
+component. And here we have our uh sigma
+value. Okay. So 2a 10a 40. So these
+controls the spread of gazian kernel. So
+larger value border kernel strong
+smoonening. Kindly keep it in mind.
+Okay. Now let we just go with the
+Gaussian kernel construction. Okay. So
+here this exact Gaussian kernel
+constructions as per the sigma value and
+here I have already specified
+previously. Anyhow I just remind you
+again. So yes k of x y which is equal to
+expression that is rise to minus x² + y²
+divided by sigma and here it just
+defines on of course 15 into 15 uh fixed
+grid. Okay. And here it is normalized to
+sum of uh k which is equal to 1. Okay.
+So that is what here it is uh specified.
+Okay. Now let we just go for smooning
+and here when on just making the
+smoothening that is applies this
+Gaussian smooning each pixel becomes a
+weighted average of the neighbor and
+here we have the boundary as wrap. So it
+treats the image as periodic that is
+edges wraps around and uh let me just
+have this as an uh uh visualization
+output. So here we have the uh panel
+one. So original noise and other three
+that is from 2 to four we are just going
+to have the smoothened results of
+increasing this sigma that is 2 10 and
+40. Let me just see here. Okay. So let I
+execute and we observe the value of
+sigma is small. The kernel is sharply
+peaked and here only nearby pixel
+contributes. So here slightly smoothened
+but noise still prominent. Okay. Next
+let me just go for sigma which is 10. Of
+course it is moderate. So kernel spreads
+out and here more neighbors contribute.
+And what was the resultant? Of course,
+noticeably there is a blur is there.
+Noise reduced but emerging smooth
+structure emerging here, here, here and
+all that. Okay. Last but not least, the
+sigma which is equal to 40. Yes, kernel
+becomes very flat and large neighborhood
+average. So here it has resulted with
+smooth strong smooning and image
+approach low frequency feed. So fine
+detail completely removed. Friends here
+I want to specify an important
+functionality. Whenever we just go for
+uh this uh uh sigma functionalities as
+here sigma increases the gausian kernel
+becomes wider that is flatter averaging
+over a large neighborhood. So the effect
+progresses from light dinoising to
+aggressive blurring. Okay. So that
+reveals only the coet structure and here
+I have already specified one thing dear
+friends we have used the exact kernel we
+have used as like the expression - x² +
+y square divided by sigma but that is
+the standard one yes the standard one is
+the expression raised to - x² + y square
+divided by 2 sigma the square so this is
+the exact one so here this sigma is not
+a statistical standard deviation. It is
+still monotonically controlled smthening
+strength and here we have a fixed kernel
+size as like 15 into 15. We have already
+specified that and this implication yes
+the very large sigma. Yes, here the
+gaussian is truncated kernel becomes
+nearly uniform within the window. So
+true large sigma behavior would require
+a large kernel support. So for that we
+have just used this. Okay. And dear
+friends yes u by by practicing yes the
+choice of this sigma depends on the
+application when you just go towards
+anything as like uh uh image uh image
+noise dising. So here the small sigma
+would preserve the details. Okay. And if
+you just go for anything as like an
+background estimation. So here large
+sigma to capture border trends. So
+kindly make use of a larger sigma. And
+if it is a uh scale or space analysis
+here we just need multiple sigma values
+simultaneously to detect features at a
+different scale used in SF or any other
+key key detectors. Okay. So yes dear
+friends, so I think uh in this session
+we have discussed about the uh
+convolutional functionalities that is
+image filtering that extended from those
+uh uh onedimensional to two-dimensional
+functionalities by using those uh
+hadamad
+product and the summation that sliding
+2D kernels and here Gazian kernel
+smooths images soel kernels detect edges
+and the kernels
+shape determines what future is detected
+and here modern CNN learns optimal
+kernels through gradient descent. I hope
+I think this session would help you
+understand about and kindly just uh like
+this video, share it with someone
+starting with their uh AI journey. Okay
+dear friends, thanks for watching and
+see you in the next recessive.

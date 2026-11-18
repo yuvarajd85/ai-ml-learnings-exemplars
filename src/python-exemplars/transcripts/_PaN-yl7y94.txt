@@ -1,0 +1,264 @@
+# _PaN-yl7y94
+# https://youtu.be/_PaN-yl7y94
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on Eigen decomposition, which
+is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure, that
+is a set of special direction, which we
+just to say Eigen vectors. An associated
+scaling factor, yes, that is what Eigen
+value. The two together tells us
+everything about what the matrix does.
+And yes, dear friends, here it is what a
+simple-looking
+equation, A multiple by V, which equals
+lambda multiple by V. It looks small,
+but this single equation powers, yes,
+principal component analysis, noise
+reduction, data compression, graphic
+analysis, dynamical systems, yes, of
+course, a lot and lot. And this exact
+equation, yes, when matrix A multiplies
+with a special vector V, the result is
+simply that same vector scaled by this
+number, that is lambda. Here the vector
+V is an Eigen vector and the scale
+lambda is its corresponding Eigen value.
+Finding all such pairs, that is lambda
+and V, is what Eigen decomposition is
+all about. And dear friends, of course,
+there is a prerequisite also. Yes, you
+should be comfortable with the matrix
+multiplication, determinants, the null
+space, a matrix rank, and we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover, yes, what Eigen values and
+Eigen vector really mean, and why Eigen
+decomposition works only for square
+matrix, the geometric interpretations of
+stretching without rotating. The very
+first thing to know about Eigen
+decomposition is its scope. If it apply
+only for a square matrix, difference you
+can't eigen decompose a 3 into 5 matrix
+or a 100 into 7 matrix. You can just
+make only that is m into m matrix can be
+eigen decomposed because an eigen value
+equation, yes, AV which is equal to
+lambda multiplied by V requires that a
+matrix vector product AV produces a
+vector with the same dimensional as V.
+And here, if this A, yes, if it is this
+A, if it is an m into n matrix, so with
+m which is not equal to n, then AV is an
+m vector while V is an n vector. That
+cannot be equal. So here, every m into m
+matrix has exactly m eigen value that is
+counting multiplicities and m
+corresponding eigen vector. So, for an
+example, if I just specify 2 into 2
+matrixes has two eigen value eigen
+vector pairs. And do the same if it is
+an 100 into 100 matrixes, yes, it has
+100 pairs and so on. And the difference,
+of course, kindly just observe for an
+non-square matrix, yes, they can be also
+decomposed but using singular value
+decomposition. Yes, we will be
+discussing it later in next session.
+Difference, the most intuitive way to
+understand eigen vector is
+geometrically. Yes, when a matrix
+multiplies a vector, it generally does
+two things. One, it just rotates, that
+is changes direction, and scales, that
+is changes length. But for certain
+special vectors, that is eigen vectors,
+the matrix only scales them without
+changing the direction. And yes, of
+course, that is what mathematically
+specified, That is AV, which is equal to
+lambda multiplies V. And here this exact
+left side of AV, that is is a matrix
+vector multiplication, which is
+generally produces a complete new vector
+pointing in new direction. And here this
+right side, this lambda V is a scalar
+vector multiplication. Which only
+stretches or compresses the vector along
+its original direction. So here from
+this equation, yes, for this particular
+vector V, the complex matrix
+multiplications acts like simple scalar
+multiplication. Okay, let me just
+discuss that by using this code. So yes,
+dear friends, this exact script
+construct a geometric demonstration of
+how a linear transformation that is
+represented by a matrix. So here it is
+A. Acts differently on Eigen vectors and
+a non-Eigen vectors, too. So here, yes,
+it is a matrix A, which is a 2 into 2
+matrix, a symmetric matrix, which
+guarantees real Eigen values, orthogonal
+Eigen vectors. And here exactly this was
+the one computes Eigen values and Eigen
+vectors. Yes, dear friends, Eigen values
+lambda one, lambda two, and
+corresponding Eigen vectors. Yes, stored
+as column. And yes, as I specified
+mathematically, AV which is equal to
+lambda multiplied by V. And here we just
+uh displays our Eigen values and Eigen
+vector numerically. And kindly just
+observe, dear friends, this
+uh exact Evecs. So this extracts the
+first Eigen vector, that is column-wise
+storage. Here we just uh start our
+vector preparation. So for Eigen
+vectors, that is for scaled for
+visualization. So here V1 and V2. So,
+eigen vectors are scaled purely for
+plotting clarity. And scaling does not
+change direction, which is the key
+property of eigen vectors. Kindly have a
+note. And here a non-eigen vectors, too.
+Yes, here kindly just observe W1 and W2.
+Here W1, standard basis vector along
+x-axis. And for W2, yes, normalized
+arbitrary direction. And dear friends,
+these are not aligned with eigen vector.
+So, they will behave differently under
+this matrix A. Now, let me just uh frame
+our plotting. Yes, for visualization.
+So, here we are just going to create a
+two sub uh plots. Okay? So, two
+side-by-side plots. Left, of course, it
+is for eigen vectors. And right, of
+course, it is for non-eigen vectors. And
+here this exact left panel, yes, kindly
+just observe, it computes the
+transformed vector AV. And here we have
+the solid arrow that is original vector.
+And the dashed arrow for transformed
+vector AV. And dear friends, kindly just
+have an observation. Yes, AV lies on the
+same line as V. And only magnitude
+changes. And yes, to this equation, here
+no rotation, only scaling. That is
+stretching or shrinking. And here we
+just go for the right panel. Yes, dear
+friends, kindly just observe. Here we
+have the exact uh AW is not parallel to
+W. The same transformation. But here, AW
+is not parallel to W. Direction changes,
+geometric rotation, and scaling. Of
+course, it demonstrate AW that is not
+equal to lambda W. For visual encoding,
+yes, we have across both the plots.
+Kindly just observe. Yes,
+we have arrows for origin vector. And
+yes, a circular marker for original
+vector and square marker for yes vector.
+And to the same, both the things are
+there. And there's a solid line for
+before transformation, dashed line for
+after transformation. And here we have,
+kindly just observe, yes, equal scaling
+preserves geometric correctness, grids,
+and axes improves interpretability. And
+yes, dear friends, actually here we have
+a printed statement. Yes, each eigen
+vector, that is a left stay aligned
+non-eigen vector, right rotates. So,
+this summarizes the core linear algebra
+principle. Okay, let me just execute and
+observe the output. And here it's the
+exact visualizing output. Left panel it
+just shows the eigen vectors. So, here
+the solid arrow shows two eigen vectors
+V1 and V2. So, before multiplication of
+A, okay, the dashed arrow shows the
+resultant after multiplication. Notice
+that the dashed arrow point in the exact
+same direction as the solid arrow. They
+are only longer. This is the defining
+property of eigen vectors. The matrix
+stretches them without rotating them.
+So, V1, of course, the lambda one,
+kindly just see here the eigen value
+lambda one is 1.38,
+meaning A stretches it by a factor of
+1.38. And the lambda two, that is V2,
+has eigen value as 3.62.
+Meaning A stretches it by factor of
+3.62.
+Both eigen values are positive and
+greater than one. So, [snorts] both
+eigen vectors get longer. And here
+towards the right panel, kindly just
+observe, it is for non-eigen vector. So,
+the solid arrow shows two arbitrary,
+that is non-eigen vectors. After
+multiplication by A1, the dash arrow
+point in different directions than the
+originals. So, the matrix both rotated
+and scaled these vectors. So, this is
+typically behavior most vectors are not
+Eigen vector. And dear friends, a matrix
+has infinitely many vectors it could act
+on, but only M special direction for an
+M into M matrix where it acts like a
+simple scalar. So, those direction
+encodes the matrix fundamental geometric
+personality. So, here yes, this exact
+code is not just a plotting vectors. It
+is visualizing the geometric meaning of
+Eigen decomposition. And here why Eigen
+vectors are fundamental in PCA or
+stability analysis, differential
+equation, and quantum mechanics. And
+that's a wrap, dear friends. Today, we
+explored one of the most elegant concept
+in mathematics and data science. We
+begin with a simple question, what
+happens when a matrix transforms a
+vector? And that questions leads us into
+the fascinating world of Eigen values
+and Eigen vectors. We have discussed
+Eigen vectors are special directions
+that remains unchanged in orientation.
+Eigen values tells us how much those
+directions stretch or shrink. And here
+the most important lesson is, yes, Eigen
+decomposition is not about matrices. It
+is about finding hidden patterns. When
+data becomes complicated, Eigen vector
+reveals the important direction. When
+data set becomes high dimensional, PCA
+uses Eigen vector to simplify them. When
+noise higher hides useful information,
+Eigen values helps separate signals from
+noise. So, that's why Eigen
+decomposition powers PCA, machine
+learning, computer vision, signal
+processing, network analysis, financial
+modeling, scientific computing. Of
+course, dear friends, every time a
+machine learning model discovers hidden
+structure in data, eigen decomposition
+is often working quietly behind the
+scenes. Hope I think so this session
+would be very much useful. Yes, dear
+friends, the true power of mathematics
+lies not in solving equation, but in
+discovering the hidden patterns behind
+them. So, thanks for watching. See you
+in the next session, dear friends. Happy
+learning.

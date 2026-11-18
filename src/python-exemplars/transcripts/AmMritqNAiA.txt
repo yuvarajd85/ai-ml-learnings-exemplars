@@ -1,0 +1,485 @@
+# Machine Learning Mathematics Ep 40 | Matrix Definiteness | Positive (Semi)Definite Matrices & AᵀA
+# https://youtu.be/AmMritqNAiA
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on Eigen decomposition, which
+is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure, that
+is a set of special direction, which we
+just to say Eigen vectors. An associated
+scaling factor, yes, that is what Eigen
+value. The two together tells us
+everything about what the matrix does.
+And yes, dear friends, here it is what a
+simple looking equation. A multiple by
+V, which equals lambda multiple by V. It
+looks small, but this single equation
+powers, yes, principal component
+analysis, noise reduction, data
+compression, graphic analysis, dynamical
+systems, yes, of course, a lot and lot.
+And this exact equation, yes, when
+matrix A multiplies with a special
+vector V, the result is simply that same
+vector scaled by this number, that is
+lambda. Here the vector V is an Eigen
+vector and the scale lambda is its
+corresponding Eigen value. Finding all
+such pairs, that is lambda and V, is
+what Eigen decomposition is all about.
+And dear friends, of course, there is a
+prerequisite also. Yes, you should be
+comfortable with the matrix
+multiplication, determinants, the null
+space, a matrix rank, and we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover, yes, what Eigen values and
+Eigen vector really mean, and why Eigen
+decomposition works only for square
+matrix, the geometric interpretations of
+stretching without rotating, how Eigen
+value reveals see
+patterns in data, the characteristic
+polynomial, finding eigen vectors using
+the null space, and matrix
+diagonalization. And last, yes, why
+symmetric matrices are the superheroes
+of linear algebra. And added, yes, we
+will see why eigen decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Based on
+the sign of eigen value, every square
+matrix falls into one of the five
+definiteness categories. So, positive
+definiteness, all the eigen value, that
+is lambda sub i, would be greater than
+zero. And for positive
+semi-definiteness, that is all lambda
+sub i, would be greater than or equal to
+zero. So, in such a case, some would be
+zero also. And when coming towards
+indefiniteness, yeah, it would have the
+mixed values of positive and negative.
+And going for negative
+semi-definiteness,
+that is all eigen value, that is lambda
+sub i, that would be less than or equal
+to zero. And yes, here also some values
+would be zero. And last but not least,
+negative definiteness, that is all eigen
+value, that is lambda sub i, would be
+less than zero. If it's why this
+definiteness matters in data science or
+machine learning, it is mainly important
+for, yes, of course, optimization. Yes,
+gradient descent requires the loss
+function's Hessian matrix, that is the
+matrix of second derivatives, to be
+positive semi-definite at the minimum.
+If the Hessian is indefinite, you are at
+a saddle point, not a minimum. And of
+course, a covariance matrix, every valid
+covariance matrix is positive
+semi-definite. Yeah, positive definite
+if the data is full rank. So, if you
+compute a covariance matrix and find a
+negative eigenvalue, something went
+wrong in your computation. And the next
+Cholesky decomposition, that is the
+first matrix factorization, which is A
+which is equal to L multiplied by L
+transpose, works only on positive
+definite matrices. It is used in Monte
+Carlo simulation to generate correlated
+random data. Okay. So, here let me just
+visualize the quadratic form, that is A
+Z which is equal to W transpose
+multiplied by A multiplied by W. Yes, we
+are going to visualize this quadratic
+form as a 3D surface for three classes
+of symmetric matrix. So, making
+definiteness geometric explicitly. So,
+here we are just going to kindly just
+observe dear friends, we are just going
+to create three subplots. One is for a
+positive definite and the next one for
+indefinite and negative definite. So,
+here we are defining the matrix and the
+titles. So, each matrix is a symmetric
+ensuring real eigenvalue orthogonal
+principal directions.
+And here we are having the grid over
+input space. So, that defines the
+vector. And yes, towards the vector,
+kindly just observe dear friends, it
+would be W which is equal to W1 and W2.
+So, yes, column wise. So, evaluate the
+quadratic form over a grid in two
+matters, that is R2. And here we are
+going to compute the quadratic form. So,
+this is the expanded form of W transpose
+multiplied by A multiplied by W.
+And for symmetric A, this simplifies
+into
+A sub 11 multiplied by x squared plus 2
+A sub 12 multiplied by xy plus A sub 22
+multiplied by y squared. And I kindly
+just observe dear friends this exact
+line. Yes, it was for a surface
+plotting. So here height is that
+represents the exact equation of W
+transpose multiplied by A multiplied by
+W. So here color map enhances curvature
+visualization. And here we are just
+going to have the eigen values in the
+title. So it displays eigen values for
+each matrix. So these directly determine
+the surface space. And here it reference
+the exact plane that is is that is equal
+to zero which provides a baseline to
+compare sign of W transpose multiplied
+by A multiplied by W. So here we have
+the exact matrix value for positive
+definite, indefinite, and negative
+definite. So let me just first of all
+evaluate the exact eigen value and then
+we visualize the
+output. So the case A, yes, it is for
+positive definite. So the matrix A which
+is equal to 2 0.5. So here the exact
+eigen value both would be greater than
+zero. And yes, the surface here it just
+makes a upward opening bowl. That is
+would be elliptical parabola and
+entirely above is that which is equal to
+zero. So here W transpose multiplied by
+A multiplied by W would be greater than
+zero. And when going on to the second
+case, yes, it is for indefinite. Yeah,
+we are having the matrix A which is
+equal to minus one and two and two and
+one. So here the exact eigen value one
+would be positive and another would be
+negative. So, here the surface would be
+saddle space, that is hyperbolic
+paraboloid. And here the exact value is
+that would crosses the plane. The W
+transpose multiplied by A multiplied by
+W would be greater than zero or less
+than zero. And towards the case, yes, we
+are just going to have the negative
+definite. Yes, kindly just observe the
+matrix A it produce minus three's minus
+0.5 and minus 0.5 and here it is minus
+two. So, yes, agent value both would be
+less than zero. And here downward
+opening bowl. That surface would be
+downward opening bowl. And entirely
+below the Z is equal to zero. And yes,
+dear friends, here our equations would
+be that is W transpose multiplied by A
+multiplied by W would be less than zero.
+Okay, let me just visualize the exact
+output. So, here each surface is shows
+the value of W transpose multiplied by A
+multiplied by W as a function of the two
+element vector, that is W which has a W1
+and W2 the whole transpose. And the gray
+plane makes the Z which is equal to
+zero. And here when coming towards this
+positive definite, kindly just observe
+dear friends, the lambda value it is 1.8
+and 3.2. And here the surface forms a
+upward opening bowl that that never
+touches or crosses the gray plane. No
+matter which directions you move in the
+W1 or W2 plane, the quadratic form is
+always positive. Next, here the
+indefinite, kindly just observe the
+lambda value it is minus 2.2 and 2.2.
+So, here the surface
+uh forms a saddle shape. It curves
+upward in some direction and downward in
+other. So, the surface crosses the gray
+plane. Kindly just observe, this is what
+the gray plane. And meaning that
+quadratic form is positive for some
+vectors and negative for others. And
+last one, it is all about a negative
+definite. So, both lambda, which is
+equal to the agent value, it is
+negative, that is -3.2 and -1.8.
+So, the surface forms a downward opening
+bowl, always below the gray scale. So,
+this is the plane, okay? And here, that
+is what below that gray plane. So, the
+quadratic form is always negative. This
+is the maximum analog of positive
+definite.
+And dear friends, the agent value
+determine the shape. The agent value
+defines the axis of the bowl, saddle,
+and the agent value determine the
+curvature along each axis. So, larger
+lambda means tighter curvature.
+That's it. So, this code turns an
+abstract algebraic object into a
+geometric one.
+So, quadratic form that surface is in
+3D. And here, agent value, curvature
+along principal axis. And here,
+definiteness by position relative to is
+it is equal to zero. So, it provides a
+direct visual proof, that is agent value
+signs always relate with global shape of
+W transpose multiple by A multiple by W.
+And furthermore, here we have one thing,
+dear friends, that is always that is A
+transpose multiple by A is always
+positive semi-definite. See, one of the
+most important fact in applied linear
+algebra, that is any matrix of form,
+yes, which is equal to A transpose
+multiple by A is guaranteed to be a
+positive semi-definite. And of course,
+positive definite also if A has full
+column rank. And here we have the exact
+proof. Kindly just observe W transpose
+multiple by S multiple by W, which would
+be Yes, of course. Here we are just
+going to have the squared norms of A
+multiple by W. That would be greater
+than or equal to zero. Because this
+exact
+the squared norm of A multiple by W is
+always non-zero. That is magnitudes
+cannot be negative. It equals zero only
+when AW, which is equal to zero. So,
+which happens only when W is in the null
+space of A. That is when A is singular.
+Difference for every covariance matrix,
+which is computed as like C, which is
+equal to 1 / n - 1 whole multiple by X
+transpose multiple by X. Here, X is the
+mean center data matrix. So, therefore
+every co-ma- covariant matrix would be a
+positive semi-definite. That is which is
+guaranteed. That is all eigen value that
+would be greater than or equal to zero.
+So, variance is never be a negative. And
+all eigen values are real valued. All
+eigen values are orthogonal. And the
+eigen decomposition is numerically
+stable. So, let me just discuss that by
+using the code. So, here it is what. So,
+dear friends, this exact script verifies
+a fundamental results in linear algebra.
+That is for any real matrix A, the
+matrix A transpose A is always symmetric
+positive semi-definite. And is positive
+definite if A has a full column rank.
+So, let me just set up the test cases.
+So, here you are going to evaluate a
+transpose multiplied by a across
+different shapes and ranks to show the
+result is universal, not dimension
+specific. So, yes, a tall matrix or wide
+matrix, a square matrix, and rank
+deficient. And here we are going to
+construct the matrix that is a transpose
+multiplied by a. So, here it defines the
+two main key properties that one it is
+all about the symmetry. Yes, of course,
+a transpose multiplied by a, the whole
+transpose which is equal to a transpose
+multiplied by a. And the second, it is
+for quadratic form. So, kindly just
+observe x transpose multiplied by a
+transpose multiplied by a whole
+multiplied by x, which is equal to a
+multiplied by x whole transpose
+multiplied by a multiplied by x. So,
+here, yes, the square norms of a
+multiplied by x, that is greater than or
+equal to zero. So, this immediately
+implies all eigen values are
+non-negative.
+And here exactly, kindly just observe
+this is what the eigen value
+computation. And here it is eigen h is
+used because a transpose a is a
+symmetric. So, here it returns real
+sorted eigen values.
+And here we are just going to have the
+non-negative checks that allows for
+small numerical error also. Yes, it just
+confirms that is uh
+lambda sub i, that would be greater than
+or equal to zero.
+And uh dear friends, kindly just observe
+this one. Yes, we are just going to
+detect the definiteness. So, here uh
+whether it is a positive definite or
+positive semi-definite, we are going to
+observe on execution. And uh here we are
+having the exact tall matrix. Kindly
+just observe. So, each cases we are just
+going to have it, and each cases we have
+a different
+matrix formation. So, let we just
+discuss that, and then we just go for
+the execution. So, in on just case A,
+that is the tall matrix. So, it has a 5
+into 3 matrix. So, likely full column
+matrix here it would be the rank would
+be 3. And of course, for A transpose A,
+it would be a 3 into 3 matrix, and
+surely it is a positive definite. And
+when just going for the B cases,
+actually it is a wide matrix, and it is
+of 3 into 5 matrix, and kindly just
+observe the rank. Actually, it would be
+less than or equal to 3. And when
+suppose going for A transpose A, yes,
+kindly just to see here, it would be a 5
+into 5 matrix, and surely it has at
+least two zero eigen value. So, it would
+be a positive semi-definite. Next, the
+case it is all about a square matrix.
+Yes, it is a 4 into 4 matrix, and here
+if it is a full rank, it should be a
+positive definite, or otherwise, it
+would be a semi-definite. So, kindly
+just keep keep it in mind. And the last
+case, yes, it is a rank deficient
+matrix. And here, kindly just observe,
+dear friends. Here, we are just having a
+2 by 3 matrix, and yes, the rank it
+would be less than or equal to 2. And
+when going on for A transpose A, yes, it
+has at least one zero eigen value. That
+is positive semi-definite functionality.
+And here we are just going to have a
+relation with the singular values also.
+Yes, dear friends, the eigen values of A
+transpose A are kindly just observe
+lambda sub I which is equal to sigma sub
+I the square. And here where sigma sub I
+are a singular values of A. So, that's
+always a non-negative and here zero
+Eigenvalue would be equalized to zero
+singular value which it just implies
+that rank deficiency. And here we have
+the rank relationship. So, yes, dear
+friends, rank of A transpose A which is
+equal to rank of A.
+So, number of non-zero Eigenvalue would
+be equal to rank of A. So, let we
+execute. So, as here we have already
+discussed, so kindly just see here, dear
+friends. So, yes, here we have the tall
+matrix. So, the shape of matrix it is 5
+into 3 and here the rank is 3. And when
+on just evaluating the A transpose A,
+yes, the shape is 3 into 3 and the
+Eigenvalue, yes, all the Eigenvalues are
+positive. And yeah, it is a category of
+positive definite. And when just going
+for this
+wide matrix, kindly just observe, we
+just have 3 into 5 and the exact rank,
+yes, it is exactly 3. And when going for
+the Eigenvalue, kindly just observe,
+dear friends, we have few zeros also.
+That is less than or equal to zero. And
+when just going on towards this square
+matrix, kindly just observe, dear
+friends. So, here, yes,
+it is a 4 into 4 matrix and here we have
+the
+rank, it is also 4 and all the exact
+Eigenvalues are positive. And as it is a
+full rank, we just get
+positive definite functionality. So, if
+it is not a full rank, we just get a
+semi definite, okay? So, here it is a
+full rank functionality. And last but
+not least, the rank deficiency. And
+kindly just observe the rank, it is two.
+And here we have an Of course, at least
+one zero value each in value here it is.
+So, it is a positive semi definite
+functionality. Dear friends, kindly just
+observe in every test case the eigen
+value of this A transpose A are
+non-negative, confirming the proof. When
+A is full column rank, all eigen values
+are strictly positive. When A is rank
+deficient, some eigen values are exactly
+zero. And here, the connection towards
+the variances in PCA, the eigen values
+of covariant matrix represents the
+variance captured by each principal
+component. A negative variance would be
+physically meaningless. So, it would be
+like saying as the data varies by minus
+three unit or something like that. So,
+here the A transpose A structures
+ensures this never happens. And one
+thing, dear friends, not all symmetric
+matrices are positive semi definite.
+So, from this the code empirically
+confirms that A transpose A is always
+symmetric, positive semi definite, and
+it is positive definite if rank A which
+is equal to number of columns. And yes,
+dear friends, the final takeaway
+functionality, surely I have to specify
+this. Yes. So, here X transpose multiple
+by A transpose multiple by A multiple by
+X which is equal to Yes, double norms of
+A multiple by X that would be greater
+than or equal to zero. So, this identity
+is the entire reasons the result holds.
+And it underpins a large portion of
+numerical linear algebra and
+optimization. We have discussed Eigen
+vectors as special directions that
+remains unchanged in orientation. Eigen
+values tells us how much those
+directions stretch or shrink. The
+characteristic equation helps us uncover
+Eigen values and Eigen vectors emerges
+from the null space of shifted matrices.
+And here the most important lesson is
+yes, Eigen decomposition is not about
+matrices. It is about finding hidden
+betas. When data becomes complicated,
+Eigen vector reveals the important
+direction. When data set becomes high
+dimensional, PCA uses Eigen vector to
+simplify them. When noise higher hides
+useful information, Eigen values helps
+separate signals from noise. So, that's
+why Eigen decomposition powers PCA,
+machine learning, computer vision,
+signal processing, network analysis,
+financial modeling, scientific
+computing. Of course, dear friends,
+every time a machine learning model
+discovers hidden structure in data,
+Eigen decomposition is often working
+quietly behind the scenes. I hope I
+think so this session would be very much
+useful. Yes, dear friends, the true
+power of mathematics lies not in solving
+equation,
+but in discovering the hidden patents
+behind them. So, thanks for watching.
+See you in the next session, dear
+friends. Happy learning.

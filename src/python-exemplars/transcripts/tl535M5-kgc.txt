@@ -1,0 +1,384 @@
+# tl535M5-kgc
+# https://youtu.be/tl535M5-kgc
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as uh PLT. And
+dear friends, of course, we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And yes, dear
+friends, we have included the warnings.
+We have this imports Python's built-in
+warnings modules also which allow
+control over warning messages generated
+during execution. And yes, we have just
+included the default parameters. Yes,
+for
+the font size and enabling the grids and
+setting the transparency of the grid
+lines to 30%. And of course, the font
+size for all text in plots to 12 points.
+Yes, and yeah, closing the dictionary
+and applies all the configuration
+updates. We have just Let me include
+this and execute this. Yes, of course,
+we have the version as NumPy version
+with 2.3.5.
+Okay, now let me just move on to a full
+inverse. What is this full inverse? Yes,
+dear friends, just now we have discussed
+that is a full inverse means A inverse
+multiplied by A, which is equal to A
+multiplied by A inverse, which is equal
+to I. So, there are two conditions for a
+matrix to have a full inverse. One, of
+course, it is a square, and the second
+one, it is all about a full rank.
+Dear friends, every square full rank
+matrix has an inverse, and every matrix
+has a
+full inverse is square and full rank.
+By the way, I am using the term full
+inverse here to distinguish it from the
+next two possibilities. That is, you
+would typically refer to the full
+inverse simply as an inverse matrix.
+Okay, now let me just move on to this
+code. So, yes, dear friends, this exact
+code it just going to made it use of
+computes the inverse of 2 into 2 matrix
+using both the closed-form formula and
+NumPy. So, that verifies their
+equalness. Okay, starting with this
+code, kindly just observe. Yes, we are
+just going to assign an
+value of A. Okay, so that is A matrix 1
+{comma} 4 and 2 {comma} 7, the same
+thing. Okay, and we are just going to
+assign an entries. Entries are such A
+{comma} B {comma} C {comma} D as here A
+of 0 0 and A of 0 and 1 and 1 0 and
+We are just going to have A matrix, and
+this one it would be as like A B C D,
+and kindly just observe. This would be
+as like assigning 1 4 2 and 7.
+So, A of 0 0, A of 0 1, and A of 1 0,
+and A of 1 1. Okay, so this is what.
+Okay, now let me just
+define the determinant A. Okay, so here
+it is specified as like A multiplied by
+D minus B multiple by C. Yes, of course.
+So, determinant of A which is equal to
+AD minus BC.
+So, here of course 1 into 7 minus 4 into
+2 which is equal to 7 minus 8. Here it
+is minus 1.
+And dear friends, kindly just keep it in
+mind. If the exact determinant is not
+equal to zero, of course the matrix is
+invertible.
+And of course, if it has an equivalent
+towards 1, yes the magnitude 1, that is
+area are preserved.
+And we just
+if we make use of an negative sign, yes
+it seems to be as like
+an orientation of flip.
+So, this is what I need keep it in mind.
+Okay, now let me just moving on towards
+manual inverse formula. Here we have and
+next we are just going to have our
+NumPy. Okay, first let me just discuss
+about this manual
+inversion formula. So, kindly just
+observe 1 by determinant of A multiple
+by with this matrix A.
+So, what it happens? Of course, we
+already know about the formula. Anyhow,
+I just let you know again. So, the
+formula here is
+A inverse which is equal to 1 divided by
+AD minus BC and here with a matrix of D
+minus B
+minus C and A. So, this is what the
+exact formula. So, let me just
+substitute our value here. So, yes A
+inverse which is equal to 1 by
+Of course, we just
+when we just make it on to this
+determinant, we just got minus 1. Okay,
+so multiply by 7 minus 4 and minus 2 1.
+Directly we are just substituting this
+and here what we just get minus 7 4
+2 and minus 1. Of course, this is what's
+the exact result. Okay, dear friends,
+now let me just make use of this
+inverse by using the NumPy
+functionalities. And here dear friends,
+it just uses a general purpose
+algorithm. What is it? Yeah, it is all
+about the LU decomposition. Okay, so LU
+decomposition and here it produces the
+same result by using the up to floating
+point precision. Okay. So, that is what.
+So, let me just check wait when on
+execution. And here we want to make use
+of the formula. Yes, we are just using
+all close for confirming both methods
+agree numerically and let me just expect
+the true and wait we are just going for
+a verification of this inverse property.
+So, here kindly just observe A and A
+inverse manually.
+So, it is going to result as like of
+course A A inverse which is equal to yes
+of course it is an identity. Let me just
+to see this. Okay, so yes let I just
+execute. So, what we have just discussed
+before. So, this is what.
+Kindly just see. So, the A what we had
+is
+1
+4
+and 2 and 7. Okay, and next we have just
+made the manual functionality. And here
+we just got the A inverse and here we
+just got the A inverse as like
+minus 7 4 2 and minus 1. That is what
+here we just got.
+And to the same by using this NumPy also
+we just got the same. And whether it is
+matching, of course it is matching. And
+what is the exact output? Yes, it is a
+resultant. So, the exact verification
+here it is A * A inverse, which is equal
+to I.
+So, dear friends, here why this exact
+equation works. Dear friends, kindly
+just observe one thing. We have a
+matrix. So, again I just go above,
+kindly just observe. So, here we have a
+matrix as like this one. Here it is as
+like a D - B
+- C and A. So, this is what the exact
+inverse functionality. And here it is an
+educate matrix. Because dividing by
+determinant rescales it to a exact undo
+of A.
+And here what is the exact geometric
+meaning is this A, yes, it seems to be
+as like it transforms the plane. And
+here we just get the determinant A, yes,
+it is a area scaling factor. And to the
+last, A inverse, of course, it reverses
+this exact transformation.
+And dear friends, last but not least,
+simple in
+functionality, let I just specify, yes,
+for a 2 * 2 matrix.
+A inverse, which is equal to 1 by
+determinant of A * adjoint of A. Okay?
+So, this is the exact formula. Okay? But
+this closed formula exists only for
+small matrix. Yes.
+It does not scale well to higher
+dimension.
+And when we just go for a practical
+note, kindly just observe, dear friends,
+if you are using for a large matrix,
+always use numerical methods. Numerical
+methods of course we have just used in
+NumPy now. So, this exact method kindly
+just go with this.
+Okay? Always use this and it would just
+better solve the system. And explicit
+formula becomes only computationally
+expensive and numerical unstable. Okay?
+Yes, dear friends. So, I think this
+would be very much easy. Let me just
+move on towards uh Of course, I just
+want to specify one more important
+thing.
+This exact code would just demonstrate
+the defining property of a singular
+matrix
+and contrast the non-existence of a true
+inverse with the existence of a pseudo
+inverse.
+Okay? So, that is a very important
+functionality. So, let me just start
+discussing with the code.
+So, dear friends, kindly just observe
+here we have our singular matrix B,
+which is equal to 1 4 2 and 8. Row 2,
+which is equal to 2 multiplied by row 1.
+Is it yes or no? So, kindly just see
+here 1 4 2 and 8.
+This exact row 2 is twice the times of
+row 1. So, here rows are linearly
+dependent. So, here this exact matrix is
+a rank deficient. Now, let me just
+define the exact determinant
+of uh
+B. Okay? And kindly just observe dear
+friends, here we are just going to have
+our uh value as B of 0,0 into B of 1
+into 1 minus B of 0,1 into B of 1,0. So,
+yes, let me just assign the exact value
+and here our B is
+1 4 2 and 8. So, when on just
+multiplying 1 into 8 minus
+4 into 2. So, here of course 8 minus 8
+it is 0. So, here determinant of B which
+is equal to 0.
+Implicates. Yes, B is singular and
+non-invertible.
+Of course, it is defined. Okay, now let
+me just move on to have the rank, okay?
+And kindly just observe dear friends
+here. Don't get confusion. The rank here
+it is
+one.
+Instead of two, here it is one because
+the column lies in one-dimensional
+subspace.
+So, transformation collapses the plane
+onto a line. Okay, now let me just
+attempt an inversion. So, up on
+attempting an inversion there would be a
+possibilities of an rising an error. Of
+course, here it just makes an rising an
+error whether it is a singular matrix or
+not because of course kindly just
+observe one thing dear friends. Whenever
+we just go for a no matrix B inverse
+exists in such that B multiplied by B
+inverse which is equal to I. Okay, and
+here when you just go towards this
+pseudo inverse that is
+Moore-Penrose inverse [snorts]
+functionalities, okay? We are just going
+to discuss it further but anyhow, let I
+specify this. This is what the pseudo
+inverse and this one always exists even
+for a singular matrix. Okay, and it is
+mainly computed for
+singular
+value decomposition. That is for SVD. We
+will discuss it later in coming
+sessions. Okay, and when on just making
+towards the structure kindly just
+observe your friend. For rank one, of
+course, we have our rank one matrix. So,
+this one here, the pseudo inverse
+effectively inverts along the non-zero
+singular directions. So, it ignores the
+null spaces, okay? And when we just make
+use of this one, product of Okay? So,
+product of BB+ this exact line. Kindly
+just observe. It is going to result and
+not the identity matrix. Why? Because
+kindly see here this one B into B
+multiplied by B inverse, which is equal
+to I. But here, B multiplied by B+, that
+is the product in identity matrix.
+Actually, this going to give us P. This
+is a projection matrix. Okay? And here,
+projection interpretation always Yes, P,
+which is equal to B multiplied by B+.
+This is actually here projects any
+vector onto a column space of B.
+And in this case, of course, our column
+space is a single dimension. So, here
+single dimension, it just gives a span
+of 1, 2.
+And kindly just see here, it is of
+course as column column space of single
+dimension. And so, any vector is
+projected onto this line. Okay, before
+going further, let I just execute the
+code and kindly just observe. Yes, dear
+friends. So, here this is our matrix B.
+So, 1, 4 and 2, 8. And yes, here we have
+our determinant is equal to zero. And
+kindly just observe, the rank is one.
+Yes, column two. Of course, we have two
+columns, but anyhow. And here, when
+NumPy rises, we are just going to have a
+singular error as a singular matrix. And
+towards the pseudo inverse
+still exist and produce B
+multiple by B plus. So, here we just
+have the exact output as like 0.2, 0.4,
+and 0.4, and 0.8. Which is not the
+identity.
+But, it is the orthogonal projection
+onto the column space of this B.
+The pseudo inverse get as a close to I
+as possible for a singular matrix.
+So, here, dear friends, when we just go
+for true inverse, if it is exist, we
+have already discussed A multiple by A
+inverse, which is equal to I.
+But, when on specifying about the pseudo
+inverse, A multiple by A projection,
+that is which is projection on column
+space. So, here, according to the exact
+example, we have the matrix B, which it
+comprises with the 2D space onto a line.
+And this information is lost, that is
+not recoverable. But, when we just
+specify this B plus, yes, it provides
+the best possible inverse, and it
+results
+least square solution, and cannot
+reconstruct lost component.
+Why does exactly, of course, pseudo
+inverse is essentially when solving
+undetermined or over determined the
+system, and performing least square
+regression?
+And of course, we are working with the
+rank deficient data.
+Dear friends, this exact code
+demonstrated, of course,
+matrix with zero determinant, of course,
+and reduced rank,
+and no inverse.
+And here, when we just had a failure,
+yes, of course, by using a numpy, we can
+identify and here existence of pseudo
+inverse B plus, that is also we have
+discussed. And interpretation with B
+multiplied by B plus as a projection
+operator and it is not a identity. That
+is also we have discussed it yes. So,
+hope yes, with this session, we unlock
+the concept of matrix inverse. Dear
+friends, existence depends on rank.
+A square full rank matrices has a full
+inverse. That is A inverse A, which is
+equal to A A inverse, which is equal to
+identity. So, I think uh this exact uh
+session it would be useful. So, kindly
+like this video, share it with someone
+starting their data science or machine
+learning or generative AI journey and
+subscribe to Demystify with Ajay for
+more such real-world explanation. Thanks
+for watching, dear friends. See you in
+the next video.

@@ -1,0 +1,280 @@
+# 5D4sAWxL9fo
+# https://youtu.be/5D4sAWxL9fo
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as uh PLT. And
+uh dear friends, of course we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And uh yes, dear
+friends, uh we have included the
+warnings. We have this import Python's
+built-in warnings modules also, which
+allow control over warning messages
+generated during execution. And yes, uh
+we have just included the default
+parameters. Yes, for
+the font size and enabling the grids and
+setting the transparency of the grid
+lines to 30%. And of course, the font
+size for all text in plots to 12 points.
+Yes, and uh yeah, closing the dictionary
+and applies all the configuration
+updates. We have just Let me include
+this and execute this. Yes, of course,
+we have the version as NumPy version
+with 2.3.5.
+And let me just uh discuss on this
+numerical stability of the inverse. Dear
+friends, matrix inversion is numerically
+fragile. And here, the conditional
+number, that is K of A, which is equal
+to sigma max divided by sigma min, That
+measures instability. And here large K
+means the matrix is ill-conditioned and
+it is inverse in unreliable. Let me just
+discuss about this Hilbert matrices. And
+dear friends, here this exact code it
+studies this Hilbert matrices, a
+classical example of extremely numerical
+ill-conditioned and show how inversion
+becomes unreliable as size increases.
+Okay, let me just discuss the code one
+by one. So, kindly just observe. We are
+just going to have a loop over matrix
+sizes, okay? And here the sizes are 3 5
+8 10 13 and 15. So, these are for test
+the progressively larger Hilbert
+matrices HN, okay? And let me just
+define a Hilbert matrices equation H I
+sub IJ, which is equals 1 by I plus J
+minus 1. And dear friends, H is for
+Hilbert of N. And on defining this
+Hilbert of N, and yes, we have an
+example of 3 into 3 matrix. Kindly just
+observe, dear friends. And matrix here
+it would be this is 1 1 by 2 1 by 3 and
+again 1 by 2 1 by 3 1 by 4 1 by 3 1 by 4
+and 1 by 5, okay? And here one more
+thing we have just defined a conditional
+number and this defines the exact
+functionality. Condition number, it just
+gives K of H, which equals norms of H
+into norms of H inverse, okay? So, this
+measures sensitivity to numerical
+errors. And kindly just observe if the K
+largest K increases, yes, there would be
+an unstable computation. And uh yeah, we
+are just going to have the rank. And
+yes, theoretically, of course, we all
+know
+rank of
+H. We are just going to have the N
+value. And here, but numerically, may
+appear the deficient for large N. That
+is a large size of N. And next, we are
+just going to have an inversion and
+error check. Okay? So, what here it is
+measuring it Kindly just observe this
+exact equation. So, H at H inverse minus
+identity matrix. And this with a
+Frobenius norms specified
+mathematically. And Frobenius norms of
+H multiplied by H inverse minus I. And
+this one, ideally, zero. And dear
+friends, kindly just keep it in mind, in
+the practice, it just grows rapidly with
+the value of N. And towards the last, we
+are just going to have a written
+a tabular formula. Okay? So, we are just
+going to have the first one as a matrix
+size. This is what the N. And the next
+one, this condition, it is for condition
+number. And third one for rank. And the
+last one, any error, that is deviation
+from identity. Okay, let I execute and
+let me just to see what is the output.
+So, kindly just observe, dear friends,
+the conditional number grows
+astronomically for N which is equal to
+3.
+It just grows from, of course, 10 to the
+power of 4. We're not just going towards
+Kindly just observe this N N is equal to
+13. So, N is equal to 13, this
+astronomically we have 10 to the power
+of 70. And at N is equal to 13. So, when
+we just identify this error, H H inverse
+minus identity under Frobenius norms,
+okay, is already significant and beyond
+N13, okay? NumPy considers the matrix
+rank deficiency. And here one thing
+kindly just see, this there is a
+functionality is called rule of thumb.
+Each power of 10 is the condition number
+cost roughly one digit of precision in
+the inverse. So here a matrix if we just
+say K towards 10 to the power of 16,
+yeah, it is near the limit of 64-bit
+floating point. It's effectively
+singular. And here our production advice
+kindly just see, avoid explicit matrix
+inversion when possible. And here
+instead of this one and kindly use see
+actually here
+NumPy linear algebra {dot} solve of a
+{comma} b. Use this instead of
+making as linear algebra of inverse of a
+at b. Because it uses LU decomposition
+internally, which is both faster and
+more stable. And for uh least square
+kindly make use of np.linalg.lstsq
+of x {comma} y instead of don't go for
+this x transpose x the whole inverse and
+x transpose y. Don't go for this
+directly. And last but not least, uh
+dear friends,
+uh for eigen problem use QR
+decomposition, QR based iterative
+methods. And uh dear friends, kindly
+just
+uh one thing I just want to let you
+know, dear friends.
+Uh see, with this uh Hilbert matrices
+are problematic because columns are
+nearly linear dependent. And here
+extremely small singular values and
+poorly conditioned by us. And when we
+just go towards the resultant, kindly
+just see one thing, if we have uh
+minimal small size of matrix, yeah, the
+conditional number would be manageable.
+Conditional number would be manageable
+and when we just think about the error,
+of course, it would be nearly zero. And
+if we just go with a large number of
+size of a matrix, of course, conditional
+number would be enormous and error would
+be significant. So, kindly just keep it
+in mind, Hilbert matrices are
+theoretically invertible, practically
+unstable. And when you just go towards
+this practically, kindly avoid explicit
+inversion for ill-conditioned matrix. As
+I have already specified, yes,
+prefer towards this functionalities,
+okay? So, prefer this one rather than
+going for this one. And if it is an SVS
+SVD-based method, regularization, kindly
+use ridge regression. And yes, dear
+friends, this exact code demonstrate
+rapid growth of conditional number in
+Hilbert matrices and breakdown of
+numerical inversion despite theoretical
+invertibility. And the important of
+condition in numerical linear algebra.
+Okay, let me just visualize the Hilbert
+matrix and yes, it inverses and their
+product revealing the hallmark behavior
+of ill-conditioned system. Let me just
+see whether a small or well-behaved
+inputs leading to extremely large
+inverse entries or not, okay? So, yes,
+here kindly just observe we are just
+going to have an
+a value that is the end which is equal
+to five and here, of course, the H which
+is equal to Hilbert of N. And this one,
+yes, it is a 5 into 5 Hilbert matrix and
+when on just going for H inverse, yes,
+it is a numerical inverse and towards
+the
+product, yes, should approximately
+identity. Now, let me just visualize the
+structures. So, here we are just going
+to have the visualization and we are
+just going to have a three panels. One,
+yes, H, second one H inverse, and third
+one product of H and H inverse. And let
+me just have the
+panel A. Okay, so the panel A yes, it is
+just going to have uh values of
+0.04 to 1. And yes, a smooth decay away
+from
+top left. And of course, it appears
+well-behaved and uh structured. And when
+in just going for this H inverse, yes,
+the values are very large in magnitude
+and it just going to range with
+minimum and maximum. So that is what. So
+typically we are just going to have
+order of 10 to the power of 2 to order
+of 10 to the power of 5. Okay, let me
+just have that. And last one, the
+product of H and H inverse. Okay, and
+let me just have the exact matrices. And
+of course, we are just going to have
+that expectation. Let me just have the
+expectation here.
+So it would be as like identify of five.
+So 1 0 like that 0 1 and 0 0 1. So like
+that it would goes on. Okay, and yes, it
+is close to identity but not exact
+because due to floating point errors
+would be that. Okay, so let me just
+print the diagnostic values ranges and
+let me confirm whether
+what is the exact values of H, H
+inverse, and to the product of H and H
+inverse. Okay, so let me just execute
+and we just to see. So kindly just
+observe dear friends. Here the value of
+the visualization of H, we can
+able to view an smooth gradient. Smooth
+gradient is in the sense of course, it
+is a structured and a low variation. And
+when on just
+visualizing this H inverse, of course,
+we have a high contrast and of course,
+there is an oscillation also. So, this
+would mean towards instability and
+amplification. And last, of course, the
+product of H and H inverse. Kindly just
+observe, it is nearly identity and
+approximate of correctness. So, with
+this, yeah, we can just conclude that
+ill conditioning manifest
+as large inverse value and sensitivity
+to error. So, even the matrix is small,
+even the matrix is small, our structure
+appears simple. And dear friends, here I
+just want to summarize one thing. The
+code demonstrate the deceptive
+simplicity of Hilbert matrices, the
+dramatic growth in inverse magnitude,
+nearly identity product we have just
+seen. So, that despite instability and
+direct visual evidence of conditioning
+effect. Hope I think this exact session
+it would be useful. So, kindly like this
+video, share it with someone starting
+their data science or machine learning
+or generative AI journey, and subscribe
+to Demystify with Ajay for more such
+real-world explanation. Thanks for
+watching, dear friends. See you in the
+next video.

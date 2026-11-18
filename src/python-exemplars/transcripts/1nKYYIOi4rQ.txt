@@ -1,0 +1,248 @@
+# 1nKYYIOi4rQ
+# https://youtu.be/1nKYYIOi4rQ
+
+Happy morning dear friends. Here's Dr.
+Welcome to demystify with Ajay. Dear
+friends, today in this session we are
+just going to discuss on orthogonal
+matrix. In linear algebra, the
+foundation is orthogonality. And let me
+just begin by understanding one of the
+most special objects in mathematics that
+is orthogonal matrix. A matrix that can
+rotate data without stretching it. A
+matrix that preserves distance, angles,
+and geometry. A matrix whose inverse is
+simply its transpose.
+Think about that for a moment. Most
+matrix distort information.
+Orthogonal matrix preserves it.
+So, we will discuss why the equation of
+course Q transpose Q which is equal to
+one. This is one of the most important
+equation in numerical computing.
+Then we will just move on to the world
+of
+QR decomposition. A powerful technique
+that transforms any matrix into A equals
+QR.
+Where Q captures pure geometry and R
+captures the structure.
+And here the QR decomposition quietly
+powers
+least square regression, matrix
+inversion, numerical optimization,
+eigenvalue algorithms, scientific
+computing. But that's only the
+beginning. Because once we understand
+orthogonality and the QR decomposition,
+we are ready for one of the greatest
+idea in all of applied mathematics. So,
+before going on to the discussion, so
+let I just include the necessary
+libraries. And here we have the NumPy.
+Yes, NumPy provides efficient numerical
+array operations and there's a
+foundational for linear algebra
+computation. And here for
+Matplotlib, yes it is used for creating
+visualization such as graphs and figure.
+Next we just uh,
+the warnings. Yes, dear friends,
+uh, this controls over warning message
+generated during execution. And here the
+line begins updating Matplotlib runtime
+configuration parameter using a
+dictionary. And yes, this exact, uh,
+sets the default size of all figures to,
+uh, 8-in wide and 5-in tall. And it
+enables the grid grid lines on all plots
+by default. And here we have an, uh,
+transparency of grid lines to 30% making
+them subtle and, uh, less visual
+dominant. And of course, to the last,
+yes,
+uh, sets the default font size for all
+text in the plots to 12.
+And dear friends, of course, we have
+just included that,
+uh, version. Yes, it prints the
+installed versions of NumPy by accessing
+the versions attribute. Okay? So, let me
+execute and, uh, see what is the exact
+uh, version. Yes, here NumPy version, it
+is a 2.3.5.
+Dear friends, we are here to discuss
+Gram-Schmidt procedure. Dear friends,
+this Gram-Schmidt transforms any matrix
+with, uh, linearly independent columns
+into an orthogonal matrix. So, it works
+column by column left to right. And here
+for each column, if we just specify VK
+of the input matrix, yes, here it just
+orthogonalize, that is, remove the
+projection of VK onto all previous
+orthogonal columns. Orthogonal columns
+like, uh, from Q1 to QK-1.
+So, here the exact equation, it is
+specified V sub K star, which is equal
+to, this is star, okay? V sub K star
+equals, uh, V sub K minus summation of
+J, which is equal to 1 to K-1, of V sub
+K transpose multiplied by Q sub J whole
+multiplied by Q sub J. So, this is the
+exact equation for orthogonalizing. And
+the next for normalizing, yes, this is
+just repeated orthogonal vector
+decomposition. Yes, we have already
+discussed that that applied to each
+column relative to all previous column.
+Yes, kindly just observe it is
+Q sub K which equals V sub K star
+divided by norm V sub K star. Let me
+just discuss this procedure by using the
+code. So, here exactly this is what the
+function definition. We are just going
+to create a function for Gram-Schmidt,
+okay? And here we have the input V.
+Yeah, a matrix whose columns are
+linearly independent vector. And we are
+just going to have our output Q. So,
+whose columns are Yes, of course,
+orthogonal and normalized. So,
+orthogonal in the sense mutually
+perpendicular and normalized of course,
+it is unit length. So, let me just
+initialize one by one. Yeah, here we are
+initializing M. Yeah, it is the number
+of rows. So, mainly for dimension of
+vectors. And the next N, number of
+vectors. And here kindly just observe,
+dear friends, we have the matrix that
+will store orthogonal vectors. And here
+we just start the algorithm loop. And
+kindly just observe, dear friends, this
+process each column of V one at a time.
+Let me just start with the step A. Yeah,
+it is the original vector and it is V
+star. So, it extracts the Kth column of
+V and it converts to float to ensure
+numerical stability. And next step B, it
+is to subtract that is remove components
+along previous basis vector. And dear
+friends, this is the exact
+orthogonalization step. And
+mathematically, we have already
+discussed. Kindly just observe. So,
+mathematically, V sub K star, which is
+equal to V sub K minus summation of J,
+which is equal to 1 to K minus 1 of V
+sub K transpose Q sub J multiplied by Q
+sub J. Dear friends, each term subtracts
+the projection of VK onto this QJ. After
+this loop, VK sub K star is orthogonal
+to all previous QJ. And here one
+important details, dear friends, the
+projection uses this one for original
+vector. And kindly just observe, it is
+not a star. So, this is the exact
+classical Gram-Schmidt formulation.
+Okay, next we just going for
+normalizing. So, here we just converts
+VK sub K star into unique vector. And
+yes, mathematically, we have already
+specified. Yes, Q sub K, which is equal
+to VK sub K star divided by norms of VK
+sub K star. And here, we just get the
+resultant Q. So, the matrix Q has
+orthonormal column. And here we have a
+test case. Yes, we just want to have the
+exact test case. We have 3 into 3 matrix
+with a linearly dependent column. And
+observe, dear friends, we are just going
+to have our orthonormality check. That
+is the QGS, which is equal to this is
+what our function. We are just going to
+call, and this should equal the identity
+matrix. And kindly just observe, dear
+friends, we have the column column
+norms, and each column should have the
+norms that is equal to I. The algorithm
+construction Q is such that the span of
+Q, which is equal to span of V, but with
+a better structure. That is
+orthogonality simplifies computation and
+numerical methods become more stable.
+So, let I just execute this and let me
+just see what is the resultant. So,
+kindly just observe, dear friends. This
+is what our input and here we are having
+our Q, the Gram-Schmidt, and once on
+Gram-Schmidt successfully orthogonalize
+the input, that is Q transpose Q, which
+is equal to an identity. And all columns
+norms are exactly one. The first column
+of Q is simply V1 normalized. The second
+column of V2, yes, with its projection
+onto Q1, that is removed, then
+normalized. The third column of that is
+V3 with projection onto both the Q1 and
+Q2 removed, then normalized. Dear
+friends, this classical Gram-Schmidt is
+a numerically unstable for large
+matrices. The repeated subtraction
+accumulation rounding errors. So, in
+practice, so kindly just observe here.
+And here in practice, actually, Python
+always use this
+linear algebra. dot QR. That is uses
+Householder reflection, which are
+algebraically equivalent but numerically
+superior. So, here Gram-Schmidt remains
+the right way to understand QR
+decomposition. So, yes, dear friends,
+this exact
+code just implements use classical
+Gram-Schmidt, which is conceptually
+simple but numerically unstable for
+nearly dependent vectors. So, a more
+stable variant is modified Gram-Schmidt.
+So, where projections are computed using
+the updated vectors here. So, yes, this
+exact code takes linearly independent
+vectors, remove mutual component,
+normalize them, and produce a
+orthonormal basis. So, let's summarize,
+dear friends. So, here today we have
+discussed about Gram-Schmidt. This
+transforms a non-orthogonal matrix into
+a orthogonal one by iteratively
+subtracting projection of each column
+onto all previous orthogonalized column,
+so then normalizing. So, it is the
+conceptual foundation of QR. Though
+production code uses the most stable
+Householder reflections. And let's wrap
+today's session, dear friends. So, uh we
+started with orthogonal matrices and
+discovered something remarkable. A
+transformation can rotate data without
+changing its length, without changing
+its angle, without destroying its
+geometry. We learned why this Q
+transpose multiple by Q, which is equal
+I, makes orthogonal matrix computational
+superheroes. Dear friends, as we
+continue our journey, we will begin to
+notice that many machine learning
+algorithms are simply clever ways.
+So, behind every recommendation engine,
+behind every PCA visualization, behind
+every compressed image, behind every AI
+model, there is linear algebra quietly
+doing the heavy lifting. The goal of
+mathematics is not to memorize equation.
+The goal is to discover the hidden
+structure behind data and the world
+around us. Thanks for watching, dear
+friends. Happy learning.

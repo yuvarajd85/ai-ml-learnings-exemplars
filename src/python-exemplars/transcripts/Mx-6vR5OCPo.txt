@@ -1,0 +1,261 @@
+# Mx-6vR5OCPo
+# https://youtu.be/Mx-6vR5OCPo
+
+Happy morning dear friends. Here's Dr.
+Rajenta. Welcome to demystify with Ajay.
+Dear friends, today we are going to
+discuss on matrix inverse. The matrix
+inverse is central to solving matrix
+equations in practical applications
+including fitting statistical model to
+data. And here we have a very big
+question. Why do we even need to invert
+matrix? we need to cancel a matrix in
+order to solve problems that can be
+expressed in the form of ax which is
+equal to b. So here where a and b are
+known quantities and we want to solve
+for this x difference actually here we
+start with a equation. So here we just
+start with the equation as like a x= b
+and we left multiply both the sides by a
+inverse. So here it is in the sense as
+like a inverse and here to an a inverse.
+So giving a inverse a x=
+a inverse b. Since a inverse * a equals
+to an identity, we get iix which is
+equal to a inverse b. Finally, yes, the
+identity matrix leaves a vector
+unchanged and resulted with x=
+a inverse b. Dear friends, that seems
+really straightforward, but computing
+the inverse is deceptively difficult.
+Yes, in this session we are just going
+to explore when an inverse exist, why
+some matrix can never be inverted, the
+famous 2 into two inverse shortcut, left
+inverse and right inverses, the more
+Penrose pseudo inverse that powers
+machine learning and leaves square
+regression. And most importantly we will
+understand why data scientists often
+avoiding computing matrix inverse
+directly
+even though they are mathematically
+beautiful. And dear friends by the end
+of the session you will see matrix not
+as rows and columns but as a tool that
+transforms data images geometry and
+entire AI system. Let me just discuss
+one by one. Okay, before going on to the
+discussion, let me just include the
+necessary libraries. Import the numpy
+library and assign it as like alias np.
+And uh next it is for mattplot lib. Yes,
+dear friends, this imports the plotting
+module pipot from mattplot lib and
+aliasis as uh plg. And dear friends, of
+course, we are also including this
+import hillbird. Yes, this is exact
+functions to create hilbert mattresses
+for numerical analysis and stability
+testing. And yes, dear friends, we have
+included the warnings. Yes, this imports
+Python's built-in warnings modules. So,
+which allow control over warning
+messages generated during execution. And
+yes, we have just included the uh
+default parameters. Yes, for uh the font
+size and enabling the grids and uh
+setting the transparency of the grid
+lines to 30%. And of course uh the font
+size for all text in plot to 12 points.
+Yes. And yeah, closing the dictionary
+and applies all the configuration
+updates. We have just let me include
+this and execute this. Yes, of course we
+have the version as numpy version with
+2.3.5.
+Okay, dear friends, let me just start
+the matrix inverse. Uh, dear friends, of
+course, here we have already discussed.
+Yes, a inverse multiplied by A equals A
+multiplied by A inverse equals the
+identity matrix.
+Dear friends, the inverse matrix
+completely cancels the original matrix.
+And here I have already specified.
+Kindly just observe if this is a matrix
+analog of a scalar inverse 3 into 3
+inverse which is 3 into 1 by3. Yes of
+course it just gives resultant with one.
+See here dear friends when on just
+making condition for invertibility
+we have to just think on four important
+functionalities. Yes. whether it is full
+inverse or whether it is left inverse or
+whether it is a right inverse and last
+but not least a pseudo inverse
+and here we are just going to discuss
+all these things one by one and the
+common thread here is it is all about
+rank determines invertibility
+when reduced rank of course it is a
+singular matrix cannot be exactly
+inverted method. Okay. So when on just
+starting with here why element wise
+inversion does not work dear friends
+here I have already specified. So kindly
+just observe a natural first guess
+invert each element individually. So
+this fails because matrix multiplication
+is not element wise. And dear friends,
+here we are just going to discuss about
+the code that demonstrates a common
+misconception that is taking the
+reciprocal of each matrix element is not
+the same as computing the matrix
+inverse. Okay. So let me just start
+here. So yes dear friends here we are
+just defining a matrix A. Yes, as like
+an 1A 4 and 2a 7. And here I just want
+to provide the definition of elementwise
+reciprocal. So element-wise reciprocal
+yes of course uh how this produce is of
+course we have our matrix A as like 1A 4
+and 2A 7 and when on just making towards
+reciprocal yes this provide 1 by A which
+is equal to 1 and 0.25 25 and here it is
+0.5 and yes nearing towards 0.143
+and kindly just observe dear friends
+this operation which we just say yes it
+is all about hadamad which is an
+elementwise
+operation it ignores a relationship
+between entries okay so let me just test
+does it behave like an inverse or not
+yes here we just go dear friends so here
+I'm just going to apply this one so let
+We just check whether it is and yeah it
+is not going to result as a true. Yes
+the result is not the identity matrix.
+Why? Because yes dear friends of course
+just now I have specified. So kindly
+just observe here if I just specify a
+into multiplied by 1 by A which is equal
+to I. So matrix multiplication involves
+row column interactions not independent
+element operation. And here kindly just
+observe the true inversion. So the true
+inversion. Yes. How would happen? So for
+an example if I just specify it for an 2
+into two matrix. Let I just specify A as
+a matrix. And here we have A B and C D
+as our elements. And here if I just make
+it as an inverse here it would be as
+like using this um matrix inversion. So
+it is true matrix inversion formulation.
+It would be 1 by a d minus b c and
+multiple by d minus b as a first row
+minus c and a as our second row. Let me
+just verify this how this is happening.
+So let we are just going to verify it by
+this uh exact line and we are just going
+to identify and of course we are just
+going to get the exact output. Yes, what
+we have got it. Yes. Okay dear friends
+and this one it is verified by the
+equation a at a true inverse and this is
+going to produce of course it would be
+as like 1 0 0 and 1. What it is? Yes, of
+course it is an identity and this is
+done by using up to floating point
+precision. Okay, dear friends, let me
+just have this towards our uh exact
+value. We have 1a 4 2a 7. Okay, kindly
+just observe we have a as 1 4 2 and 7.
+Okay. And when we just make an
+elementwise inversion, we just get one
+here. 0.25
+and 0.5 and 0.143.
+And dear friends, kindly just observe if
+we just specify a into 1 by 8 and it
+just gives 3 0.821 8 to 1 and sorry 5.5
+and 1.5 and dear friends clearly it is
+specify it is not a identity matrix here
+when we just specify the exact true
+inverse how it happens so kindly just
+see it is 1 4 2 and 7 so if we just
+specify a true inverse it has to be -7
+and 4 2 and -1 This is what the exact
+because it is what produced exactly by a
+in multiple by a inverse which is equal
+to i. So notice how different it is from
+the element wise reciprocal. The matrix
+inverse requires a global computation
+involving the entire matrix
+and this elementwise inverse how this is
+happening how it works. Yes, kindly just
+observe dear friends. Whenever we just
+go for elementwise
+inverse here, kindly just observe this
+is an element wise matrix subig which is
+equal to 1 by A subigj. And yes, this is
+exactly a local operation. No algebraic
+meaning in linear system. And when we
+just make it into an inverse. So matrix
+inverse it happens as a inverse just
+satisfies to us a multiple by a inverse
+which is equal to i. Yes this is what
+the global operation and kindly just see
+here this is the local operations and of
+course as I have already specified this
+is what a no algebraic meaning in linear
+system. And here when we just is making
+yes it encodes how to undo the linear
+transformation. So this is what the
+exact difference and dear friends don't
+get confusion here. Of course surely
+there would be a confusion because
+kindly just observe for scalar a into
+multiple by 1 by a which is equal to i.
+Yes, this is exactly for scalar. But
+when we just go for matrix, of course
+the exact values are not scalar objects
+and multiplication is not element wise
+and structure of course it has rows and
+columns that's the matter. Okay. So here
+how this exact geometric interpretation
+happens is dear friends whenever we just
+take a matrix. Yes, it transforms space
+and that spaces yes it can be
+transformed into scales or rotation or
+shears and here a inverse it was
+reversing the transformation and when we
+just go towards this element wise
+reciprocal it doesn't has geometric
+meaning so it does not undo anything
+okay so that is what the both difference
+and here let I just conclude with one
+simple important important
+functionality. Kindly just observe dear
+friends here 1 by a which is equal to a
+inverse. Of course this is what the
+elementwise operation and this is not
+equal to an linear algebra operation and
+here only the true inverse satisfies a
+multiple by a inverse which is equal to
+i. So kindly just keep it in mind. So
+hope yes with this session we unlock the
+concept of matrix inverse. The matrix
+inverse a inverse is the tool that lets
+us solve a x which is equal to b for x
+is equal to a inverse b. Hope I think
+this exact session it would be useful.
+So kindly like this video, share it with
+someone starting their data science or
+machine learning or Genjd AI journey and
+subscribe to Demystify with AJ for more
+such real world explanation. Thanks for
+watching dear friends. See you in the
+next

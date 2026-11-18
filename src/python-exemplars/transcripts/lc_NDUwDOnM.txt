@@ -1,0 +1,176 @@
+# lc_NDUwDOnM
+# https://youtu.be/lc_NDUwDOnM
+
+Happy morning dear friends. Here's Dr.
+Rajenta. Welcome to Demystify with Ajay.
+Dear friends, today we are going to
+discuss on matrix inverse. The matrix
+inverse is central to solving matrix
+equations in practical applications
+including fitting statistical model to
+data. Okay. Dear friends, we are just
+going to discuss about an important
+topic inverse of diagonal matrix. Here
+shortly we just specify C simple invert
+each diagonal elements individually if
+in the sense. So here D inverse which is
+equal to if it is a diagonal diagonal of
+1 by D1 by D2 1 by D3 till 1 by DN. So
+this works because the product of two
+diagonal matrices is just the elements
+wise product of their diagonal. So a
+diagonal matrix with any zero on the
+diagonal is singular and cannot be
+inverted. Kindly just observe this and
+yes this exact shortcut is crucial for
+pseudo inverse that mainly with the SVD.
+Okay. So here it is just specify as like
+an summation of this power of diagonal
+of 1x d1 comma 1x d2 till 1 by dn. Okay,
+let me just discuss this with a code. So
+yes, dear friends, this exact code
+highlights a special and important case
+in uh linear algebra that is diagonal
+matrix where inversion becomes trial and
+also clearly shows when inversion fail.
+Okay. So here we have the exact diagonal
+inverse D with an values of 2a 3a 4. So
+in such a case here it would be as like
+this is our D and here 2 3 and four. So
+others would be zero.
+Okay. So all of diagonal entries are
+zero and each axis is scaled
+independently.
+And next let we just have the inverse
+via element wise diagonal. Okay. element
+wise diagonal inversion and uh yes here
+in such a case when we just go onto this
+so d inverse which is equal to 1 by 2
+1x3
+and 1x4
+okay and kindly just see here dear
+friends this is invert each diagonal
+element independently that is what we
+just specify inverse via element
+wise diagonal.
+Okay. Okay. We are just going to verify
+the result by this functionality. So, D
+at D inverse. Okay. So, in such a case D
+at D inverse which specify D dot D
+inverse that is D multiple by D inverse
+which is equal to identity. So, we just
+going to be 1 0 0 0 1 0 0 1. Okay. This
+is what whether we are just going to
+confirm it or not. So let me just verify
+it by using this. Okay. And uh we are
+also going to confirm it by using this
+numpy functionality. So here we just
+make use of this functionality and uh it
+just going to produce the same result.
+And this one would be verified by
+functionalities all close. Okay. So let
+me just compare this. And one more thing
+kindly just observe dear friends we are
+also going to have a singular matrix
+here. Singular diagonal matrix and in
+such a case singular diagonal matrix we
+have 2 0 and 4. So this singular
+diagonal matrix
+which is 2
+0 and 4. Okay. So here we have and uh
+let me just make the rank and
+invertibility. So here we are just going
+to uh identify this that is we are just
+going to display the rank and
+invertibility and kindly just observe
+dear friends. So here we are just going
+to have the rank which is equal to two
+that is less than the full rank of
+three. Okay by making use of the
+determinant functionality. So let I just
+calculate anyhow. So determinant of d
+which is equal to 2 into 0 into 4. Of
+course it is zero. Okay. Now let me just
+attempt an inversion and here we are
+just going to attempt an inversion and
+uh let me just check and we rise an uh
+uh singular matrix error. Okay. So let I
+execute and observe the output here.
+Okay. Dear friends, kindly just observe
+our D value. Of course we already know
+we have 2,
+3 and four. And when we just make the
+diagonal inverse matrix. Okay. So here
+we just get diagonal of 1x d1 1x d2
+until 1 by dn. So this is what our
+standard and here if any d is zero then
+1 by d it would be undefined.
+Kindly just keep it in mind. And here
+why it is because of course that
+dimension is collapsed to zero. So
+information is lost cannot be recovered.
+Okay. So kindly just keep this in mind.
+And let me just have towards this
+functionality. So when I just make it
+towards uh d inverse here 1 by 2 comma
+1x 3 1x 4. Okay. So this is what the
+diagonal of and here I just get diagonal
+of 0.5 comma 0.33
+comma 0.25 25 and when I just make use
+of this functionality kindly just
+observe the uh one here uh let us
+specify here again kindly just observe d
+inverse here it is a diagonal of 1 by 2
+1x 3 and 1x4 and when I just evaluate
+here we just get a diagonal of 0 comma
+0.5 comma 0.33 comma 0.25 25 and when we
+just make use of D multiple by D inverse
+which is equal to yes identity matrix of
+3 into 3. So when any diagonal element
+is zero of course the matrix is a
+singular okay so that is what we have
+already specified and towards this
+diagonal matrix or the simplest linear
+transformation. So here each coordinate
+is scaled independently towards the
+functionality. Okay. And when we just
+make use of this as like an inverse
+functionality. So kindly just it can be
+rescaled as x1 1 by d i xi and dear
+friends kindly just observe as I have
+already specified this one whether it is
+an identity. Yes, we just get the
+identity one. Okay. And whether matching
+the both of course both are matching and
+as I have already specified yes the rank
+is two because it is less than of full
+rank of three. Okay. And uh yes it is
+not going to make it uh inward. So it as
+it is a singular matrix. Here in such a
+case of singular any zero on diagonal of
+course determinant would be zero and
+rank deficient and no inverse happen. Uh
+summarizing
+for 2 into two matrix that is swap
+diagonal negative off diagonal define by
+determinant. So for diagonal invert each
+diagonal element.
+So yes, diagonal matrices are trially
+invertible when all entries are non
+zero.
+Okay. And inversion reduces to
+elementwise
+element wise reciprocal on diagonal and
+towards the zero entity. If any one
+single entity is zero, of course it just
+destroys the invertibility and of course
+it reduces the rank and last but not
+least corresponds to loss of the
+dimension. Hope I think this exact
+session it would be useful. So kindly
+like this video, share it with someone
+starting their data science or machine
+learning or genui journey and subscribe
+to demystify with AJ for more such real
+world explanation. Thanks for watching
+dear friends. See you in the next

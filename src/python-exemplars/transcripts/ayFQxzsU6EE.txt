@@ -1,0 +1,196 @@
+# ayFQxzsU6EE
+# https://youtu.be/ayFQxzsU6EE
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as uh PLT. And
+uh dear friends, of course we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And uh yes, dear
+friends, uh we have included the
+warnings. We have this imports Python's
+built-in warnings modules also, which
+allow control over warning messages
+generated during execution. And yes, uh
+we have just included the uh default
+parameters. Yes, for
+the font size and enabling the grids and
+uh setting the transparency of the grid
+lines to 30% and of course the font size
+for all text in plots to 12 points. Yes,
+and uh yeah, closing the dictionary and
+applies all the configuration updates.
+We have just Let me include this and
+execute this. Yes, of course uh we have
+the version as NumPy version with 2.3.5.
+Dear friends, every matrix has a
+pseudoinverse, regardless of its shape
+and rank. If the matrix is
+square full rank, then its pseudoinverse
+equals its full inverse. Likewise, if
+the matrix is non-square and has its
+maximum possible rank, then the pseudo
+inverse equals its left inverse. Left
+inverse for the tall matrix or its right
+right inverse for a wide matrix. But, a
+reduced rank matrix still has a pseudo
+inverse, in which case the pseudo
+inverse transforms the singular matrix
+into another matrix that is close but
+not equal to the identity matrix. Dear
+friends, this one is very much
+important. Let me just uh discuss this
+with an coding. Here, this exact code
+systematically compares how this uh
+Moore-Penrose pseudo inverse, that is A
+projection, helps behaves across
+different matrix types and verifies its
+defining property. And here we are just
+going to have four different matrices.
+Yes, it is a square singular, square
+full rank, tall inverse, and wide Sorry,
+tall matrix and wide matrix, where tall
+it is a left inverse and a wide it is a
+right inverse. Okay? And uh kindly just
+observe, dear friends, uh this exact uh
+dictionary, it is going to uh create a
+test case. This square, it is a 2 into 2
+matrix, and uh square full rank, of
+course, that is also a 2 into 2 matrix.
+When uh coming towards this tall matrix,
+it has a 5 into 3 matrix. And wider, of
+course, it is 3 into 5 matrix. Okay? So,
+let me just uh discuss one by one. And
+here, let me compute the pseudo inverse.
+Okay? So, let me just compute the pseudo
+inverse here by using this. And this
+exactly uses SVD internally. It works
+for all matrices regardless of any
+shapes or rank. And uh let me just
+identify the key product
+functionalities, that is A multiple by A
+plus. Theoretically, we just say A A
+plus, which is equal to the projection
+of uh column space matrix. Okay? So,
+projection onto the column space A. And
+here we are just going to have an
+error measurement. Okay? So, we are just
+going to have an error measurement where
+this compass whether it is A A plus two
+identity. And this can be happened by
+using a
+Frobenius norm functionality. We have
+already discussed about the Frobenius
+norm. Anyhow, I let you know about this
+Frobenius norm equation. And this one
+summation of I J of M sub I J the
+square. Okay? So, this one we are just
+going to have it as like an error
+measurement. And let me just going to
+have each and everything as a case
+interpretation. So, case by case we are
+just going to identify the rank and
+projection and then towards the error
+functionalities. Okay, let I execute and
+let me just see the resultant. So,
+kindly just observe the efforts. Here,
+what we just get towards this
+functionality square matrix, the shape
+it is two into two, the rank it is one.
+Rank one it is less than two.
+And kindly just observe whether it is
+invertible? No, it is not. Okay? It is
+not invertible. And yes, it is an
+identity matrix. That is acceptable. So,
+when on just making the square singular,
+kindly just see here the exact rank. Of
+course, we have two into two matrix, but
+we have the rank is one. So, rank is
+less than the full matrix. And here when
+coming towards this
+A and A plus, that is the projection.
+Actually, it is not an identity. Okay?
+So, it is not an identity. So, let I
+just specify it is not an identity. And
+how about the error? Of course, the
+error it is greater than zero. Okay? So,
+this is what the square matrix. Okay,
+let me just move on to the next one,
+square full rank.
+So, from this, what we just have? Yes,
+shape 2 into 2, and the rank is also 2.
+So, here, yes,
+both the things are equal. So, when we
+just specify a projection, which is
+equal to a inverse, and to the same, a
+into a plus, which is equal to identity.
+So, the result is true. Okay? And here,
+when we just specify whether the true
+inverse exists, of course, here, it is
+true. Okay. Now, let me just move on to
+the next one, full column matrix. Okay?
+So, yes, here, a plus, which is equal to
+a transpose a, the whole inverse, in
+multiple by a transpose. So, in such a
+case, when on just specifying towards
+the a a plus, the projection on to 3D
+subspace of R5. R5 in the sense, of
+course, here, we just have shape as 5
+comma 3. Towards the column, it is a
+rank 3. And towards the identity, of
+course, it is not an identity, and
+error, of course, it is greater than
+zero. And let me just move on to the
+full row rank. Full row rank, of course,
+it is wide full row rank. Okay? Kindly
+just observe here, it is a plus, which
+is equal to a transpose,
+multiple by a a transpose, the whole
+inverse. And here, [snorts] kindly just
+observe, dear friends, here, it is 3
+into 5, and the rank is 3. So, a into a
+plus, which is equal to identity of 3
+into 3 matrix, and towards the error, of
+course, the error, which is equal to
+zero. And you would have small a small
+confusion when to use this A A plus and
+towards this
+A A plus which is equal to identity.
+Yes, let I just give you a small thing
+dear friends. See, A A plus which is
+equal to I. If A has a full row rank,
+kindly use this. And if you are going
+with A plus A which is equal to I.
+So, kindly just make use this of full
+column rank. Don't get confusion. Okay?
+So, A A plus it is the exactly
+projection onto
+column space and here it projection onto
+row space. Okay? And dear friends, this
+both are pseudo inverse satisfies. And
+this one kindly just see here, pseudo
+inverse behaves like an inverse wherever
+possible and like a projection
+otherwise. So, by the this exact session
+it would be useful. So, kindly like this
+video, share it with someone starting
+their data science or machine learning
+or generative AI journey and subscribe
+to Demystify with Ajay for more such
+real world explanation. Thanks for
+watching dear friends. See you in the
+next video.

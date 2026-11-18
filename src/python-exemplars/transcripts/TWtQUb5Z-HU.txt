@@ -1,0 +1,331 @@
+# TWtQUb5Z-HU
+# https://youtu.be/TWtQUb5Z-HU
+
+Happy morning, dear friends. Here's your
+Dr. Ajanta. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as PLT. And
+dear friends, of course we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And yes, dear
+friends, we have included the warnings.
+We have this import Python's built-in
+warnings modules also, which allow
+control over warning messages generated
+during execution. And yes, we have just
+included the default parameters. Yes,
+for
+the font size and enabling the grids and
+setting the transparency of the grid
+lines to 30% and of course the font size
+for all text in plots to 12 points. Yes,
+and yeah, closing the dictionary and
+applies all the configuration updates.
+We have just let me include those and
+execute those. Yes, of course, we have
+the version as NumPy version with 2.3.5.
+We are just going to discuss about
+one-sided matrix. Dear friends, this
+one-sided matrix can transform a
+rectangular matrix to an identity
+matrix. But it works only for one
+multiplication order. In particularly, a
+tall matrix that can have a left inverse
+and a wide matrix that can have a right
+inverse. So, a non-square matrix has a
+one-side inverse only if it has a
+maximal possible rank.
+That is, a tall matrix has left inverse
+if it is rank n, it is for full column
+rank.
+And a wide matrix has a the right
+inverse if it rank m is full row rank.
+Okay, so let me just discuss one by one.
+So, first of all, let me just move on to
+the left inverse for a tall matrix.
+Construct a code and verifies left
+inverse for a tall matrix. So, dear
+friends, here we have, of course,
+we have uh done with an random matrix.
+And its shape is 40 into 4.
+So, here the exact shape is 40 into 4.
+Of course, it is a tall. And when I'm
+just making towards the mapping, here r
+to the power of 4 towards r to the power
+of 40. And what would be the ranking?
+Yes, let me just observe the exact
+ranking by using this. And yes,
+typically full column ranking, it would
+be 4. Let me just
+see when I'm execution. And here we are
+just going to form the step one. And
+what is it? Yes, here it going to give
+an
+t transpose t.
+Okay, t transpose t. And here when we
+just specify this t transpose t, the
+shape it would be as like 4 into 4. It
+would be a square matrix. And here it
+seems to be a symmetric property that
+positive defined if column of T are
+independent and of course it just goes
+to results as like T transform T it
+would be for a 4 into 4 matrix.
+And when on just making towards an
+invertibility, okay? So, kindly just
+observe dear friends, we are just going
+to specify an invertibility. So, here
+it would results with full rank of four.
+Okay? So, full rank of four. Yes, of
+course it is an invertibility because
+this is guaranteed if T is a full
+column.
+Because we are taking a tall matrix,
+okay? So, T is a full column matrix and
+we have four columns, okay? So, let me
+just construct the left
+left inverse by using the exact standard
+formula, okay? So, here we are just
+going to have our computing the left
+inverse and let I just mathematically
+specify L equals T transpose T whole
+inverse multiple by T transpose. So,
+this is what the exact mathematical
+equation. And dear friends, we are also
+going to identify the property, okay?
+So, that is Moore-Penrose pseudo inverse
+for full column rank matrix, okay? So,
+this is the exact equation. Kindly just
+observe.
+Okay, next let me just want to know what
+is the
+left inverse property. So, here it would
+be LT which is equal to
+T transpose T
+the whole inverse multiple by T
+transpose. And of course, we are just
+going to multiply the T with on the both
+the side which it just gives identity of
+four. Identity of four, yes of course it
+is a 4 into 4 identity matrix. And it
+confirms yes, L is a left inverse of T.
+And here it just sees whether
+it is
+T at L. That is it is it right inverse?
+That doesn't exist. Okay? Because it is
+40 into 40 and not equally to identity.
+Okay? So it just anyhow it's just going
+to result with
+false. And here we want to execute this
+shape. And here what is this TL? Yes,
+exactly this TL
+One second. Yes, this exact TL which is
+equal to T
+multiple by T transpose T the whole
+inverse T transpose. Actually, this is
+the projection matrix.
+Okay? So this is exactly the projection
+matrix rather than this TL, we can just
+directly specify P is equal to T of T
+transpose multiple by T the whole
+inverse multiple by T transpose. So this
+is the projection matrix. Okay? We are
+also going to have that also. Let we
+execute and see what is the output. So
+kindly just observe dear friends. Here
+we have an
+a matrix with the T and yeah, embedded
+with 4D space into 40 dimensional. And
+here we have the L. Yes, it recovers the
+original four-dimensional coordinates
+from that embedding. And here we have
+the TL where this exact TL is the
+projection that any vectors in R of 40
+onto the column space of T. And dear
+friends, here I just want to specify one
+thing. Kindly just observe whenever we
+just go on towards this
+left inverse. Okay? Left inverse matrix,
+kindly see here. To this code, we just
+get left inverse, which is equal to a 4
+into 4 identity matrix. Yes, this exists
+when columns are independent. But, when
+I'm just going towards the right, yes,
+we have to identify TR. Actually, it is
+a 40 into 40 identity matrix. Actually,
+this would require full row rank, and it
+is impossible because here it is 40,
+that is greater than 4. And when we just
+make on towards connection to a uh least
+square functionality, we have a formula
+that is X, which is equal to T transpose
+T the whole inverse multiplied by T
+transpose of Y. And it exactly solves
+the least square solution. And yes, dear
+friends, with this uh code, it just
+demonstrate how to construct a left
+inverse of a tall matrix. And it just
+verify the LT, which is equal to 1, the
+exact recovery. And of course, TL, which
+is equal to 1, that is also the
+verification. And here, this TL, we are
+just made with an interpretation that
+this is a projection matrix. And yes,
+this A's would be used in uh pseudo
+inverse, of course.
+Uh another one, it is a least square
+solution. Okay, here I just want to
+specify one thing, dear friends. Kindly
+just observe T transpose T whole inverse
+multiplied by T transpose is is the best
+possible inverse when T is not a square.
+Okay. Now, let me just move on to the
+right inverse. Dear friends, as
+specified in left inverse, yes, here in
+right inverse also. Yes, by symmetric
+reasoning, a wide matrix W, yes, lies in
+R M into n. Yes, it is a rectangular
+matrix and full row rank that has a
+right inverse. And that meanings here it
+just gives us R equals
+W transpose multiple by W and W
+transpose the whole inverse. Difference
+actually W multiple by R equals the
+identity matrix, okay? And that is such
+that WR
+which is equal to IW. That is W multiple
+by R equals to the identity matrix.
+Okay, let me just uh discuss this by
+using the code. So, yes difference
+kindly just observe here. We have a
+matrix, okay? So, the matrix W is a wide
+matrix where we have a shape of 3 into 8
+and it just maps us like R8 towards R3.
+That is here we have a typically a rank
+three matrix for full row matrix. Okay,
+so rank would be three. Kindly keep it
+in mind. Okay, now let we are just going
+to form the wide matrix that is WWT. So,
+this is what the right inverse, okay?
+And when I'm just making this right
+inverse, yes, here we have the row full
+row rank, okay? So, it would be the
+shape with the 3 into 3 and of course
+the property of symmetric and this one
+is invertible if rows of Y are linearly
+independent. And uh let me just have the
+right inverse construction, okay? As I
+have already specified, we already know
+that
+uh WR which is equal to W transpose
+multiple with
+WW
+transpose the whole inverse. So, this is
+Moore-Penrose pseudo inverse for full
+row rank matrices. And here when we have
+towards this right inverse property,
+yes, let me just have this. So, we are
+just going to have the right inverse
+property. So, let me just multiply both
+the thing with W. So, what we just get?
+Yeah, it would be resulted with identity
+with the 3 into 3 identity matrix. And
+it just confirms yes, R is a right
+inverse of W. And when on just checking
+with the left inverse, of course, it
+doesn't exist because the shape it is 8
+into 8 and it is not an identity. And
+here when on just making towards this
+all close functionality, we receives a
+false. And here, what is this RW? Of
+course, here W or RW, whatever thing.
+So, this is the exact projection. And
+what is the projection matrix? Okay, let
+I just end with the projection matrix. P
+is equal to W transpose multiplied by WW
+transpose whole inverse W. And dear
+friends, when on just a specifying this
+geometrically interpretation, this W is
+the compression of eight-dimensional
+space into three-dimensional matrix. And
+here, this R, of course, it lifts vector
+from R3 back into the R to the power of
+8. And when coming towards RW, yes, this
+is the projects vector in R8 onto the
+row space of W. Let I just execute and
+see what is the output. Yes, dear
+friends, kindly just observe. We have W
+with the 3 into 8 shape and here we have
+the rank is 3. And when coming towards
+this right inverse. Yes, we just have 8
+into 3. So, we receive an 3 into 3
+identity matrix. And of course, when I'm
+just comparing towards whether it is
+exist there in left or not, yeah, we
+received a false functionality. So, that
+is what here. And where this is exactly
+used, of course, I have to conclude that
+way with it. So, dear friends, kindly
+just observe one thing.
+We have checked with right inverse.
+Okay. So, right inverse matrix when on
+just existing with
+full row functionality. So, this exists
+when rows are independent. So, it equals
+identity. But when on making towards the
+left, when on verifying it towards left
+inverse, of course, we have RW which is
+equal to I to the power of 8. So, this
+is impossible here because not full
+column rank here. And towards the
+property functionalities, yes, this is
+connected towards least norm solution.
+Yes, and to the formula YX is equals W
+transpose multiple by W and W transpose
+whole inverse Y.
+And it just solves the minimum norm
+solution. And dear friends, of course,
+we have discussed here about two
+important functionalities. One is tall
+matrix. Yes, let I just give the pseudo
+inverse of the
+tall matrix. So, yeah, projection of A
+transpose A the whole inverse multiple
+by A transpose. And when just going for
+the Y, that is wide matrix. And here, A
+projection which is equal to A transpose
+multiple by A A transpose whole inverse.
+So, this both defines the Moore-Penrose
+pseudo inverse. So, dear friends, here
+we have just a constructed the right
+inverse for a wide matrix, and we have
+just a verified a WR and RW. And when
+I'm just making WR, yes, of course, it
+is an identity matrix of three, but it
+doesn't confirm that
+identity matrix of A. So, here it
+interprets the projection onto a row
+spaces. And it has a connections with
+the least norm solution. Of course,
+pseudo inverse theory also. So, I think
+this exact session it would be useful.
+So, kindly like this video, share it
+with someone starting their data science
+or machine learning or Gen Z AI journey,
+and subscribe to Demystify with Ajay for
+more such real-world explanation. Thanks
+for watching, dear friends. See you in
+the next video.

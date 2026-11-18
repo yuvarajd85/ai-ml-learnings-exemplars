@@ -1,0 +1,511 @@
+# W6QFRP29HUU
+# https://youtu.be/W6QFRP29HUU
+
+Happy morning dear friends. Here's yours
+Dr. Rajenta. Welcome to demystify with
+Ajay. Dear friends, previously we have
+discussed about the theoretical
+machinery of matrixes and this session
+puts that machinery to work on three
+applications that are central to data
+science or machine learning or deep
+learning generative way mainly on
+computer graphics. So let me just start
+with coariant matrix. Dear friends,
+coariant matrices represented as xrpose
+multiple by x. So these matrices help us
+understands the relationship and
+correlation between different features
+in the data. And before that let we
+include our input and necessary
+libraries and here we just go dear
+friends we have already discussed this
+uh in our previous sessions also. He has
+the numpy for mathematical. So,
+numerical python map plot loop for
+plotting. Yes, we have already uh
+discussed about this warnings and
+there's default parameters. And dear
+friends, we have just included that
+random seed. So, this fixes the random
+number generate states which ensure
+reproducibility.
+And yes, let we just execute and uh let
+we check what is the version of numpy.
+Yes, it is a 2.3.5.
+Okay. So, we are just going to start
+with the multivariant data coariance
+matrix. Yes. Starting with from biariant
+to multivariant.
+Friends, previously we have computed the
+PS and correlations between two
+variables using the dotproduct of mean
+centered vector normalized by their
+norms.
+With P variables, we all need pair-wise
+correlation.
+And kindly just observe, dear friends,
+when we just specify the pair-wise
+correlation, yes, it would always be as
+P into P matrix rather than looping over
+p matrix multiplication computes
+everything at once.
+And yes, coariance is the unnormalized
+version of correlation. So the
+dotproduct of mean centered variable
+would be divided by n minus one. Kindly
+just keep it in mind. And here we just
+go with the equation. Observe dear
+friends. So here covariance between
+variable a and b equals 1 / n -1
+multiplied by the sum of from i = 1 to n
+of x sub i - xr multiple y sub i - y
+bar. Okay. Here 8 equ= 1 / n -1 * x tilt
+transpose multiple by x tilt. So here
+kindly just observe dear friends where x
+tild which is equal to x - xar is the
+mean centered variable and yes dear
+friends when we just pack all p
+variables as a column of an n into p
+matrix x. So here means enter each
+column to get X type and here we just
+get the exact equation as I have already
+specified C= 1 / N minus one multiple by
+Xile transpose
+multiple by XY so this equation computes
+all pair wise covariance among variables
+simultaneously here actually dear
+friends element we are just specifying I
+or whatever be the J is exactly yes that
+is Xile transpose multiple by XY which
+is the coariance numerator and here the
+result is always symmetric symmetric is
+in the sense yes of course here we can
+just say C A B which is equal to C B
+comma A and when we just speak on
+towards yeah so this is what the
+symmetric and when just we speak about
+this square matrix of Of course here we
+just took P into P matrix because we
+already discussed about that is A
+transpose A is always a square
+symmetric. So we have already discussed
+uh previously. Okay. Now let me just
+discuss about this multivariant. Okay.
+Multivariant data set with known
+structure using code. So here we are
+just starting with of course anyhow we
+have just already previously included
+about this uh random seed. Okay. So this
+fixes that random number generator
+stator as 42 and ensures reproducibility
+that is every execution produces
+identical data and we have just uh given
+the dimension the data set dimension as
+n is equal to 500 observations. So here
+number of samples is there and P is
+equal to 6. Yes, these are the number of
+variables and when we just go for this
+latent variable. Yes, this is what
+hidden factor. So we have two
+independent standard normal form is one
+and isn't two. So these act as Latin
+factor that induce correlations among
+observed feature. Actually conceptually
+they represent hidden source influencing
+multiple variable. And dear friends here
+we have an X that is the features with
+controlled correlation. Each feature is
+uh constructed as like kindly just
+observe. So here it would be as like uh
+future which is equal to loading into
+latent factor and plus noise. And dear
+friends kindly just observe here we have
+already specified that is X0 this
+strongly depends on is one with small
+noise. So here high correlations with is
+one. Okay. And next it is X1. Yes
+moderately depends on Az. So I'm just
+specifying this moderately or highly by
+using this constant variable. Okay. So
+here it is still correlated but noiser.
+Next we are just going to have x2
+actually it is an negatively dependent
+on this is one negatively dependent on
+is one. So here uh it is correlated with
+x0 and x1 and next x3. Yes it is
+strongly dependent on ez2
+and correlated with x4. Next moderately
+dependent on 2. Yes, that is what the X4
+and last but not least X5. Yes, it is
+the pure noise that is independent of
+all others. Dear friends, this
+consection produce two correlated
+feature groups. Yes, of course. Uh let I
+just give you one thing. So here uh this
+group one yes it is is one which is
+driven with X0, X1 and X2. And this is
+strong internal correlation. And here x2
+it is negatively correlated with x0 and
+x1. And the group two yes it is is2
+driven. And here we have x3 and x4. So
+both are positively correlated with each
+other. And last but not least yes the
+noise feature x5. So no systematic
+correlation with any feature. So these
+resembles a factor model with the two
+latent dimension. And dear friends,
+kindly just observe here we have just
+specified the feature names. Yes, the
+these are labels formatted by uh latex
+cell rendering and actually it is for
+plotting. Okay. So next let we just have
+the exact output. Okay. So the output
+statement that is confirms the shape of
+the data set and let we just execute and
+uh see what is the output. Yes, kindly
+just observe dear friends here we have
+yes 500 comma 6 that is we have 500
+observation with six features. So this
+one we have created 500 into 6 data
+matrix where feature x0 x1 x2 shares a
+common latent factor is at one with x2
+loading negatively and here feature x3
+x4 sh has 2 and xy is pure noise. So the
+covariance matrix should reveal these
+block structure and dear friends I just
+add one more thing. So dear friends when
+we just have this code simulates
+actually this data following a linear
+latent factor model that is x which is
+equal to is w + epsilon. So here this
+exact is yes these have two latent
+variables is 1 and is 2. Of course we
+have already discussed this and here's
+this W it which it just specify as
+feature loading and here we have the
+Gaussian noise and dear friends yes to
+test PCA or validate factor analysis
+methods and of course it is used
+commonly used to benchmark clustering or
+dimensionality reduction algorithm. So
+kindly keep it in mind. Okay. Now let me
+just uh discuss about computing the
+coariance matrix from first principle.
+Let me just start with defining this
+column means dear friends. Actually this
+computes the mean of each feature that
+is column wise and of course we have
+already seen that is we have the feature
+six. So yes it just rs the shape with
+six and exactly this corresponds to the
+uh equation. Of course we have already
+seen that is uh mean j which is equal to
+1 by n summation of i which is equal to
+1 to n x sub iig j. So this is what
+exactly this is what corresponds to this
+column wise uh centering the step. Next
+let we just move on to define this uh x
+type. Yes, this is what the mean
+centered data actually this extract
+the column means from every row wise
+using broadcasting and of course we have
+already know the uh shape. Yes, it is
+500A 6. Yet it is just going to remains
+the same. And mathematically we can just
+express it as like yes X subig type
+which is equal to X subig minus mean J.
+So this ensures each column has zero
+mean which is required for covariance
+computation. Okay. Now next let me just
+uh uh define the manual coariance matrix
+which is equal to C. Actually this was
+the exact equation which we have already
+discussed. Yes. So here the C manual
+which is equal to C equals 1 by N
+minus1. Okay. Xile transpose multiple by
+XY. So that is what given here. Okay. So
+dear friends actually this uh this is
+the exact standard sample coariance
+formula and here we have already know
+this x child is exactly 500a 6 we have
+already seen but here it is specified as
+like t that is transpose so here it
+would be as like 6a 500 okay so
+multipled with xyl so multiple with 500a
+6 Okay. So it is divided by n minus one.
+So here the results it would be 6a 6 and
+for each entry how this would be
+calculated. So this would be calculated
+as like okay. So here c jk k let i just
+specify like this. Okay. So 1 by n -1
+summation of i which is equal to 1 to n
+and here x sub i j minus mean j into x
+sub i k minus mean k. So this is what
+the exact entry actually this is what
+the interpretation that makes uh
+diagonal entries as like variance of
+each features and offdagonal entries as
+like pairwise covariance. Okay. So yes
+dear friends now let me just go with the
+numpy coariance here. Okay. So this is
+what the covariance calculated using
+numpy. So this computes coariant using
+numpy implementation cov. Okay. And here
+we have just specified as row v uh row
+variance which is equal to false. Yes.
+This indicates that columns are
+variables that is the features. And here
+also uses normalization by n minus one
+by default. Okay. So let me just see the
+exact resultant by yeah providing this
+uh uh output that is shape and value
+here. Here it is the shape and value. So
+it just displays the covariant matrix
+rounded to uh three decimals. Okay. And
+here this one yes it just verifies
+numerical equivalence between manual and
+numpy results. So if it is both match it
+just expected result would be true. Let
+me check and yes the next one the same
+by using symmetric and here it just
+confirms the matrix in symmetric. So we
+have already seen what is the symmetric
+case. Anyhow I just let you know it is C
+subj K which is equal to C sub KJ. Okay.
+So let me just see this whether it is
+matching or not. So expecting a true
+value and next we are just going to have
+the variance that is the di diagonal
+factors. Okay. So this extracts the
+variance of each feature. Actually dear
+friends these reflects uh higher
+variance for features with stronger
+latent signal and inclusion of noise and
+here this independent noise feature X5
+of course should have variance which is
+equal to one. Okay. So let me just see
+how this is happening and let I execute.
+So kindly just see here we have the
+covariance matrix 6x 6. Okay. So this is
+what 6x6 symmetric and computed as uh we
+have already know we have 500
+uh observations. So in such case yeah it
+would be as like 1 by that is n minus
+one. So here 1x499
+and yes uh xile transpose multiple by
+extract
+to co-variance we're using this numpy
+okay to machine precision and here this
+diagonal contains the variance of each
+features. So this is what the exact
+diagonal that contains the exact
+features and the coariance of a variable
+with itself and the off diagonal other
+than the diagonal elements or the pair
+wise coariance
+and here I just want to specify one
+thing mostly usually some would ask why
+this n minus one actually this is
+bezel's corrections I just specify yes
+this is bashel's correction see actually
+dividing by n minus one instead of n
+gives an unbiased reestimator so mainly
+for population covariance when working
+with a sample so that is what we are
+using here n minus one so kindly just
+keep it in mind anyhow I just added with
+that okay and dear friends of course uh
+by using this uh code yes we have uh
+seen yes how covariance arises from mean
+centered interroducts
+And yeah we have just seen both are
+matching both are symmetry and this is
+the exact diagonal variance also. So
+this equivalence between yes linear
+algebra formulation and library
+implementation and of course I just add
+up with this uh the key properties of
+this coariance matrix. Yes, mainly it is
+of uh symmetry. And second one, yeah, we
+have just seen about the uh variance on
+this diagonal. And last but not least,
+yeah, structured correlation from latent
+variables. Okay. Now let me visualize
+and numerical representation of this
+coariance and correlation structure of
+this data set X. Okay. And dear friends,
+this is what the figure, axis. Yes. Uh
+this creates a figures with the two
+subplots side by side. Yes. That is what
+subplot 1 comma 2. So here uh let me
+just have one on coariance matrix plot
+and another correlation matrix plot.
+Okay. So here let me just go with this
+coariance matrix. So yes dear friends
+here we have uh axis zero and we have
+just specified np.max
+uh that is npi.mmax and uh here I just
+uh defined this IM see actually this
+shows displays the covariant matrix as a
+heat map okay and uh dear friends uh
+kindly just observe this one here we
+have just specified uh color map as like
+uh uh red blue positive correlations and
+negative correlations correspondingly.
+And here I have just specified this uh v
+min which is equal to minus vax and vax
+which is equal to vax that is ensures a
+symmetric color scale around zero. Okay.
+So this is to uh know about the exact uh
+plotting. So I just want to set up this
+before uh uh making the execution. So I
+have just given this and next it is all
+about the color bar. Of course it adds a
+legend for uh interpreting color
+intensity. And uh next we just gone
+towards axis labels. Okay. So yes,
+labels, rows and columns with features
+are like uh x0 to x5 that is also we
+have just seen and yes of course we are
+going to have it within a loop that is
+uh this writes numerical coariance value
+inside each shell and uh of course we
+have just given the uh text color so
+that adapts for uh contracts. So here
+white text for uh strong value and black
+test for uh weak and next we have just
+included the title. Okay. So this is the
+exact title of that uh plot. Okay. We
+are moving on to this correlation
+matrix. So kindly just observe dear
+friends here we have that is actually uh
+we have defined the standard deviation
+just defined this R manual. Yes. which
+is just a specified matrix of all paths
+of sigma 1 comma sigma j. Okay. So let I
+just specify by using an equation.
+Kindly just observe dear friends. It is
+r subig j which is equal to c subig j
+divided by sigma i multiplied by sigma
+j. So actually the correlation between
+variables I and J equals their
+covariance divided by the product of
+their standard deviation. That is what
+it is uh specified. Okay. So here we are
+just going to calculate it by using this
+one. And of course dear friends this one
+uh correlation coefficient. Yes, this is
+built-in PSN correlation computation
+which we just implement by using this
+numpy. And uh next here correlation
+matrix visualization. So I have just
+given this one. So kindly just see here
+v min which is equal to minus1. So
+perfect negative correlation and uh this
+one vax which is one. So here it is for
+perfect positive correlation. And of
+course we have included the uh
+correlation color bar also. Okay. And uh
+next we have included the labels for
+exactly as I have already specified. And
+this is the exact loop. Yes. It just
+highlights the moderate to strong
+correlation. So hydrate to uh strong
+correlation is in the sense yes. So here
+it would be as like uh uh the p which is
+greater than 0.5. Okay. And last but not
+least here I have just specified the
+title. Okay. So let me just visualize
+the final layout. Okay. And here we are
+just going to have our uh tight layout
+because to prevent overlap of labels and
+plots. Okay. And uh last but not least
+let me just save the visualization as an
+image file. And let we execute and
+display the image. So kindly just
+observe DFS. The block structure of
+course is exactly what we designed. This
+upper left 3 into 3 matrix block that is
+what x0 x1 x2 shows the iset factor and
+here x0 and x1 are positively correlated
+while x2 is negatively correlated with
+both. Now the center block x3 and x4
+shows the is2 factor and here the x5 yes
+has near zero covariance with all other
+features that is independent noise and
+this crosslock entries that is example
+from uh x0 to x 3 or near zero uh which
+is the exact two factors or
+independently.
+And here when we just discuss about this
+uh interpretation within this covariance
+and correlation kindly just see here
+dear friends this dividing each element
+by the product of the feature standard
+deviation normalization to minus1 to +1
+scale. So that is what here it is each
+and every value that is between minus1
+to + one. So this it would specify as
+like which we just say here. Yes. R
+subig j which is equal to c subig j
+divided by sigma i multiple by sigma j.
+So in mathematical notation it is
+specified as like uh kindly just observe
+here dear friends
+this is r which is equals to d inverse
+ult* by c multiple by
+d inverse.
+So here d is the diagonal matrix
+containing standard deviation. Kindly
+just observe this one.
+And when we just say towards the D,
+kindly just observe this is the diagonal
+matrix of sigma 2 till sigma P. Okay. So
+the correlation matrix always has ones
+on the diagonal. So here we have once
+again I just show you. So yes that is
+what here in diagonal we have all ones.
+And dear friends this covariant matrix
+appears everywhere as the core of PCA
+and in Gaussian mixture model also. So
+in portfolio risk analysis and in uh
+kman filters also. Okay. So here kindly
+just observe here with this uh covariant
+matrix it just reflects the scale
+dependent relationship where larger
+magnitude values for higher variance
+features. And when on just going with
+the correlation matrix. So that is
+normalized version that is skill
+invariant. Kindly observe and clearly
+structured clearly structured. Yes. Uh
+here it as
+so here it is as like x0
+x0 and x1 as positive correlated and of
+course x3 and x4 also positively
+correlated. and went on just taking
+towards the strongly negative
+correlation as like uh x2 ves x0 and x1
+and one thing nearing zero correlation
+is also there where between x0 x1 and x2
+and to x3 and x4. So any feature with X5
+that is also it is nearing zero
+correlation and dear friends this code
+demonstrate how to visualize coariance
+versus correlation. So here while we
+have just uh correlation often we are
+just preferring correlation is yes is it
+comparably across features and it is
+bounded kindly observe the value it is
+already bounded within minus1 to one and
+here of course it is mainly important
+how latent structures appears as block
+patterns in this heat map. I hope I
+think this session would help you
+understand about this uh covariant
+matrix and kindly just uh like this
+video, share it with someone starting
+with their uh AI journey. Okay dear
+friends, thanks for watching and see you
+in the next recessive.

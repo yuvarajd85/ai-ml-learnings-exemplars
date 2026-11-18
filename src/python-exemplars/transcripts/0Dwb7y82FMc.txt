@@ -1,0 +1,374 @@
+# 0Dwb7y82FMc
+# https://youtu.be/0Dwb7y82FMc
+
+Happy morning dear friends, here's Dr.
+Welcome to demystify with Ajay. Dear
+friends, today in this session we are
+just going to discuss on orthogonal
+matrix. In linear algebra, the
+foundation is orthogonality and let me
+just begin our by understanding one of
+the most special objects in mathematics
+that is orthogonal matrix. Difference a
+matrix that can rotate data without
+stretching it. A matrix that preserves
+distance, angles and geometry. A matrix
+whose inverse is simply its transpose.
+Think about that for a moment. Most
+matrix distort information.
+Orthogonal matrix preserves it.
+So, we will discuss why the equation of
+course Q transpose Q which is equal to
+one is one of the most important
+equation in numerical computing.
+Then we will just move on to the world
+of
+QR decomposition. A powerful technique
+that transforms any matrix into A equals
+QR.
+Where Q captures pure geometry and R
+captures the structure.
+And here the QR decomposition quietly
+powers
+least square regression, matrix
+inversion, numerical optimization,
+eigenvalue algorithms, scientific
+computing. But that's only the
+beginning. Because once we understand
+orthogonality and the QR decomposition,
+we are ready for one of the greatest
+idea in all of applied mathematics. So,
+before going on to the discussion, so
+let I just include the necessary
+libraries. And here we have the NumPy.
+Yes, NumPy provides efficient numerical
+array operations and there's a
+foundational for linear algebra
+computation. And here for
+Matplotlib, yes it is used for creating
+visualization such as graphs and figure.
+Next we just uh
+the warnings. Yes, dear friends,
+uh this controls over warning message
+generated during execution. And here the
+line begins updating matplotlib runtime
+configuration parameter using a
+dictionary. And yes, this exact uh sets
+the default size of all figures to uh
+8-in wide and 5-in tall. And it enables
+the grid grid lines on all plots by
+default. And here we have an uh
+transparency of grid lines to 30% making
+them subtle and uh less visual dominant.
+And of course, to the last yes,
+uh sets the default font size for all
+text in the plots to 12.
+And uh dear friends, of course, we have
+just included that
+uh version. Yes, it prints the installed
+versions of NumPy by accessing the
+versions attribute. Okay? So, let me
+execute and uh see what is the exact uh
+version. Yes, here NumPy version, it is
+a 2.3.5.
+Okay, dear friends, let me just start
+our discussion on orthogonal matrix.
+This orthogonal matrix Q
+has two defining properties.
+One is orthogonal column.
+And second, it is all about
+unit
+norm column.
+You friends, the orthogonal column is
+exactly every pair of distinct column
+has dot product zero. And that is unit
+norm column, each column has Euclidean
+norms exactly one.
+So, combining into one
+elegant equation. Kindly just approach
+it, dear friends. Here, the inner
+product of
+uh Q sub I and Q sub J
+equals zero
+when I is not equal to J or one when I
+is equal to J.
+Uh since Q transpose Q
+computes all pairwise dot products
+between column, this means Q transpose Q
+which is equal to identity. So, this is
+profound. Yes, Q transpose is matrix
+that multiplies Q to produce I.
+By definition, that is the inverse. So,
+therefore, Q inverse which is equal to Q
+transpose.
+So, the inverse of an orthogonal matrix
+is simply its transpose. Fast, free, and
+numerically exact. This is why
+orthogonal matrix are prized in
+numerical computing.
+Dear friends, let me just discuss on
+this code that construct two matrices.
+Yes, Q1 and Q2
+and verifies that they are orthogonal
+matrix. Here, Q1 is a 2 by 2 matrix
+scaled by 1 by root 2.
+And the scaling ensures each column has
+unit length. Without scaling, the column
+would not be normalized.
+And here the Q3, sorry, Q2 is 3 into 3
+matrix scaled by 1 by 3.
+Again, scaling ensures orthonormal
+columns. And kindly just observe, dear
+friends, this multiplies Q1
+back by root 2 to show the original
+integer matrix. And here, np.round
+removes floating point artifacts. So,
+similarly here, of course, we have a one
+more np.round.
+So, Q2 multiple by 3. So, this displays
+the original integer entries of Q1 and
+Q2. And kindly just observe, dear
+friends, this exactly Q1 transpose. And
+this one, it is a matrix multiplication.
+And this is exactly for the orthogonal
+matrix which we have already discussed.
+Yes, the Q transpose Q, which is equal
+to identity. And of course, Q Q
+transpose, which is equal to identity.
+Yes.
+This check confirms both. And here,
+columns are orthogonal. So, Q transpose
+Q, which is equal to identity. And to
+the same, rows are rows are orthonormal.
+That is Q Q transpose, which is equal to
+one.
+And here, we are just making the
+rounding. Okay, so to remove numerical
+noise.
+And kindly just observe, dear friends,
+here Q2
+transpose
+matrix multiplication with Q2. So, that
+confirms orthonormality of columns. For
+square orthogonal matrix, this alone is
+sufficient.
+And towards this loop, kindly just
+observe, dear friends.
+Here, we just specify axis is equal to
+zero. Yes, actually this one is this
+exact loop, it is for column norms and
+determinant. And this axis is equal to
+zero, yes, computes the norms of each
+column vector. And for orthonormal
+columns, each normal should equal to
+one. And here, we just compute the
+determinant. And yes, of course, you all
+know already we have discussed a lot.
+Yes, when we just determine the Q, which
+is plus or minus one. And here, if it is
+a positive one, yes, it is a proper
+rotation. And if it is a negative, of
+course, it is all about a reflection.
+That is improper rotation. Okay, let me
+just
+execute this and kindly just observe the
+resultant.
+So, kindly just observe, dear friends,
+this is the matrix Q1.
+And here, we have the Q2. And both
+matrices satisfy
+Q transpose Q is a identity matrix and Q
+transpose Q is an identity matrix.
+Every column has norm one. Cross column
+dot products are zero. So, notice here,
+of course, we have just discussed that Q
+transpose Q is equal to identity. As
+well, for a square orthogonal Q
+transpose Q, which is equal to Q Q
+transpose is equal to identity. Q Q
+transpose, which is equal to identity. I
+just took only the Q1 matrices. And as
+well, for square orthogonal matrix, yes,
+Q transpose Q, which is equal to Q Q
+transpose, that is equal to identity.
+And here for tall matrix, that is
+non-square orthogonal matrix, only Q
+transpose Q, which is equal to I, that
+only it holds.
+And here again, the determinant plus or
+minus, which is it means that
+if it is plus one, yeah, it is a
+rotation, that is no axis flipping. And
+here, if the determinant it is a minus
+one, means a reflection where orthogonal
+matrices preserves length and angles.
+They are the rigid body transformation
+of linear algebra. And uh dear friends,
+of course, this exact script demonstrate
+and verifies that uh matrix Q1 and Q2
+are orthogonal matrix and their columns,
+yes, are mutually perpendicular, that is
+orthogonal. So, these matrices
+represents rotations or reflections in
+2D and 3D spaces. Orthogonal matrix
+preserves length, angle, and inner
+product. Let me just go to a
+demonstration. Kindly just observe, dear
+friends. This exact code demonstrate a
+fundamental property of orthogonal
+transformation, that is they preserves
+vector norms, that is length and angle.
+And here the example uses a 2D rotation
+matrix and verifies this both
+numerically and visually.
+So, kindly just observe, dear friends.
+Here we have, of course, that this exact
+matrix defines a 2D rotation matrix. So,
+what it has is, of course, we are just
+going for a rotation matrix. And here we
+have uh cos theta minus sin theta sin
+theta and cos theta. Such a matrix is
+orthogonal. That is meaning Q transpose
+Q, which is equal to I.
+And it represents a counterclockwise
+rotation. Kindly just observe, it just
+has a counterclockwise rotation, and
+that is with the 30°.
+And next, we are just making an input of
+two vectors. So, two arbitrary vectors
+in R2.
+And applying the transformation, that is
+the exact this one is operations
+performs matrix vector multiplication.
+So, this rotates both vector by 30°.
+And the next, let me just have our
+numerical verification. So, this one it
+is before rotation. So, before rotation,
+it just computes the norm. And of
+course, the length norm V1 and norm V2.
+And yes, it just has a dot product V1
+and V2. And when angle is computed,
+kindly just observe, it is computed via
+this theta. So, cos inverse of V1 into
+V2 divided by norm V1 into norm V2. And
+dear friends, same quantities are
+computed by using, that is, after
+rotation. And this one, yes, we are just
+going to calculate eight by same thing
+computed for QV1 and QV2. That is after
+rotation. And here we have the key
+property being verified. That is first
+one, it is all about a length. That is
+norm QV the whole square which is equal
+to norm V.
+So, this orthogonal transformation
+preserves the length. That is what it is
+specifying. And the second one, it is
+all about dot product preservation. And
+this dot product preservation, yes, here
+it just is specified as like QU whole
+transpose
+multiplied by QV which is equal to U
+transpose V.
+Actually, this one orthogonal
+transformation preserves angle. So, here
+we have the visualization. Yes, we are
+just going to have a two axes with a
+subplot.
+Left is for original vector and right is
+for rotated vector. And this is all
+about draws each vector as the arrow
+from the origin. So, let I execute. And
+here we go with the output. And dear
+friends, kindly just observe dear
+friends, this is what the exact value of
+norm V1 and V2 before rotation. And yes,
+it is 2.2361 and 2.6926.
+And once after rotation also, QV1 and
+QV2 norm QV1 and norm QV2, kindly
+observe the value remains unchanged. And
+just went on making the dot product and
+went on making the angle also, yes, all
+are preserved. And went on visualizing,
+kindly just observe dear friends, the
+norms, dot products, and angles are
+identical before and after rotation. So,
+this is the defining geometric property
+of orthogonal matrix. They preserve the
+inner product structure of the space.
+And yes, dear friends, previously we
+just discussed for length preservation.
+Yes, the norm of QV square, which is
+equal to norm of V square.
+And here, yes,
+with the dot product preservation and
+towards angle preservation also. Yes,
+kindly just observe. Let I just give the
+full proof sketch. Yes, norm of QV the
+whole square, which is equal to QV
+transpose multiple by QV, which is equal
+to
+V transpose Q transpose QV, which is
+equal to V transpose identity V, which
+is equal to
+norm V the square.
+So, similarly for dot product, yes, we
+just have
+QU the whole transpose multiple by QV,
+which is equal to U transpose V.
+Dear friends, orthogonal transformation,
+yes, it happens in PCA.
+Yes, principal component analysis. That
+rotates data into new coordinate system
+without distorting distance. So, this is
+why PCA preserves total variance.
+So, with this, yes, dear friends, this
+exact script empirically confirms that a
+rotation, that is orthogonal
+transformation, does not stretch
+[snorts] or shrink vectors.
+Does not change angles between vectors.
+Only changes their orientation in space.
+This is why orthogonal matrix are
+central in computer graphics, physics
+simulation, and numerical linear
+algebra. That is mainly for stability of
+computation. Here,
+today we have discussed about the
+orthogonal matrix which have orthogonal
+unit norm columns giving the remarkable
+property.
+And dear friends, this exact is our
+property. Which means that Q inverse
+which is equal to Q transpose.
+A free, exact, numerically stable
+inverse.
+Orthogonal transformation preserves
+length,
+angle, and dot products. And these would
+be an examples that includes rotation
+matrices, the identity matrix, and
+permutation matrix. And let's wrap
+today's session, dear friends. So, we
+started with orthogonal matrices and
+discovered something remarkable. A
+transformation can rotate data without
+changing its length, without changing
+its angle, without destroying its
+geometry. We learned why does a Q
+transpose multiple by Q which is equal I
+makes orthogonal matrix computational
+superheroes. Dear friends, as we
+continue our journey, we will begin to
+notice that many machine learning
+algorithms are simply clever ways.
+So, behind every recommendation engine,
+behind every PCA visualization, behind
+every compressed image, behind every AI
+model, there is linear algebra quietly
+doing the heavy lifting. The goal of
+mathematics is not to memorize equation.
+The goal is to discover the hidden
+structure behind data and the world
+around us. Thanks for watching, dear
+friends. Happy learning.

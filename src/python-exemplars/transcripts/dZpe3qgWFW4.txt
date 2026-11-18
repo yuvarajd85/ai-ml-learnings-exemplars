@@ -1,0 +1,209 @@
+# dZpe3qgWFW4
+# https://youtu.be/dZpe3qgWFW4
+
+Happy morning dear friends, here's Dr.
+Welcome to demystify with Ajay. Dear
+friends, today in this session we are
+just going to discuss on orthogonal
+matrix. In linear algebra, the
+foundation is orthogonality and let we
+just begin our by understanding one of
+the most special objects in mathematics
+that is orthogonal matrix. Difference a
+matrix that can rotate data without
+stretching it. A matrix that preserves
+distance, angles and geometry. A matrix
+whose inverse is simply its transpose.
+Think about that for a moment. Most
+matrix distort information.
+Orthogonal matrix preserves it.
+So, we will discuss why the equation of
+course Q transpose Q which is equal to
+one. This is one of the most important
+equation in numerical computing.
+Then we will just move on to the world
+of
+QR decomposition. A powerful technique
+that transforms any matrix into A equals
+QR.
+Where Q captures pure geometry and R
+captures the structure.
+And here the QR decomposition quietly
+powers
+least square regression, matrix
+inversion, numerical optimization,
+eigenvalue algorithms, scientific
+computing. But that's only the
+beginning. Because once we understand
+orthogonality and the QR decomposition,
+we are ready for one of the greatest
+idea in all of applied mathematics. So,
+before going on to the discussion, so
+let I just include the necessary
+libraries. And here we have the NumPy.
+Yes, NumPy provides efficient numerical
+array operations and there's a
+foundational for linear algebra
+computation. And here for
+Matplotlib, yes it is used for creating
+visualization such as graphs and figure.
+Next we just uh
+the warnings. Yes, dear friends,
+uh this controls over warning message
+generated during execution. And here the
+line begins updating matplotlib runtime
+configuration parameter using a
+dictionary. And yes, this exact sets the
+default size of all figures to
+8-in wide and 5-in tall. And it enables
+the grid grid lines on all plots by
+default. And here we have an
+transparency of grid lines to 30% making
+them subtle and less visual dominant.
+And of course to the last years
+sets the default font size for all text
+in the plots to 12.
+And dear friends, of course we have just
+included that
+version. Yes, it prints the installed
+versions of NumPy by accessing the
+versions attribute. Okay, so let me
+execute and see what is the exact uh
+version. Yes, here NumPy version it is a
+2.3.5.
+Okay, dear friends, let me just make a
+comparative study
+that is from Gram-Schmidt and with
+NumPy.
+Yes, we are just going to produce a QR
+factorization.
+Okay, yes dear friends, this exact code
+compares two different way of producing
+a QR decomposition. Yes, one is you can
+just make it with Gram-Schmidt and the
+next one yes, by using the NumPy NumPy
+of course Householder based QR method.
+Okay, so the goal is to show that both
+are mathematically valid while
+highlighting non-uniqueness and
+numerical differences.
+Okay, kindly just observe dear friends,
+this is what the initialization. Yes, we
+are just having an A matrix of 4 into 4.
+And here two different algorithm that is
+produces orthogonal matrices. One is
+classical Gram-Schmidt and the next one
+it is all about Householder reflections
+by using NumPy.
+And here we are just making the
+orthogonality check. Yes, both output
+satisfy Q transpose multiple by Q which
+is equal to identity. Yes, this comes
+from columns are orthonormal. Both are
+valid Q factor.
+And next we are just going to have the
+reconstruction of A.
+Yes, here yes of course kindly just
+observe dear friends. This one it just
+use the identity as like R which is
+equal to Q transpose multiple by A.
+And kindly just observe this is with
+Gram-Schmidt reconstruction and yes this
+exact line it is by NumPy constructions.
+And yes towards the error comparison yes
+both errors are
+we are just going to get us little small
+only. Okay, we are just expecting a
+small value. So both errors are near
+machine precision confirms both
+decomposition are correct. And dear
+friends by using all close method yes we
+are just going to compare the Q
+matrices. And anyhow let I just want to
+specify one thing dear friends kindly
+just observe here. So QR of course QR is
+not unique. If A which is equal to QR
+then for any diagonal matrix D with plus
+or minus entries here A which is equal
+to Q multiple by D multiple by D inverse
+R. So here column of Q can differ by
+sign flips.
+So corresponding rows of R yes adjust
+accordingly.
+And kindly just observe dear friends
+this exact interpretation. Yes, when we
+just compare it towards uh this uh QGS
+and QNP, yes, it is going to be usually
+false. And uh towards the absolute
+value, of course, it couldn't be often
+true. So, this indicates that same
+direction and possibly opposite
+orientation.
+And, dear friends, when we just discuss
+about the structure of R from this uh
+Gram-Schmidt, yes, here we are just
+going to check with the all close
+functionality, and it just confirms that
+by using this particular function, we
+just confirming that R is upper
+triangular.
+Okay, let you be execute that, and we
+combine. So, kindly just observe, dear
+friends.
+So, here by using this both comparative
+view, so it is easily observed that
+classical Gram-Schmidt, yes, computes
+projection using original vector.
+It numerically unstable for nearly
+dependent column.
+And here when just going on towards the
+NumPy QR, that is Householder, uses
+orthogonal reflections, much more stable
+and standard in production linear
+algebra.
+And, dear friends, kindly just observe,
+yes, this exact Gram-Schmidt, it is
+usually false, and here we just get the
+often, of course, absolute value, it is
+often true. So, this indicates that same
+direction and possibly opposite
+orientation.
+And yes, dear friends, from this
+uh both comparative functionality, yes,
+both Gram-Schmidt and NumPy produce
+valid QR decomposition.
+And orthogonal Q and uh exact
+reconstruction, so the both absolute
+values of column matches, but signs may
+differ. So, this is a non-uniqueness of
+QR. So, flipping column sign in Q is
+compensated by flipping the
+corresponding row sign in R. So, keeping
+A is equal to QR intact.
+And here, the exact R from
+GS is confirmed that upper triangle R as
+expected. And let's wrap today's
+session, dear friends. So, we started
+with orthogonal matrices and I
+discovered something remarkable. A
+transformation can rotate data without
+changing its length, without changing
+its angle, without destroying its
+geometry. We learned why those Q
+transpose multiplied by Q, which is
+equal I, makes orthogonal matrix
+computational superheroes. Dear friends,
+as we continue our journey, we will
+begin to notice that many machine
+learning algorithms are simply clever
+ways.
+So, behind every recommendation engine,
+behind every PCA visualization, behind
+every compressed image, behind every AI
+model, there is linear algebra quietly
+doing the heavy lifting. The goal of
+mathematics is not to memorize equation.
+The goal is to discover the hidden
+structure behind data and the world
+around us. Thanks for watching, dear
+friends. Happy learning.

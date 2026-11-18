@@ -1,0 +1,669 @@
+# bAJEs18BOfY
+# https://youtu.be/bAJEs18BOfY
+
+Happy morning, dear friends. Here's
+yours, Dr. Rajendra. Welcome to
+Demystify with Ajay.
+Dear friends, previously we have
+discussed about the theoretical
+machinery of matrices.
+And this session puts that machinery to
+work on three applications that are
+central to data science or machine
+learning or deep learning, generative
+way, mainly on computer graphics. We are
+going to discuss on geometric
+transformation. If these include
+operations such as translation,
+rotation, scaling, and flipping,
+allowing images to be viewed from
+different perspective while preserving
+meaningful information. And before that,
+let we include our important necessary
+libraries. And here we just go, dear
+friends. We have already discussed with
+this
+in our previous sessions also. Yes, the
+NumPy for mathematical, so numerical
+Python, Matplotlib for plotting. Yes,
+we have already discussed about those
+warnings and other default parameters.
+And dear friends, we have just included
+that a random seed. So, this fixes the
+random number generate states, which
+ensure reproducibility.
+And yes, let we just execute and
+let we check what is the version of
+NumPy. Yes, it is a 2.3.5.
+Okay, dear friends, this code constructs
+and visualizes a 2D rotation
+transformation to verify its
+mathematical properties and demonstrates
+its geometric effect on a set of points.
+Okay, before going to coding, I just
+want to specify one thing, dear friends.
+Dear friends, actually this matrix has
+two remarkable properties. Yes, one is
+columns are orthogonal. So, kindly just
+see here. Cos theta multiplied by sin
+theta plus minus sin theta into cos
+theta which is equal to zero.
+So this is what specified as columns are
+orthogonal. And the second property is
+of course columns are unit vector. It it
+would be just a specified as like an
+Pythagorean identity. What is it? Yes,
+of course that cos squared theta plus
+sine squared theta which is equal to
+one. So a matrix with this
+orthogonal unit norm is called as
+orthogonal matrix.
+An orthogonal matrix if it satisfies
+T transpose multiplied by T which is
+equal to one, which means yes, of course
+T inverse which is equal to T transpose.
+So let me just see what is the exact
+code defines. So dear friends actually
+here this theta which is equal to np.pi
+divided by five. So actually this is
+what the degree clockwise that is 36
+degree clockwise. And here we have the
+matrix that is the exact T matrix a T of
+theta which is equals to a matrix whose
+first row is
+cos theta
+sine theta
+and the second row is negative sine
+theta
+cos theta. Difference actually this
+matrix rotates its points while
+preserving their length.
+Okay, and here kindly just observe dear
+friends that this one we have a standard
+counterclockwise rotation. Where that
+exact standard counterclockwise rotation
+it just shows here it is cos theta minus
+sine theta and uh to the second row it
+would be the sine theta and cos theta.
+So actually this code flips the sign of
+the sign term to rotate in the opposite
+direction. Kindly have a note on towards
+this. Okay? So, this is what and here
+this would be the 2D rotation. Okay? And
+here this what makes the opposite side
+of the rotation. Okay? Yes, let me just
+move on to the next line of the coding.
+Yes, here it just shows the exact
+numerical verification of the property
+that is orthogonality. Okay, now let me
+just verify the orthogonality property
+by using exact equation that we have
+already discussed. Yes,
+T transpose Okay? Matrix T transpose
+multiplied by T which is equal to
+identity. That is the exact numerical
+verification of property which is an
+orthogonality. Okay? So, this exactly
+shows us like T transpose multiplied by
+T which is equal to the identity.
+Actually, this confirms columns are
+orthogonal. And yes, this implies kindly
+just observe the length would be
+preserved and the angle
+the angle are preserved.
+And the next, of course, kindly just
+observe dear friends. Here we have the
+numerical Python that is NumPy
+functionalities. This it just to shows
+the determinant. Yes, for the property
+of rotation, we are just going to have
+us like determinant of T
+which is equal to one. And here kindly
+just see here dear friends, if this
+interpretation is positive one, yes, it
+just a rotation but no reflection. But
+if it is a negative one, of course, it
+just makes the reflection. So, this is
+rotation and this negative one it would
+be the
+reflection. Okay, now let me just to
+move on to the next slide. Yes, this
+exact construct the
+input geometry. Okay, so here of course
+kindly just observe we have a
+vertical line of points and this shows
+the exact one and this generate eight
+points along the Y axis. So along the Y
+axis here it would be as like So kindly
+just observe it would be like 0
+yi. So yes, it has the shape of points
+would be 2 8. Okay, next let me just
+apply the exact rotation. Dear friends,
+this matrix multiplication rotates all
+points simultaneously.
+So each column is a transform. Each
+column is transformed how? Yes, exactly.
+So the X rotation which is equal to T
+times X.
+Now let me just visualize the
+plot originally and rotate points also.
+Okay, so that is what here it is given
+and kindly just observe the original.
+Yes, it is in black circle and towards
+the rotated yes, it's in blue that is
+what it is specified and here we have
+the blue and kindly just see here this
+would results with an
+line becomes a filtered line that is
+rotated clockwise
+in 36 degrees. So that is what here we
+have specified.
+Okay, and next one kindly just observe
+dear friends we are just having a
+rotation arc annotation. Okay, and arc
+annotation yes, it just draws a small
+arc indicating the rotation angle and
+starts at 90 degree vertical direction
+and moves clockwise.
+Okay, now let me just have our axes and
+styling. Yes, we have just a specified
+just equal scaling ensures
+geometric accuracy and axis lines
+emphasize the rotation about the origin.
+And dear friends, yes, let me just have
+this is the exact title and we just save
+the figure and saves this visualization.
+Let I execute and see what's the output.
+Okay, so kindly just observe here. So,
+this is our T and yeah, we have the
+orthogonality as T transpose multiplied
+by three, which is an identity. So, that
+is what here it is specified and with
+this resultant, yes dear friends, so
+here what it just shows is the rotation
+matrix T with pi by five, that is 36
+degree. It just satisfies that is T
+transpose.T,
+which is equal to identity.
+This is what the orthogonality. And yes,
+when on just a specifying the
+determinant of that T, which is equal to
+one, yes, this specifies the rotation,
+not a reflection. And here kindly just
+observe the vertical line of points is
+rotated 36 degree. Okay, so 36 degree
+clockwise without any stretching. Every
+points maintains its distance from the
+exact origin.
+And one thing I just want to specify
+here, dear friends, for
+counterclockwise,
+okay, actually the exact rotation here
+it is specified as like a
+counterclockwise rotation, where it just
+negate
+at theta, that is equivalently and makes
+the transpose of the matrix T matrix of
+minus theta, which is equal to T of
+theta the whole transpose.
+So, this is what it is specified as like
+counterclockwise.
+And uh dear friends, kindly just
+observe, dear friends, here the rotation
+property, whichever we just uh specified
+here, I just want to make you a simple
+point. Yes, first of all, according to
+the rotation property, the length is
+preserved. Yes, of course, the length is
+preserved by Yeah, the norm of matrix T
+of X,
+which is equal to the norm of X.
+So, with this, the length is preserved,
+and of course, the angle is preserved,
+but there is no distortion.
+Okay? So, the no distortion is in the
+sense No, uh that is uh it is a rigid
+transformation. And when just coming
+towards the uh geometric effect, kindly
+just observe, dear friends, the second
+one we are just going to discuss on
+geometric effect. Yes, the original
+point lies on a vertical line, of
+course. After transformation, yes, the
+line rotates Lo- rotates according to
+what? 36°. Okay? So, the line rotates,
+and the distance between each point,
+kindly observe, remains unchanged.
+And here, orientation changes, but not
+the shape.
+The shape remains also the same. Okay.
+Now, next uh it is all about a broader
+context. Dear friends, this is an
+example of an orthogonal transformation.
+What is it? Yes, of course, T inverse,
+which is equal to T transpose.
+So, such transformation are fundamental
+in uh PCA, computer graphics, robotics,
+and coordinate transformation.
+So, of course it is also used in Asian
+vector based decomposition.
+Okay. Now, next of course kindly just
+observe here friends.
+We have just discussed a pure rotation
+matrix preserves length. Yes, of course
+the same.
+And here a general 2 into 2
+transformation matrix can both rotate
+and stretch.
+Rotate and stretch. Yes, that is what
+specified as like the wobbly circle.
+And here towards the exact matrix dear
+friends, it is specified as like yes.
+T pi
+which is equal to
+matrix with the first row as one
+1 minus pi
+and second row it is zero and one.
+And dear friends, the diagonal elements
+scales the axis both one here.
+Yes.
+So, no scaling.
+But
+while the off-diagonal that is
+off-diagonal kindly just observe it is 1
+minus pi. So, shears the x-axis based on
+the y coordinates.
+So, here if the pi which is equal to one
+of course T would be one. No
+transformation. And here if this pi
+moves
+away from one yes, the circle also get
+sheared. So, that is what shear
+transformation.
+Okay. Now, let me just discuss with the
+code. Yes, this exact code visualize a
+family of shear transformation applied
+to the unit circle and verifies a key
+algebraic property that is determinant.
+Okay. So, this the result is the
+so-called wobbly circle. Let me just see
+and
+of course this is an ellipse-like shape.
+Okay? Yes, dear friends, kindly just see
+here this exact Let me just define the
+theta and here we have an
+line space with 100 coordinates, okay?
+And yes, and here we have the circle and
+which it just has
+a shape of 2 into 100, okay? And when on
+just making these two things Yes, this
+just gives us
+Kindly just observe here the parametric
+of a representation of x which is equal
+to cos theta and y of course it defines
+the sin theta, okay? So, that is what
+here it is specified as like a theta and
+here when coming towards the circle Yes,
+it has the shape of 2 into 100 where it
+just shows that is row zero, it would be
+the x coordinate and the row one, it
+would be the y coordinate.
+And dear friends, kindly just observe
+here this is the exact parametrized
+history transformation, okay? So,
+parametrized history transformation and
+here each value of pi defines a
+different transformation matrix.
+And that is a specified here. So, for
+each different
+values, we are just going to have this
+loop functionality and yeah, this is
+what which I have already specified. So,
+this is what the exact equation which
+has a general form as like
+which we have already discussed. Yes,
+T of pi equals a matrix with the first
+row as like
+one and one minus of pi and second row
+as a zero and one.
+Okay? Now, let me just move on the
+interpretation of the transformation.
+So, here it is what applied. So,
+transformed which is equal to t at
+circle. So, dear friends, actually this
+a point for a point x {comma} y the
+transformation would becomes as like So,
+this exact equation would be just
+specified. So, here whenever we have a
+point at x {comma} y, so this would be
+transformed as like
+x' which is equal to x + 1 - pi into y.
+And here y' it would be the same y. So,
+what would just it resembles as like
+Yes, dear friends, the y coordinates
+remains unchanged, but the x coordinate
+is shifted proportionally to the y.
+Okay? So, this is a horizontal shear.
+That is what it shows. Okay. And I just
+want to give you a small
+information also. Kindly just have a
+note on towards dear friends. If here
+let me have a pi and this is 1 - pi,
+what happens when this is affected?
+Okay? So, here in such a case
+if the pi is one
+and to the 1 - pi if it is zero, okay?
+So, it is specified as like no shear
+would be done and it is as like a
+perfect circle.
+And if the same pi has a value of 0.5
+and 1 - pi also has the same value of
+0.5, okay? A mild shear transformation
+occurs.
+And kindly just observe if the pi is
+zero and 1 - pi is one, so that would be
+a moderate shear would be applied.
+And here to the last it is minus 0.5 and
+here it is 1.5 under 1 minus 5 as strong
+shear transformation would appear.
+So, kindly just observe this exact 1
+minus 5. If it is increases
+If it is increases, yes, the circle
+becomes increasingly tilted and
+stretched horizontally.
+So, the shape resembles an ellipse
+skewed to the right.
+Okay. So, let me just visualize that,
+okay? And here, kindly just observe the
+exact plot that transformed points are
+like scattered, okay? So, here we let me
+just
+set the axis of fixed or and equally
+scaled. And this ensures geometric
+distortions are accurately represented.
+And let me just have the title, okay?
+So, just displays the
+Of course, displays the parameter value
+and explicit matrix formation. And
+kindly just observe let me have the
+one important functionality I have to
+specify here, dear friends.
+This one it is to check the determinant
+whether the area is preserved or not.
+Okay? And for this, what we are just
+going to have as a Yeah, we are just
+going to have a value of Yeah, so that
+would gives you Kindly just observe that
+would just show that a T which is equal
+to one a matrix of one and Yeah as a
+first row and zero and one as our second
+row. Where this gives our determinant of
+T which is equal to one.
+So, let me just to see what is the
+output here and let me just go towards
+the visualization tools.
+So, here we just got the exact
+output.
+Kindly just observe, dear friends.
+As I have already said, yes, the pi one,
+okay? And kindly just see here, the T
+determinant of T is also one. And the
+circle is undistorted.
+As this pi value is getting decreases,
+the off-diagonal element of this
+zero point, that is 1 minus pi,
+introduce a shear.
+That is the upper half of the circle is
+pushed to the right side. Pushed it to
+the right side, and lower half is pushed
+to the left side.
+So, our frame has determinant of T,
+which is equal to one. That is meaning
+that area is preserved even though the
+shape changes. So, the area of the
+circle, the area of this ellipse, this
+ellipse, this ellipse, of course, this
+is what the wobbly circle. Yes, the area
+is preserved, but the shape changes
+accordingly. So, this is what a shear
+transformation, so one of the
+fundamental transformation type.
+So, with this, yes, dear friends, I have
+to specify one important aspect. So,
+when on just executing this coding, yes,
+this exact codes gives us, yes, of
+course, it has an area preservation.
+That is determinant of T, which is equal
+to one. So, area is unchanged. Even
+though the shape distorts, its area
+remains constant. And the next one, of
+course, it is a non-orthogonal
+transformation. Yes, unlike rotation,
+here the angle is not preserved.
+And the lengths are also not preserved.
+So, the
+circle becomes a sheared ellipse-like
+figure.
+Okay? And uh next one, of course, uh
+kindly just observe, dear friends.
+The third one, it is all about linear
+transformation. So, linear
+transformation, yes, of course, this is
+a unipotent matrix. So, here we have the
+agent values as like lambda one, which
+is equal to lambda two, which is equal
+to one. So, no diagonalizable, that is
+in general. And yes, this represents a
+pure shear, not scaling or rotation.
+Okay, now, let me just uh move on to a
+determinant as a area or volume scale
+factor.
+Dear friends, actually, this exact code
+provides a geometric demonstration of a
+central linear algebra result.
+Actually, what is that? Yes. So, kindly
+just observe So, determinant of matrix
+T, which is equal to area scaling factor
+of the transformation. So, that is
+what's said to be central linear algebra
+result.
+So, it visualizes have different two
+into two matrix that transforms a unit
+square and how their determinants
+relates to the resulting area. So, that
+is what we are just going to visualize
+it. Okay, so, kindly just observe, we
+are just going to have our
+uh plotting and here we are just going
+to have four subplots, one per
+transformation. Okay? And what is that
+exact transformation? Yes, one is
+identity, and next one, it is going to
+be a scaling of two types, and
+uh yes, a rotation, and the last but not
+least, it is singular.
+Okay, and here, let I just give you the
+exact transformation functionality. So,
+if it is an identity, so exactly so T it
+would be equal to one and here to the
+same determinant would also be there.
+And yes, dear friends, this is what's
+said to be no change in shape or area.
+The next one we just to say yes, it is
+going to be a uniform scaling. So, what
+is uniform scaling is yes, exactly. So,
+here T it would be the two times of
+identity and here our determinant would
+be four. So, here each axis doubles.
+Okay? So, area it just becomes 2 into 2
+which is equal to 4.
+And the next we are just going to have
+the rotation. Okay? So, next it is all
+about the rotation and kindly just to
+see here we are having 45°
+rotation. So, yes. So, that 45°
+clockwise rotation. Okay? So, here
+determinant it would be equal to one.
+So, pure rotation, shape preserved and
+area also would be preserved. And last
+but not least yes, we are just going to
+discuss about the singular matrix. So,
+here singular matrix of course we have
+an array as like
+1 {comma} 2 and 0.5 and 1. So, here if I
+just compute the determinant for this.
+Okay? So, let I just have the first
+matrix here. So, 1 {comma} 2
+and 0.5 {comma} 1. Okay? So, this is the
+matrix exactly. So, if I just
+uh
+evaluate the determinant which is equal
+to
+1 into 1 minus 2 into 0.5. So, which is
+equals to 1 into 1 that's sorry 1 minus
+1 so, that is equals to 0. So, this
+matrix is purely singular.
+So, it collapses 2D space onto a line.
+That is zero area.
+And dear friends, based on the
+unit square, okay? So, based on this
+unit square, let me just have this one.
+So, this defines a closed polygon, so
+that it returns to origin. That is area
+which is equal to one. And let me just
+apply the transformation. What is the
+transformation? Of course, all these
+four inside a loop, let me just apply
+the transformation. And here, this
+applies transformation for each vertex.
+Okay? And here, once it is done, yes, it
+produced a new quadrilateral, that is
+degenerated shape also. And dear
+friends, this one it just going to
+visualization of a logic
+functionalities, that is as like whether
+it is gray color, and of course it is
+light gray color, and we are just going
+to have a dashed border. Okay? So, that
+is also here it is specified, and the
+exact
+transformed shape, it would be as like
+blue and red. So, here when just comes
+towards blue, yes, it is non-zero
+determinant, which is area preserved or
+scaled. And for red, of course,
+it just specify as like a near zero
+determinant, that is area it is
+collapsed. Okay? And here we have the
+exact title, and which is just displays
+the transformation type and determinant.
+Okay? So, let I just execute, and let me
+observe the result.
+And here we have. So, this one it is
+identity. So, yes, there is no change we
+have.
+Of course, area is also preserved.
+Okay? No change is there, area is
+preserved. And when coming towards the
+scaling as two times scaling, okay?
+Here, our determinant which is equal to
+four. So, each axis is doubled.
+So, as I have already specified, yes,
+uh this is what here. Okay, so each one
+it is uh
+doubled, so we have uh 2 into 2, which
+is equal to four times larger. Okay,
+that is what we just got here.
+And the next one, a rotation of 45°
+rotation of 45° and here, dear friends,
+the shape is rotated, area is preserved.
+So, the rotation is volume preserving.
+That is also keep it in mind, okay? The
+volume is that is area is uh preserved,
+the shape is also there, but one and
+only the angle. Exactly, we have only
+the angle. So, the shape may rotate, but
+not distort area. And last, but not the
+one, it is singular. So, the square
+collapses into a line. So, one dimension
+is completely flattened here. So, this
+is what the determinant is equal to
+zero. So, that is what here we have just
+uh discussed. So, that is what it is
+specified as determinant is zero means
+geometrically.
+So, yes, dear friends, uh with this
+visualization, what we have just
+observed is uh yeah, determinant as area
+multiplier.
+For a a any region, if I just specify
+any region as like uh A, so here it
+would be area of T of A, which is equal
+to yes, absolute determinant of T
+multiplied by area of A.
+So, this is what it's said to be
+determinant as area multiplier.
+Next, when I'm just going as little bit
+then uh sign of determinant, dear
+friends, if it is a positive, yes, it is
+uh orientation preserved. And if it is a
+The
+of course, orientation it is flipped.
+That is reflection happens.
+Okay? And uh next uh we have just uh
+discussed about uh sharing, of course,
+uh scaling, of course, we have just uh
+seen the rotation also. So, here
+rotation it just uh preserves area and
+shape. Okay? So, area and shape it is
+preserved. And when coming towards
+scaling, changes, of course, uh area
+uniformly. And uh when coming towards
+this uh shear, yes, uh
+uh from the previous example, what we
+have just uh seen is, yeah, it just uh
+preserves the area, but it distorts the
+shape. And uh last but not in the least,
+yeah, we have also discussed about the
+uh singular which uh destroys the
+dimensionality itself. So, yes, dear
+friends, of course, uh
+uh this this exact code demonstrate that
+the determinant is not just an algebraic
+quantity.
+It has a direct geometric meaning. Uh
+area scaling in 2D or a volume scaling
+in higher dimension. And of course, uh
+here linear transformation can uh
+preserve area, scale area, collapse
+space, everything. Of course,
+uh th- these are the exact importancy
+when we just uh visualize it. Okay? By
+this uh we are just able to uh see, yes,
+dear friends, this geometric
+transformation use uh matrix vector
+multiplication. Uh and mainly this uh
+uh transform also of this uh my matrix
+vector multiplication to rotate or scale
+and uh shear coordinate. And here pure
+rotation matrix are uh orthogonal, that
+is also we have just uh discussed. Okay?
+And uh which we just uh preserves the
+length. And uh dear friends, the
+determinant of the transformation matrix
+that gives the uh area or volume scale
+factor. And uh last but not least, a
+determinant which is equal to zero means
+the dimension is collapsed. And of
+course, we have also discussed about
+wobbly circle, demonstrated how
+parameterized the transformation creates
+animation.
+I hope I think this session would help
+you understand about the and uh kindly
+just
+like this video, share it with someone
+starting with their
+AI journey. Okay, dear friends, thanks
+for watching and see you in the next
+session.

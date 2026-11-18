@@ -1,0 +1,453 @@
+# MBPRCM1xlPs
+# https://youtu.be/MBPRCM1xlPs
+
+Happy morning dear friends. Here yours
+is Dr. Rajenta. Welcome to demystify
+with Ajek. Dear friends, today we are
+going to discuss on agent decomposition
+which is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure that
+is a set of special direction which we
+just say een vectors and associated
+scaling factor. Yes, that is what each
+inn value the together tells us
+everything about what the matrix does
+and yes dear friends here it is what a
+simple looking equation a multiple by v
+which equals lambda multiple v it looks
+small but this single equation powers
+yes principal component analysis noise
+reduction data compression graphic
+analysis dynamical systems yes of course
+a lot and lot and this exact equation
+yes when matrix A multiplies a special
+vector V the result is simply that same
+vector scaled by this number that is
+lambda here the vector V is an EGN
+vector and the scale lambda is its
+corresponding EG value finding all such
+paths that is lambda and V is what EN
+decomposition is all about and dear
+friends of course There is a
+prerequisites also. Yes, you should be
+comfortable with the matrix
+multiplication, determinance, the null
+space, a matrix rank and we will also
+use the concept of matrix shifting. And
+dear friends, in this session we will
+uncover yes what EG values and EG vector
+really mean and why EGN decomposition
+works only for square matrix. The
+geometric interpretations of stretching
+without rotating. How agent value
+reveals important patterns in data. The
+characteristic polomial. Finding Eian
+vectors using the null space. And matrix
+diagonalization. And last, yes, why
+symmetric matrix are the superheroes of
+linear algebra. and added. Yes, we will
+see why EGN decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Uh in this
+session, we are just going to discuss on
+how to find EGN vector. Dear friends,
+once we have the EN values, finding the
+EN vector is conceptual straightforward.
+Each vector V live in the null space of
+the matrix shifted by its EN value.
+Mathematically v sub i belongs to null
+space of a minus lambda sub i * i. That
+is every eian vector lives inside the
+null space of its shifted matrix. And
+dear friends, think of it this way. The
+een value is like a key and the matrix
+is like a lock. You insert the key that
+is lambda sub i into the matrix by
+shifting that is a minus lambda sub i *
+i and the door open to reveal the agent
+vector hiding in the null space. Okay,
+let me just discuss this by using the
+code. So dear friends, actually this
+exact script computes agent vector by
+explicitly solving the null space
+problem. Yes, the null space problem
+mathematically specified. Yes, a minus
+lambda * i multiple by v which is equal
+to zero. So for each agian value and
+then verifies the result numerically. So
+let me just define the matrix. Yes, here
+we have the matrix. Yes, it is a
+symmetric guarantees real eian value and
+orthogonal een vector. And here yes of
+course we have the Egen value numerical
+Python and here we just go for the step
+one. Yes this is the exact core idea
+where we just specified yes the null
+space a minus lambda * i. Yes, for each
+value of lambda, we are just going to
+computed the sifter functionalities and
+this produce a matrix whose null space
+contains the EGN vector. And here we
+have kindly just observed dear friends.
+Yes, this is the code logic for solving
+the null space. Yes, this implements a
+manual null space solution. And here,
+yes, it just uses the first row
+equation. Yes, of course. It just
+specify as like mathematically a
+multiple by v sub 1 + b * v sub 2 which
+is equal to zero which implies yes
+v_sub_2 which is equal to - a / b * v
+sub i and here yes if we just set this v
+sub 1 which is equal to 1. Yes to obtain
+a concrete vector and it handles edge
+cases where division would be unstable
+and yes dear friends here we have the uh
+normalization yes it converts eian
+vector to unit length and it is mainly
+important for numerical stability
+consistent comparisons. So this exact
+verification step it just makes the
+check a multiple by v which is equal to
+lambda v. So yes here we have the exact
+comparative statement with numpy and
+this numpy returns each vector as
+column. They may differ by of course a
+scalar multiple as like sign flips. So
+this is expected because each vectors
+are not unique and here this v and c
+multiple by v represents the same
+direction. Okay. So let me just execute
+and view the result. So here we just
+discussed dear friends kindly just
+observe here we have the matrix A that
+is 1 2 2 and 1 and here we are able to
+identify the value of lambda 1 and
+lambda 2 as with help of characteristic
+polomial. Yes you can verify the
+characteristic polomial here it is
+lambda square minus 2 * lambda minus 3
+which is equal to 0. And here yes with
+this functionality we are able to
+identify that is lambda 1 it is three
+and lambda 2 it is minus1. So yes we
+just got the exact eian values here. And
+with this let me just compute the
+shifted matrix. So yes dear friends
+kindly just observe here when we just
+move on. Yes uh if we just have the case
+one as lambda which is equal to three.
+Okay. So here so here a - 3 i which is
+equal to 1 - 3 2 2 and 1 - 3. So this is
+what the exact matrix and here it is
+resulted to - 2 2 and 2 -2. So this
+exact matrix it comes and solving the
+null spaces. Kindly just observe dear
+friends -2 v_ub_1 + 2 v_sub_2 which is
+equal to zero. Yes. which implies
+v_sub_1 which is equal to v_sub_2. So
+here a valid eian vector we just get it
+as like yes v which is equal to 1 and 1
+and when not normalizing yes it just
+comes 1 / 2 multiple of this matrix
+and when with verification yes dear
+friends so we have a multiple by v which
+is equal to 3 and 3 yes yeah it is what
+the 3 V. So we are just getting that
+particular functionality by using this
+lambda 1 which is equal to 3. So let me
+just compute the shifted matrix by using
+the case 2 functionalities. Yes, here
+the case 2 which is lambda which is
+equal to minus1. So let me just make use
+of it and identify. So see here dear
+friends. So a minus of -1 into i. So
+here we just get a + 1 which is equal to
+2 2 and 2. This is the matrix and yes by
+using the null space yes from the first
+row we just get 2 v sub 1 + 2 v sub 2
+which is equal to zero. Yes, which it is
+implies v_sub_1 which is equal to minus
+v_sub_2. So a valid een vector here v it
+would be 1 and minus1 and when on
+normalizing yes we just get 1 by 2
+of matrix 1 and minus1 and kindly just
+observe the verification dear friends.
+So here we just get a v which is equal
+to minus1 and 1. So yes resulted towards
+minus1 multiple by v. So yes that is
+what we are just getting it here. So
+this is for the case one and kindly just
+observe and this is for the case two
+functionality and we just when we apply
+towards this first row with the null
+space here we just get and when on
+verifying kindly just observe when on
+verifying yes we are able to get yes
+both or yes it's equal and towards with
+the geometric interpretation yes kindly
+I just observe dear friends when we just
+go towards this uh verification of numpy
+values. Yes dear friends here when we
+just make use of this eg value by using
+one and one the transpose. Yes it
+directions along the line y is equal to
+x and it is stretched by factor three.
+So that is what the first lambda which
+we have observed.
+Okay, first case study and second is we
+just uh had the exact functionality as
+like a value which is 1 and -1 the
+transpose. So here the direction along
+the line y which is equal to minus x and
+here reflected and scaled by factor
+minus1. So that is what we just got it
+here. Yes, the lambda to the factor it
+is minus one. Dear friends, by this
+code, yes, this exact code demonstrate
+the canonical procedure. Yes, first it
+just compute the EN value and for each
+EN value from A minus lambda I. Yes, it
+solves its null space and then normalize
+the resulting vector and it just
+verifies that is
+a multiple by v which is equal to lambda
+multiple by v. And here comparing with
+the numerical routines it explicitly
+shows the Eian vector arise as
+non-trival solutions to a homogeneous
+linear system making to connection
+between Eian decomposition and null
+space fully concrete. Okay. Now let we
+just uh have a practice that is uh we
+use an linear algebra for EGN
+decomposition rather than computing EGN
+values and EGN vector by hand. So the
+function returns both the EGN values as
+a vector okay and the EGN vector as
+columns of a matrix. So SD dear friends
+this script demonstrates the practical
+computation and correct interpretations
+of Eg decomposition in numpy with an
+emphasis on an common source of
+confusion that is how Egen vectors are
+stored.
+Okay. So here we just start with
+defining a matrix. Yes, here uh we are
+just going to have our matrix A which is
+1 2 3 and four. And yes, let me just
+define the EEG decomposition via numpy.
+Okay, so this numpy returns e valal that
+is array of een values that is lambda 1
+and lambda 2. And here we have the
+matrix whose columns are een vector and
+here we just get that so a multiple by v
+which is equal to v multiple by a. So
+here uh v actually it is what the aian
+vector that is columns and a yeah it is
+a diagonal matrix of each value. Next we
+are going to have our uh critical
+structure details. Yes values are
+according towards the column. So here we
+just get this exact column. Yes we just
+get the first een vector and here we
+have the second een vector. And this is
+essential. Yes. When we just go towards
+that I eian vector. And here we are just
+making it towards the column. Yes. Dear
+friends, kindly just observe this is a
+column conversion because the matrix
+equation is kindly just observe a
+multiple by v_sub_1 v_sub_2. Okay. So
+here which is equal to that v_sub_1
+v_sub_2 multiple by lambda that is
+lambda 1 and 0 lambda 2. So here each
+column satisfy a multiple by v sub i
+which is equal to lambda sub i multiple
+by v sub i. And kindly just see here
+dear friends this one here a common
+mistake explicitly shown. Yes, this one
+it is a column not an row because row
+makes components of different EN
+vectors. They do not satisfy a multiple
+by v which is equal to lambda multiple
+by v. And here we have the loop
+functionality for verification. Yes, for
+each pair it just going to compute two
+things. Yes, one it is as like a
+multiple by v and next one it is lambda
+multiple by v. So it just compare using
+this uh numpy functionalities also. So
+this validates the defining equation as
+like a multiple by b which is equal to
+lambda multiple by b. And dear friends
+here we are just having the al close so
+which is used instead of exac quality
+because floating point arithmetic
+introduces small rounding errors and
+here we are just going to have the
+results typically match up to 10 ^ of
+minus 8 position. So let me just execute
+and view the output. So this code
+operationalize the exact factor. Kindly
+just observe dear friends this Aian
+values. Yes, it is a scaling factor and
+AGN vectors. Yes, of course invariant
+directions and here the matrix A acts as
+stretching along a vector direction with
+a different scaling factor as per
+direction. And dear friends again I just
+specify here the single most column
+mistake when working with EGN vector in
+code is confusing rows and columns and
+here numpy exactly stores the EN vectors
+as column of a matrix not rows. So with
+square matrix you will not get a shape
+error if you accidentally use rows. So
+you will you just get wrong answer
+silently and here always access each
+values as a column slicing not a row
+slicing. So this convention follows from
+the standard mathematical notations
+where v of course it is what's an eian
+vector computes a column of v. So yes
+dear friends exactly this script it just
+summarize that here we are just getting
+from this yeah we are returning the EN
+vectors in columns. So each column
+corresponds to one EN value. So the
+verification loop confirms the EEN
+decomposition numerically and
+misinterpreting rows as EN vector is a
+fundamental but common error. script
+reinforce both the correct API usage and
+the underlying linear algebra structure
+and dear friends here we are just going
+to discuss on an important topic yes een
+vectors are not unique if v is an een
+vector of a then alpha multiple by v is
+also an een vector for any nonzero
+scalar alpha and here of course here we
+have the exact proof A multiple by alpha
+V which is equal to alpha multiple by
+AV. So here which is equivalent to alpha
+multiple by lambda V and which implies
+lambda multiple by alpha V. So if V is
+an EN vector any scaled version of V is
+also an EG vector that is what here it
+is specified. Okay let me just discuss
+that by using the code. So this exact
+script demonstrate a fundamental
+properties of EGN vector. So they are
+not unique in magnitude or sign only in
+direction. So here we are just starting
+the defining matrix. So kindly just
+observe dear friends. So this one it is
+the matrix A. We have 1 2 2 and 1. And
+of course kindly just observe this
+functionality which is just shows
+v_sub_1 is one e vector corresponding to
+the e value of zero. And here numpy
+returns eg vector normalized to unit
+vector length. So in such a case nom
+factor of v sub i which is equal to 1
+and dfs kindly just observe here we just
+specify mathematical principle as like a
+multiple by v which is equal to lambda
+multiple by v. So therefore for any
+scalar that is alpha which is not equal
+to zero. Yes, as I have already
+specified a multiple by alpha v which is
+equal to alpha multiple by av and which
+it implies as alpha multiple by lambda v
+and yes which is equal to lambda
+multiple by av and yes av is also an
+eian vector and kindly just observe dear
+friends here this exact code demonstrate
+for each scalar alpha the code exactly
+computes this loop functionalities. Yes,
+it just verifies and it was specified as
+with all close functionalities. Okay.
+And here it just proves that is each
+output line conforms towards this
+functionalities that is a multiple by
+alpha v which is equal to lambda
+multiple by alpha a. So here the een
+value equation still holds after
+scaling. So let me just uh execute and
+view the outputs. And here we are able
+to witness one thing. Kindly just
+observe alpha which is equal to minus1.
+Yes, v which is implies to minus v. So
+the vector points in the opposite
+direction but still lies on the same
+line through the origin. So here that
+implies that v and minus v represents
+the same eian direction. And here I just
+want to specify one thing dear friends.
+here een values and here we have the
+geometrical interpretation. As Egen
+vector defines lines in one dimensional
+subspace not specific arrows and here it
+just transformations A that is it
+preserves the line scales vectors along
+it and yes of course by this we are able
+to specify that span of V which is equal
+to yes alpha V when alpha belongs to R
+And here normalization is used. Yes.
+Numpy returns unit vector because
+removes arbitrary scaling ambiguity and
+makes comparisons consistent and it
+improves numerical stability. But
+mathematically normalization is a
+convention not a requirement. And yes
+finally we have the statement. Yes
+kindly just observe direction matters
+magnitude and sign do not. So this is
+exact practice. EN vectors are defined
+up to nonzero scalar multiples. The only
+invariant properties is their direction
+that is the span. And yes dear friends,
+this exact code just verifies that
+scaling an EN vector by any nonzero
+scalar produces another valid EN vector.
+So the EN value equations remain
+satisfied. Egent vector represents
+directions not fixed vectors. So this
+property is essential for correctly
+interpreting agent decomposition in both
+theory and practice. We have discussed
+egen vectors are special directions that
+remains unchanged in orientation. Egen
+values tells us how much those
+directions stretch or shrink. The
+characteristic equation helps us uncover
+Egen values and EN vectors emerges from
+the null space of shifted matrices. And
+here the most important lesson is yes EN
+decomposition is not about matrices. It
+is about finding hidden patterns. When
+data becomes complicated, een vector
+reveals the important direction. When
+data set becomes highdimensional, PCA
+uses EEN vector to simplify them. When
+noise hides useful information, EG
+values helps separate signals from
+noise. So that's why Egen decomposition
+powers PCA, machine learning, computer
+vision, signal processing, network
+analysis, financial modeling, scientific
+computing. Of course, dear friends,
+every time a machine learning model
+discovers hidden structure in data,
+agent decomposition is often working
+quietly behind the scenes. I hope I
+think so this session would be very much
+useful. Yes, dear friends, the true
+power of mathematics lies not in solving
+equation but in discovering the hidden
+patents behind them. So, thanks for
+watching. See you in the next session,
+dear friends. Happy learning.

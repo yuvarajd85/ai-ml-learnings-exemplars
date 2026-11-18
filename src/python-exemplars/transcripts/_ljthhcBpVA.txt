@@ -1,0 +1,166 @@
+# _ljthhcBpVA
+# https://youtu.be/_ljthhcBpVA
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as uh PLT. And
+uh dear friends, of course we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And uh yes, dear
+friends, uh we have included the
+warnings. We have this imports Python's
+built-in warnings modules also which
+allow control over warning messages
+generated during execution. And yes, we
+have just included the default
+parameters. Yes, for
+the font size and enabling the grids and
+setting the transparency of the grid
+lines to 30%. And of course the font
+size for all text in plot to 12 points.
+Yes, and uh yeah, closing the dictionary
+and applies all the configuration
+updates. We have just Let me include
+those and execute those. Yes, of course
+we have the version as NumPy version
+with 2.3.5.
+We are just going to discuss uh
+important functionalities. Uniqueness of
+inverse matrix. Dear friends, so far we
+learned what an inverse matrix is and
+how to compute. But now an interesting
+questions arise. Can a matrix have two
+different inverse? In other words, could
+there be one matrix, like we have B, and
+acts as an inverse of A, and another
+matrix C that also the inverse of A? And
+dear friends, the answer is no.
+An invertible matrix has exactly one
+inverse. Okay, let me just discuss that.
+Dear friends, suppose, just for the sake
+of argument, let A has a two inverse.
+Okay, we just have B and C. And since B
+is an inverse, we know, so kindly just
+observe, we have a matrix A. Okay, and
+towards its inverse, A inverse. But, let
+we just call two things. One is B and C.
+Since B is inverse, we know AB, which is
+equal to Y, where I is an identity
+matrix. And here, similarly for C, we
+have AC, which is equal to I. Now,
+assume
+B and C is not equal.
+We will see if this assumption is
+actually possible. So, we will start
+with a matrix C itself. Multiplying any
+matrix by the identity matrix does not
+change it.
+So, here, if I just go with
+C, which is equal to CI.
+So, this is simply the identity
+property. Now, let we replace with the
+identity matrix I
+with AB.
+What happens? So, here, C, which is
+equal to C of AB.
+Now, next comes an important property of
+matrix multiplication. Matrix
+multiplication is associative. That
+means, we can regroup the brackets
+without changing the order. So, here, C
+of AB becomes CA of B. So, notice that
+we have not changed the order of
+multiplication. We have only changed the
+grouping. Now, look carefully. What is
+the CA? Since C is the inverse of A, we
+know CA is equal to I.
+Remember an inverse satisfies both AZ is
+equal to I and CA is equal to I. So, we
+replace this CA with the identity
+matrix. Okay? So, now here it becomes
+IB. Again, multiplying by identity
+matrix changes nothing.
+What happens? B. So, this IB, now it
+becomes C.
+Putting everything together, now we know
+C, which is equal to B. This is a
+contradiction in a and whenever a
+mathematical assumption leads to a
+contradiction, the assumption must be
+false. So, therefore, our original
+assumptions that a matrix could have two
+different inverse is impossible. Hence,
+an invertible matrix has one and only
+one inverse. Well, why this important in
+machine learning? Different kindly just
+think about this. This uniqueness gives
+us confidence when solving matrix
+equation. For an example, let I just
+give you one thing. So, kindly just see
+here. AX is equal to B.
+And here, using X, which is equal to A
+inverse B,
+we never have to worry about getting
+multiply answer because of multiple
+inversion. There is only one inverse,
+which means there is only one
+transformation that exactly reverses the
+effect of A. So, this makes
+inverse-based computation reliable in,
+of course, linear regression, computer
+vision, or graphic transformation,
+robotics, signal processing, scientific
+computing, and interesting observation.
+Oh god.
+Here's something worth remembering. The
+uniqueness property applies only to
+invertible matrix.
+If a matrix is singular, meaning its
+determinant is zero, then it does not
+have an ordinary inverse.
+Instead, we often use something called
+Moore-Penrose pseudo inverse.
+Interestingly, there can be many
+generalized pseudo inverse for a
+singular matrix.
+And dear friends, however, the
+Moore-Penrose pseudo inverse is special
+because it is the unique minimum norm
+pseudo inverse.
+That's why it is widely used in machine
+learning, especially in least square
+problem, a linear regression, and neural
+network optimization.
+Okay, here I just give you a small
+remembering. Kindly just keep it in
+mind. Dear friends, if a matrix is
+invertible, its inverse is unique. So,
+there is one matrix that undoes the
+transformation, and only one.
+So, this seemingly simple result is one
+of the fundamental reason why inverse
+matrices are so powerful in linear
+algebra and machine learning.
+So, I think this exact session it would
+be useful. So, kindly like this video,
+share it with someone starting their
+data science or machine learning or
+generative AI journey, and subscribe to
+Demystify with Ajay for more such
+real-world explanation. Thanks for
+watching, dear friends. See you in the
+next video.

@@ -1,0 +1,263 @@
+# lvp2tkyiqEQ
+# https://youtu.be/lvp2tkyiqEQ
+
+Happy morning dear friends. Here yours
+is Dr. Rajenta. Welcome to demystify
+with Ajek. Dear friends, today we are
+going to discuss on agent decomposition
+which is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure that
+is a set of special direction which we
+just say een vectors and associated
+scaling factor. Yes, that is what each
+inn value the together tells us
+everything about what the matrix does
+and yes dear friends here it is what a
+simple looking equation a multiple by v
+which equals lambda multiple v it looks
+small but this single equation powers
+yes principal component analysis noise
+reduction data compression graphic
+analysis dynamical systems yes of course
+a lot and lot and this exact equation
+yes when matrix A multiplies a special
+vector V the result is simply that same
+vector scaled by this number that is
+lambda here the vector V is an EGN
+vector and the scale lambda is its
+corresponding EG value finding all such
+paths that is lambda and V is what EN
+decomposition is all about and dear
+friends of course There is a
+prerequisites also. Yes, you should be
+comfortable with the matrix
+multiplication, determinance, the null
+space, a matrix rank and we will also
+use the concept of matrix shifting. And
+dear friends, in this session we will
+uncover yes what EG values and EG vector
+really mean and why EGN decomposition
+works only for square matrix. The
+geometric interpretations of stretching
+without rotating. How agent value
+reveals important patterns in data. The
+characteristic polomial. Finding Eian
+vectors using the null space. And matrix
+diagonalization. And last, yes, why
+symmetric matrix are the superheroes of
+linear algebra. and added. Yes, we will
+see why Eian decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Dear
+friends, in this section, yes, we are
+just going to discuss on statistical
+interpretation mainly on principal
+component analysis. In data science, the
+most common application of Egene
+decomposition is what this principal
+component analysis. Here PCA answers the
+question what are the most important
+directions of variation in a
+multivariant data set. The idea is
+simple but powerful given and data set
+with many variables that is what the
+columns. So we compute the covariant
+matrix a symmetric matrix that capture
+how every pair of variables co-varies.
+So then we eg decomposition with
+covariant matrices and mathematically
+specified as C which is equals to V
+lambda V transpose. Dear friends, the
+exact EGN vectors V are the principal
+component that is the direction in the
+data space that captures the most
+variance and the EGN values lambda tells
+us how much variance each direction
+captures. A screen plot displays the EGN
+values in descending order. The shape of
+the screen plots reveals the structure
+of the data. If the data set is
+dominated by one major pattern, the
+first EEN value will be much larger than
+the reset. So if there are several
+independent patterns, there will be
+several large EEN values before the drop
+off. Okay, let me just discuss eight by
+using the code. So this exact script
+simulates two different data generated
+process and uses screen plots that is
+Egen value spectra to reveal their
+underlying structure via PCA. So here
+kindly just observe dear friends yes we
+have fixes randomness for consistent
+result and we create two side byside
+plots that is left of course scenario A
+and uh right by scenario B. So here we
+just go for that scenario A. Yes, kindly
+just observe this is one dominant latent
+factor. And here we are just going to
+have our data generation. Yes, kindly
+just observe. And from this we construct
+a rank one signal and noise model. Yes,
+of course. Which is mathematically
+specified as X is equal to F multiple by
+dopose plus epsilon. And dear friends,
+yes, here this exact F is a single Latin
+factor. Yes, shared across all variable.
+And W, yes, random loadings. How
+strongly each variable depends on the
+factor. And last epsilon, yes, a small
+independent noise. And here it is what
+the exact computes covariant matrices.
+Of course, here it is what the 15 into
+15 we have the variable. So 15 into 15
+covariance matrix and extracts the een
+values and short descending order and
+here yes dear friends of course uh each
+bar that is variance explained by the
+principal component and kindly just
+observe here we just measure how much
+variance is captured by the first
+principal component and of course it is
+expected to be within 70 to 95%age and
+as explained by uh PC ones and here we
+just go for scenario B and here exactly
+kindly just see here these are the exact
+uh data generations. So this creates a
+block structure that of course kindly
+just observe for the variable 1 to 5
+depends on the factor 1 the variable 6
+to 10 depends on the factor f_sub_2 and
+the variables 11 to 15 depends on the
+factor f_sub_3. So mathematically it is
+specified as like x which is equal to
+f_sub_1 do1 transpose f_sub_2 do2
+transpose and f_sub_3 do3 transpose plus
+epsilon and yes dear friends here we
+have the covariance and een values. So
+here it just shows that uh three een
+values we have and yes here we just
+explains the variance. Yes, it just
+measures the variance captured by the
+first three component and uh yes, let me
+just execute and view the result. So
+when on just viewing this plots kindly
+just observe dear friends here this
+scenario A yes it simulates a data sets
+with all 15 variables are driven by a
+single common factor plus small noise
+and the screen plot shows one dominant
+EG value towering over the rest. So this
+tells us the data is essentially
+onedimensional and all variables move
+together. Think of it like 15 different
+cryptocurrencies prices that all go up
+and down with Bitcoin. And this is how
+it was specified that a data is
+effectively one dimension. And here PCA
+will compress it with minimal
+information loss. And here the screen
+plot shows a sharp elbow after the first
+component. And here when on just going
+towards the uh scenario B kindly just
+observe dear friends this simulates a
+data sets with three independent
+subgroups. Three independent subgroups
+of five variable each. So the screen
+plot shows three large EN value then a
+short drop. So this means the data has
+three independent dimensions of
+variation. Think of stocks from three
+different industries uh maybe tech or
+healthcare or energy that moves together
+within each industry but independently
+across industry. And here the screen
+plots is one of the most informative
+single figure in data science. And here
+when we just go towards this kindly just
+observe dear friends this three
+independent clusters of correlated
+variables. Yes, weak correlations
+between the clusters and here this shows
+three large EN values remaining EN
+values are small and as I have already
+specified yes data is approximately
+three-dimensional PCA identifies three
+dominant direction and here screen plot
+shows an elbow after this third
+component. So from this plot yes it is
+understood that scenario A that is the
+left plot one tallbar rapid drop off
+that implies strong global correlation
+single underlying driver and here
+towards the scenario B that is the right
+plot three tall bars then drop off which
+implies multiple independent structure
+and clustered relationship. So from this
+this exact code demonstrate a
+fundamental principle of principle
+component analysis. Yes dear friends EN
+values EN values of the coariant matrix
+reveal intrinsic dimensionality. Large
+EN value meaning structure and small EN
+value it would be noise. So if data has
+K latin factor coarian matrix is
+approximately rank A and first K EN
+values are large remaining EEN values
+are near zero and yes with this
+practical implementation dimensionality
+reduction also we have just discussed
+that is scenario reduces to one
+dimension and scenario B reduces to
+three dimension. So identifying number
+of principal components and it detect
+latent structure also diagnose
+correlation patterns also and with this
+exact scenario of largest EEN value and
+uh scenario of top three EEN values. So
+here the scenario A yes variance
+concentrated in one component and
+scenario B variance distributed across
+uh three components. So yes, this exact
+code summarize one shadow factor, one
+dominant EG value and stringle structure
+in scenario A and three independent
+factor, three dominant EG value and
+three structure in scenario B. So the
+screen plot serves as a diagnostic tool
+that converts covariant structure into a
+interpretable visual structure of the
+data latent geometry. We have discussed
+egen vectors are special directions that
+remains unchanged in orientation. Egen
+values tells us how much those
+directions stretch or shrink. The
+characteristic equation helps us uncover
+egen values and een vectors. And here
+the most important lesson is yes
+decomposition is not about matrices. It
+is about finding hidden patterns. When
+data becomes complicated, een vector
+reveals the important direction. When
+data set becomes highdimensional, PCA
+uses EEN vector to simplify them. When
+noise hides useful information, EG
+values help separate signals from noise.
+So that's why EN decomposition powers
+PCA, machine learning, computer vision,
+signal processing, network analysis,
+financial modeling, scientific
+computing. Of course, dear friends,
+every time a machine learning model
+discovers hidden structure in data, age
+in decomposition is often working
+quietly behind the scenes. I hope I
+think so this session would be very much
+useful. Yes, dear friends, the true
+power of mathematics lies not in solving
+equation but in discovering the hidden
+patents behind them. So, thanks for
+watching. See you in the next session,
+dear friends. Happy learning.

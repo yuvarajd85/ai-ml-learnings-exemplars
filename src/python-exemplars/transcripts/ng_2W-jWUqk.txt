@@ -1,0 +1,286 @@
+# ng_2W-jWUqk
+# https://youtu.be/ng_2W-jWUqk
+
+Nothing going on dear friends. Here is
+Dr. Rajendra. Welcome to Demystify with
+Ajay.
+Let me just start with
+implementing the necessary libraries.
+Dear friends, of course we have already
+seen this in the previous session. Yes,
+importing the NumPy, SciPy. Of course,
+here we are using
+SciPy for null space function and we
+have
+imported that Matplotlib and warnings.
+Of course,
+to suppress all the warning messages.
+And we have also
+used this parameter. That is a
+configuration parameter using with a
+dictionary for default size and
+transparency and of course the size of
+the font. Okay, so let us just make use
+of this print function and let I just
+display the exact execute that exact
+import functionalities. Yeah, we are
+just going to discuss on eigen values
+and characteristic polynomial. Okay, so
+here
+let let I just combine the coding and
+towards the discussions simultaneously.
+So dear friends, here we are going to
+find the eigen value and verify the
+characteristic equation. Okay, so first
+of all let me just have the matrix A
+here.
+We have 1 3 and 3 and 1. Okay, so it
+just defines the matrix A which is 1 3
+and 3 and 1. Okay, now let me just move
+on to this
+eigen value. Kindly just dear friends,
+on with this eigen value has an standard
+equation that is determinant of
+A minus lambda I which is equal to zero.
+Okay, so these are the exact roots. So
+computing this eigen of eigen values of
+A. So here how this happens? So first of
+all, we have this matrix 1 3 and 3 and 1
+minus determinant of this which is equal
+to zero. So here, so we have to multiply
+the diagonal. So when I'm just
+multiplying this diagonal and minus off
+diagonal, okay? So here it comes as like
+this implies 1 minus lambda the whole
+square minus 3 into 3, so that is 9
+which is equal to zero. And here again
+kindly just observe that is if I just
+make 1 minus lambda the whole square,
+here it is lambda square minus 2 lambda
+minus 8 which is equal to zero. Why
+because this here we have 9 and 1 square
+it becomes
+1. 1 minus 9 it is 8. So that is what
+here I specified. Now again I just want
+to simplify this. So lambda square minus
+2 lambda minus 8. So here which it just
+implies lambda minus 4
+into lambda plus 2 which is equal to
+zero. So yes, dear friends, now we just
+get the value of lambda 1 which is equal
+to 4 and lambda 2 which is equal to
+minus 2. So because minus 4 and here,
+okay? So this one we just get. Let we
+just check it with the coding also
+simultaneously. So here we just go with
+this. So defining the matrix, let we
+print it and I just want to compute this
+matrix. Since here
+the determinant is not equal to zero,
+okay? Matrix is full rank and
+invertible.
+Let we just compute the eigen value. Of
+course I have already specified and yes,
+that roots of the characteristic
+polynomial. Okay? So yes, it just prints
+the eigen value. Now, let me just verify
+characteristic equations also. Kindly
+just see here, dear friends. This
+characteristic polynomial combines
+matrix shifting with the determinant.
+Okay? So, matrix shifting with the
+determinant. So, here it just compute as
+like So, lambda Sorry, A minus lambda I.
+Okay? So, this matrix should be a
+singular. And let me just compute the
+determinant and the
+shifted matrix. Okay? And this line it
+just compute computes the rank. And next
+we just
+print the current eigen value. And let
+me just displays the shifted matrix.
+Okay? So, let me just uh
+print the shifted matrix. And once done,
+let's me combine combine and confirms
+what we have just discussed before. That
+is what? This one. Okay? Determinant A
+minus
+lambda I, which is equal to zero. That
+is whether it is a singular or not. And
+if rank drops, matrix becomes singular.
+Kindly keep it in mind. Okay? So, if
+ranks drop, matrix becomes zero. So, let
+me just have the
+null space. So, let me compute the null
+space A minus lambda I. Okay? And that
+gives the eigen satisfying So, here
+eigen satisfying how it happens? So,
+this one.
+If this is what the determinant, so A
+minus lambda I times X is equal to zero.
+Okay? And I just want to know whether
+the size is
+less than zero. So, if
+A is that, so it is non
+non-trivial solution exists. And let me
+just print that
+eigen vector also. Okay? So, let I
+execute and we compute this. And kindly
+just see here, dear friends.
+We have a matrix A.
+And observe the determinant of A.
+Okay? So, here I just want to specify
+three things. Of course, dear friends,
+kindly just observe.
+We have already discussed, but anyhow, I
+just let you know here. The first
+important point, it is all about
+characteristic equation. That is
+determinant of A minus lambda I times it
+is zero. Okay? And towards the important
+functionalities, yes, eigen value. That
+is the value of lambda that make max
+matrix singular. And when coming towards
+eigen vector, so it is the exact
+direction that don't change direction
+under transformation. Okay? So, these
+three things I have to specify it. And
+when coming towards this code, kindly
+just see here.
+This lambda, that is A minus lambda I
+becomes a singular here. And the
+determinant it is equal to zero.
+Okay? So, it is nearing towards zero
+here. And of course, kindly just observe
+the rank is dropping. And when coming
+towards the null space appears, yes,
+that gives the eigen vector. Okay? And
+here we have already determined about
+two things, that is
+lambda one is equal to four and lambda
+two is equal to minus two. With that,
+yes, lambda four, of course, we also
+having the rank is one. And the rank is
+dropping, and we have a null space
+appears of eigen vector. Okay? And this
+eigen values, that is four and minus
+two, are the one scaling factor. Okay,
+so here to be the final line. Yes, dear
+friends, eigenvalues are the scalar that
+makes a matrix lose rank.
+And the corresponding null space reveals
+the invariant direction. That is what
+the eigenvector.
+Got it?
+Okay, now let me visualize that
+characteristic polynomial here.
+Okay, so kindly just observe dear
+friends that here we have uh defining a
+matrix A and I'm just going to plot that
+uh determinant. That is
+uh this command introduce the goal. That
+is visualize how a determinant changes
+with lambda. Okay, and uh next we are
+just going to
+uh
+generate the 200 values of lambda. That
+is between uh minus four to six. Okay,
+so this will be used to evaluate the
+determinant function. And here we are
+just going to compute the
+uh determinant of each value of lambda.
+So this is the exact uh characteristic
+polynomial evaluated numerically. Next,
+let me just plot the exact one. Okay, so
+plotting the figure. Yes, this uh shows
+the plotting of a curve. X axis lambda
+and Y axis determinant of A minus lambda
+I. Okay. And uh next one I want to uh
+just draw a horizontal line where Y is
+equal to zero. Kindly just keep it in
+mind. So this is critical because
+eigenvalue occurs where the curve
+crosses zero. Okay, where the curve
+crosses zero. And uh next I want to have
+the eigenvalues of A. So let me compute
+it. And that computation through a loop.
+Okay, so through a loop each eigenvalue
+I have to specify. And of course, I have
+to plot each eigen value on x-axis with
+a red dot. Okay? And let me just add
+labels by plotting for each eigen value.
+Okay? And let me just
+>> [clears throat]
+>> label that x-axis lambda and y-axis as a
+determinant function. And yeah, let me
+just set some title emphasis that key
+idea that is root which is equal to
+eigen values. Okay? And finally, let me
+just render it by
+finalizing the layout, shaving the
+image, and displaying the plot. Okay, so
+confirms that
+the figure is saved here. Let I execute.
+Yeah, here we just go. So, here we just
+get the exact one. So, kindly just see
+here. So, this one the plots determinant
+A minus lambda I, okay, as the function
+of lambda. And kindly just to see here,
+dear friends, the characteristic
+polynomial of
+A minus lambda I, which is equal to here
+I have already specified lambda square
+minus 2 lambda minus 8, which is equal
+to
+zero. That is, it is a parabola.
+So, it's root, that is, where a curve
+crosses this zero.
+Where a curve crosses this zero are the
+eigen value. And kindly just observe
+that exact value is minus 2 and 4.
+Lambda is equal to minus 2 and lambda is
+equal to 4.
+And for a 3 into 3 matrix, this would be
+a cubic curve with the three roots. For
+a m into m matrix, a degree of minus m
+polynomial with m roots. So, some
+possible complex. So, this directly
+connects linear algebra to the
+fundamental theorem of algebra. That is
+every square matrix has exact n each and
+value. That is counted with multiple,
+okay? And here, of course, uh dear
+friends, kindly just keep it in mind
+that each and value are the root of
+characteristic polynomial. Visually,
+they are the points where the
+determinant curve crosses this zero,
+revealing where the matrix loses rank,
+okay? Yes, dear friends. Now, let me
+just uh have this
+uh vector in a column space, and uh let
+me just have a key application of rank,
+that is determining whether there's a
+uh vector with a column space by a
+augmentation test. Okay, let I just to
+summarize what we have just discussed in
+this session. So, dear friends, this
+exact session introduced the concept
+that transform matrices from simple
+array of numbers into powerful
+structures with deep mathematical
+meaning. The characteristic polynomial,
+so here we have already
+uh discussed about this determinant of
+matrix A minus lambda I, which is equal
+to zero, connects all these concepts.
+Its root are the each and value of A,
+and the null space of the shifted matrix
+or the each and vector. Hope I think so
+this uh session would be helpful for
+you. So, like this video, share it with
+some other who just start or interest on
+learning mention learning or generative
+AI, and uh subscribe, dear friends. So,
+see you in the next session. Happy
+learning, dear friends.

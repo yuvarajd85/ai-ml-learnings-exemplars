@@ -1,0 +1,1848 @@
+# 4_WM_zJeJt4
+# https://youtu.be/4_WM_zJeJt4
+
+So here it is in the sense as like a
+inverse and here to an a inverse. So
+giving a inverse a x equals a inverse b.
+Since a inverse * a equals to an
+identity we get iix which is equal to a
+inverse b. We are just going to have a
+matrix and this one it would be as like
+a b c b. And kindly just observe this
+would be as like assigning 1 4 2 and 7.
+So a of 0 0 a of 0 1 and a of 1 0 and a
+of 1 1. Okay. So this is what Okay. Now
+let me just uh define the determinant a.
+Okay. So here it is specified as like a
+multiple d minus b * c. Yes. So
+determinant of a which is equal to a d
+minus b c. So here of course 1 into 7 -
+4 into 2 which is equal to 7 - 8 here it
+is -1. And dear friends kindly just keep
+it in mind if the exact determinant is
+not equal to zero of course the matrix
+is invertible
+and of course if it has an equivalent
+towards one yes the magnitude one that
+is area or preserved
+row 2 which is equal to 2 * row 1 is it
+yes or no? So kindly just see here 1 4 2
+and 8 this exact row two is twice the
+times of row one. So here rows are
+linear dependent. So here this exact
+matrix is a rank deficient. Dear friends
+this one side matrix can transform a
+rectangular matrix to an identity matrix
+but it works only for one multiplication
+order. in particularly a tall matrix
+that can have a left inverse and a wide
+matrix that can have a right inverse.
+Okay, dear friends, kindly just observe
+our D value. Of course, we already know
+we have 2
+3 and 4. And when we just make the
+diagonal inverse matrix. Okay. So here
+we just get diagonal of 1x d1 1x d2
+until 1 by dn. So this is what our
+standard and here if any d is zero then
+1 by d it would be undefined.
+Kindly just keep it in mind. And here
+why it is because of course that
+dimension is collapsed to zero. So
+information is lost cannot be recovered.
+Okay. So kindly just keep this in mind
+and let me just have towards this
+functionality. So when I just make it
+towards uh d inverse here 1 by 2 comma
+1x 3 1x4 okay so this is what the
+diagonal of and here I just get diagonal
+of 0.5 comma 0.33 comma 0.25 25 and when
+I just make use of this functionality
+kindly just observe the uh one here uh
+so kindly just observe dear friends here
+the value of the visualization of h we
+can able to view an smooth gradient
+smooth gradient is in the sense of
+course it is a structured and low
+variation and when on just uh
+visualizing this h inverse of course we
+have a high contrast And of course there
+is an oscillation also. So this uh would
+mean towards instability and
+amplification. And last of course the
+product of h and h inverse. Kindly just
+observe it is nearly identity and
+approximate of correctness. So kindly
+just see here the first one. Yes
+original it is an undeserved house and
+the second one we have a skewed and
+scaled version. It just demonstrate
+effect of this transformation.
+And the last one yes we have a recovered
+matches original shape conforms
+correctness of inverse.
+So how about the conversion recovered?
+Yes of course it is true and dear
+friends when on just specifying this
+colinear functionality. So here when we
+just go towards the core linear algebra
+principle. So here t inverse t which is
+equal to i and towards the mathematical
+applies. It is exactly under t inverse
+of t * x which is equal to x. Happy
+morning dear friends. Here's Dr.
+Rajenta. Welcome to demystify with Ajay.
+Dear friends, today we are going to
+discuss on matrix inverse. The matrix
+inverse is central to solving matrix
+equations in practical applications
+including fitting statistical model to
+data. And here we have a very big
+question. Why do we even need to invert
+matrix? We need to cancel a matrix in
+order to solve problems that can be
+expressed in the form of ax which is
+equal to b. So here where a and b are
+known quantities and we want to solve
+for this x difference actually here we
+start with a equation. So here we just
+start with the equation as like a x= b
+and we left multiplying both the sides
+by a inverse. So here it is in the sense
+as like a inverse and here to an a
+inverse. So giving a inverse a x equals
+a inverse b. Since a inverse * a equals
+to an identity, we get iix which is
+equal to a inverse b. Finally, yes, the
+identity matrix leaves a vector
+unchanged and resulted with x=
+a inverse b. Dear friends, that seems
+really straightforward. But computing
+the inverse is deceptively difficult.
+Yes, in this session we are just going
+to explore when an inverse exist. Why
+some matrix can never be inverted. The
+famous 2 into two inverse shortcut. Left
+inverse and right inverses. The more
+Penrose pseudo inverse that powers
+machine learning and leaves square
+regression. And most importantly we will
+understand why data scientists often
+avoiding computing matrix inverse
+directly
+even though they are mathematically
+beautiful. And dear friends by the end
+of the session you will see matrix not
+as rows and columns but as a tool that
+transforms data images geometry and
+entire AI system. Let me just discuss
+one by one. Okay, before going on to the
+discussion, let me just include the
+necessary libraries. Import the numpy
+library and assign it as like alias np.
+And uh next it is for mattplot lib. Yes,
+dear friends, this imports the plotting
+module pipot from mattplot lib and
+aliasis as uh plt. And dear friends, of
+course, we are also including this
+import hbert. Yes, this is exact
+functions to create hilbert mattresses
+for numerical analysis and stability
+testing. And yes, dear friends, we have
+included the warnings. Yes, this imports
+Python's built-in warnings modules. So,
+which allow control over warning
+messages generated during execution. And
+yes, we have just included the uh
+default parameters. Yes, for uh the font
+size and enabling the grids and uh
+setting the transparency of the grid
+lines to 30%. And of course the font
+size for all text in plot to 12 points.
+Yes. And yeah closing the dictionary and
+applies all the configuration updates.
+We have just let me include this and
+execute this. Yes, of course we have the
+version as numpy version with 2.3.5.
+Okay, dear friends, let me just start
+the matrix inverse. Uh, dear friends, of
+course, here we have already discussed.
+Yes, a inverse multiplied by A equals A
+multiplied by A inverse equals the
+identity matrix.
+Dear friends, the inverse matrix
+completely cancels the original matrix.
+And here I have already specified.
+Kindly just observe if this is a matrix
+analog of a scalar inverse 3 into 3
+inverse which is 3 into 1x3. Yes, of
+course it just gives resulted with one.
+See here dear friends when on just
+making condition for invertibility
+we have to just think on four important
+functionalities. Yes. whether it is full
+inverse or whether it is left inverse or
+whether it is a right inverse and last
+but not least a pseudo inverse
+and here we are just going to discuss
+all these things one by one and the
+common thread here is it is all about
+rank determines invertibility when
+reduced rank of course it is a singular
+matrix cannot be exactly inverted
+Okay. So when on just starting with here
+why element wise inversion does not work
+dear friends here I have already
+specified. So kindly just observe a
+natural first guess invert each element
+individually. So this fails because
+matrix multiplication is not element
+wise. And dear friends, here we are just
+going to discuss about the code that
+demonstrates a common misconception that
+is taking the reciprocal of each matrix
+element is not the same as computing the
+matrix inverse. Okay. So let me just
+start here. So yes dear friends, here we
+are just defining a matrix A. Yes, as
+like an 1A 4 and 2A 7. And here I just
+want to provide the definition of
+element wise reciprocal. So element wise
+reciprocal yes of course uh how this
+produce is of course we have our matrix
+A as like 1a 4 and 2a 7 and when on just
+making towards reciprocal yes this
+provide 1 by a which is equal to 1 and
+0.25 25 and here it is 0.5 and yes
+nearing towards 0.143
+and kindly just observe dear friends
+this operation which we just say yes it
+is all about hadamad which is an
+elementwise
+operation it ignores a relationship
+between entries okay so let me just test
+does it behave like an inverse or not
+yes here we just go dear friend so here
+I'm just going to apply this one so let
+me Just check whether it is and yeah it
+is not going to result as a true. Yes
+the result is not the identity matrix.
+Why? Because yes dear friends of course
+just now I have specified. So kindly
+just observe here if I just specify a
+into multiplied by 1 by A which is equal
+to I. So matrix multiplication involves
+row column interactions not independent
+element operation. And here kindly just
+observe the true inversion. So the true
+inversion. Yes. How would happen? So for
+an example if I just specify it for an 2
+into two matrix. Let just specify A as a
+matrix. And here we have A B and C D as
+our elements. And here if I just make it
+as an inverse here it would be as like
+using this um matrix inversion. So it is
+true matrix inversion formulation. It
+would be 1 by a d minus b c and
+multiplied by d minus b as a first row
+minus c and a as our second row. Let me
+just verify this how this is happening.
+So let we are just going to verify it by
+this uh exact line and we are just going
+to identify and of course we are just
+going to get the exact output. Yes, what
+we have got it. Yes. Okay dear friends
+and this one it is verified by the
+equation a at a true inverse and this is
+going to produce of course it would be
+as like 1 0 0 and 1. What it is? Yes, of
+course it is an identity and this is
+done by using up to floating point
+position. Okay, dear friends, let me
+just have this towards our uh exact
+value. We have 1a 4 2a 7. Okay, kindly
+just observe we have a as 1 4 2 and 7.
+Okay. And when we just make an
+elementwise inversion, we just get 1
+here. 0.25
+and 0.5 and 0.143.
+And dear friends, kindly just observe if
+we just specify a into 1 by a and it
+just gives 3 0.821 821 and sorry 5.5 and
+1.5 and dear friends clearly it is
+specify it is not a identity matrix here
+when we just specify the exact true
+inverse how it happens so kindly just
+see it is 1 4 2 and 7 so if we just
+specify a true inverse it has to be -7
+and 4 2 and -1 This is what the exact
+because it is what produced exactly by a
+in multiple by a inverse which is equal
+to i. So notice how different it is from
+the elementwise reciprocal. The matrix
+inverse requires a global computation
+involving the entire matrix and this
+element wise inverse how this is
+happening how it works. Yes, kindly just
+observe dear friends. Whenever we just
+go for elementwise
+inverse here, kindly just observe this
+is an element wise matrix subig which is
+equal to 1 by A subigj. And yes, this is
+exactly a local operation. No algebraic
+meaning in linear system. And when we
+just make it into an inverse. So matrix
+inverse it happens as a inverse just
+satisfies to us a multiple by a inverse
+which is equal to i. Yes this is what
+the global operation and kindly just see
+here this is the local operations and of
+course as I have already specified this
+is what a no algebraic meaning in linear
+system. And here when we just is making
+yes it encodes how to undo the linear
+transformation. So this is what the
+exact difference and dear friends don't
+get confusion here. Of course surely
+there would be a confusion because
+kindly just observe for scalar a into
+multiple by 1 by a which is equal to i.
+Yes, this is exactly for scalar. But
+when we just go for matrix, of course,
+the exact values are not scalar objects
+and multiplication is not element wise
+and structure of course it has rows and
+columns that's the matter. Okay. So here
+how this exact geometric interpretation
+happens is dear friends whenever we just
+take a matrix. Yes, it transforms space
+and that spaces yes it can be
+transformed into scales or rotation or
+shears and here a inverse it was
+reversing the transformation and when we
+just go towards this element wise
+reciprocal it doesn't has geometric
+meaning so it does not undo anything
+okay so that is what the both difference
+and here let I just conclude with one
+simple important Important
+functionality. Kindly just observe dear
+friends here 1 by a which is equal to a
+inverse. Of course this is what the
+elementwise operation and this is not
+equal to an linear algebra operation.
+And here only the true inverse satisfies
+a multiple by a inverse which is equal
+to i. So kindly just keep it in mind.
+Okay. Now let me just move on to a full
+inverse. What is this full inverse? Yes
+dear friends, just now we have discussed
+that is a full inverse means a inverse
+multiple a which is equal to a
+multiplied by a inverse which is equal
+to i. So there are two condition for a
+matrix to have a full inverse. One of
+course it is a square and the second one
+it is all about a full rank. Dear
+friends, every square full rank matrix
+has an inverse and every matrix has a
+full inverse is square and full rank. By
+the way, I am using the term full
+inverse here to distinguish it from the
+next two possibilities that is you would
+typically refer to the full inverse
+simply as an inverse matrix. Okay. Now
+let me just move on to this code. So yes
+dear friends this exact code it just
+going made use of computes the inverse
+of 2 into two matrix using both the
+closed form formula and numpy. So that
+verifies their equalence. Okay starting
+with this code kindly just observe yes
+we are just going to assign an value of
+a. Okay so that is a matrix 1a 4 and 2a
+7 the same thing. Okay. And we are just
+going to assign an entries entries as
+such a comma b comma c comma d as here a
+of 0 0 and a of 0 and 1 and 1 0 and 1 1.
+We are just going to have a matrix and
+this one it would be as like a b c d and
+kindly just observe this would be as
+like assigning 1 4 2 and 7. So a of 0 0
+a of 0 1 and a of 1 0 and a of 1 1.
+Okay. So this is what Okay. Now let me
+just uh define the determinant a. Okay.
+So here it is specified as like a
+multiple d minus b multiple c. Yes of
+course. So determinant of a which is
+equal to a d minus b c. So here of
+course 1 into 7 - 4 into 2 which is
+equal to 7 - 8 here it is -1 and dear
+friends kindly just keep it in mind if
+the exact determinant is not equal to
+zero of course the matrix is in betable
+and of course if it has an equivalent
+towards one yes the magnitude one that
+is area or preserved
+And we just if we make use of an
+negative sign yes it seems to be as like
+an orientation of flip. So this is what
+kindly keep it in mind. Okay. Now let me
+just moving on towards manual inverse
+formula. Here we have and next we are
+just going to have our numpy. Okay.
+First let me just discuss about this
+manual uh inversion formula. So kindly
+just observe one by determinant of A
+multiple by with this matrix A. So what
+it happens of course we already know
+about the formula. Anyhow I just let you
+know again. So the formula here is
+a inverse which is equal to 1 / a d
+minus b c and here with an matrix of d
+minus b minus c and a. So this is what
+the exact formula. So let me just
+substitute our value here. So yes a
+inverse which is equal to 1 by
+of course we just uh uh when we just
+make it onto this determinant we just
+got -1. Okay. So multiple by 7 -4 and -2
+1 directly we are just substituting this
+and here what we just get - 7 4 2 and -1
+of course this is what's the exact
+resultant okay dear friends now let me
+just make use of this uh inverse by
+using the numpy functionalities and here
+dear friends it just uses a
+generalpurpose algorithm what is it yeah
+it is all about the LU decomposition.
+Okay, so LU decomposition and here it
+produces the same result by using the up
+to floating point precision. Okay, so
+that is what so let me just check with
+uh when on uh execution and here we want
+to make use of the formula. Yes, we are
+just using all close for confirming both
+methods agree numerically and uh let me
+just expect the true and wait we are
+just going for uh verification of this
+inverse property. So here kindly just
+observe a add a inverse manually. So it
+is going to result as like of course a a
+inverse which is equal to yes of course
+it is an identity. Let me just see this.
+Okay. So yes, let I just execute. So
+what we have just discussed before. So
+this is what kindly just see. So the a
+what we had is uh 1 4 and 2 and 7. Okay.
+And uh next we have just made the manual
+functionality. And here we just got the
+a inverse. And here we just got the a
+inverse as like -7 4 2 and minus1 that
+is what here we just got and to the same
+by using this numpy also we just got the
+same and whether it is matching of
+course it is matching and what is the
+exact output yes it is resultant so the
+exact verification here it is a multiple
+by a inverse which is equal to I.
+So dear friends here why this exact
+equation works. Dear friends kindly just
+observe one thing. We have a matrix. So
+again I just go above. Kindly just
+observe. So here we have a matrix as
+like this one. Here it is as like d
+minus b minus c and a. So this is what
+the exact uh inverse functionality. And
+here it is an adjudicate matrix because
+dividing by determinant rescales it to a
+exact undo of A. And here what is the
+exact geometric meaning is this A? Yes,
+it seems to be as like a transforms the
+plane and here we just get the
+determinant A. Yes, it is a area scaling
+factor. And to the last a inverse of
+course it reverses this exact
+transformation.
+And dear friends last but not least
+simple in a functionality. Let I just
+specify yes for a 2 into two matrix a
+inverse which is equal to 1 by
+determinant of a multiple by adjunct of
+a. Okay. So this is the exact formula.
+Okay. But this closed formula exists
+only for small matrix. Yes, it does not
+scale well to higher dimension. And when
+we just go for a practical note, kindly
+just observe dear friends, if you are
+using for a large matrix, always use
+numerical methods. Numerical methods of
+course we have just used in numpina. So
+this exact method kindly just go with
+this. Okay, always use this and it will
+just better solve the system and
+explicit formula becomes only
+computational expensive and numerical
+unstable. Okay. Yes, dear friends. So I
+think this would be very much easy. Let
+me just move on towards of course I just
+want to specify one more important
+thing. This exact code would just
+demonstrate the defining property of a
+singular matrix and contrast the
+non-existence of a true inverse with the
+existence of a pseudo inverse. Okay. So
+that is a very important functionality.
+So let me just start discussing with the
+code. So dear friends kindly just
+observe here we have our singular matrix
+B which is equal to 1 4 2 and 8 row 2
+which is equal to 2 * row 1. Is it yes
+or no? So kindly just see here 1 4 2 and
+8 this exact row two is twice the times
+of row one. So here rows are linear
+dependent. So here this exact matrix is
+a rank deficient. Now let me just define
+the exact determinant of uh B. Okay. And
+kindly just observe dear friends here we
+are just going to have our uh value as B
+of 0 into B of 1 into 1 minus B of 0A 1
+into B of 1 comma 0. So here let me just
+assign the exact value and uh here our b
+is 1 4 2 and 8. So when on just
+multiplying 1 into 8 -
+4 into 2. So here of course 8 - 8 it is
+zero. So here determinant of B which is
+equal to zero implicates yes B is
+singular and non invertible
+of course it is defined okay now let me
+just move on to have the rank okay and
+kindly just observe dear friends here
+don't get confusion the rank here it is
+one instead of two here it is one
+because The column lies in
+onedimensional subspace. So
+transformation collapses the plane onto
+a lion. Okay. Now let we just attempt an
+inversion. So on attempting an inversion
+there would be a possibilities of an
+rising and error. Of course here it just
+makes an rising and error whether it is
+a singular matrix or not because of
+course kindly just observe one thing
+dear friends. Whenever we just go for
+and no matrix B inverse exists in such
+that B multiple by B inverse which is
+equal to I. Okay. And here when you just
+go towards this pseudo inverse that is
+uh morenros inverse functionalities.
+Okay. We are just going to discuss it
+further but anyhow let I uh specify
+this. This is what the pseudo inverse
+and this one always exist even for a
+singular matrix. Okay. And it is mainly
+computed for uh singular
+value decomposition that is for SVD. We
+will discuss it later in uh coming
+sessions. Okay. And when on just making
+towards this structure kindly just
+observe dear friends for rank one of
+course we have our rank one matrix. So
+this one here the pseudo inverse
+effectively inverts along the nonzero
+singular directions. So it ignores the
+null spaces. Okay. And when we just make
+use of this one product of Okay. So
+product of BB B+ this exact line. Kindly
+just observe it is going to result and
+not the identity matrix. Why? Because
+kindly see here this one B into B * B
+inverse which is equal to I. But here B
+multiplied by B plus that is the product
+in identity matrix actually this going
+to give as P. This is a projection
+matrix. Okay. And here projection
+interpretation always yes P which is
+equal to B * B plus this is actually
+here projects any vector onto a column
+space of B. And in this case of course
+our column space is a single dimension.
+So here single dimension it just gives a
+span of 1 comma 2 and kindly just see
+here it is of course as column a column
+space of single dimension and so any
+vector is projected onto this line. Okay
+before going further let I just execute
+the code and kindly just observe. Yes
+dear friends. So here this is our matrix
+B. So 1a 4 and 2a 8 and yes here we have
+our determinant is equal to zero and
+kindly just observe the rank is one.
+Yes, column two. Of course, we have two
+columns. But anyhow, and here when numpy
+rises, we are just going to have a
+singular error as a singular matrix. And
+towards the pseudo inverse still exist
+and produce B multiple by plus. So here
+we just have the exact output as like
+0.2, 0.4 and 0.4 and 0.8. A which is not
+the identity but it is the orthogonal
+projection onto the column space of this
+B. The pseudo inverse get as a close to
+I as possible for a singular matrix. Let
+let I just give you one more small
+explanation. So see here dear friends
+whenever we just have. So here dear
+friends when we just go for true inverse
+if it is exist we have already discussed
+a multiple by a inverse which is equal
+to i. But when on specifying about the
+pseudo inverse a multiple by a
+projection that is which is projection
+on column space. So here according to
+the exact example we have the matrix B
+which it comprises with 2D space on to a
+line and this information is lost that
+is not recoverable. But when we just
+specify this B+ yes it provides the best
+possible inverse and it results least
+square solution and cannot reconstruct
+loss component. Why this exactly? Of
+course, pseudo inverse is essentially
+when solving undetermined or
+overdetermined system and performing
+least square regression. And of course,
+we are working with rank deficient data.
+Dear friends, this exact code
+demonstrated of course uh matrix with
+zero determinant of course and reduced
+rank and no inverse. And here when we
+just had a failure. Yes, of course by
+using a numpy we can identify. And here
+existence of pseudo inverse B+ that is
+also we have discussed. And the
+interpretation with B multiple by B+ as
+a projection operator and it is not a
+identity that is also we have discussed
+it de. Okay dear friends next we are
+just going to discuss about an important
+topic inverse of diagonal matrix. Here
+shortly we just specify C simple invert
+each diagonal elements individually if
+in the sense. So here D inverse which is
+equal to if it is a diagonal diagonal of
+1 by D1 by D2 1 by D3 till 1 by DN. So
+this works because the product of two
+diagonal matrices is just the elements
+wise product of their diagonal. So a
+diagonal matrix with any zero on the
+diagonal is singular and cannot be
+inverted. Kindly just observe this and
+yes this exact shortcut is crucial for
+pseudo inverse that mainly with the SVD.
+Okay. So here it is just specified as
+like an summation of this power of
+diagonal of 1x d1 comma 1x d2 till 1 by
+dn. Okay, let me just discuss this with
+a code. So yes, dear friends, this exact
+code highlights a special and important
+case in uh linear algebra that is
+diagonal matrix where inversion becomes
+trial and also clearly shows when
+inversion fail. Okay. So here we have
+the exact diagonal inverse D with an
+values of 2A 3A 4. So in such a case
+here it would be as like this is our D
+and here 2 3 and four. So others would
+be zero.
+Okay. So all of diagonal entries are
+zero and each axis is scaled
+independently.
+And next let we just have the inverse
+via elementwise diagonal. Okay. element
+wise diagonal inversion and uh yes here
+in such a case when we just go onto this
+so d inverse which is equal to 1 by 2
+1x3
+and 1x4
+okay and kindly just see here dear
+friends this is invert each diagonal
+element independently that is what we
+just specify inverse via element ment
+wise diagonal.
+Okay. Okay. We are just going to verify
+the result by this functionality. So D
+at D inverse. Okay. So in such a case D
+at D inverse which it specified D dot D
+inverse that is D multiple by D inverse
+which is equal to identity. So we just
+going to be 1 0 0 0 1 0 0 0 1. Okay.
+This is what whether we are just going
+to confirm it or not. So let me just
+verify it by using this. Okay. And uh we
+are also going to confirm it by using
+this numpy functionality. So here we
+just make use of this functionality and
+uh it just going to produce the same
+result. And this one would be verified
+by functionalities all close. Okay. So
+let me just compare this. And one more
+thing kindly just observe dear friends.
+We are also going to have a singular
+matrix here. singular diagonal matrix
+and in such a case singular diagonal
+matrix we have 2 0 and 4. So this
+singular diagonal matrix
+which is 2
+0 and 4. Okay. So here we have and uh
+let me just make the rank and
+invertibility. So here we are just going
+to uh identify this that is we are just
+going to display the rank and
+invertibility and kindly just observe
+dear friends. So here we are just going
+to have the rank which is equal to two
+that is less than the full rank of
+three. Okay by making use of the
+determinant functionality. So let I just
+calculate anyhow. So determinant of d
+which is equal to 2 into 0 into 4. Of
+course it is zero. Okay. Now let me just
+attempt an inversion and here we are
+just going to attempt an inversion and
+uh let me just check and we rise an uh
+singular matrix error. Okay so let I
+execute and observe the output here.
+Okay dear friends kindly just observe
+our D value. Of course we already know
+we have 2
+3 and four. And when we just make the
+diagonal inverse matrix. Okay. So here
+we just get diagonal of 1x d1 1x d2
+until 1x dn. So this is what our
+standard and here if any d is zero then
+1 by d it would be undefined.
+Kindly just keep it in mind. And here
+why it is because of course that
+dimension is collapsed to zero. So
+information is lost cannot be recovered.
+Okay. So kindly just keep this in mind
+and let me just have towards this
+functionality. So when I just make it
+towards uh d inverse here 1 by 2 comma
+1x 3 1x4 okay so this is what the
+diagonal of and here I just get diagonal
+of 0.5 comma 0.33 comma 0.25 25 and when
+I just make use of this functionality
+kindly just observe the uh one here uh
+let us specify here again kindly just
+observe d inverse here it is a diagonal
+of 1 by 2 1x 3 and 1x4 and when I just
+evaluate here we just get a diagonal of
+0 comma 0.5 comma 0.33 comma 0.25 2 5
+and when we just make use of d multiple
+by d inverse which is equal to yes
+identity matrix of 3 into 3. So when any
+diagonal element is zero of course the
+matrix is a singular. Okay. So that is
+what we have already specified and
+towards this diagonal matrix or the
+simplest linear transformation. So here
+each coordinate is scaled independently
+towards the functionality.
+Okay. And when we just make use of this
+as like an inverse functionality. So
+kindly just it can be rescaled as x1 1
+by d i x i and dear friends kindly just
+observe as I have already specified this
+one whether it is an identity. Yes, we
+just get the identity one. Okay. And
+whether matching the both of course both
+are matching and as I have already
+specified yes the rank is two because it
+is less than of full rank of three.
+Okay. And uh yes it is not going to make
+it uh inward. So it as it is a singular
+matrix here in such a case of singular
+any zero on diagonal of course
+determinant would be zero and the rank
+deficient and no inverse happen. Uh
+summarizing
+for 2 into two matrix that is swap
+diagonal negative off diagonal define by
+determinant. So for diagonal invert each
+diagonal element.
+So yes, diagonal matrices are trially
+invertible when all entries are non
+zero.
+Okay. And inversion reduces to
+elementwise
+element wise reciprocal on diagonal and
+towards the zero entity. If any one
+single entity is zero, of course it just
+destroys the invertibility and of course
+it reduces the rank and last but not
+least corresponds to loss of the
+dimension. Now next we are just going to
+discuss on an important aspect that is M
+C algorithm. So here M stands for minor
+matrix, C stands for co-actor matrix and
+A of course it's adjugate matrix. Dear
+friends, this minor matrix of course the
+element m sub i, j is the determinant of
+submatrix formed by deleting row i and
+column j. And of course dear friends we
+are also having one more uh intermediate
+matrix which we just say as grid matrix
+and this exact grid matrix check borders
+of plus or minus1 with the grid subig j
+which is equal to minus1 to the power of
+i + j and the third one of course the
+co-actor so co-actor matrix it is all
+about the hadaman product Yes, all with
+this M dot matrix with G and co adjugate
+matrix. Dear friends, it is all about A
+inverse equals 1 / determinant of A
+multiplied by C transpose. So yes, these
+are the exact four intermediate
+matrices. Let me just discuss one by
+one. And of course here again I specify
+M, G, T and A. Okay. So this is what we
+are going to take it here. And yes dear
+friends this exact code would implements
+matrix inversion using minor co-actors
+adjugate that is MCA method a classical
+but computational expensive alternative
+to numerical algorithm. Okay. First of
+all, let me just define a function here.
+Okay, so this exact function has an
+input A. Actually, this A is a square
+matrix. Okay, where it has N into N
+dimensionality and of course we are just
+going to have the output A inverse and
+not only that we are just going to have
+a minus, grids and co-actors. Okay, so
+these are our intermediate matrices.
+Okay. Now let we just have our
+preconditions and kindly just observe
+the first main precondition here is we
+are just going to have the exact shape
+and yes this exact matrix it's going to
+be a square matrix and next one it is
+all about the determinant. Yes
+determinant must be a nonzero and in
+such a case it is an invertible
+conditions. Okay here let me just go
+step by step. The first step I just want
+to have a minor matrix. Okay. So thus
+first step in such a case. So here we
+are just going to have our
+[clears throat] minor m subig where here
+kindly just observe. So this is what the
+uh first functionality and let just
+specify it in mathematical manner. So
+here it is what the step one. Okay. So m
+subig j which is equal to determinant of
+matrix formed by removing row i and
+column j. Okay. So this is what and it
+just produce an n into n matrices of
+determinants of n minus1 into n minus
+one submatrices. Kindly just keep it in
+mind. This is what our sub uh step one.
+Okay. So here kindly just observe here
+we are just going to have our
+sub and this is what our J functionality
+is. Okay. Now let we move on to the step
+two and observe dear friends towards
+this one let I make it in a mathematical
+manner. So here the step two here I'm
+just going to sign a grid and that grid
+it would be grid sub iig j which is
+equal to -1 to the power of i + j okay
+and here for a 3 into3 matrix if I just
+specify a square of 3 into 3 matrix yes
+here it would be as like a positive
+negative positive negative positive
+negative positive negative positive so
+like this it would be Okay. And uh next
+uh let me just move on to the step
+three. Yes, it is all about co-actor
+matrix and yes dear friends it is a
+element wise multiplication and element
+wise multiplication of M and G. Okay. So
+as I have already specified this is what
+M and this is what G. Okay. So here this
+M and this G. Okay. So towards this M we
+just have M I J and towards that G we
+have minus1 to the power of I + J. Okay.
+So here for the step three co-actor
+matrix. So C subig J which is equal to
+minus1 to the power of I + J multiple by
+M subig.
+So yes again I specify this is an
+element wise multiplication that is a
+hadamat projection.
+Okay and uh next it is all about
+adjugate matrix that is the step four.
+So we are just going to adjugate and
+then inverse and here towards the
+mathematical formula let I specify here.
+So formula here it would be a inverse
+which is equal to 1 / determinant of a
+multiplied by adject of a.
+Okay. And here what is this adjugate of
+a? Yeah. Adjugate of a which is equal to
+crpose. Okay. Now let me just uh test
+and validate the functionality. So here
+we are just going to have a random
+matrix. Uh okay. So here we are just
+going to have our random matrix and let
+me just make the comparison by using
+this uh all close. Okay. And it just
+confirms whether MCA matches the numpy
+inverse. Okay. And of course we are just
+going to identify by using this. So this
+is what that so here it just produces
+the identity matrix up to floating point
+error. And uh let me just make the
+execution and see what is the output. So
+kindly just observe dear friends here
+this is what the exact matrix and here
+we have our determinant and when on just
+calculating this minus so this is what
+the minus matrix and here we have the
+grid. Okay. So plus - plus - plus - plus
+- plus because it is a 3 into 3 matrix
+and yes the co-actor of course had a mat
+product of minus and grid and this is
+what the exact resultant and with that
+when we evaluate the matrix that is
+random matrix output. So kindly just see
+here this is by using NCA method and
+this is by using numpy and of course
+both are matching. Yes, when on
+comparing both are true, it just
+matches. And when we make use of an
+overall functionality as a dot product
+with a inverse which is equal to
+identity. Okay, that is what v receives
+here. And dear friends, when we make use
+of an uh computational complexity,
+kindly just keep it in mind the MCA
+algorithm successfully computes the
+inverse every element. Okay, every
+element requires computing a
+subdeterminant making the bigo method of
+n minus one whole cube because each
+minor requires a determinant. Okay. And
+towards the total cost yes it would be
+as like big W of N ^ of 4 or worst case
+because it is compared to LU
+decomposition where LU decomposition it
+would be big of N3 much more efficient
+and numerically stable and when on
+specifying the numerically stability of
+MCA of course this MCA it's an sensitive
+to floating floating point error and it
+is not used in practice for large
+matrices. Kindly keep it in mind. And of
+course here whenever you are just making
+use of any particular uh stability
+functionalities of course you have to uh
+include libraries as like LU for uh
+decomposition or QR decomposition or SVD
+decomposition based on the methods you
+have to include it. And when coming
+towards the geometric interpretation,
+dear friends, core factors encode how
+each entry contributes to uh one is
+volume scaling and next one it is all
+about uh orientation. And last but not
+least adjucate reconstruct the
+transformation needed to be undo A. And
+here altogether A inverse which is equal
+to 1 by determinant of A into multiple
+by co-actor matrix the whole transpose.
+So this is the closed form inverse. It
+is valuable for theory or small matrices
+or understanding structure. So yes
+finally this exact code demonstrate full
+implementation of a classical inversion
+algorithm. So it just constructs all
+about a minor co-actor and adjugate. So
+agreement with numerical methods and of
+course we have uh verified and
+identified the matching. Okay. Next we
+are just going to discuss about one side
+matrix. Dear friends, this one side
+matrix can transform a rectangular
+matrix to an identity matrix. But it
+works only for one multiplication order
+in particularly a tall matrix that can
+have a left inverse and a wide matrix
+that can have a right inverse. So a
+nonsquare matrix has a one side inverse
+only if it has a maximum possible rank
+that is a tall matrix has left inverse.
+If it is rank n it is for full column
+rank and a wide matrix has a right
+inverse. If it rank m is full row rank.
+Okay. So let me just discuss one by one.
+So first of all let me just move on to
+the left inverse for a tall matrix.
+Construct a code and verifies a left
+inverse for a tall matrix. So dear
+friends here we have of course uh we
+have done with an random matrix and it
+shape is 40 into 4. So here the exact
+shape is 40 into 4. Of course it is a
+top and when on just making towards the
+mapping here R to the power of 4 towards
+R to the^ of 40 and what would be the
+ranking? Yes, let me just observe the
+exact ranking by using this. And yes,
+typically full column ranking it would
+be four. Let me just uh uh see when on
+the execution and here we are just going
+to form the step one. And what is it?
+Yes, here it going to give an t
+transpose t. Okay, t transpose t. And
+here when we just specify this three
+transpose t the shape it would be as
+like 4 into 4. It would be a square
+matrix. And here it seems to be a
+symmetric property where positive define
+if column of t are independent and of
+course it just goes to results as like t
+transform t it would be for a 4 into 4
+matrix and when on just making towards
+an invertibility. Okay so kindly just
+observe dear friends we are just going
+to specify an invertibility. So here uh
+it would uh results with full rank of
+four. Okay. So full rank of four. Yes,
+of course it is an inverability because
+this is guaranteed if T is a full column
+because we are taking a tall matrix.
+Okay. So T is a full column matrix and
+we have four columns. Okay. So let me
+just construct the left uh left inverse
+by using the exact standard formula.
+Okay. So here we are just going to have
+our computing the left inverse and let I
+just mathematically specify L equals T
+transpose T whole inverse multiple by
+TRpose. So this is what the exact
+mathematical equation and dear friends
+we are also going to identify the
+property. Okay. So that is more penrose
+pseudo inverse for full column rank
+matrix. Okay. So this is the exact
+equation. Kindly just observe. Okay.
+Next let me just want to know what is
+the uh left inverse property. So here it
+would be lt which is equal to
+t transpose t the whole inverse multiple
+by t transpose and of course we are just
+going to multiply the t with on the both
+the side which it just gives identity of
+four identity of four. Yes, of course it
+is a 4 into 4 identity matrix and it
+confirms yes l is left inverse of t. And
+here it just sees whether uh it is an t
+at l that is it is it right inverse that
+doesn't exist okay because it is 40 into
+40 and not equally to identity okay so
+it just anyhow it's just going to result
+with uh uh false and uh here we want to
+execute this uh shape and here what is
+this tl yes exactly this TL
+1 second. Yes, this exact TL which is
+equal to T multiple by T transpose T the
+whole inverse T transpose. Actually this
+is the projection matrix. Okay. So this
+is exactly the projection matrix rather
+than this TL we can just directly
+specify P is equal to T of T transpose
+multiple by T the whole inverse multiple
+by TRpose. So this is the projection
+matrix. Okay, we are also going to have
+that also. Let we execute and see what
+is the output. So kindly just observe
+dear friends. Here we have an a matrix
+with a t and yeah embedded with 4D space
+into 40 dimensional. And here we have
+the L. Yes, it recovers the original
+fourdimensional coordinates from that
+embedding. And here we have the TL where
+this exact TL is the projection that any
+vectors in R of 40 onto the column space
+of T. And dear friends here I just want
+to specify one thing. Kindly just
+observe whenever we just go on towards
+this uh left inverse okay left inverse
+matrix kindly see here to this code we
+just get left inverse which is equal to
+a 4 into 4 identity matrix yes this
+exists when columns are independent but
+when on just going towards the right yes
+we have to identify tr actually it is a
+40 into 40 identity matrix actually this
+would require full row rank and it is
+impossible because here it is 40 that is
+greater than four. And when we just make
+on towards connection to a list square
+functionalities we have a formula that
+is x which is equal to t transpose t the
+whole inverse multiple by t transpose of
+y and it exactly solves the least square
+solution. And yes dear friends with this
+uh code it just demonstrate how to
+construct a left inverse of a tall
+matrix and it just verify the LT which
+is equal to one exact recovery and of
+course TL which is equal to one that is
+also the verification and here this TL
+we are just made with an interpretation
+that this is a projection matrix and yes
+this is would be used in pseudo inverse
+of
+uh another one it is a least square
+solution. Okay, here I just want to
+specify one thing dear friends kindly
+just observe three transpose t whole
+inverse multiple by tpose yes is the
+best possible inverse when t is not a
+square. Okay now let me just move on to
+the right inverse difference as
+specified in left inverse. Yes, here in
+right inverse also yes by symmetric
+reasoning a wide matrix W yes lies in R
+M into N. Yes, it is a rectangular
+matrix and full row rank that has a
+right inverse and that meanings here it
+just gives as R equals Wrpose
+multiple by W and Wrpose the whole
+inverse. Dear friends, actually W
+multiple by R equals the identity
+matrix. Okay. And that is such that WR
+which is equal to I W that is W multiple
+by R equals to the identity matrix.
+Okay, let me just discuss this by using
+the code. So yes dear friends, kindly
+just observe here we have a matrix.
+Okay. So the matrix W is a wide matrix
+where we have a shape of 3 into 8 and it
+just maps as like R8 towards R3 that is
+here we have typically a rank three
+matrix for full row matrix. Okay. So
+rank would be three kind in mind. Okay.
+Now let we are just going to form the Y
+matrix that is WWT. So this is what the
+right inverse. Okay. And we're not just
+making this right inverse. Yes. Here we
+have the row full row rank. Okay. So it
+would be the shape with 3 into 3. And of
+course the property of symmetric and
+this one is invertible if rows of Y are
+linearly independent. And let me just
+have the right inverse construction.
+Okay, as I have already specified, we
+already know that uh dar which is equal
+to wrpose
+multiple with uh wrpose
+inverse. So this is more penrose pseudo
+inverse for full row rank matrices. And
+here when we have towards this uh right
+inverse property. Yes, let we just have
+this. So we are just going to have the
+right inverse property. So let we just
+multiply both the thing with w. So what
+we just get? Yeah, it would be resulted
+with identity with the 3 into 3 identity
+matrix and it just confirms yes R is a
+right inverse of W. And when on just
+checking with the left inverse of course
+it doesn't exist because the shape it is
+8 into 8 and it is not an identity. And
+here when I'm just making towards this
+all close functionality we receives a
+false and here what is this RW? Of
+course here Wr or Rw whatever thing. So
+this is the exact projection. And what
+is the projection matrix? Okay, let I
+just end with the projection matrix P is
+equal to Wrpose
+multiple by W. Wrpose whole inverse W.
+And dear friends, when on just
+specifying this geometrically
+interpretation, this W is the
+compression of a dimensional space into
+three-dimensional matrix. And here this
+R of course it lifts vector from R3 back
+into the R to the^ of 8. And when coming
+towards RW, yes, this is the project's
+vector in R A onto the row space of W.
+Let I just execute and see what is the
+output. Yes, dear friends, kindly just
+observe we have an W with a 3 into 8
+shape. And here we have the rank is
+three. And when coming towards this uh
+right inverse, yes, we just have 8 into
+three. So we receive an 3 into three
+identity matrix and of course we're not
+just comparing towards whether it is
+exist there in left or not. Yeah we
+received a false functionality. So that
+is what here and where this is exactly
+used of course I have to conclude that
+with it. So dear friends kindly just
+observe one thing we have checked with
+right inverse. Okay. So write inverse
+matrix when on just existing with full
+row functionality. So this exists when
+rows are independent. So it equals
+identity. But when on making towards
+left when on verifying it towards left
+inverse of course we have RW which is
+equal to I to the^ of 8. So this is
+impossible here because not full column
+rack here and towards the property
+functionalities. Yes, this is connected
+towards least norm solution. Yes. And to
+the formula x is equals wrpose multiple
+by w and wrpose whole inverse y. And it
+just solves the minimum norm solution.
+And dear friends, of course we have uh
+discussed here about two important
+functionalities. One is tall matrix.
+Yes, let I just give the pseudo inverse
+of the uh tall matrix. So a projection
+of a transpose. A the whole inverse
+multiple by a transpose. And when just
+going for the y that is y matrix and
+here a projection which is equal to a
+transpose multiple by a a transpose
+whole inverse. So this both defines the
+more penrose pseudo inverse. So dear
+friends here we have just constructed
+the uh right inverse for a wide matrix
+and we have just verified W wr
+and when just making WR yes of course it
+is an identity matrix of three but it
+doesn't confirms that uh identity matrix
+of eight. So here it interprets the
+projection onto a row spaces and it has
+a connections with uh least nom solution
+of course. pseudo inverse theory also.
+Now let me just move on to more Pendros
+pseudo inverse. Friends, every matrix
+has a pseudo inverse regardless of its
+shape and rank. If the matrix is square
+full rank, then its pseudo inverse
+equals its full inverse. Likewise, if
+the matrix is nons square and has its
+maximum possible rank, then the pseudo
+inverse equals its left inverse. left
+inverse for the tall matrix or it's
+right right inverse for a wide matrix.
+But a reduced rank matrix still has a
+pseudo inverse in which case the pseudo
+inverse transforms the singular matrix
+into another matrix that is close but
+not equal to the identity matrix. Dear
+friends, this one is very much
+important. Let me just discuss this with
+an uh coding here. This exact code
+systematically compass how this more
+pendro pseudo inverse that is a
+projection helps behaves across
+different matrix types and verifies its
+defining property. And here we are just
+going to have four different matrix.
+Yes, it is a square singular square full
+rank tall inverse and wide sorry tall
+matrix and wide matrix where tall it is
+left inverse and wide it is right
+inverse. Okay. And kindly just observe
+dear friends uh this exact uh dictionary
+it just going to uh create a test case.
+This square it is a 2 into2 matrix and
+uh square full rank of course that is
+also a 2 into two matrix. When coming
+towards this tall matrix it has a 5
+into3 matrix and wider of course it is 3
+into 5 matrix. Okay. So let me just uh
+discuss one by one and here let me
+compute the pseudo inverse. Okay. So let
+me just compute the pseudo inverse here
+by using this. And this exactly uses SVD
+internally. It works for all matrices
+regardless of any shapes or rank. And
+let me just identify the key product
+functionalities that is a multiple by a
+plus. Theoretically we just say a a plus
+which is equal to the projection of
+column space matrix. Okay. So projection
+onto the column space of a. And here we
+are just going to have an uh error
+measurement. Okay. So we are just going
+to have an error measurement where this
+compares whether it is a a + 2 identity
+and this can be happened by using a
+forbinous norm functionality. We have
+already discussed about the forvenius
+norms. Anyhow, I let you know about this
+uh forinius norm equation and this one
+summation of J of M subig the square.
+Okay. So this one we are just going to
+have it as like an error measurement and
+let we just going to have each and
+everything as a case uh interpretation.
+So case by case we are just going to
+identify the rank and projection and
+then towards the error functionalities.
+Okay, let I execute and let me just see
+the resultant. So kindly just observe
+dear friends here what we just get
+towards this functionality square matrix
+the shape it is 2 into 2 the rank it is
+one rank one it is less than two and
+kindly just observe whether it is
+invertible no it is not okay it is not
+invertible and yes it is an identity
+matrix that is acceptable so when on
+just making the square uh singular
+Kindly just to see here the exact rank
+of course we have 2 into two matrix but
+we have the rank is one. So rank is less
+than the full matrix and here when
+comping towards this uh a and a plus
+that is the projection actually it is
+not an identity. Okay so it is not an
+identity. So let I just specify it is
+not an identity. And how about the
+error? Of course the error it is greater
+than zero. Okay. So this is what the
+square matrix. Okay. Let me just move on
+to the next one. Square full rank. So
+from this what we just have. Yes shape 2
+into two and the rank is also true. So
+here yes both the things are equal. So
+when we just specify a projection which
+is equal to a inverse and to the same a
+into a plus which is equal to identity.
+So the result is true. Okay. And here
+when we just specify whether the true
+inverse exists of course here it is
+true. Okay. Now let me just move on to
+the next one. Full column matrix. Okay.
+So yes here a plus which is equal to a
+transpose a the whole inverse in
+multiple by a transpose. So in such a
+case when on just specifying towards
+this a a plus the projection onto 3D
+subspace of R5 R5 in the sense of course
+here we just have shape as five comma 3
+towards the column it is rank three and
+towards identity of course it is not an
+identity and uh error of course it is
+greater than zero and let me just move
+on to the full row rank. Full row rank
+of course it is wide full row rank.
+Okay. Kindly just observe here it is a +
+which is equal to a transverse multiple
+by a a transverse the whole inverse and
+here kindly just observe dear friends
+here it is 3 into 5 and the rank is
+three. So a into a + which is equal to
+identity of 3 into 3 matrix and towards
+the error of course error which is equal
+to zero and you would have small small
+uh confusion when to use this a a plus
+and towards this uh a a plus which is
+equal to identity. Yes, let I just give
+you a small thing dear friends. See a a
+plus which is equal to i. If a has a
+full row rank kindly use this and if you
+are going with a + a which is equal to
+i. So kindly just make use this of full
+column wrap. Don't get confusion. Okay.
+So a a plus it is exactly projection
+onto uh column space and here it
+projection onto uh row space. Okay. And
+dear friends this both are pseudo
+inverse satisfies and this one kindly
+just see here pseudo inverse behaves
+like an inverse wherever possible and
+like a projection otherwise. Okay. Now
+we are just going to discuss uh
+important functionalities uniqueness of
+inverse matrix. Dear friends, so far we
+learned what an inverse matrix is and
+how to compute. But now an interesting
+questions arise. Can a matrix have two
+different inverse? In other words, could
+there be one matrix like we have B and
+acts as an inverse of A and another
+matrix C that also the inverse of A. And
+dear friends, the answer is no. An
+invertible matrix has exactly one
+inverse. Okay, let me just discuss that.
+Dear friends, suppose just for a sake of
+argument, let A has a two inverse. Okay,
+we just have B and C. And since B is an
+inverse, we know. So kindly just observe
+we have a matrix A. Okay. And towards
+its inverse A inverse. But let we just
+call two things. One is B and C. Since B
+is inverse, we know AB which is equal to
+Y where I is an identity matrix. And
+here similarly for C, we have A C which
+is equal to I. Now assume B and C is not
+equal. We will see if this assumption is
+actually possible. So we will start with
+a matrix C itself. multiplying any
+matrix by the identity matrix does not
+change it. So here if I just go with C
+which is equal to C I. So this is simply
+the identity property. Now let me
+replace the identity matrix I with A.
+What happens? So here C which is equal
+to C of A B. Now next comes an important
+property of matrix multiplication.
+Matrix multiplication is associative.
+That means we can regroup the brackets
+without changing the order. So here C of
+A B becomes CA of B. So notice that we
+have not changed the order of
+multiplication. We have only changed the
+grouping. Now look carefully what is the
+CA. Since C is the inverse of A, we know
+CA is equal to I. Remember an inverse
+satisfies both A is equal to I and CA is
+equal to I. So we replace this CA with
+the identity matrix. Okay. So now here
+it becomes I again multiplying by
+identity matrix changes nothing. What
+happens? B. So this I now it becomes C.
+Putting everything together now we know
+C which is equal to B. This is a
+contradiction enough. And whenever a
+mathematical assumption leads to a
+contradiction the assumption must be
+false. So therefore our original
+assumptions that a matrix could have two
+different inverse is impossible. Hence
+an invertible matrix has one and only
+one inverse. Well, why this important in
+machine learning? Dear friends, kindly
+just think about this. This uniqueness
+gives us confident when solving matrix
+equation. For an example, let I just
+give you one thing. So kindly just see
+here a x which equal to p and here using
+x which is equal to a inverse b. We
+never have to worry about getting
+multiply answers because of multiple
+inversion. There is only one inverse
+which means there is only one
+transformation that exactly reverses the
+effect of a. So this makes inverse based
+computation reliable in of course linear
+regression, computer vision or graphic
+transformation, robotics, signal
+processing, scientific computing and
+interesting observation. Oh god. Here's
+something worth remembering. The
+uniqueness property applies only to
+invertible matrix. If a matrix is
+singular, meaning its determinant is
+zero, then it does not have an ordinary
+inverse. Instead, we often use something
+called more pendro pseudo inverse.
+Interestingly, there can be many
+generalized pseudo inverse for a
+singular matrix and dear friends however
+the more penrose pseudo inverse is
+special because it is the unique minimum
+non pseudo inverse that's why it is
+widely used in machine learning
+especially in least square problem a
+linear regression and neural network
+optimization
+okay here I just give you a small
+remembering kindly just keep it in mind
+dear friends if a matrix is invertible.
+It inverse is unique. So there is one
+matrix that unders the transformation
+and only one. So this seemingly simple
+result is one of the fundamental reason
+why inverse matrix are so powerful in
+linear algebra and machine learning. And
+let me just discuss on this numerical
+stability of the inverse. Difference
+matrix inversion is numerically fragile.
+And here the conditional number that is
+k of a which is equal to sigma max
+divided by sigma min that measures
+instability. And here large k means the
+matrix is ill conditioned and it is
+inverse in unreliable. Let me just
+discuss about this Hilbert matrices. And
+dear friends here this exact code it
+studies this Hilbert matrices a
+classical exam of extremely numerical
+ill condition and show how inversion
+becomes unreliable as size increases.
+Okay, let me just discuss the code one
+by one. So kindly just observe we are
+just going to have a loop over matrix
+sizes. Okay. And here the sizes are 3 5
+8 10 13 and 15. So these are for test
+progressively larger Hbert matrices Hn.
+Okay. And let we just define a Hellbert
+matrices equation H I subig which is
+equals 1 by I + J -1. And dear friends H
+is for Hbert of N. And on defining this
+Hbert of N. And here we have an example
+of 3 into 3 matrix. Kindly just observe
+dear friends. And the matrix here it
+would be this is 1 1x 2 1x 3 and again
+1x 2 1x 3 1x 4 1x 3 1x4 and 1x 5. Okay.
+And here one more thing we have just
+defined a conditional number and this
+defines the exact uh functionality uh
+condition number. It just gives K of H
+which equals norms of H into norms of H
+inverse. Okay. So this measures
+sensitivity to numerical errors. And
+kindly just observe if the K largest K
+increases yes there would be an unstable
+computation. And uh yeah we are just
+going to have the rank and yes
+theoretically of course we all know uh
+rank of uh h we are just going to have
+the n value and here but numerically may
+appear deficient for large n that is a
+large size of n and next we are just
+going to have an inversion and error
+check. Okay. So what here it is
+measuring is kindly just observe this
+exact equation. So h at h inverse minus
+identity matrix and this with a
+forbinous norms specify mathematically
+and forbinous norms of
+h multiple by h inverse minus i and this
+one ideally zero and dear friends kindly
+just keep it in mind in practice it just
+grows rapidly with the value of n and
+towards the last we are just going to
+have it within a tabular formula Okay.
+So we are just going to have uh the
+first one as matrix size. This is what
+the n and next one this condition it is
+for condition number and third one for
+rank and last one any error that is
+deviation from identity. Okay let I
+execute and let me just see what is the
+output. So kindly just observe dear
+friends the conditional number grows
+astronomically for n which is equal to
+three. uh it just grows from of course
+10 ^ of 4. We're not just going towards
+kindly just observe this n is equal to
+13. So n is equal to 13. This
+astronomically we have 10 ^ of 17 and at
+n is equal to 13. So when we just
+identify this error h inverse minus
+identity under forbinous norms okay is
+already significant and beyond uh n13
+okay numpy considers the matrix rank
+deficiency and here one thing kindly
+just say that this there is a
+functionality is called rule of thumb
+each power of 10 is the condition number
+cost roughly one digit of precision in
+the inverse. So here a matrix if we just
+say k towards 10 ^ of 16 yeah it is near
+the limit of 64-bit floating point is
+effectively singular and here a
+production advice kindly just see avoid
+explicit matrix inversion when possible
+and here instead of this one and kindly
+use see actually here uh numpy linear
+algebra dot solve of a comma b use this
+instead of uh making as linear algebra
+of inverse of A at B because it uses LU
+decomposition internally which is both
+faster and more stable and for uh least
+square kindly make use of NP dot linear
+algebra LSTSQ of X Y instead of don't go
+for this Xrpose X the whole inverse and
+Xrpose Y don't go for this directly And
+last but not least, dear friends, uh for
+EGN problem, use QR decomposition, QR
+based iterative methods. And dear
+friends kindly just uh one thing I just
+want to let you know dear friends uh see
+this hillbirth matrices are problematic
+because columns are nearly linear
+dependent and here extremely small
+singular values and poorly conduced by
+us. And when we just go towards the
+resultant kindly just see one thing if
+we have a minimal small size of matrix.
+Yeah, the conditional number would be
+manageable. Conditional number would be
+manageable. And when we just think about
+the error, of course, it would be nearly
+zero. And if we just go with a large
+number of size of a matrix, of course,
+conditional number would be enormous and
+error would be significant. So kindly
+just keep it in mind. Hilbert matrices
+are theoretically invertible,
+practically unstable. And when you just
+go towards this practically kindly avoid
+explicit inversion for ill condition
+matrix as I have already specified yes
+uh prefer towards this functionalities.
+Okay. So prefer this one rather than
+going for this one. And if it is an SBS
+SBD based method regularization kindly
+used ridge regressions. And yes dear
+friends this exact code demonstrate
+rapid growth of conditional number in
+Hilbert matrices and breakdown of
+numerical inversion despite theoretical
+invertibility and the important of
+condition in numerical linear algebra.
+Okay let me just visualize the Hilbert
+matrix and yes it inverses and their
+product revealing the hallmark behavior
+of illonditioned system. Let me just see
+whether small or well- behaved inputs
+leading to extremely large inverse
+entries or not. Okay. So yes here kindly
+just observe we are just going to have
+an uh a value that is n which is equal
+to five and here of course h which is
+equal to hbert of n and this one yes it
+is a 5 into 5 hbert matrix and when on
+just going for h inverse yes it is a
+numerical inverse and towards the uh
+product yes should approximately
+identity. Now let me just visualize the
+structures. So here we are just going to
+have the visualization and we are just
+going to have three panels. One yes H
+second one H inverse and the third one
+product of H and H inverse. And let we
+just have the uh panel A. Okay. So the
+panel A yes it is just going to have a
+values of uh 0.04 04 to 1 and yes a
+smooth decay away from uh top left and
+of course it appears well behaved and
+structured and when in just going for
+this h inverse yes uh the values are
+very large in magnitude and it just
+going to range with minimum and maximum
+so that is what so typically we are just
+going to have order of 10 ^ of two to
+order of 10 ^ of 5 okay let me just have
+that and uh The last one the product of
+H and H inverse. Okay. And let me just
+have the exact matrices and of course we
+are just going to have that expectation.
+Let I just have the expectation here. So
+it would be as like identify of five. So
+1 0 like that 0 1 and uh 0 0 1. So like
+that it would go on. Okay. And yes it is
+close to identity but not exact because
+due to floating point errors would be
+there. Okay. So let me just uh print the
+diagnostic values ranges and let me
+confirm whether uh what is the exact
+values of h H inverse and to the product
+of h and h inverse. Okay. So let I just
+execute and we just see. So kindly just
+observe dear friends here the value of
+the visualization of h we can able to
+view an smooth gradient. Smooth gradient
+is in the sense of course it is a
+structured and low variation and when on
+just uh visualizing this h inverse of
+course we have a high contrast and of
+course there is an oscillation also. So
+this uh would mean towards instability
+and amplification. And last of course
+the product of H and H inverse. Kindly
+just observe it is nearly identity and
+approximate of correctness. So with this
+yeah we can just conclude that ill
+conditioning manifest as large inverse
+value and sensitivity to error. So even
+the matrix is small even the matrix is
+small uh structure appears simple. And
+dear friends here I just want to
+summarize one thing. The code
+demonstrate the deceptive simplicity of
+Hward matrices. The dramatic growth in
+inverse magnitude nearly identity
+product we have just seen. So that
+despite instability and direct visual
+evidence of conditioning effect. Now now
+let we just move on to geometric
+interpretation. The inverse undo a
+transformation. Dear friends, previously
+we have seen about a matrix T transforms
+geometric coordination that is via Q is
+equal to TT. Here the inverse T inverse
+undo the transformation. So U which is
+equal to T inverse of Q which is T
+inverse TP which is identity P and which
+is P. And here why single matrix have no
+inverse that is geometrically. Yes, of
+course. A singular transformation
+collapses at at least one dimension.
+Once a 3D shape is flattened to a 2D
+surface, the lost dimension cannot be
+recovered. This one we have already
+discussed. Okay, let me just visualize
+by using the code here. So this exact
+code provides a geometric demonstration
+of matrix inverse applying a linear
+transformation and then it inverse
+recover the original shape. So exactly
+uh up to numerical precision. Let me
+just see here. Okay. So yes here we have
+a representation of uh six vertices in
+two dimensional and of course the shape
+is a simple house polygon. Okay. So that
+is what here it is specified and it just
+going to store 2 into six matrix. So
+columns is the point our and uh let me
+just have our transformation matrix.
+Okay. So here it just interprets 1.5 0.5
+0.3 and 1.2. So what it happens of
+course it just going to have the
+combination of scaling shearing
+rotations like distortions and yes we
+are just going to have the uh
+determinant functionality. So when on
+just taking towards determinant first of
+all let I just have the matrix t. So t
+is equal to 1.5 0.5
+0.3 1.2. Okay. And when on just making
+the determinant of t here 1.5 into 1.2
+minus 0.5 into 0.3
+so which equals 1.8
+minus 0.15 which is equal to 1.65. So
+here it is a nonzero. So it is an
+invertible. And of course area scaling
+factor it just leads to 1.65 and of
+course it is an positive orientation
+preserves also. Okay. Now next we just
+go for forward transformation. So
+forward transformation here it just
+going to specify as like Q is equal to
+TP. Okay. So here applies t to every
+vertx and it's just going to produce a
+disaster house. Disaster means of course
+it can be uh skewed or uh stretched. Let
+me just check over when on execution and
+we are just going to have an inverse
+transformation also. So inverse
+transformation here it is mathematically
+uh specified as like P which is equal to
+T inverse Q and of course it just going
+to applies inverse transformation. So
+should recover original points. Let me
+just see and yeah here we just go with
+the visualization point. So first one it
+is going to be original second it is uh
+transformed and next it is going to be a
+recovered. And last but not least, we
+are just going to verify. Okay, so we
+are just going to verify all the things
+and let me just have a comparative
+whether it is true or not. Okay, so once
+I just execute it. So kindly just see
+here the first one. Yes, original it is
+an undeserved house and the second one
+we have a skewed and scaled version. It
+just demonstrate effect of this
+transformation.
+And the last one yes we have a recovered
+matches original shape confirms
+correctness of inverse.
+So how about the conversion recovered?
+Yes of course it is true and dear
+friends when on just specifying this
+colinear functionality. So here when we
+just go towards the core linear algebra
+principle. So here t inverse t which is
+equal to i and towards the mathematical
+applies it is exactly under t inverse of
+t * x which is equal to x. So when on
+making this apply transformation exactly
+it unders the functionality and when on
+coming towards geometric informations
+yes t that maps the space. So even
+though disastered coordinate system and
+here t inverse maps back original
+coordinate the systems and here kindly
+just have keep it in mind dear friends
+important functionality transformation
+acts on entire space not just point the
+shape follows because its points are
+transformed and when this works yes
+exactly when the t is invertible t is
+invertible is in the sense The
+determinant is not equal to zero. That
+time alone this exactly works. This undo
+the transformation. And here no
+information is lost because
+transformation is bjective.
+So yes dear friends kindly just keep it
+in mind. This exact code demonstrate the
+linear transformation as geometric
+mapping inverse matrices as exact undo
+operation determinant as criterias of
+reversibility and visually confirm as T
+inverse of TP which is equal to P. So
+hope yes with this session we unlocked
+the concept of matrix inverse. We
+discussed uh that an inverse exists only
+when a matrix is quiet and fully rank.
+Singular matrix cannot be inverted
+because information has been lost. The
+determinant tells us whether recovery is
+possible. Left inverse and right inverse
+helps us solve problems involving tall
+and wide matrices. The more Pendro
+pseudo inverse gives us a universal
+solution when a true inverse doesn't
+exist. Most importantly, we discovered a
+deeper idea that is a matrix
+transformation change a world. Inverse
+transformation helps us understand how
+to get that world back. So this single
+idea appears everywhere in linear
+regression, machine learning, neural
+network, computer vision, computer
+graphics, optimization, scientific
+computing. The more you discuss or more
+you learn linear algebra, the more you
+will realize that matrices are not just
+mathematical objects. They are the
+operating system behind modern AI. Hope
+I think this exact session it would be
+useful. So kindly like this video, share
+it with someone starting their data
+science or machine learning or geni
+journey and subscribe to demystify with
+aay for more such real world
+explanation. Thanks for watching dear
+friends. See you in the next

@@ -1,0 +1,254 @@
+# Machine Learning Mathematics Ep 39 | Quadratic Forms & Matrices| xᵀAx Matrix Geometry & Applications
+# https://youtu.be/q8unKzqY8No
+
+Happy morning dear friends. Here yours
+is Dr. Rajenta. Welcome to demystify
+with Ajek. Dear friends, today we are
+going to discuss on agent decomposition
+which is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure that
+is a set of special direction which we
+just say een vectors and associated
+scaling factor. Yes, that is what each
+inn value the together tells us
+everything about what the matrix does
+and yes dear friends here it is what a
+simple looking equation a multiple by v
+which equals lambda multiple v it looks
+small but this single equation powers
+yes principal component analysis noise
+reduction data compression graphic
+analysis dynamical systems yes of course
+a lot and lot and this exact equation
+yes when matrix A multiplies a special
+vector V the result is simply that same
+vector scaled by this number that is
+lambda here the vector V is an EGN
+vector and the scale lambda is its
+corresponding EG value finding all such
+paths that is lambda and V is what EN
+decomposition is all about and dear
+friends of course There is a
+prerequisites also. Yes, you should be
+comfortable with the matrix
+multiplication, determinance, the null
+space, a matrix rank and we will also
+use the concept of matrix shifting. And
+dear friends, in this session we will
+uncover yes what EG values and EG vector
+really mean and why EGN decomposition
+works only for square matrix. The
+geometric interpretations of stretching
+without rotating. How agent value
+reveals important patterns in data. The
+characteristic polomial. Finding Eian
+vectors using the null space. And matrix
+diagonalization. And last, yes, why
+symmetric matrix are the superheroes of
+linear algebra. and added. Yes, we will
+see why Eian decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Let we
+discuss on quadratic form and
+definitess. Dear friends, we arrive at
+one of the most practical important
+concept in EGN decomposition. Yes,
+definitess. It sounds intimidating but
+the idea is simple. Okay, towards the
+quadratic form. Dear friends, kindly
+just observe. Let we have a given square
+matrix A. Okay. So and and many vectors
+W. Okay. So here of compatible size. So
+the quadratic form of this would be
+kindly just observe Q which is equal to
+W transpose multiple A multiple W. This
+takes a matrix and a vector and produce
+a single scalar Q. The question is what
+is the sign of Q for all possible vector
+W? Let us connect this to EGN value
+using the EGN value equation. Of course,
+we all know A multiple by V which is
+equal to lambda multiple by V and left
+multiplying by V transpose. What we just
+get? Yes. V transpose multiple by A
+multiple by V which is equal to V
+transpose multiple by lambda multiple by
+V. So which is equal to kindly just
+observe lambda multiple by v transpose
+multiple by v. So kindly just observe
+dear friends this would be the v noms of
+square which is greater than zero. So
+here yes the quadratic form is would be
+lambda multiple by norms of v noms of
+the square and here since this v n the
+whole square is always positive we
+exclude v is equal to zero. So the sign
+of quadratic form is determined entirely
+by the sign of the EN value and because
+any vector can be written as a
+combination of EN vectors. The sign of
+all EN values determine the possible
+sign of quadratic form for any vector.
+Okay, let me just discuss that by the
+code. So kindly just observe dear
+friends. So this script illustrate the
+relationship between the agent values
+and definitess of a matrix via quadratic
+form and yes we already have uh
+discussed. So here the quadratic form of
+q of w which is equal to w transpose
+multiple a multiple w and verifies the
+theory empirically using random vector.
+So here kindly just observe dear friends
+we are just going to define the
+quadratic form definition as symmetric
+matrix A and yes here it is what the
+defined one and yes this has an array as
+like a 2 1 and 1 and three and we are
+just defining the een values. So both
+een values are positive. So kindly just
+observe when we just make use of this
+lambda 1 which would be greater than
+zero and lambda 2 that also would be
+greater than zero. And uh theoretically
+of course uh if all values are positive
+we always may specify as like w
+transpose multiple a multiple by w that
+would be greater than zero. So a is
+positive definite and when we just do
+towards that empirical test here
+evaluated values for uh 10,000 random
+vectors and here minimum value is still
+positive and yes dear friends this exact
+loop confirms that no direction produces
+a negative or zero value. So the
+quadratic form defines a strictly convex
+surface and onto the result. He has
+kindly just observed dear friends the
+quadratic form is a elliptic ball and
+every direction curves upward and here
+no flat or downward directions would be
+there. Okay. But we have an second
+example. So which it just specify an
+indefinite matrix. So here we have that
+indefinite matrix minus1 2 and 211. And
+of course we are going to have the een
+value for this indefinite matrix. Yes.
+uh when we just describe this one een
+value would be positive another een
+value would be negative. So yes dear
+friends. So for an uh indefinite
+functionality lambda 1 that would be
+greater than zero and lambda 2 that
+would be less than zero. And if eian
+values have mixed sign here w transpose
+multiple by a multiple by w can be
+positive or negative. So here a is
+indefinite. And here we have the
+empirical result. Yes, minimum is
+negative, maximum is positive. So this
+exactly confforms some direction produce
+positive curvature other produce
+negative curvature. So here this exact
+in quadratic form is a saddle surface
+and curves upward is some direction
+downward in another directions. Okay. So
+let me just uh execute and identify the
+uh resultant. So here we have the exact
+positive definite and here we have the
+uh indefinite matrix. And kindly just
+observe dear friends we are just uh
+determining the sign of Eian values by
+using the diagonalization. Yes, for
+diagonalizing kindly just observe if a
+which is equal to v multiple by lambda
+multiple by vranspose then here we just
+get wrpose multiple by a * w which is
+equal to v transpose multiple by w the
+whole transpose multiple by lambda and
+for vranspose here v transpose and
+multiple by w so Let E is Z which is
+equal to V transpose multiple by W. Then
+what we just get? Yes. Kindly just
+observe Wrpose multiple by A multiple by
+W which is equal to summation of I of
+lambda sub I multiple by is sub I
+squared. So each term is weighted by an
+EG value. Since here is sub I the square
+that is greater than or equal to zero.
+So that the sign depends entirely on
+this lambda subi and dear friends kindly
+just observe. So with this we are just
+identifying the eian values and if all
+eian values all greater than zero so
+definitess would be positive definite
+and if all the een values are less than
+zero it would be negative definite. But
+if it has a mixer sign yes surely it is
+an indefinite functionality. And kindly
+just observe dear friends if it is
+greater than or equal to zero that is
+some zeros would be there now. So in
+such a case it would be semi-definite
+functionality. So here with this
+functionality yes here we just get yes
+positive definite it is an uh unique
+minimum and in indefinite so we just get
+a saddle point and dear friends kindly
+just observe in machine learning yes
+hesian matrix determines curvature and
+with using the numerical method yes
+positive definite matrices enable
+efficient algorithm and yes dear friends
+this exact uh code just demonst
+demonstrate positive definite matrix. So
+all eian values here are positive and
+quadratic form always positive and here
+the geometry would be convex bold. And
+when coming towards the example two as
+an indefinite matrix. So we just get
+mixed sign value and here quadratic form
+can be positive or negative and the
+geometry would be saddle surface. So the
+key identity would be yes as we have
+already discussed. So it would be as
+like a W transpose multiple A multiple W
+which is equal to summation of I of
+lambda sub I multiple by sub I squared
+which explains why EGN values completely
+determining definitess. We have
+discussed egen vectors are special
+directions that remains unchanged in
+orientation. Egen values tells us how
+much those directions stretch or shrink.
+The characteristic equation helps us
+uncover egen values and een vectors
+emerges from the null space of shifted
+matrices. And here the most important
+lesson is yes een decomposition is not
+about matrices. It is about finding
+hidden patterns. When data becomes
+complicated, egen vector reveals the
+important direction. When data set
+becomes highdimensional, PCA uses EEN
+vector to simplify them. When noise
+hides useful information, EG values
+helps separate signals from noise. So
+that's why Egent decomposition powers
+PCA, machine learning, computer vision,
+signal processing, network analysis,
+financial modeling, scientific
+computing. Of course, dear friends,
+every time a machine learning model
+discovers hidden structure in data,
+agent decomposition is often working
+quietly behind the scenes. I hope I
+think so this session would be very much
+useful. Yes, dear friends, the true
+power of mathematics lies not in solving
+equation but in discovering the hidden
+patents behind them. So, thanks for
+watching. See you in the next session,
+dear friends. Happy learning.

@@ -1,0 +1,369 @@
+# Machine Learning Mathematics Ep 41 | Generalized Eigendecomposition | From Av = λv to Av = λBv
+# https://youtu.be/CiBL4zEE1Lo
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on Eigen decomposition, which
+is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure, that
+is a set of special direction, which we
+just to say Eigen vectors. An associated
+scaling factor, yes, that is what Eigen
+value. The two together tells us
+everything about what the matrix does.
+And yes, dear friends, here it is what a
+simple-looking
+equation, A multiple by V, which equals
+lambda multiple by V. It looks small,
+but this single equation powers, yes,
+principal component analysis, noise
+reduction, data compression, graphic
+analysis, dynamical systems, yes, of
+course, a lot and lot. And this exact
+equation, yes, when matrix A multiplies
+a special vector V, the result is simply
+that same vector scaled by this number,
+that is lambda. Here the vector V is an
+Eigen vector and the scale lambda is its
+corresponding Eigen value. Finding all
+such pairs, that is lambda and V, is
+what Eigen decomposition is all about.
+And dear friends, of course, there is a
+prerequisite also. Yes, you should be
+comfortable with the matrix
+multiplication, determinants, the null
+space, a matrix rank, and we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover, yes, what Eigen values and
+Eigen vector really mean, and why Eigen
+decomposition works only for square
+matrix, the geometric interpretations of
+stretching without rotating, how Eigen
+value reveals see
+patterns in data, the characteristic
+polynomial, finding eigen vectors using
+the null space, and matrix
+diagonalization. And last, yes, why
+symmetric matrices are the superheroes
+of linear algebra. And added, yes, we
+will see why eigen decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Okay, dear
+friends, let me just discuss about
+generalized eigen decomposition. Dear
+friends, the standard eigen
+decomposition solves A multiplied by V,
+which is equal to lambda multiplied by
+V. And here, generalized eigen
+decomposition solves a more general
+problem. That is A multiplied by V,
+which is equal to lambda multiplied by
+matrix B multiplied by V. Here, instead
+of scaling the eigen vector by scalar,
+that is
+lambda V, we are going to scale it by
+another matrix times a scalar. That is
+lambda B times V. So, the resulting
+here, the lambda and V vector pair are
+not eigen vectors of matrix A alone or B
+alone.
+They characterize the relationship
+between this both the matrix.
+So, conceptually, you can think of
+generalized eigen decomposition as a
+regular eigen decomposition of product
+of A multiplied by B inverse. So, though
+the implementation does not require the
+matrix B to be invertible, so here
+actually this is very much useful in
+data science or machine learning, mainly
+in
+Fisher's linear discriminant analysis.
+Yes, a classification technique finds
+the projections that maximize the
+between class variation relative to to
+the within class variance. So, this is
+formulated as a generalized eigen
+decomposition of two covariance matrix.
+And here the standard requirement is
+that this exact B, yes, is a positive
+definite, which is a guaranteed when B
+is a covariance matrix. Okay, let me
+just discuss it by code. Kindly just
+observe, dear friends. So, the exact
+script demonstrate the generalized eigen
+decomposition problem and mathematically
+specified as like A * B, which is equal
+to lambda * B * B for symmetric positive
+definite matrix of A and B and verifies
+its properties numerically. So, here we
+are just going to construct the
+SVD, that is the symmetric positive
+definite matrices here. And yes, kindly
+just observe, which is a guaranteed
+symmetric positive definite because here
+R * R inverse is always symmetric and
+positive semi-definite. And this exact
+matrix, when we just add with, of
+course, A / 10, this ensures a strict
+positive definiteness be and better
+numerical conditioning. So, here both A
+and B satisfies, that is X transpose A *
+X, that would be greater than zero, and
+X transpose B * X, that would be greater
+than zero. And here, when we just go
+towards the generalized eigen problem,
+we define here those eigen vectors and
+eigen values. So, yes, this exactly
+solves, yeah, as to the same. A * B sub
+I, which is equal to lambda sub I, * B *
+B sub I. And here, kindly just observe,
+dear friends, this eigen value, yes, it
+is a generalized eigen value. And
+towards the vectors, yes, it is a
+generalized
+eigen vectors towards the column. And
+when we just interpret for those
+generalized eigen decomposition, dear
+friends, kindly just observe, unlike
+standardized eigen decomposition, that
+is AV which is equal to lambda V,
+this generalized eigen decomposition
+measures scaling relative to B. So, here
+we just get lambda which is equal to V
+transpose A * V / V transpose B * V.
+So, this is a generalized Rayleigh
+quotient. And yes, we are just going to
+have a verification check that is here
+with this loop, yes, we are just going
+to have the verification. And by using
+the lambda functionality, it's just
+going to check the equation A *
+V sub I that would equals with lambda
+sub I B * V sub I. And here, yes, kindly
+just observe this all core close formula
+confirms numerical correctness. And for
+symmetric positive definiteness for B,
+this eigen vector satisfied, that is V
+sub I transpose * V * V sub J which is
+equal to if I which is equal to J, it
+would be one, and if I which is not
+equal to J, it would be zero. So, here
+eigen vectors are orthonormal under the
+B, that is inner product, not the
+standard dot product. Kindly have a
+note. And when we just go towards the
+reduction to standard eigen
+decomposition, here GED, that is
+generalized
+eigen decomposition can be converted to
+a standard problem. So, since the exact
+standard problem for Uh, this B matrix,
+here B which is equal to C multiple by C
+transpose. That is using Cholesky
+formula. And here then we are just going
+to define a A tile. That is C inverse
+multiple by A multiple by C inverse the
+whole transpose. And we are just going
+to solve this by A tile multiple by U
+which is equal to lambda U. And it just
+recovers that V which is equal to C
+inverse the whole transpose multiple by
+U. And of course we just have this EGN
+hitch. So which performs this
+transformation internally. And kindly
+just observe dear friends it has a
+connection to a standard EGN
+decomposition. Yes, by using EGN hitch.
+And here kindly just observe when we
+have B is equal to identity. Okay? When
+we just have B is equal to identity our
+GED that is a generalized EGN
+decomposition reduced to A multiple by V
+which is equal to lambda multiple by V.
+And here you can just check this by
+using this all close functionality. And
+yes we are just going to get a
+generalized solver matches standard EGN
+decomposition.
+And here let I just execute. And dear
+friends kindly just observe this is what
+the matrix A. Okay? So here it is a
+symmetric and positive definite. And the
+matrix B yes this is also a symmetric
+positive definite. And here we just get
+the generalized EGN value. And we just
+have the generalized EGN vectors towards
+the column. And when we just
+interpret with the generalized EGN
+decomposition that is GED yes here we
+just get the verification of this the
+lambda functionality. That is by using
+this yeah we are having that is AV which
+is equal to lambda B times VI. So, here
+this is what the A and yes, this one it
+just makes the B times V, which both are
+kindly just observe, both are
+equalizing. So, this confirms new
+numerical correctness. And when we just
+go towards the connection to standardize
+uh eigen decomposition, kindly just
+observe here friends. Here, when B is
+equal to identity, the GED with this
+functionality, it also equalizes the
+exact value. So, yes, both are same and
+it just confirm generalized solver
+matches standard eigen decomposition.
+And yes, dear friends, by using this
+code, yes, this exact code demonstrate
+solving the generalized eigen problem.
+That is AV, which is equal to lambda
+multiple by B times V. Yes, verifying
+correctness numerically and showing
+equivalence to standard eigen
+decomposition when B is equal to
+identity. And here, implicitly, it using
+the fact that B defines a metric. Eigen
+vectors are orthogonal under that
+metric. And one thing I have to add on,
+dear friends. So, generalized eigen
+decomposition answers a deeper question
+that the standard case, that is in which
+direction does A dominate relative to B.
+So, this make it fundamental in problem
+involving ratios of quadratic form, not
+just absolute scaling. So, before we
+conclude, let us verify two beautiful
+mathematical relationship that connect
+eigen value to quantities we already
+know. One, of course, the summation of
+eigen values. And and mathematically,
+summation from I equals 1 to M of lambda
+sub I, which is equals to the trace of
+A. And second one, yes, the product of
+eigenvalues. That is the product form of
+I which is equals to 1 to M of lambda
+sub I which is equal to determinant of
+A. So, let me just have the experimental
+setup. That is
+we are just going to have a random
+square matrix of varying
+3 into 3 size and 4 into 4 size and 5
+into 5 size. And here eigenvalues may be
+real or complex. And computation uses uh
+floating point arithmetic. And
+difference, kindly just observe here. We
+are just going to have the
+trace and summation of eigenvalues. That
+is trace versus summation of
+eigenvalues. And theoretically, it just
+results trace of A which is equal to
+summation of I of
+lambda sub I. And difference, this trace
+is the sum of diagonal elements. And
+here always equals the sum of
+eigenvalues. That is continuing
+multiplicity. Here, we are just having
+it with a dot real. That is complex
+eigenvalues occurs in conjugate pair.
+For an example, let me just give like
+this. So, here A plus Bi plus A minus Bi
+which is equal to 2A. And here,
+imaginary part cancels. So, the total is
+real. And difference, kindly just
+observe this
+determinant of A and product evaluation.
+So, theoretically, it just is specified.
+Yes, as I have already specified. So,
+kindly just see determinant of A which
+is equal to product of I which is equal
+to 1 to M of lambda sub I. So, here
+determinant encodes total volume
+scaling. Eigenvalues represents scaling
+along principal director. So, product
+combines these effect. And yes,
+difference, numerically, we have yes,
+comparison. We are just going to have
+yes, use a tolerance based comparison
+due to floating points rounding and
+numerical agent decomposition errors.
+So, let me just execute and when we just
+go towards this trial one. Yes, here we
+have 5 into 5 matrix and here 4 into 4
+matrix. The sum of all the roots which
+is equal to the trace and here the
+product of the roots which is equal to
+the determinant. Actually, this comes
+directly from the characteristic
+polynomial of determinant of A minus
+lambda I and the dear friends actually
+from polynomial theory here the sum of
+roots which is equal to trace and the
+product of roots which is equal to
+determinant. So, from that yes, kindly
+just observe this is what the trace and
+here sum of the roots which is equal to
+trace and yes, we get the determinant of
+A and here product of that agent value
+that is the roots which equals the the
+determinant value. So, yes, it matches
+all the same and yes, dear friends,
+these properties holds for any square
+matrix that is non just symmetric real
+or complex matrix. Even if matrix is not
+diagonalizable or agent values are
+complex and yes, dear friends, from this
+we are able to say that is trace totally
+linear scaling effect and yes, the trace
+is sum of directional stretch factors
+and when coming towards determinant it
+is total volume scaling effect and it
+includes orientation that is sign and
+yes, from the script that confirms
+experimental that trace which is equal
+to sum of agent value and determinant
+which is equal to product of agent
+value. So, these are not coincident but
+structural invariance derived from the
+characteristic polynomial and they
+remain valid across all square matrix
+regardless of symmetry or
+diagonalizability. We have discussed
+Eigenvectors as special directions that
+remains unchanged in orientation.
+Eigenvalues tells us how much those
+directions stretch or shrink.
+The characteristic equation helps us
+uncover Eigenvalues and Eigenvectors. It
+emerges from the null space of shifted
+matrices. And here the most important
+lesson is yes, Eigen decomposition is
+not about matrices. It is about finding
+hidden patterns. When data becomes
+complicated, Eigenvector reveals the
+important direction. When data set
+becomes high dimensional, PCA uses
+Eigenvector to simplify them. When noise
+higher hides useful information,
+Eigenvalues helps separate signals from
+noise. So, that's why Eigen
+decomposition powers PCA, machine
+learning, computer vision, signal
+processing, network analysis, financial
+modeling, scientific computing. Of
+course, dear friends, every time a
+machine learning model discovers hidden
+structure in data, Eigen decomposition
+is often working quietly behind the
+scenes. I hope I think so this session
+would be very much useful. Yes, dear
+friends, the true power of mathematics
+lies not in solving equation,
+but in discovering the hidden patterns
+behind them. So, thanks for watching.
+See you in the next session, dear
+friends. Happy learning.

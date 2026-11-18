@@ -1,0 +1,753 @@
+# HGMcpWkxqcM
+# https://youtu.be/HGMcpWkxqcM
+
+Happy morning dear friends, here's Dr.
+Welcome to demystify with Ajay. Dear
+friends, today in this session we are
+just going to discuss on orthogonal
+matrix. In linear algebra, the
+foundation is orthogonality and let me
+just begin our by understanding one of
+the most special objects in mathematics
+that is orthogonal matrix. Difference a
+matrix that can rotate data without
+stretching it. A matrix that preserves
+distance, angles and geometry. A matrix
+whose inverse is simply its transpose.
+Think about that for a moment. Most
+matrix distort information.
+Orthogonal matrix preserves it.
+So, we will discuss why the equation of
+course Q transpose Q which is equal to
+one is one of the most important
+equation in numerical computing.
+Then we will just move on to the world
+of
+QR decomposition. A powerful technique
+that transforms any matrix into A equals
+QR.
+Where Q captures pure geometry and R
+captures the structure.
+And here the QR decomposition quietly
+powers
+least square regression, matrix
+inversion, numerical optimization, eigen
+value algorithms, scientific computing.
+But that's only the beginning. Because
+once we understand orthogonality and the
+QR decomposition, we are ready for one
+of the greatest idea in all of applied
+mathematics. So, before going on to the
+discussion, so let I just include the
+necessary libraries. And here we have
+the NumPy. Yes, NumPy provides efficient
+numerical array operations and there's a
+foundational for linear algebra
+computation. And here for
+Matplotlib, yes it is used for creating
+visualization such as graphs and figure.
+Next we just uh
+the warnings. Yes, dear friends,
+uh uh this controls over warning message
+generated during execution. And here the
+line begins updating matplotlib runtime
+configuration parameter using a
+dictionary. And yes, this exact uh sets
+the default size of all figures to uh
+8-in wide and 5-in tall. And it enables
+the grid grid lines on all plots by
+default. And here we have an uh
+transparency of grid lines to 30% making
+them subtle and uh less visual dominant.
+And of course, to the last yes,
+uh sets the default font size for all
+text in the plots to 12.
+And uh dear friends, of course, we have
+just included that
+uh version. Yes, it prints the installed
+versions of NumPy by accessing the
+versions attribute. Okay? So, let me
+execute and uh see what is the exact uh
+version. Yes, here NumPy version, it is
+a 2.3.5.
+Let me discuss on QR decomposition. Dear
+friends, previously we have discussed on
+Gram-Schmidt procedure. Yes, it
+transforms A into Q but discards
+information in the process. And dear
+friends, that lost information is stored
+into R. That it just specify A is equal
+to QR. And dear friends, this finding
+the value of R is straightforward since
+Q transpose Q which is equal to
+identity. And it is extended, yes, Q
+transpose A which is equal to Q
+transpose Q multiplied by R. And yeah,
+with this functionality, we are just
+going to equalize that identity into R
+which is further equalized to R. And
+dear friends, here no matrix inverse
+needed.
+Just transpose and multiply. Yes, let me
+just discuss it by code. And yes, this
+exact code computes the QR decomposition
+of a square matrix and verifies its key
+mathematical property.
+Given is this exact line. So, it creates
+a 6 into 6 matrix A
+with entries drawn from a standard
+normal distribution. Yes, and here the
+seed, yes, it ensures reproducibility.
+And here we are initiating the QR
+decomposition. Yes, the factor A into
+QR, this is what. Where here Q is a real
+number of 6 into 6 is a orthogonality.
+So, that gives Q transpose multiplied by
+Q, which is equal to I. And here, dear
+friends, of course, R is a upper
+triangular matrix. And here it is R sub
+IJ, which is equal to zero for every I,
+which is greater than J. And next, we
+are just going to include this for shape
+verification. Yes, it just confirms all
+matrices are 6 into 6 since A is a
+square matrix. Next, we are just going
+for orthogonality check. And here, this
+exact line should produce the identity
+matrix with the 6 into 6 matrices. And
+rounding it into 10 decimal places
+suppresses floating point noise. So,
+this exact verifies, yes, Q inverse,
+which is equal to Q transpose. And uh
+yes, next we are just moving for
+reconstruction accuracy. Dear friends,
+this exact formation, it just computes
+the Frobenius norms of the error. Yes,
+the Frobenius norms, it is A minus QR,
+the Frobenius norms. Now, next we are
+just going to structure the R. So, it
+displays the upper triangular matrix.
+All entries below the diagonal should be
+approximately zero. Let I just execute
+and we just discuss further. And kindly
+just observe dear friends, as we have
+already discussed, yes, all these AQR
+all are 6 into 6 matrices. And here,
+yes, Q is a 6 into 6 orthogonal and here
+it just gives Q transpose multiplied by
+Q is the identity matrix of 6. And
+observe dear friends, R, of course, it
+is a 6 into 6 upper triangular matrix.
+And the reconstruction error A minus QR
+and the Frobenius norms is the machine
+precision under 10 to the power of minus
+15. The upper triangular structure of R,
+of course, all zeros below the diagonal
+is not a coincidence. It is a guaranteed
+property of QR decomposition. Dear
+friends, QR decomposition express A as
+Q, a sequence of orthonormal basis
+vector, and R, coefficient describing
+how to combine those basis vector to
+reconstruction A. And which is exactly
+equivalent to, yes, column of Q form a
+orthogonal basis for the column space of
+A. And yes, R contains the projection
+coefficient. And kindly just observe
+this exact connection to Gram-Schmidt.
+Yes, QR decomposition is essentially a
+matrix form implementation of
+Gram-Schmidt's. And here, NumPy uses
+Householder reflections, which are more
+numerical stable and standard in
+practical linear algebra library. And
+yes, dear friends, here this exact
+script demonstrate that any square
+matrix A can be decomposition into QR.
+And yes, the Q is orthogonal that is
+preserves the geometry. R is upper
+triangular that is structured and easy
+to solve with and the decomposition is
+numerically precise. And let me just
+produce the visual that is matrix level
+interpretation of
+QR decomposition by plotting a heat map
+of
+QR and A. So, their product QR and the
+reconstruction error. So, here this
+line, yes, it just creates a single row
+of five subplots. Each sub plots will
+display one matrix. Wide layout
+emphasizes side-by-side comparisons.
+And next to here this exact matrices,
+yes, it just
+visualize you just use it to visualize
+each tuple contains the matrix data, a
+LaTeX formatted title, and a color map.
+And yes, kindly just observe this one.
+It is all about
+red-blue diverging.
+And dear friends, here we are just
+creating this matrix with a purpose of
+each panel that is A is for original
+matrix, Q is for orthogonal matrix, and
+here R it is all about upper triangular
+matrix, and QR that is Q multiple R is a
+reconstructed matrix, and lastly A minus
+Q multiple R reconstruction error. Let
+me just render this by using the loop.
+Yes, it iterates through subplots and
+corresponding matrices. And we are
+having an scaling that is color scaling
+V max is available. Okay, so here this
+one, it just computes the maximum
+absolute value in the exact matrix and
+ensure systematic color scaling that is
+minus V sub max and plus V sub max. And
+here, yes, and here one e to the power
+of minus 10. Yes, it prevents the
+division by zero issues for non-zero
+matrices. And here, it just uh displays
+the heat map. Yes, uh red is positive
+values, blue is negative value, and
+white, of course, it is zero. And
+symmetric scaling preserves sign
+interpretation. And yes, dear friends,
+this exact uh formatting, that is uh
+titles using LaTeX formatting, that is
+the bold matrix symbols, and access
+transits uh tricks are uh removed for
+clarity. And uh dear friends, of course,
+we have a global title, that is the QR
+decomposition of
+uh 6 * 6 random matrices, and it just
+adds a figure wide title slightly above
+the plots. And uh yes, we have an a
+layout adjustment, that is prevents
+overlap between subplots and labels. And
+uh yeah, like we just uh display, uh
+save, and uh display the image, and here
+it is. So, when on viewing this uh so
+visualization, here A appears as a
+unstructured mix of positive and
+negative values. And kindly just observe
+the Q. Yes, Q has a uh salt and pepper
+uh pattern, that is orthogonal columns
+mix all entries. So, columns are
+orthonormal, and it visual appears
+balanced, no dominant direction. And
+when just coming towards R, kindly just
+observe, dear friends, is clearly upper
+triangle. All zeros below the uh
+diagonal, okay? All zeros below the
+diagonal. And yes, upper triangle
+structure becomes visual, and here lower
+left region, which is what the zero it
+just uh shows in white. And uh yes, dear
+friends, here this QR, of course, it
+should closely matches the A. Yes, you
+can just observe it. It should closely
+matches the A. And last, of course, A
+minus QR, ideally near zero everywhere.
+Mostly white confirms a numerical
+accuracy. Difference actually this
+visualization makes the decomposition
+tangible. Yes, that is A which is equal
+QR. And here, this Q rotates, reflects
+the space. That is structure preserving.
+And here, R, it is all about scales and
+combines component. That is triangular
+structure. And here, the final panel
+confirms, yes, norms of A minus QR,
+which is nearer towards zero. And here,
+we are using the diverging color map.
+Dear friends, this is for highlights
+sign. That is for positive versus the
+negative. Okay? Makes non-zero error
+visibly obvious. And here, we would have
+risen the question. That is why R is a
+upper triangle. Since R, which is equal
+to Q transpose multiple by A, an
+element, that is R sub I, J is a dot
+product column of I of Q and column J of
+A. And here, when I is greater than J,
+that is column Q sub I was constructed
+after A sub J. And the Gram-Schmidt
+procedure specifically orthogonalized Q
+sub I to be perpendicular to all earlier
+column of A. And here, therefore, Q sub
+I transpose multiple by A sub J, which
+is equal to zero. When I is less than or
+equal to J, that is on or above the
+Here, Q sub I column Q sub I constructed
+before column A sub J. So, here A sub J
+was not used in the orthogonalization of
+Q1. So, their pro dot product is
+generally non-zero. And specifically, if
+A is already orthogonal, then R, which
+is equal to Q transpose multiplied by A,
+which is equal to identity.
+So, that is what that is what R is upper
+triangular. Okay, this code tells a
+subtle property of
+QR decomposition where the input matrix
+is already orthogonal. So, kindly just
+observe dear friends. Here, Q2, of
+course, it is a 3 into 3 orthogonal
+matrix. Q2 transpose multiplied by Q2,
+which is equal to identity. So, its
+columns are already orthogonal and unit
+matrix.
+And here, next, Q out, {comma} R out,
+which is equal to that is a linear
+algebra that is QR of test. That is this
+compute Q sub test, which is equal to Q
+sub out multiplied by R sub out. So,
+this is what the exact QR decomposition.
+And here, we are just going to have our
+expected mathematical behavior. Yes, if
+A is already an orthogonal, then A,
+which is equal to Q multiplied by R.
+This has a special structure. That is,
+no orthogonalization is needed. The
+algorithm only adjusts us the sign
+conversion. So, thus, here, Q out is
+another orthogonal matrix. And here, R
+out becomes diagonal with entries plus
+or minus one. And here, R is exactly a
+diagonal. Dear friends, here, QR
+decomposition typically constructs of
+course we have already discussed that is
+R sub R sub IJ which is equal to Q sub I
+transpose multiplied by A sub J. But if
+A which is equal to Q sub this is
+orthogonal, then columns are orthogonal.
+Then columns are orthogonal.
+Q sub I transpose
+Q sub J which is equal to zero when I is
+not equal to J which is equal to I when
+I is equal to J. So off-diagonal entries
+vanishes and one only diagonal entries
+is remains. And here why this plus or
+minus? Okay? So why this plus or minus
+instead of all plus one? Because ideally
+diagonal entries would always be plus
+one. In practice, QR decomposition is
+not unique. And here the exact sign
+gives yes, QR which is equal to
+QD multiplied by D inverse multiplied by
+R.
+And here D is a diagonal matrix with
+plus or minus entries. So some diagonal
+entries of R may be minus one and
+corresponding columns of Q are flipped.
+Okay, let me just make the diagonal
+check. Okay? So if that verifies all of
+the diagonal elements are is equal to
+zero
+and confirms R is effectively diagonal.
+Let me just execute and identify what is
+the output. So kindly just see here dear
+friends.
+When the input is already orthogonal, R
+collapses to a diagonal matrix. Okay? R
+collapses to a diagonal matrix with
+entries plus or minus. So this confirms
+the logic. If columns are already
+orthogonal, no off-diagonal dot products
+are right. And here the sign plus or
+minus reflects the non-uniqueness of QR
+decomposition. And here NumPy's
+Householder algorithm may flip column
+signs compared to Gram-Schmidt's. But
+the decomposition is A is equal to QR is
+always valid. And here, kindly just
+observe, dear friends, when we just go
+towards this one here, the orthogonal
+input matrix Q multiplied by R
+multiplied by Q subtest, which is equal
+to R. Of course, it is what the diagonal
+of plus or minus one.
+So, actually this reflects no need to
+orthogonalize and only normalization or
+sign adjustment remains. And here the
+exact statement, all plus or minus one
+because input columns already have
+unique norm.
+Actually is incomplete. More preciously,
+unique norms ensure diagonal magnitude,
+which is equal to one. And orthogonal
+ensures off-diagonal, which is equal to
+zero. And sign ambiguity explains this
+plus or minus.
+So, yes, dear friends, this exact code
+demonstrate that QR decomposition of an
+orthogonal matrix is trivial and R
+becomes diagonal with entries of plus or
+minus. And the decomposition is not
+unique due to sign freedom. Dear
+friends, for a tall matrix M that is
+greater than N,
+there are two modes. One is economy and
+another one it is full.
+Yes, this exact economy mode, that is
+reduced form of QR decomposition. And
+here this full, yes, it was specified as
+like a complete form of QR
+decomposition.
+Yes, let we just discuss with the code.
+Yes, it compass economy that is reduced
+and full that is complete QR
+decomposition for a tall matrix of A
+that is having a real value of 8 into 3
+that is more rows than column. So, the
+distinctions is primarily about matrix
+dimensions and how much of orthogonal
+basis is constructed.
+So, kindly just to see here difference
+here
+input that is we are just going to make
+the input A tall. So, it is a shape of 8
+into 3 that is matrix and here rank that
+is less than or equal to 3. At most of
+the number of columns, okay? And the
+next we are having the economy that is
+reduced QR, okay? And here we are having
+the shape as like
+Q econ that is it is 8 into 3 and here R
+econ yes, it is 3 into 3 matrices. The Q
+econ
+contains only the orthonormal basis for
+the column space of A and this is the
+minimal representations needed to
+reconstruct A. So, here we are just
+going to do an orthogonality check.
+That is we are just going to check
+whether it is related to columns or
+rows. See if it is a column, of course,
+they are orthonormal. Orthonormal is in
+the sense Q sub A econ transpose
+multiple by Q sub A econ which is equal
+to identity matrix of 3.
+And here, but not the rows that is Q sub
+A econ multiple by Q sub A econ of
+transpose which is not equal to an
+identity matrix of A.
+Because this
+this Q econ is not a square.
+And here we are just making a
+reconstruction. Kindly just observe. And
+here for a reconstruction, kindly just
+observe a tall that is nearest to Q sub
+econ multiple by R sub econ. Okay. Now,
+let me just move for a full that is
+complete QR. And dear friends, kindly
+just observe here Q full and R full. So,
+here Q full, it is a 8 * 8 matrix. And
+here R full, it is a 8 * 3 matrix. So,
+here Q full, okay, is a full orthogonal
+basis of 8 * 8 matrix. And first the
+three columns spans the column space of
+A and remaining five columns spans the
+orthogonal complement. And here, kindly
+just observe, dear friends, we are just
+going to have our orthogonality check.
+So, for full orthogonal, yes, you're
+just going to have Q sub full transpose
+multiple by Q sub full, which is equal
+to Q sub full multiple by Q sub full
+transpose, which is equal to identity
+matrix of 8 * 8. And here, structure of
+R full, structure of R full, yes, here
+we just to say that top 3 * 3 same as
+reduced R.
+So, what we just get? Yeah, kindly just
+observe here R sub full, which is equal
+to matrix of R sub econ and zero. Top 3
+* 3 matrix same as reduced R. And here
+the bottom 5 * 3 all are zeros. And when
+we just go for the rank property, so
+kindly just observe rank of Q full,
+which it just going to be eight. And
+yes, the rank of R full, of course, we
+are just going to equalize towards the
+rank of A. So, here same as rank as A.
+Okay? So, let me just execute and see
+the output. So, kindly just observe,
+dear friends. So, here when we just go
+for an 18 to 3 tall matrix, kindly
+observe the result of economy. Yes, it's
+also the same 18 to 3. The shape of A.
+And here it satisfies the Q transpose Q
+which is equal to I. But not Q Q
+transpose, of course, which is a eight
+identity matrix. Because three columns
+cannot span eight. And when going with
+this full QR, kindly just observe, dear
+friends, it is a 18 to 8 square matrix.
+So, it satisfy both, of course, Q
+transpose Q, which is an identity, and Q
+Q transpose, that is also an identity.
+So, here we have that extra five columns
+are orthogonal to all columns of A and
+spans the left null spaces, that is A
+transpose. So, dear friends, both more
+reconstruct A exactly. The full R has
+five extra rows of zero, the bottom M
+minus N rows. And here since those extra
+Q columns are not needed for
+reconstructions.
+So, here when on just making a
+comparative of this economy QR and a
+full QR, kindly just observe, dear
+friends. So, when on just a making
+towards the Q shape. Yes, the economy
+has So, here when on just making a
+comparative of this economy QR and a
+full QR, kindly just observe, dear
+friends. So, when on just a making
+towards the Q shape. Yes, the economy
+has 18 to 3 matrix.
+And here full, of course, it is 18 to 8
+matrix.
+And we just go when we just go for our
+shape. Yes, here for economy it is of 3
+into 3 matrix and for full QR it is 8
+into 3 matrix. And when on just check of
+Q orthogonality, okay? So, this and in
+economy QR, of course, columns only.
+But here in full, of course, it is a
+square orthogonal.
+And of course, dear friends, this
+uh memory usage it is efficient in
+economy QR and
+yes, of course, for fully it is large
+memory usage is needed. So, yes, dear
+friends, both mode reconstruct A
+exactly.
+The full R has five extra rows of zeros.
+That is the bottom M minus N rows.
+Since those rows extra Q columns are not
+needed for reconstruction.
+And dear friends, economy mode is more
+memory efficient and is the default in
+NumPy. So, uh full mode is needed with
+when you want a complete orthogonal
+basis for uh this uh R, that is mainly
+useful for this SVD.
+And yes, dear friends, uh here this
+exact uh code that uh demonstrate both
+the decomposition satisfy A is equal to
+QR.
+And here economy QR gives a compact
+factorization and a few uh full QR gives
+a complete orthonormal basis. And here,
+orthogonality uh properties differs due
+to matrix shape. Now, let we just uh uh
+visualize the comparative study. Yes, so
+this exact code generates uh comparative
+visualization of an economy that is
+reduced and uh full that is complete QR
+decomposition for a tall matrix. And
+yes, the goal is to make the structural
+difference in matrix sizes and the
+patents visual explicit.
+So, here yeah, we are going to create a
+2 into 3 grids of sub plots. So, here
+top row it would be for economy QR and
+bottom row it is for full QR. And each
+row shows a Q and R. And this is what
+the exact look for economy QR row. Okay?
+So, it just displays
+18 to 3 matrix A. And Q econ of 18 to 3
+and R sub econ of 3 into 3.
+And here dear friends, this exact key
+visualize characteristic last like
+Q sub econ, it is a tall and narrow that
+contains only three orthonormal columns.
+And when just going for R sub econ, so
+it is a square upper triangular and no
+zero padding.
+Now in here, yes, it is all about the
+full QR rows.
+It just displays the A, of course, it is
+a 18 to 3 matrix. And here Q sub full,
+that is 18 to 8 matrix. And the next R
+sub full, it is a 18 to 3 matrix.
+And here for a visualizing, yes, kindly
+just observe dear friends, this QR, yes,
+it is a square of 18 to 8 matrix.
+Additional columns that is five extra
+form and orthonormal complement.
+And here for R sub full, yeah, it has
+top 3 into 3 block resembles this R econ
+and bottom five rows which is equals
+towards zero. So, it would be as like a
+visually white region.
+And here of course, the V max Yes, this
+ensures a systematic color
+normalization, okay? And here lower
+bound, it would be 0.01 that avoids the
+overly washed out plots for non-zero
+matrices. And of course, here we just
+have the
+I am sure, okay? So, here we just have
+for red-blue diverging color map. Red is
+for positive values, blue is for
+negative values. And white of course,
+near zero, okay? And it just makes a
+structure that is a triangularization
+zero blocks visual clear, okay? And next
+here, it is all about formatting. So,
+title and making it towards the X ticks,
+okay? So, it just removes axis clutter
+for cleaner matrix visualization. And
+yes, the difference kindly just observe
+this one. Axis 0,0 and axis 1,0 that is
+labels rows to distinguish decomposition
+type.
+And here we have the title and
+global title clarifies comparison. And
+here tight layout prevents overlapping.
+And yes, let me just execute and we just
+save the figure. So, here we just go.
+Yes, this is what the exact output.
+So, here kindly observe about the size
+difference. So, here we just have
+Q as our 8 into 3 matrix. When we just
+go with economy, the size of Q it is 8
+into 3 matrix and R which is a 3 into 3
+matrix. And here when we just go for
+full matrix, yes, Q it is a 8 into 8
+matrix and R of course, it is 8 into 3
+matrix. And kindly just observe the
+structural difference in R. So, here
+kindly observe the R uh
+R. so it compacts upper triangular. And
+when just going for a full R, see
+actually visible as a white block in a
+lower rows.
+Okay? White block in lower fully lower
+rows. And here basic completion is
+economy Q that spans only column space
+of A. And here full Q, it spans entire
+A into A. That is extra columns which is
+orthogonal complement. And here, dear
+friends, of course kindly just observe
+the visualization makes explicit that
+economy QR minimal representation of
+data. And here full QR which complete
+orthonormal coordination system. So next
+both satisfy A is equal to QR, but
+differ in how much of the ambient space
+they describe.
+So yes, here we are just
+going to discuss. That is this exact
+code illustrate how full QR
+decomposition behaves for a single
+vector. That is
+2 into 1 matrix. Okay? So that emphasize
+how the algorithm completes an
+orthonormal basis. So dear friends,
+kindly just observe here we have shape
+of 2 into 1 matrix represents a single
+vectors of two-dimensional. So here it
+would be as like A which is equal to 1,
+this is minus 1. And uh dear friends,
+here we have the
+QR full QR decomposition. Okay? And the
+exact dimensions shape of it is
+Q sub full which is has an 2 into 2
+matrix. And R sub full matrix which is
+has an 2 into 1 shape.
+And here, when we just go in depth
+towards the
+shape the structure of Q. So the first
+column of Q it would be a normalized
+version of A. That is Q1 which is equal
+to 1 by root 2 multiple by 1 by 1 minus.
+That is this rescales Q1 back to integer
+form of readability. And here what would
+be the second column? So column second
+column it is yes Q2. So this is an
+additional vector orthogonal to Q1.
+So one valid choice here is Q2 which is
+equal to 1 by root 2 multiple by 1 and
+1.
+So hence what we just get? Yes, Q which
+is equal to 1 by root 2 with the two row
+and the columns at that is two row one
+and one and here it is minus one and
+this is one.
+Okay? And when I'm just going towards
+this observation kindly just to see here
+dear friends. This Q has okay? Of course
+we have the exact full vector it is of 2
+into 2 okay? Two columns from a matrix
+with one column.
+So here the input has one column here
+and output has a two columns.
+So this happens because full QR always
+produces a square orthogonal matrix and
+it extends the given vector into a full
+orthonormal basis. So let I just
+execute. And I kindly just observe here
+dear friends. So here a single column
+vector A which is equal to 1 and minus 1
+that is transpose produce a 2 into 2
+orthogonal Q with two column.
+So the second column is created with a
+thin A.
+That is it is a unique up to sign unit
+vector in R2 that is orthogonal to A.
+So, this is preciously
+what the SVD exploits. So, here the full
+Q always spans all of this M matrix.
+Even if A has an rank that is a that
+rank less than M. So, the extra columns
+reveals the null space structure.
+And the kindly just observe the
+structure of R. Yes, even a single
+vector becomes one normalized direction
+the one ortho orthogonal complement
+direction.
+And here the R encodes the magnitude and
+structure of the original vector. So,
+let's summarize dear friends. So, here
+today we have discussed about the QR
+decomposition.
+Dear friends, we have a
+QR decomposition of factor that is A
+which is equal to QR.
+Where Q is orthogonal and R is upper
+triangle.
+And this R is upper triangular because
+later columns of Q are orthogonalized to
+earlier column of A making their dot
+product zero. Economy mode gives the Q
+the same shape as A.
+And here full mode gives a square Q that
+spans all RM. And let's wrap today's
+session dear friends. So, we started
+with orthogonal matrices and discovered
+something remarkable. A transformation
+can rotate data without changing its
+length, without changing its angle,
+without destroying its geometry. We
+learned why there's a Q transpose
+multiple by Q which is equal I makes
+orthogonal matrix computational
+superheroes. Dear friends, as we
+continue our journey, we will begin to
+notice that many machine learning
+algorithms are simply clever ways.
+So, behind every recommendation engine,
+behind every PCA visualization, behind
+every compressed image, behind every AI
+model, there is linear algebra quietly
+doing the heavy lifting. The goal of
+mathematics is not to memorize equation.
+The goal is to discover the hidden
+structure behind data and the world
+around us. Thanks for watching, dear
+friends. Happy learning.

@@ -1,0 +1,264 @@
+# eXbVgB7UQro
+# https://youtu.be/eXbVgB7UQro
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on Eigen decomposition, which
+is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure, that
+is a set of special direction, which we
+just to say Eigen vectors. An associated
+scaling factor, yes, that is what Eigen
+value. The two together tells us
+everything about what the matrix does.
+And yes, dear friends, here it is what a
+simple-looking
+equation, A multiple by V, which equals
+lambda multiple by V. It looks small,
+but this single equation powers, yes,
+principal component analysis, noise
+reduction, data compression, graphic
+analysis, dynamical systems, yes, of
+course, a lot and lot. And this exact
+equation, yes, when matrix A multiplies
+with a special vector V, the result is
+simply that same vector scaled by this
+number, that is lambda. Here the vector
+V is an Eigen vector and the scale
+lambda is its corresponding Eigen value.
+Finding all such pairs, that is lambda
+and V, is what Eigen decomposition is
+all about. And dear friends, of course,
+there is a prerequisite also. Yes, you
+should be comfortable with the matrix
+multiplication, determinants, the null
+space, a matrix rank, and we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover, yes, what Eigen values and
+Eigen vector really mean, and why Eigen
+decomposition works only for square
+matrix, the geometric interpretations of
+stretching without rotating, how Eigen
+value reveals see
+patterns in data, the characteristic
+polynomial, finding eigen vectors using
+the null space, and matrix
+diagonalization. And last, yes, why
+symmetric matrices are the superheroes
+of linear algebra. And added, yes, we
+will see why eigen decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Dear
+friends, till now we understand what
+eigen values and what
+eigen vectors represents. But here the
+question, how do we find them? The
+derivation starts from the eigen value
+equation and applies a sequence of
+logical steps, each building on concepts
+from the earlier sessions. So, this is
+the exact one of the most elegant
+derivations in linear algebra. So, yeah,
+kindly just observe. Let me just start
+with the step one. Yes, start with an
+eigen value equation. That is AV which
+is equal to lambda V. Now, step two,
+move everything to one side. So, moving
+here AV minus lambda V, which is equal
+to zero. And here, step three, yes, we
+are just going to factor out V. That is
+requires converting lambda to lambda I.
+So, which it just makes us like
+A minus lambda I multiplied by V, which
+is equal to zero. Here, of course, you
+would have asked this one, why lambda I?
+Because actually, A minus lambda is a
+matrix minus a scalar, which is
+undefined. We need to subtract a matrix
+from a matrix. So, we use lambda I, that
+is a diagonal matrix with lambda on the
+diagonal. So, this is matrix shifting.
+Now, this is step three says that V is a
+null space of A minus lambda I. Since we
+execute the trivial solution, V is equal
+to zero. That is the zero vector is
+never considered an Eigen vector. And
+here the matrix A minus lambda I must be
+singular. The only singular matrix has
+non-trivial null space. And dear
+friends, of course we have already know
+that singular matrix have a determinant
+of zero. That is determinant of A minus
+lambda I. Yes, which is equal to zero.
+So, this equation is called the
+characteristic equation and the
+polynomial you get by expanding the
+determinant is the characteristic
+polynomial. And dear friends, for
+an m into m matrix, this is polynomial
+of degree m in lambda. So, it has
+exactly m roots. That is by the
+fundamental theorem of algebra. So,
+giving as m Eigen values. So, let me
+just discuss that by using this code.
+So, this is script that derives and
+verifies the Eigen values of two into
+two matrix using both analytic formula
+and numerical computation while
+highlighting key algebraic properties.
+This exact script derives and verifies
+the Eigen value of two into two matrix
+using both analytic formula and
+numerical computation while highlighting
+key algebraic properties. So, yes dear
+friends, here is the matrix definition.
+So, we have the matrix A which is equal
+to 1 2 and 3 4. Okay? And here of
+course, it just explains the
+characteristic polynomial. That is for a
+generic matrix, if we just have AB and
+CD. Okay? The Eigen values satisfy,
+kindly just observe, determinant of A
+minus lambda I, which is equal to zero.
+So, here, determinant of A minus lambda,
+B, C, D minus lambda, which is equal to
+A minus lambda multiple by D minus
+lambda minus BC. And with this
+expanding, kindly just observe, dear
+friends, on simplifying this, we just
+get lambda squared minus A plus D lambda
+plus AD minus BC, which is equal to
+zero. From this, we just get trace, that
+is the sum here of eigen value. So, here
+it is
+trace of A, which is equal to 1 plus 4,
+which is 5. And the determinant, yes,
+the product of eigen values. So, here,
+determinant of A, which is equal to 1
+multiple by 4 minus 2 multiple by 3. So,
+which is equal to minus 2.
+So, the characteristic equation here is,
+kindly just observe, let I just take it
+here. So, lambda squared minus 5 lambda
+minus 2, which is equal to zero. And
+solving this by using the quadratic
+formula, okay? So, we are just going to
+have the value of lambda 1 and lambda 2,
+okay? So, let me just evaluate it. And
+with this, we are just going to make a
+numerical verification by using NumPy.
+So, which it just computes the eigen
+value using a numerical algorithm. And
+here, all closed, yes, it just verifies
+equality, that is within floating point
+tolerance. And we have here the exact
+fundamental identities, yes,
+sum of eigen values and the product of
+eigen values, okay? So, yes, and here
+let me just execute and verify is the
+result. And of course we have already
+identified the exact characteristic
+polynomial. Yes, kindly just observe.
+Here we just have lambda square minus
+five into lambda minus two which is
+equal to zero.
+And by using
+quadratic formula, kindly just observe.
+So lambda which is equal to five square
+minus four into minus two which is equal
+to 25 plus eight which is 33.
+And here if I just want to go with
+lambda one and two, so five plus or
+minus square root of 33 divided by two.
+So numerically we just get lambda one.
+Yes, it would be as like a 5.37
+and lambda two. Yes, it would be minus
+0.3723.
+So that it was we just got it here.
+Numerical algorithm, it just computes
+the eigenvalues and of course the both
+are equal.
+So here it is the exact fundamental
+identities. Dear friends, the script
+verifies two important variants. Yes,
+one is sum of eigenvalues by the trace.
+Yes, summation of I which is equal to
+one to M lambda sub I which is equal to
+trace of A.
+And the second one it is all about
+product of eigenvalues. That is product
+from I which is equal to one to M of
+lambda sub I which is equal to
+determinant of A.
+And here we just get yes, this is at
+five and here we just get this value as
+minus two.
+So yes, that is what we just obtained
+here. So sum of roots which is trace and
+product of roots that is the
+determinant. And uh dear friends, here
+uh trace measures total scaling effect
+along the principal directions. And
+here, determinant measures area scaling,
+that is including orientation flip if
+negative. And for this matrix, one
+eigenvalue is positive, that is
+stretching in one direction. And one
+eigenvalue, it is in negative, that is
+reflection plus scaling in another
+direction. So, this exact example
+illustrates eigenvalues encode intrinsic
+transformation behavior. That is, the
+matrix can be understood as stretching
+along one direction, flipping and
+compressing another uh along another
+direction. So, this exact code
+summarize, that is, walk through the
+full pipeline. So, construct a matrix,
+derive characteristic polynomial, solve
+analytical, that is, quadratic formula,
+and verify numerically. So, confirm
+invariant relationship, that is, trace
+and determinant. So, it demonstrates
+that eigenvalue are not just
+computational artifacts, they are
+tightly constrained by fundamental
+algebraic properties of the matrix. We
+have discussed eigenvectors are special
+directions that remains unchanged in
+orientation. Eigenvalues tells us how
+much those directions stretch or shrink.
+The characteristic equation helps us
+uncover eigenvalues and eigenvectors
+emerges from the null space of shifted
+matrices. And here, the most important
+lesson is, yes, eigen decomposition is
+not about matrices, it is about finding
+hidden patterns. When data becomes
+complicated, eigenvector reveals the
+important direction. When dataset
+becomes high dimensional, PCA uses
+eigenvector to simplify them. When noise
+higher hides useful information, eigen
+values helps separate signals from
+noise. So, that's why eigen
+decomposition powers PCA, machine
+learning, computer vision, signal
+processing, network analysis, financial
+modeling, scientific computing. Of
+course, dear friends, every time a
+machine learning model discovers hidden
+structure in data, eigen decomposition
+is often working quietly behind the
+scenes. I hope I think all the session
+would be very much useful. Yes, dear
+friends, the true power of mathematics
+lies not in solving equation, but in
+discovering the hidden patterns behind
+them. So, thanks for watching. See you
+in the next session, dear friends. Happy
+learning.

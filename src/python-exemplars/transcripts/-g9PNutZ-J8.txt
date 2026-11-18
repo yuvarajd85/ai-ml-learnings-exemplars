@@ -1,0 +1,252 @@
+# -g9PNutZ-J8
+# https://youtu.be/-g9PNutZ-J8
+
+Happy morning, dear friends. Here's your
+Dr. Ajanta. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on matrix inverse.
+The matrix inverse is essential to
+solving matrix equations in practical
+applications, including fitting
+statistical model to data. Okay, before
+going on to the discussion, let me just
+include the necessary libraries. Import
+the NumPy library and assign it as like
+alias NP. And next it is for a
+matplotlib. Yes, dear friends, this
+imports the plotting module pyplot from
+matplotlib and alias this as uh PLT. And
+uh dear friends, of course we are also
+including this import Hilbert. Yes, this
+is exact functions to create Hilbert
+matrices for numerical analysis and
+stability testing. And uh yes, dear
+friends, uh we have included the
+warnings. We have this imports Python's
+built-in warnings modules also, which
+allow control over warning messages
+generated during execution. And yes, uh
+we have just included the uh default
+parameters. Yes, for
+the font size and enabling the grids and
+uh setting the transparency of the grid
+lines to 30% and of course the font size
+for all text in plots to 12 points. Yes,
+and uh yeah, closing the dictionary and
+applies all the configuration updates.
+We have just Let me include this and
+execute this. Yes, of course uh we have
+the version as NumPy version with 2.3.5.
+We are just going to discuss on an
+important aspect, that is
+MCA. So,
+here M stands for minor matrix, C stands
+for cofactor matrix, and yeah, of course
+it's educate matrix. Dear friends, this
+minor matrix, of course, the element M
+sub I {comma} J is the determinant of
+submatrix formed by deleting row I and
+column J. And of course, the dear
+friends, we are also having one more
+intermediate matrix which we just to say
+as
+grid matrix and this exact grid matrix
+check borders of plus or minus one with
+the grid sub IJ, which is equal to minus
+one to the power of I plus J. And third
+one, of course, the cofactor. So,
+cofactor matrix, it is all about the
+Hadamard product. Yes, all with this M
+{dot} matrix with G. And of course,
+educate matrix. Dear friends, it is all
+about A inverse equals one divided by
+determinant of A multiplied by C
+transpose. So, yes, these are the exact
+four intermediate matrixes. Let me just
+to discuss one by one. And of course,
+here again I specify M, G, C and A.
+Okay? So, this is what we are going to
+take it here. And yes, dear friends,
+this exact code would implement matrix
+inversion using minor cofactors educate,
+that is MCA method, a classical but
+computational expensive alternative to
+numerical algorithm. Okay. First of all,
+let me just define a function here.
+Okay? So, this exact function has an
+input A. Actually, this A is a square
+matrix. Okay? Where it has N into N
+dimensionality. And of course, we are
+just going to have the output A inverse.
+And not only that, we are just going to
+have a minors, the grids, and cofactors.
+Okay? So, these are our intermediate
+matrices.
+Okay. Now, let me just have our
+preconditions. And kindly just observe,
+the first main precondition here is we
+are just going to have uh the exact
+shape. And yes, this exact matrix it's
+going to be a square matrix. And uh next
+one, it is all about the determinant.
+Yes, determinant must be a non-zero. And
+in such a case, it is an invertible
+condition. Okay. Here, let me just go
+step-by-step. The first step I just want
+to have a minors matrix. Okay? So,
+that's first step in such a case. So,
+here we are just going to have our minor
+[clears throat]
+M sub IJ. We are here kindly just
+observe. So, this is what the uh first
+functionality. And uh let I just specify
+it in uh mathematical manner. So, here
+it is what the step one. Okay? So, M sub
+IJ, which is equal to determinant of
+matrix
+formed by removing row I and column J.
+Okay? So, this is what. And it just
+produce an N into N matrices of
+determinants of N minus 1 into N minus 1
+submatrices. Kindly just keep it in
+mind. This is what our sub uh step one.
+Okay? So, here kindly just observe here,
+we are just going to have our
+sub and this is what our IJ
+functionalities.
+Okay? Now, let we move on to the step
+two.
+And observe, dear friends, towards this
+one, let I make it in uh mathematical
+manner. So, here the step two here, I'm
+just going to sign at grid. And that
+grid, it would be grid sub IJ which is
+equal to -1 to the power of I + J.
+Okay? And here for a 3 * 3 matrix, if I
+just specify a square of 3 * 3 matrix,
+yes, here it would be as like a
+positive, negative, positive, negative,
+positive, negative, positive, negative,
+positive. So, like this it would be.
+Okay? And next, let me just move on to
+the step three. Yes, it is all about a
+cofactor matrix. And yes, dear friends,
+it is a element-wise multiplication. And
+element-wise multiplication of M and G.
+Okay? So, as I have already specified,
+this is what M and this is what G. Okay?
+So, here this M and this G. Okay? So,
+towards this M, we just have Mij. And
+towards that G, we have -1 to the power
+of I + J. Okay? So, here
+for the step three, cofactor matrix, so
+C sub IJ which is equal to -1 to the
+power of I + J multiplied by M sub IJ.
+So, yes, again I specify this is an
+element-wise multiplication that is a
+Hadamard projection.
+Okay? And next,
+it is all about adjugate matrix. That is
+the step four. So, we are just going to
+adjugate and then inverse. And here
+towards the mathematical formula, let I
+specify here. So, formula here it would
+be A inverse which is equal to 1 /
+determinant of A multiplied by adj of A.
+Okay? And here, what is this adjugate of
+A? Yeah. Adjugate of A, which is equal
+to C transpose. Okay, now let me just
+test and validate the functionality. So,
+here we are just going to have a random
+matrix.
+Okay? So, here we are just going to have
+our random matrix and let me just make
+the comparison by using those all close.
+Okay? And it just confirms whether MCA
+matches the NumPy inverse. Okay? And of
+course, we are just going to identify by
+using this. So, this is what that. So,
+here it just produces the identity
+matrix up to floating point error. And
+let me just make the execution and see
+what is the output. So, kindly just
+observe, dear friends. Here, this is
+what the exact matrix and here we have
+our determinant. And when on just
+calculating this minor, so this is what
+the minors matrix and here we have the
+grid. Okay? So, plus minus plus minus
+plus minus plus minus plus because it is
+a 3 into 3 matrix. And yes, the
+cofactor, of course, Hadamard product of
+minors and grid and this is what the
+exact resultant. And with that, when we
+evaluate the matrix, that is random
+matrix output, so kindly just see here.
+This is by using MCA method and this is
+by using NumPy. And of course, both are
+matching. Yes, when on comparing, both
+are true. It just matches. And when we
+make use of an overall functionality as
+A dot product with A inverse, which is
+equal to identity. Okay, that is what we
+receive here.
+And dear friends, when we make use of an
+computational complexity, kindly just
+keep it in mind. The MCA algorithm
+successfully computes the inverse.
+Every element
+Okay? Every element requires computing a
+sub-determinant making the big O method
+of n - 1 whole cube. Because each minor
+requires a determinant. Okay? And
+towards the total cost, yes, it would be
+as like a big O of n to the power of
+four or worst case. Because it is
+compared to LU decomposition where LU
+decomposition it would be big O of n
+three.
+Much more efficient and numerically
+stable.
+And when on specifying the numerically
+stability of MCA, of course, this MCA
+it's an sensitivity to floating point
+error and it is not used in practice for
+large matrices. Kindly keep it in mind.
+And of course, here whenever you are
+just making use of any particular
+stability functionalities, of course,
+you have to include libraries as like LU
+for
+decomposition or QR decomposition or SVD
+decomposition. Based on the methods, you
+have to include it. And when coming
+towards the geometric interpretation,
+dear friends, cofactors encode how each
+entry contributes to one A's volume
+scaling and next one it is all about
+orientation. And last but not least,
+adjugate reconstruct the transformation
+needed to be undo A. And here, all
+together, A inverse which is equal to 1
+by determinant of A into multiple by
+cofactor matrix the whole transpose. So,
+this is the closed form inverse. It is
+valuable for theory or a small matrices
+or understanding structure. So, yes, uh
+finally this exact code demonstrate full
+implementation of a classical inversion
+algorithm. So, it just constructs all
+about the a minor, cofactor, and
+adjugate. So, agreement with the
+numerical methods and of course we have
+uh verified and identified the matching.
+Hope I think uh this exact uh session it
+would be useful. So, kindly like this
+video, share it with someone starting
+their data science or machine learning
+or generative AI journey, and subscribe
+to Demystify with Ajay for more such
+real-world explanation. Thanks for
+watching, dear friends. See you in the
+next video.

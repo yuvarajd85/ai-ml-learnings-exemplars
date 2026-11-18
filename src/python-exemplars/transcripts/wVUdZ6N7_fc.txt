@@ -1,0 +1,2568 @@
+# Eigendecomposition for AI | Eigenvalues, Eigenvectors, PCA & Matrix Diagonalization | GenAI Ep 17
+# https://youtu.be/wVUdZ6N7_fc
+
+Now step two move everything to one
+side. So moving here a v minus lambda v
+which is equal to zero. And here step
+three yes we are just going to factor
+out v that is requires converting lambda
+to lambda i. So which it just makes as
+like a minus lambda i multiple by b
+which is equal to zero. Here of course
+you would have asked this one. Y lambda
+I because actually a minus lambda is a
+matrix minus a scala which is undefined.
+We need to subtract a matrix from a
+matrix. So we use lambda i that is a
+diagonal matrix with lambda on the
+diagonal. So this is matrix shifting.
+And here this exact uh left side of AV
+that is is a matrix vector
+multiplication which is generally
+produces a complete new vector pointing
+in new direction. And here this right
+side this lambda V is a scalar vector
+multiplication which only stretches or
+compresses the vector along its original
+direction. Notice that the dashed arrow
+point in the exact same direction as the
+solid arrow. They are only longer. This
+is the defining property of each in
+vectors. The matrix stretches them
+without rotating them. So v_sub_1 of
+course the lambda 1 kindly just see here
+the regen value lambda 1 is 1.38
+meaning a stretches it by a factor of
+1.38. And from this we construct a rank
+one signal and noise model. Yes, of
+course. Which is mathematically
+specified as X is equal to F multiple by
+do transpose plus epsilon. And dear
+friends, yes, here this exact F is a
+single Latin factor. Yes. Shar across
+all variable. And W. Yes. Random
+loadings. How strongly each variable
+depends on the factor. And last epsilon.
+Yes, a small independent noise. So here
+let me just define the matrix. So here A
+is a 2 into two matrix and here we have
+the E val and E calc that is EN value
+lambda 1 and lambda 2 and here EN vector
+that is matrix V whose columns are EN
+vectors and dear friends kindly just
+observe here is the constructing of the
+diagonal matrix. So this matrix contains
+only scaling factor along its diagonal.
+So when we just do lambda yes we just
+get lambda which is equal to lambda 1 0
+0 and lambda 2. So this is what the
+exact so this matrix contains only
+scaling factors alongs a diagonal. So
+here it is what the core exact core
+identity that is a which is equal to v
+multiple by lambda. So when we just make
+it mathematically kindly just observe we
+of course we have two vectors v_sub_1
+and v_sub_2. So yes a tall matrix or
+wide matrix square matrix and rank
+deficient. And here we are going to
+construct the matrix that is a transpose
+multiple by a. So here it defines the
+two main key properties that one it is
+all about the symmetry. Yes, of course.
+A transpose multiple by A. The whole
+transpose which is equal to A transpose
+multiple A. And second, it is for
+quadratic form. So, kindly just observe
+X transpose multiple by A transpose
+multiple A whole multiple X which is
+equal to A multiple X whole transpose
+multiple A multiple X. So here yes the
+square norms of a multiple by x that is
+greater than or equal to zero. So this
+immediately implies all eian values are
+non- negative. A transpose is
+essentially free. You just swap row and
+column indices. And here for symmetric
+matrices we never need to compute v
+inverse. We simply use vranspose.
+This is faster, more stable and more
+memory efficient. And in in data science
+the matrix we EG and decompose are
+almost always coariant matrix which are
+symmetric by definition as like uh
+kindly just observe C which is equal to
+X transpose multiple by X. So this
+simplification applies to virtually
+every PCA computations you will ever
+run. So if you know your matrix is
+symmetry instead of this kindly just use
+of course uh np do linear algebra eig h
+of a because here h stands for hermitian
+that is the complex generalization of
+symmetric and here this eig h yes this a
+is very faster more numerical stable and
+returns egen values stored in ascending
+order. Happy morning dear friends.
+Here's here's Dr. Rajenta. Welcome to
+demystify with AJ. Dear friends, today
+we are going to discuss on agent
+decomposition which is one of the most
+powerful and beautiful ideas in all of
+linear algebra. It takes a square matrix
+and reveals its fundamental structure
+that is a set of special direction which
+we just say each vectors and associated
+scaling factor. Yes, that is what H in
+value the together tells us everything
+about what the matrix does and yes dear
+friends here it is what a simple looking
+equation a multiple by v which equals
+lambda multiple by v. It looks small but
+this single equation powers yes
+principal component analysis, noise
+reduction, data compression, graphic
+analysis, dynamical systems. Yes, of
+course. A lot and lot. And this exact
+equation, yes, when matrix A multiplies
+a special vector V, the result is simply
+that same vector scaled by this number
+that is lambda. Here the vector V is an
+EG vector and the scale lambda is its
+corresponding EGN value. Finding all
+such paths that is lambda and V is what
+EN decomposition is all about. And dear
+friends, of course, there is a
+prerequisites also. Yes, you should be
+comfortable with the matrix
+multiplication, determinance, the null
+space, a matrix rank. And we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover yes, what EGN values and EG
+vector really mean and why EN
+decomposition works only for square
+matrix. The geometric interpretations of
+stretching without rotating. The very
+first thing to know about Eg decomposion
+is its scope. Yes, it apply only for a
+square matrix. Friends, you can't EN
+decompose a 3 into 5 matrix or a 100
+into 7 matrix. You can just make one
+that is M into my M matrix can be EN
+decomposed because an EN value equation.
+Yes. A V which is equal to lambda
+multiple by V requires that a matrix
+vector product A V produces a vector
+with the same dimensional as V. And here
+if this A yes if it is this A if it is
+an M into N matrix. So with M which is
+not equal to N then AV is an M vector
+while V is an N vector that cannot be
+equal. So here every M into M matrix has
+exactly M EN value that is counting
+multiplicities and M corresponding EN
+vector. So for an example if I just
+specify 2 into two matrices has two EN
+value EN vector pass and to the same if
+it is an 100 into 100 matrices yes it
+has 100 pass and so on and dear friends
+of course kindly just observe for an
+nonsquare matrix yes they can be also
+decomposed but using singular value
+decomposition yes we will be discussing
+it later in next session Dear friends,
+the most intuitive way to understand EGN
+vector is geometrically. Yes, when a
+matrix multiplies a vector, it generally
+does two things. One, it just rotates
+that is changes direction and scales
+that is changes length. But for certain
+special vectors that is agent vectors,
+the matrix only scales them without
+changing the direction. And yes of
+course that is what mathematically
+specified that is AV which is equal to
+lambda multiplies V. And here this exact
+uh left side of AV that is is a matrix
+vector multiplication which is generally
+produces a complete new vector pointing
+in new direction. And here this right
+side this lambda v is a scalar vector
+multiplication which only stretches or
+compresses the vector along its original
+direction. So here from this equation
+yes for this particular vector v the
+complex matrix multiplications acts like
+simple scalar multiplication. Okay let
+we just discuss that by using this code.
+So yes dear friends this exact script
+construct a geometric demonstration of
+how a linear transformation that is
+represented by a matrix so here it is a
+acts differently on eian vectors and a
+non-e vectors too. So here S it is a
+matrix A which is a 2 into two matrix
+symmetric matrix which guarantees real
+EN values orthogonal EEN vectors and
+here exactly this was the one computes
+EN values and EN vectors. Yes dear
+friends. Een values lambda 1 lambda 2
+and corresponding een vectors yes stored
+as column and yes as I specified
+mathematically a v which is equal to
+lambda multiple by v. And here we just
+displays our een values and een vector
+numerically and kindly just observe dear
+friends this exact eax. So this extracts
+the first een vector that is column-wise
+storage. Here we just start our vector
+preparation. So for EN vectors that is
+for scaled for visualization. So here
+v_sub_1 and v_sub_2. So een vectors are
+scaled purely for plotting clarity and
+scaling does not change direction which
+is the key property of een vectors.
+Kindly have a note. And here none
+vectors too. Yes, here kindly just
+observe W1 and W2. Here W1 standard
+basis vector along X-axis and for W2 yes
+normalized arbitrary direction and dear
+friends these are not aligned with EGN
+vector. So they will behave differently
+under this matrix A. Now let me just uh
+frame our plotting. Yes, for
+visualization. So here we are just going
+to create two sub plots. Okay. So, two
+sideby-side plots. Left of course it is
+for EGN vectors and right of course it
+is for non- AN vectors. And here this
+exact left panel. Yes. Kindly just
+observe it computes the transformed
+vector AV. And here we have the solid
+arrow that is original vector and dashed
+arrow for transformed vector AV. And
+dear friends kindly just have an
+observation. Yes, AV lies on the same
+line as V and only magnitude changes and
+yes to this equation here no rotation
+only scaling that is stretching or
+shrinking and here we just go for the
+right panel. Yes dear friends kindly
+just observe here we have the exact aw
+is not parallel to W. The same
+transformation but here AW is not parall
+to W. direction changes, geometric
+rotation and scaling. Of course, it
+demonstrate AW that is not equal to
+lambdaw. For visual encoding, yes, we
+have across both the plots. Kindly just
+observe. Yes, we have arrows for origin
+vector and yes circular marker for
+original vector and square marker for
+yes vector and to the same both the
+things are there and solid line for
+before transformation dashed line for
+after transformation and here we have
+kindly just observe yes equal scaling
+preserves geometric correctness grids
+and axis improves interpretability and
+Yes dear friends actually here we have a
+printed statement. Yes each vector that
+is left stay aligned non each vector
+right rotates. So this summarize the
+core linear algebra principle. Okay let
+me just execute and observe the output.
+And here it's the exact visualizing
+output. Uh left panel it just shows the
+EGN vectors. So here the solid arrow
+shows two EGN vectors v_sub_1 and
+v_sub_2. So before multiplication of a
+okay the dashed arrow shows the
+resultant after multiplication. Notice
+that the dashed arrow point in the exact
+same direction as the solid arrow. They
+are only longer. This is the defining
+property of each in vectors. The matrix
+stretches them without rotating them. So
+v_sub_1 of course the lambda 1 kindly
+just see here the region value lambda 1
+is 1.38
+meaning a stretches it by a factor of
+1.38 and lambda 2 that is v2 has een
+value as 3.62
+meaning a stretches it by factor of 3.62
+62 both EGN values are positive and
+greater than one. [snorts] So both EGN
+vectors get longer. And here towards the
+right panel kindly just observe it is
+for non-e vectors. So the solid arrow
+source to arbitrary that is non EGN
+vectors. After multiplication by A1 the
+dashed arrow point in different
+directions than the originals. So the
+matrix both rotated and scaled these
+vectors. So this is typically behavior
+most vectors are not egen vector and
+dear friends a matrix has infinitely
+many vectors it could act on but only m
+special direction for an m into matrix
+where it acts like a simple scalar. So
+those direction encodes the matrix
+fundamental geometric personality. So
+here yes this exact code is not just
+plotting vectors it is visualizing the
+geometric meaning of EN decomposition
+and here why Egen vectors are
+fundamental in TCA or stability analysis
+differential equation and quantum
+mechanics. Friends, in this section,
+yes, we are just going to discuss on
+statistical interpretation mainly on
+principal component analysis. In data
+science, the most common application of
+egene decomposition is what this
+principal component analysis. Here PCA
+answers the question, what are the most
+important directions of variation in a
+multivariant data set? The idea is
+simple but powerful. Given an data set
+with many variables, that is B, the
+columns. So we compute the covariant
+matrix a symmetric matrix that capture
+how every pair of variables co-varies.
+So then we eg decomposition with
+covariant matrices and mathematically
+specified as c which is equals to v
+lambda v transpose. difference the exact
+EGN vectors V are the principal
+component that is the direction in the
+data space that captures the most
+variance and the EGN values lambda tells
+us how much variance each direction
+captures. A screen plot displays the EGN
+values in descending order. The shape of
+the screen plots reveals the structure
+of the data. If the data set is
+dominated by one major pattern, the
+first EG value will be much larger than
+the reset. So if there are several
+independent patterns, there will be
+several large een values before the drop
+off. Okay, let me just discuss eight by
+using the code. So this exact script
+simulates two different data generated
+process and uses screen plots that is a
+value spectra to reveal their underlying
+structure via PCA. So here kindly just
+observe dear friends. is we have fixes
+randomness for consistent result and we
+create two side byside plots that is
+left of course scenario A and uh right
+by scenario B. So here we just go for
+that scenario A. Yes, kindly just
+observe this is one dominant latent
+factor and here we are just going to
+have our data generation. Yes, kindly
+just observe. And from this we construct
+a rank one signal and noise model. Yes,
+of course. Which is mathematically
+specified as X is equal to F multiple by
+do transpose plus epsilon. And dear
+friends, yes, here this exact F is a
+single Latin factor. Yes. Shad across
+all variable. And W. Yes. Random
+loadings. How strongly each variable
+depends on the factor. And last epsilon
+yes a small independent noise. And here
+it is what the exact computes covariant
+matrices. Of course here it is what the
+15 into 15 we have the variable. So 15
+into 15 covariance matrix and extracts
+the een values and short descending
+order. And here yes dear friends of
+course uh each bar that is variance
+explained by the principal component and
+kindly just observe here we just measure
+how much variance is captured by the
+first principal component and of course
+it is expected to be within 70 to 95
+percentage and as explained by PC once
+and here we just go for scenario B and
+here exactly kindly just see here these
+or the exact uh data generation. So this
+creates a block structure that of course
+kindly just observe for the variable 1
+to 5 depends on the factor 1. The
+variable 6 to 10 depends on the factor
+f_sub_2 and the variables 11 to 15
+depends on the factor f_sub_3. So
+mathematically it is specified as like x
+which is equal to f_sub_1 do1 transpose
+f_sub_2 do2 transpose and f_sub_3 do3
+transpose plus epsilon and yes dear
+friends here we have the covariance and
+een values. So here it just shows that
+three een values we have and yes here we
+just explains the variance. Yes, it just
+measures the variance captured by the
+first three component and uh yes let me
+just execute and view the result. So
+when on just viewing this plots kindly
+just observe dear friends here this
+scenario A yes it simulates a data sets
+with all 15 variables are driven by a
+single common factor plus small noise
+and the screen plot shows one dominant
+EG value towering over the rest. So this
+tells us the data is essentially
+onedimensional and all variables move
+together. Think of it like 15 different
+cryptocurrencies prices that all go up
+and down with Bitcoin. And this is how
+it was specified that a data is
+effectively one dimension. And here PCA
+will compress it with minimal
+information loss. And here the screen
+plot shows a sharp elbow after the first
+component. And here when on just going
+towards the uh scenario B kindly just
+observe dear friends this simulates a
+data sets with three independent
+subgroups three independent subgroups of
+five variable each. So the screen plot
+shows three large EN value then a short
+drop. So this means the data has three
+independent dimensions of variation.
+Think of stocks from three different
+industries uh maybe tech or healthcare
+or energy that moves together within
+each industry but independently across
+industry. And here the screen plots is
+one of the most informative single
+figure in data science. And here when we
+just go towards this kindly just observe
+dear friends this three independent
+clusters of correlated variables. Yes,
+weak correlations between the clusters
+and here this shows three large EG
+values remaining EG values are small and
+as I have already specified yes data is
+approximately three-dimensional PCA
+identifies three dominant direction and
+here screen plot shows an elbow after
+this third component. So from this plot
+yes it is understood that scenario A
+that is the left plot one tall bar rapid
+drop off that implies strong global
+correlation single underlying driver and
+here towards the scenario B that is the
+right plot three tal bars then drop off
+which implies multiple independent
+structure and clustered relationship. So
+from this this exact code demonstrate a
+fundamental principle of principle
+component analysis. Yes dear friends EN
+values EN values of the coariant matrix
+reveal intrinsic dimensionality. Large
+EN value meaning structure and small EN
+value it would be noise. So if data has
+K latin factor coerent matrix is
+approximately rank A and first K EN
+values are large remaining EN values are
+near zero and yes with this practical
+implementation dimensionality reduction
+also we have just discussed that is
+scenario reduces to one dimension and
+scenario B reduces to three dimension.
+So identifying number of principal
+components and it detect latent
+structure also diagnose correlation
+patterns also and with this exact
+scenario of largest EEN value and uh
+scenario of top three each values. So
+here the scenario A yes variance
+concentrated in one component and
+scenario B variance distributed across
+uh three components. So yes, this exact
+code summarize one shad factor, one
+dominant EG value and stringle structure
+in scenario A and three independent
+factor, three dominant EG value and
+three structure in scenario B. So the
+screen plot serves as a diagnostic tool
+that converts covariant structure into a
+interpretable visual structure of the
+data latent geometry. Dear friends, till
+now we understand what a values and what
+een vector represents. But here the
+question how do we find them? The
+derivation start from the agent value
+equation and applies a sequence of
+logical steps each building on concepts
+from the earlier sessions. So this is
+the exact one of the most elegant
+derivations in linear algebra. So yes
+kindly just observe. Let me just start
+with the step one. Yes, start with an EN
+value equation that is AV which is equal
+to lambda V. Now step two move
+everything to one side. So moving here
+AV minus lambda V which is equal to
+zero. And here step three yes we are
+just going to factor out V that is
+requires converting lambda to lambda I.
+So which it just makes as like a minus
+lambda i * b which is equal to zero.
+Here of course you would have asked this
+one why lambda i? Because actually a
+minus lambda is a matrix minus a scala
+which is undefined. We need to subtract
+a matrix from a matrix. So we use lambda
+I that is a diagonal matrix with lambda
+on the diagonal. So this is matrix
+shifting. Now this step three says that
+v is a null space of a minus lambda i.
+Since we execute the tribal solution v
+is equal to zero. That is the zero
+vector is never considered an eg vector.
+And here the matrix A minus lambda I
+must be singular. So only singular
+matrix has non-trivial null space. And
+dear friends of course we have already
+know that singular matrix have a
+determinant of zero. That is determinant
+of a minus lambda i. Yes. Which is equal
+to zero. So this equation is called the
+characteristic equation. And the
+polomial you get by expanding the
+determinant is the characteristic
+polomial. And dear friends for an M into
+M matrix this is polomial of degree M in
+lambda. So it has exactly M roots that
+is by the fundamental theorem of
+algebra. So giving as M EN values. So
+let me just discuss that by using this
+code. So this script derives and
+verifies the EGN values of 2 into two
+matrix using both analytic formula and
+numerical computation while highlighting
+key algebraic properties. This exact
+script derives and verifies the agent
+value of 2 into two matrix using both
+analytic formula and numerical
+computation while highlighting key
+algebraic properties. So yes dear
+friends, here is the matrix definition.
+So we have the matrix A which is equal
+to 1 2 and 3 4. Okay. And here of course
+it just explains the uh characteristic
+polomial that is for a generic matrix.
+If we just have a B and C D. Okay. The
+Aian values satisfy kindly just observe
+determinant of A minus lambda I which is
+equal to zero. So here determinant of a
+minus lambda b c c d minus lambda which
+is equal to a minus lambda multiple by d
+minus lambda minus b c and with this
+expanding kindly just observe dear
+friends on simplifying this we just get
+lambda square minus a + d lambda plus a
+d minus bz which is equal to zero. From
+this we just get trace that is the sum
+of each value. So here it is trace of a
+which is equal to 1 + 4 which is 5 and
+the determinant yes the product of EGN
+values. So here determinant of a which
+is equal to 1 * 4 - 2 * 3 so which is
+equal to -2.
+So the characteristic equation here is
+kindly just observe let I just take it
+here. So lambda square - 5 lambda minus
+2 which is equal to 0 and solving this
+by using the quadratic formula. Okay. So
+we are just going to have the value of
+lambda 1 and lambda 2. Okay. So let me
+just evaluate it. And uh with this we
+are just going to make a numerical
+verification by using numpy. So which it
+just computes the EGN value using a
+numerical algorithm. And here all close
+yes it just verifies equality that is
+within floating point tolerance. And we
+have here the exact fundamental
+identities. Yes. Sum of EN values and
+product of EEN values. Okay. So yes and
+here let me just execute and verify the
+uh result and of course we have already
+identified the exact characteristic
+polomial. Yes kindly just observe here
+we just have lambda square minus 5 into
+lambda minus 2 which is equal to 0 and
+by using quadratic formula kindly just
+observe. So lambda which is equal to 5²
+- 4 into - 2 which is equal to 25 + 8
+which is 33. And here if I just want to
+go with lambda 1 and 2. So 5 plus or
+minus square roo of 33 divided by
+2. So numerically we just get lambda 1
+yes it would be as like 5.37
+and lambda 2 yes it would be -0.3723
+so that 8 was we just got it here
+numerical algorithm it just computes the
+eent values and of course both are
+equal. So here it is the exact
+fundamental line is dear friends the
+script verifies two important variance.
+Yes one is sum of e values by the trace.
+Yes. Summation of I which is equal to 1
+to M lambda sub I which is equal to
+trace of A. And the second one it is all
+about product of EN values that is
+product from I which is equal to 1 to M
+of lambda sub I which is equal to
+determinant of A. And here we just get
+yes this is at as five and here we just
+get this value as minus2. So yes that is
+what we just obtained here. So sum of
+roots which is trace and product of
+roots that is the determinant. And dear
+friends here trace measures total
+scaling effect along principal
+directions. And here determinant
+measures area scaling that is including
+orientation flip if negative. And for
+this matrix one EG value is positive
+that is stretching in one direction and
+one EG value it is in negative that is
+reflection plus scaling in another
+direction. So this exact example
+illustrate EGN values encode intrinsic
+transformation behavior that is the
+matrix can be understood as stretching
+along one direction flipping and
+compressing another along another
+direction. So this exact code summarize
+that is walk through the full pipeline.
+So construct a matrix derive
+characteristic polomial solve analytical
+that is quadratic formula and verify
+numerically. So confirm invariant
+relationship that is trace and
+determinant. So it demonstrate that EGN
+value are not just computational
+artifacts they are tightly constrained
+by fundamental algebraic properties of
+the matrix. Uh in this session we are
+just going to discuss on how to find EGN
+vector. Dear friends once we have the EN
+values finding the EN vector is
+conceptual straightforward. Each eian
+vector v live in the null space of the
+matrix shifted by its eian value.
+Mathematically v sub i belongs to null
+space of a minus lambda sub i * i. That
+is every eian vector lives inside the
+null space of its shifted matrix. And
+dear friends, think of it this way. The
+een value is like a key and the matrix
+is like a lock. You insert the key that
+is lambda sub i into the matrix by
+shifting that is a minus lambda sub i *
+i and the door open to reveal the agent
+vector hiding in the null space. Okay,
+let me just discuss this by using the
+code. So dear friends, actually this
+exact script computes agent vector by
+explicitly solving the null space
+problem. Yes, the null space problem
+mathematically specified. Yes, a minus
+lambda * i multiple by v which is equal
+to zero. So for each agian value and
+then verifies the result numerically. So
+let me just define the matrix. Yes, here
+we have the matrix. Yes, it is a
+symmetric guarantees real eian value and
+orthogonal een vector. And here yes of
+course we have the Egen value numerical
+Python and here we just go for the step
+one. Yes this is the exact core idea
+where we just specified yes the null
+space a minus lambda * i. Yes, for each
+value of lambda, we are just going to
+computed the sifter functionalities and
+this produce a matrix whose null space
+contains the EGN vector. And here we
+have kindly just observed dear friends.
+Yes, this is the code logic for solving
+the null space. Yes, this implements a
+manual null space solution. And here,
+yes, it just uses the first row
+equation. Yes, of course. It just
+specify as like mathematically a
+multiple by v sub 1 + b * v sub 2 which
+is equal to zero which implies yes
+v_sub_2 which is equal to - a / b * v
+sub i and here yes if we just set this v
+sub 1 which is equal to 1. Yes to obtain
+a concrete vector and it handles edge
+cases where division would be unstable
+and yes dear friends here we have the uh
+normalization yes it converts eian
+vector to unit length and it is mainly
+important for numerical stability
+consistent comparisons. So this exact
+verification step it just makes the
+check a multiple by v which is equal to
+lambda v. So yes here we have the exact
+comparative statement with numpy and
+this numpy returns each vector as
+column. They may differ by of course a
+scalar multiple as like sign flips. So
+this is expected because each vectors
+are not unique and here this v and c
+multiple by v represents the same
+direction. Okay. So let me just execute
+and view the result. So here we just
+discussed dear friends kindly just
+observe here we have the matrix A that
+is 1 2 2 and 1 and here we are able to
+identify the value of lambda 1 and
+lambda 2 as with help of characteristic
+polomial. Yes you can verify the
+characteristic polomial here it is
+lambda square minus 2 * lambda minus 3
+which is equal to 0. And here yes with
+this functionality we are able to
+identify that is lambda 1 it is three
+and lambda 2 it is minus1. So yes we
+just got the exact eian values here. And
+with this let me just compute the
+shifted matrix. So yes dear friends
+kindly just observe here when we just
+move on. Yes uh if we just have the case
+one as lambda which is equal to three.
+Okay. So here so here a - 3 i which is
+equal to 1 - 3 2 2 and 1 - 3. So this is
+what the exact matrix and here it is
+resulted to - 2 2 and 2 -2. So this
+exact matrix it comes and solving the
+null spaces. Kindly just observe dear
+friends -2 v_ub_1 + 2 v_sub_2 which is
+equal to zero. Yes. which implies
+v_sub_1 which is equal to v_sub_2. So
+here a valid eian vector we just get it
+as like yes v which is equal to 1 and 1
+and when normalizing yes it just comes 1
+/ 2 multiple of this matrix and
+when with verification yes dear friends
+so we have a multiple by v which is
+equal to 3 and 3 yes yeah it is what the
+3 V. So we are just getting that
+particular functionality by using this
+lambda 1 which is equal to 3. So let me
+just compute the shifted matrix by using
+the case 2 functionalities. Yes, here
+the case 2 which is lambda which is
+equal to minus1. So let me just make use
+of it and identify. So see here dear
+friends. So a minus of -1 into i. So
+here we just get a + 1 which is equal to
+2 2 2 and 2. This is the matrix and yes
+by using the null space yes from the
+first row we just get 2 v sub 1 + 2 v
+sub2 which is equal to zero. Yes, which
+it is implies v_sub_1 which is equal to
+minus v_sub_2. So a valid een vector
+here v it would be 1 and minus1 and when
+on normalizing yes we just get 1 by
+2 of matrix 1 and minus1 and kindly
+just observe the verification dear
+friends. So here we just get a v which
+is equal to minus1 and 1. So yes
+resulted towards minus1 multiple by b.
+So yes that is what we are just getting
+it here. So this is for the case one and
+kindly just observe and this is for the
+case two functionality and we just when
+we apply towards this first row with the
+null space here we just get and when on
+verifying kindly just observe when on
+verifying yes we are able to get yes
+both or yes it's equal and towards with
+the geometric interpretation yes kindly
+I just observe dear friends when we just
+go towards this uh verification of numpy
+values. Yes dear friends here when we
+just make use of this eg value by using
+one and one the transpose. Yes it
+directions along the line y is equal to
+x and it is stretched by factor three.
+So that is what the first lambda which
+we have observed.
+Okay, first case study and second is we
+just uh had the exact functionality as
+like a value which is 1 and -1 the
+transpose. So here the direction along
+the line y which is equal to minus x and
+here reflected and scaled by factor
+minus1. So that is what we just got it
+here. Yes, the lambda to the factor it
+is minus one. Dear friends, by this
+code, yes, this exact code demonstrate
+the canonical procedure. Yes, first it
+just compute the EN value and for each
+EN value from A minus lambda I. Yes, it
+solves its null space and then normalize
+the resulting vector and it just
+verifies that is
+a multiple by v which is equal to lambda
+multiple by v. And here comparing with
+the numerical routines it explicitly
+shows the Eian vector arise as
+non-trival solutions to a homogeneous
+linear system making to connection
+between Eian decomposition and null
+space fully concrete. Okay. Now let we
+just uh have a practice that is uh we
+use an linear algebra for EGN
+decomposition rather than computing EGN
+values and EGN vector by hand. So the
+function returns both the EGN values as
+a vector okay and the EGN vector as
+columns of a matrix. So SD dear friends
+this script demonstrates the practical
+computation and correct interpretations
+of Eg decomposition in numpy with an
+emphasis on an common source of
+confusion that is how Egen vectors are
+stored.
+Okay. So here we just start with
+defining a matrix. Yes, here uh we are
+just going to have our matrix A which is
+1 2 3 and four. And yes, let me just
+define the EEG decomposition via numpy.
+Okay, so this numpy returns e valal that
+is array of een values that is lambda 1
+and lambda 2. And here we have the
+matrix whose columns are een vector and
+here we just get that so a multiple by v
+which is equal to v multiple by a. So
+here uh v actually it is what the aian
+vector that is columns and a yeah it is
+a diagonal matrix of value. Next we are
+going to have our uh critical structure
+details. Yes values are according
+towards the column. So here we just get
+this exact column. Yes we just get the
+first een vector and here we have the
+second een vector. And this is
+essential. Yes. When we just go towards
+that I eian vector. And here we are just
+making it towards the column. Yes. Dear
+friends, kindly just observe this is a
+column conversion because the matrix
+equation is kindly just observe a
+multiple by v_sub_1 v_sub_2. Okay. So
+here which is equal to that v_sub_1
+v_sub_2 multiple by lambda that is
+lambda 1 and 0 lambda 2. So here each
+column satisfy a multiple by v sub i
+which is equal to lambda sub i multiple
+by v sub i. And kindly just see here
+dear friends this one here a common
+mistake explicitly shown. Yes, this one
+it is a column not an row because row
+makes components of different EN
+vectors. They do not satisfy a multiple
+by v which is equal to lambda multiple
+by v. And here we have the loop
+functionality for verification. Yes, for
+each pair it just going to compute two
+things. Yes, one it is as like a
+multiple by v and next one it is lambda
+multiple by v. So it just compare using
+this numpy functionalities also. So this
+validates the defining equation as like
+a multiple by b which is equal to lambda
+multiple by b. And dear friends here we
+are just having the al close so which is
+used instead of exact quality because
+floating point arithmetic introduces
+small rounding errors and here we are
+just going to have the results typically
+match up to 10 ^ of minus 8 position. So
+let me just execute and view the output.
+So this code operationalize the exact
+factor. Kindly just observe dear friends
+this Aian values. Yes, it is a scaling
+factor and AGN vectors. Yes, of course
+invariant directions. And here the
+matrix A acts as stretching along a
+vector direction with a different
+scaling factor as per direction. And
+dear friends again I just specify here
+the single most column mistake when
+working with EGN vector in code is
+confusing rows and columns and here
+numpy exactly stores the EN vectors as
+column of a matrix not rows. So with
+square matrix you will not get a shape
+error if you accidentally use rows. So
+you will you just get wrong answer
+silently and here always access each
+values as a column slicing not a row
+slicing. So this convention follows from
+the standard mathematical notations
+where v of course it is what's an eg
+vector computes the column of v. So yes
+dear friends exactly this script it just
+summarize that here we are just getting
+from this yeah we are returning the EN
+vectors in columns. So each column
+corresponds to one EN value. So the
+verification loop confirms the EEN
+decomposition numerically and
+misinterpreting rows as EN vector is a
+fundamental but common error. script
+reinforce both the correct API usage and
+the underlying linear algebra structure
+and dear friends here we are just going
+to discuss on an important topic yes een
+vectors are not unique if v is an een
+vector of a then alpha multiple by v is
+also an een vector for any nonzero
+scalar alpha and here of course here we
+have the exact proof A multiple by alpha
+V which is equal to alpha multiple by
+AV. So here which is equivalent to alpha
+multiple by lambda V and which implies
+lambda multiple by alpha V. So if V is
+an EN vector any scaled version of V is
+also an EG vector that is what here it
+is specified. Okay let me just discuss
+that by using the code. So this exact
+script demonstrate a fundamental
+properties of EGN vector. So they are
+not unique in magnitude or sign only in
+direction. So here we are just starting
+the defining uh matrix. So kindly just
+observe dear friends. So this one it is
+the matrix A. We have 1 2 2 and 1. And
+of course kindly just observe this
+functionality which is just shows
+v_sub_1 is one e vector corresponding to
+the e value of zero. And here numpy
+returns eg vector normalized to unit
+vector length. So in such a case nom
+factor of v sub i which is equal to 1
+and dfs kindly just observe here we just
+specify mathematical principle as like a
+multiple by v which is equal to lambda
+multiple by v. So therefore for any
+scalar that is alpha which is not equal
+to zero. Yes, as I have already
+specified a multiple by alpha v which is
+equal to alpha multiple by av and which
+it implies as alpha multiple by lambda v
+and yes which is equal to lambda
+multiple by av and yes av is also an
+eian vector and kindly just observe dear
+friends here this exact code demonstrate
+for each scalar alpha the code exactly
+computes this loop functionalities. Yes,
+it just verifies and it was specified as
+with all close functionalities. Okay.
+And here it just proves that is each
+output line conforms towards this
+functionalities that is a multiple by
+alpha v which is equal to lambda
+multiple by alpha a. So here the een
+value equation still holds after
+scaling. So let me just uh execute and
+view the outputs. And here we are able
+to witness one thing. Kindly just
+observe alpha which is equal to minus1.
+Yes, v which is implies to minus v. So
+the vector points in the opposite
+direction but still lies on the same
+line through the origin. So here that
+implies that v and minus v represents
+the same eian direction. And here I just
+want to specify one thing dear friends.
+here een values and here we have the
+geometrical interpretation. As Egen
+vector defines lines in one dimensional
+subspace not specific arrows and here it
+just transformations A that is it
+preserves the line scales vectors along
+it and yes of course by this we are able
+to specify that span of V which is equal
+to yes alpha V when alpha belongs to R
+And here normalization is used. Yes,
+numpy returns unit vector because
+removes arbitrary scaling ambiguity and
+makes comparisons consistent and it
+improves numerical stability. But
+mathematically normalization is a
+convention not a requirement. And yes
+finally we have the statement. Yes
+kindly just observe direction matters
+magnitude and sign do not. So this is
+exact practice. Eian vectors are defined
+up to nonzero scalar multiples. The only
+invariant properties is their direction
+that is the span. And yes dear friends,
+this exact code just verifies that
+scaling an EN vector by any nonzero
+scalar produces another valid EN vector.
+So the EN value equations remain
+satisfied. Egen vector represents
+directions not fixered vectors. So this
+property is essential for correctly
+interpreting EEN decomposition in both
+theory and practice. Dear friends, let
+me discuss diagonalizing a square
+matrix. Each value and EN vector pair
+gives us one equation. Yes,
+mathematically it is a multiple by V
+subi which is equal to lambda sub i
+multiple by v sub i. For an M into M
+matrix, we have M such equations. We can
+combine them all into a single elegant
+matrix equation. Now let collect all EG
+vector as column of matrix V and all EN
+values in a diagonal matrix of lambda.
+So with this observe let we just have a
+matrix as like here if we have A
+multiple by V matrix that is EN vectors.
+So here it would be v_sub_1 v_sub_2
+v_sub_3 till v matrix and this would be
+equal to yes as such v_sub_1 v_sub_2
+v_ub3 till v m this is a vectors and
+here the agent values in a diagonal
+matrix. So lambda 1 0 0 till to the last
+column and 0 lambda 2 and 0 till to the
+last column. Yes, as such we have 0 till
+lambda m. This is what our v eian
+vectors and this is what the lambda eian
+values. So this gives us yes a multiple
+by v which is equal to v multiple by
+lambda. The magic of diagonal matrix on
+the right. Yes. When v is post multiple
+by this lambda, each column of v gets
+scaled by the corresponding dial entry
+and here column i of course
+[clears throat] of v is multiple by all
+these lambda i. Exactly what the eian
+value equation says. And here when on
+just rearranging kindly just to see here
+dear friends when on just rearranging if
+I just go for V which is equal to V
+multiple by lambda multiple by V inverse
+and dear friends this is called the EN
+decomposition or diagonalization of A.
+So it decomposes the matrix into three
+factors. one a changes of bases that is
+V inverse a simple diagonal scaling
+lambda and the inverse changes of the
+base V and dear friends in the standard
+basis A is a complex matrix with entries
+everywhere but from perspective of an EN
+vector basis A is simply a diagonal
+matrix all it does is a scale each axis
+independently and here the EEN
+decomposition reveals the natural
+coordinate system in which the matrix
+has the simplest possible form. Let me
+just discuss by the code. Kindly just
+observe here de this exact script
+demonstrate matrix diagonalization
+verifying both the forward relation A
+multiple B which is equal to V multiple
+by lambda and the reconstruction form
+that is a which is equal to v multiple
+by lambda and multiple by v inverse. So
+here let me just define the matrix. So
+here a is a 2 into two matrix and here
+we have the e valal and e calc that is
+een value lambda 1 and lambda 2 and here
+een vector that is matrix v whose
+columns are eian vectors and dear
+friends kindly just observe here is the
+constructing of the diagonal matrix. So
+this matrix contains only scaling factor
+along its diagonal. So when we just do
+lambda yes we just get lambda which is
+equal to lambda 1 0 0 and lambda 2. So
+this is what the exact so this matrix
+contains only scaling factors alongs a
+diagonal. So here it is what the core
+exact core identity that is a which is
+equal to v multiple by lambda. So when
+we just make it mathematically kindly
+just observe we of course we have two
+vectors v_sub_1 and v_sub_2 and if we
+just multiply by a. So here we just get
+a v_sub_1 and a v_sub_2 using the een
+value property kindly just observe a v
+sub i which is equal to lambda sub i
+multiple by vi.
+This would be happens as like a v which
+is equal to lambda 1 v_sub_1 and lambda
+2 v_sub_2 actually this is what v
+multiple by lambda
+and dear friends kindly just observe
+this exact left hand side which we just
+have this yes apply transformation to
+each eian vectors
+and each right side yes it just scales
+eian vector so This produced the same
+result confirming that AV which is equal
+to V lambda. And coming towards the
+reconstruction kindly just observe dear
+friends when on just reconstructing yes
+what we just have is A which is equal to
+V multiple by lambda multiple by V
+inverse. So here we are just changing
+the basis and we are just going to scale
+it and change back with the V. Yeah, we
+are just going to have this and actually
+why this works is yeah when on just
+making towards this particular kindly
+just observed dear friends if we just
+have this is what the base okay so this
+is what the base if we multiply both the
+sides by v inverse what happens so this
+v and multiple by v inverse so here we
+just have a and v lambda v inverse here
+diagonalizing decomposition at
+transformation into three steps. Yes, we
+want to check whether we have any
+rotation that is changes coordination is
+there or not. Yes, that is done by V
+inverse. Do we have any scale
+independently along the principal
+direction? Yes, that is what the lambda
+and transform back to the original
+basis. Yes, that is what the V the EGN
+vectors
+and for verification. Yes, we are just
+going to have this all closed. Yes, we
+are just going to have yeah both the
+things that is a multiple v which is
+equal to v multiple by lambda this is
+one and here's the second one a which is
+equal to v multiple by lambda multiple
+by v inverse. So numerical tolerance is
+required due to floating point
+arithmetic arithmetic. So yeah we are
+just going to discuss this. Let we
+execute and view the output. So kindly
+just observe dear friends this is what
+our matrix A and here we just
+identifying the EN values when we just
+have towards the EN vectors V when on
+multiplying the both yeah we just get
+with a lambda function that is diagonal
+matrix lambda function on verifying
+kindly just observe the resultant of a
+multiple by v which is equal to v
+multiple by lambda so both are equal
+Yes, of course it is true. And even on
+reconstruction, kindly just observe dear
+friends. A which is equal to v multiple
+by lambda and multiple by v inverse. So
+here that two we just get the same exact
+matching. So this is what the resultant
+and we just have our original a. So both
+are equal and dear friends kindly just
+observe dear friends this
+[clears throat] exact functionality has
+three equivalent forms of
+diagonalization. Yes starting from this
+a multiple v which is equal to v
+multiple by lambda. We can rearrange to
+get these three equations. So that is a
+multiple by v which is equal to v *
+lambda and a which is equal to v
+multiplied by lambda multiple v inverse
+and lambda which is equal to v inverse
+multiple by a and multiple by v. So here
+kindly just observe the second form this
+exact decomposes the matrix into its
+agent structure. And here the third form
+yes it shows that A becomes diagonal
+when we transform it into the Eian
+vector basis. This is why the process is
+called diagonalization.
+The matrix A is dense and complicated in
+the standard basis but diagonal and
+trial in its egent basis. Dear friends,
+the EEN vector form a new coordinate
+system that is V inverse converts a
+vector from the standard basis to the EN
+vector basis. So in this new coordinate
+system the matrix A is diagonal. It
+simply stretches each axis by
+corresponding EGN value. Then V converts
+back to the standard basis. So matrix
+multiplication by A is fundamentally
+just stretching along M independent
+directions. So yes dear friends this
+exact code verifies two fundamental
+identities. Yes, the one it is a * v
+which is equal to v * lambda and the
+decomposition that is a which is equal
+to v ult* lambda multiple by v inverse.
+So it shows that a linear transformation
+can be understood as a change of basis
+into agian vector coordinates and
+independent scaling along those
+direction and a transformation back to
+the original space. So this is the core
+structural insights behind EGN
+decomposition. Okay. Now let me just
+discuss on symmetric matrices. Symmetric
+matrices that is A which is equal to A
+transpose have two remarkable properties
+for agent decomposition. Yes, that makes
+them the rock star of linear algebra in
+data science. Difference property one
+yes allian vectors are pairwise
+orthogonal. Yes, that is what the
+perpendicular. And property two yes all
+een values are real value that is no
+complex number. Dear friends these
+properties are not shared by general
+non-ymmetric matrices. They make
+symmetric matrices much easier to work
+with and give their agent decomposition
+a beautiful geometric structure. Let me
+just discuss this directly by the
+coding. So kindly just observe dear
+friends. Yes this exact script
+demonstrate a central theorem in linear
+algebra. Yes, real symmetric matrices
+have orthogonal eian vectors and admit
+an orthogonal diagonalization. Here
+matrix R. Yes, it is an arbitrary 3 into
+3 integer matrix and here we just
+specified A which is equal to R
+transpose R. And towards this properties
+of construction, yes the first one it is
+all about the symmetry. Yes, kindly just
+observe here A which is equal to R
+transpose R. That is what here we just
+define it. But when on just going for
+symmetry yes kindly just observe it is a
+transpose which is equal to r transpose
+multiple by r the whole transpose. So
+which is equal to r transpose multiple r
+which is equals to a. So here the second
+one it is all about positive
+semi-definite. Yes. Kindly just observe
+dear friends. Here we are just going to
+take the xrpose multiple by a multiple x
+and here yeah with the same thing kindly
+just observe xrpose multiple by r
+transpose multiple r multiple x so which
+is equal to norms of r multiple x
+towards the square yeah greater than or
+equal to zero so here this exact a is
+guaranteed to be symmetric with real non
+on negative een values and let we just
+move on here to define the een
+decomposition. Yes dear friends here we
+are just defining the een values which
+are real and een vectors yeah can be
+chosen orthonormal. Okay and uh let me
+just move on here for orthogonality
+check. Yes, this is the loop for
+orthogonality check. And here this exact
+uh dot functionality yes this computes
+that v transpose v. So kindly just
+observe v transpose v which is equal to
+identity. So here this one we are just
+expecting it with the eian values and
+vectors. So kindly just observe. So with
+i and j functionality. So we are just
+going to have v sub i the transpose
+multiple by v subj. And here the exact
+expected value it would be v sub i
+transpose multiple by v subj which is
+equal to so if i which is not equal to j
+so it would be zero and if i which is
+equal to j that would be y and yes if it
+is normalized and here we just get the
+resultant to be 10 ^ of -16 so indicates
+numerically zero and kindly just observe
+dear friends here we are just going to
+have our matrix orthogonality. Yes, for
+checking matrix orthogonality, V
+transpose V which is equal to identity.
+So yes, dear friends. So this is what?
+So if EN vectors are normal, V transpose
+V which is equal to identity. So this
+means columns are mutually perpendicular
+and each has unit length. And yes, here
+we just go for the for an orthogonal
+matrix V. So here we are just going to
+specify as like V inverse which is equal
+to V transpose. So this is
+computationally significant. Okay. So
+let me just execute. So yes here we have
+the exact A. And yes it is a symmetric.
+Yes, of course it is a symmetric and it
+is real. And uh when we just go towards
+the een values yes here also we just get
+a real and non- negative eian values and
+uh towards the een vectors yes we just
+get an orthonormal functionality and
+when we just make the pair wise
+orthogonality check. So by using this uh
+v sub i transpose multiple by v subj
+yeah yeah we are just having the
+orthogonality check and kindly just
+observe the exact values and as I have
+already specified yes it would be an 10
+^ of minus 16 that indicates numerically
+zero and if i is not equal to j it would
+be zero and if i is equal to j so we
+just get one and currently just observe
+the V transpose multiple by V. Yes, here
+it is an identity. So that is also we
+are just getting it as like an matrix
+orthogonality. And yes, it's V is an
+orthogonal. Yes, of course it is done.
+And observe one thing dear friends here
+we are having an huge practical
+implement that is when we just make it
+as like V inverse which is equal to V
+transpose. Yes, that's it. True because
+this is computationally significant and
+here transpose is far cheaper and more
+stable than inversion. I have already
+specified and how this is happening.
+Yes. So kindly just observe dear friends
+here when Eian vectors are orthogonal
+and unit normalized the Asian vector
+matrix V is a orthogonal matrix that is
+meaning V transpose V which is equal to
+I and therefore V inverse which is equal
+to VRpose and we have already discussed
+previously. Yes. And orthogonal
+diagonalization. Yes. Instead of a which
+is equal to v multiple by lambda
+multiple by v inverse. Yes, we can get
+the stronger result as like a which is
+equal to v multiple by lambda multiple
+by v transverse. And dear friends kindly
+just observe this is called the spectral
+theorem. And why is such a big deal is
+yes dear friends actually computing a
+matrix inverse is expensive. So when we
+just say yes big W of M cube yes
+operations and numerical unstable a
+transpose is essentially free you just
+swap row and column indices and here for
+symmetric matrices we never need to
+compute V inverse we simply use V
+transpose this is faster more stable and
+more memory efficient and in data
+science the matrix V EN decompose are
+almost always covariant matrix which are
+symmetric by definition as like uh
+kindly just observe C which is equal to
+X transpose multiple by X. So this
+simplification applies to virtually
+every PCA computations you will ever
+run. So if you know your matrix is
+symmetry instead of this kindly just use
+of course uh np do linear algebra ei h
+of a because here h stands for hermitian
+that is the complex generalization of
+symmetric and here this eig h yes this
+is very faster more numerical stable and
+returns egen values stored in ascending
+order and here I just give you A proof
+also dear friends kindly just observe.
+See this is one of the most important
+proof in applied linear algebra. Let us
+walk through in step by step. So as we
+have already given yes kindly just
+observe a which is equal to a transpose
+with the two distinct eian values that
+is lambda 1 and lambda 2. Okay. And here
+kindly just observe this lambda 1 which
+is not equal to lambda 2 and their eian
+vectors v_sub_1 and v_sub_2. So here we
+our exact uh goal is we have to specify
+that is v_sub_1 transpose multiple by
+v_sub_2 which is equal to zero that is
+an orthogonal. So let me just start with
+step one. So start from the EGN value
+equation for v_sub_1 and left multiple
+by v_sub_2 transpose. So here kindly
+just observe lambda 1 v_sub_1 transpose
+and v_sub_2 which is equal to a multiple
+by v_sub_1 the whole transpose multiple
+by v_sub_2. So here what happens? So
+v_ub_1 transpose a transpose multiple by
+v_sub_2 because of a is symmetric we
+already know a transpose which is equal
+to a. So we can replace a transpose with
+a and then use the e value equation for
+v_sub_2. So kindly just observe. So
+v_sub_1 transpose a transpose v_sub_2
+which is equal to v_sub_1 transpose a
+v_sub_2. So here what we just get
+v_sub_1 transpose multiple by lambda 2
+v_sub_2 and kindly observe the exact
+resultant is lambda_2 v_sub_1 transpose
+and v_sub_2. Now here combining this
+first step and second step lambda 1 here
+and this is lambda 2. Okay. So we are
+just going to equalize the both one. So
+the third one here it is lambda 1
+v_sub_1 transpose v_sub_2 which is equal
+to lambda 2 v_sub_1 transpose v_sub_2.
+So yes, this implies lamb lambda 1 minus
+lambda 2 the whole v1 transpose v_sub_2
+which is equal to zero. And yes since
+lambda 1 and lambda_2 are not equal and
+the factor lambda 1 minus lambda 2 which
+is not equal to zero. Okay. Therefore
+v_ub_1 transpose multiple by v_sub_2
+which is equal to zero.
+So that makes this proof work is the
+substitution that is a transpose which
+is equal to a that is what we have just
+done in the step two and for a
+non-symmetric matrix a transpose is not
+equal to a and the chain of equalities
+breaks. So this is why non-ymmetric
+matrix do not have orthogonal egen
+values in general. So by this yes this
+exact code verifies that for symmetric
+matrices each and vectors are orthogonal
+and here v transpose v which is equal to
+identity and here v is an orthogonal and
+next one v inverse which is equal to
+vranspose and diagonalizing simplifies
+kindly just observe a which is equal to
+v * lambda multiple vrpose So this is
+one of the most powerful structural
+result in linear algebra. So turning
+matrix transformation into independent
+scaling along perpendicular direction.
+And here is the second special property
+that is symmetric matrix always have
+real valued EN values. So yes generally
+non-ymmetric matrix can have complex
+valued EN values. So even if the matrix
+itself contains only real numbers. Yes
+dear friends directly let me just go to
+the code and yes this script contrast
+non-ymmetric with a symmetric matrix in
+terms of their EGN values and
+empirically verifies a key key theorem
+that is real symmetric matrix always
+have real EGN value whereas
+nonseymmetric matrix may have complex EN
+value okay so here kindly just observe
+let me just go to define yes a non-sm
+symmetric matrix A and here we just go
+with an functionality that confirms the
+matrix is not symmetric not symmetric
+yes of course as we have already seen
+previously that is non-ymmetric that is
+a which is not equal to a transpose okay
+and uh next we are just having the EEN
+value computation yes this produces EN
+values that may include complex numbers
+And here is the exact uh key
+observation. Kindly just observe dear
+friends. So this exact functionality
+returns false that is not all EN values
+are real. And here we have the complex
+conjugation pairs. And yes dear friends
+for an uh real valued matrix complex EGN
+values must appear in conjugate pair.
+That is if lambda which is equal to a +
+b i so is an een value then lambda bar
+which is equal to a minus b i yes yes is
+also an een value. So this arises
+because the characteristic polomial has
+real coefficients and here we have the
+exact symmetric versions of the matrix.
+Okay. So as sim which is equal to and
+here kindly just observe we are going to
+return true matrix is symmetric. Okay.
+So that is also here it is specified and
+when on evaluating this also kindly just
+observe there is also going to return
+true because all een values are real.
+Okay let me just see when on execution.
+So here we have an empirical
+verification that is by using Monte
+Carlo test and here this exact loops
+just generate the symmetric matrices via
+yes which is equal to R transpose
+multiple by R. So here it is the
+properties as like symmetric and
+positive semidefinite and yes of course
+kindly just observe dear friends this
+exact line yes it just makes the check
+of eian values it confirms all eian
+values are real and here all thousand
+symmetric matrices have uh real een
+value and it is going to return the true
+okay so let me just execute so here on
+execution kindly just observe dear So
+this is what the non-symmetric okay it
+just may have complex egen values
+nonorthogonal eent vectors even
+defective cases that is nondagonalizable
+and here when we just go towards the
+symmetric matrices yes for real
+symmetric matrix a all een values are
+real een vectors can be chosen
+orthonormal and matrix is orthogonally
+diagonizable yes of course orthogonally
+diagnizable It is as like a which is
+equal to v * lambda multiple by v
+transpose and here for symmetry it just
+poses a real een values. So kindly just
+observe dear friends here for symmetric
+a lambda which is equal to v transpose
+multiple by a multiple v divided by v
+transpose multiple by v. So here right
+hand side is always real. uh therefore
+each values must be real. And dear
+friends, kindly just observe here we are
+going to have a non-symmetric cases.
+Yes, transformation can include a
+rotation, shear and this can produce a
+complex agent values and yes dear
+friends with this uh thing symmetric
+cases here transformation is pure
+scaling along orthogonal directions no
+rotational component and hence egen
+values remain real. So this exact code
+demonstrate non-ymmetric matrices that
+they produce complex EGN values. Complex
+[snorts] values occurs in conjugate
+pair. And when coming towards symmetric
+mat matrices always have real values
+that is real een values or structural
+well- behaved and here empirically
+thousand symmetric matrixes are all real
+een values. So this distinctions is
+foundational for understanding when
+agent decomposition yields stable
+interpretable results. Okay. Now let me
+just discuss on singular matrix. Dear
+friends, a common misconceptions is
+always there. That is learner sometimes
+think that singular [snorts] that is
+non-invertible matrices cannot be eent
+decomposed. This is completely wrong.
+Eent decomposition works perfectly well
+on singular matrix. And here the special
+property is that at least one EEG value
+is guaranteed to be zero. Think about
+why. See a singular matrix has a
+non-trival null space meaning there
+exist a nonzero v. So such that a v
+which is equal to zero and comparing
+with a which is equal to lambda v we see
+that this lambda which is equal to zero
+and v is the null space vector. So that
+we just get this exact equation. Yes.
+Conversely, if all EGN values are non
+zero, the matrix must be full rank that
+is invertible. Let me just discuss this
+by using the code. So here, yes, this
+exact script analyze the EG
+decomposition of a singular matrix and
+connects EN value, rank and linear
+dependency. Let me just start defining
+the matrix A. So which is 1 4 7 2 58 and
+369. Okay. And here we are defining the
+rank and the determinant. And kindly
+just observe uh here of course we have a
+3 into 3 matrix but this rank it won't
+be out of three. Okay. Let me just see
+and let me just determine what is the
+determinant two. And dear friends kindly
+just observe here we are just uh uh
+defining the Asian values and Asian
+vector. Yes of course typically Asian
+values one EN value would be uh zero and
+here two Asian values are non zero and
+yes dear friends here we just going to
+have the null space via Asian value for
+lambda which is equal to zero. So this
+extracts the uh een vector corresponding
+to the uh lambda which is equal to zero.
+And here we are just going to have the
+verification. Yes, that exact
+verification this confirms a which is
+equal to zero. And kindly just observe
+dear friends here we are just having the
+linear dependency of the column. So here
+the exact code that inspects the
+relationship between the columns and
+here of course kindly just observe 2
+into column 2 minus column 1. Yes, which
+equals the column 3. Okay. So yes
+columns are linearly dependent. So this
+explains uh rank deficiency and
+existency of an non-trival null space.
+So kindly just observe dear friends on
+execution. So yes, here we have the
+matrix uh A. Okay. And kindly just
+observe the rank it is two and here
+determinant it is zero. Yes, it just
+says A is singular that is non
+invertible. And when we just come
+towards this EN values, yes, kindly just
+observed. Yes, one EG value is zero. So
+two EN values are nonzeros. Okay, so
+kindly just observe that. And this
+exactly specifies that kindly just
+observe a matrix is singular if and only
+if the determinant of A which is equal
+to zero. And we have already discussed
+an product of EGN values that is a
+product from I which is equal to 1 to M
+of lambda subi which is equal to
+determinant of A. So here if the
+determinant is zero at least one egen
+must be zero. So yes dear friends that
+is what here determinant is zero and we
+have one eian is zero. And when coming
+towards this uh null space asian vector.
+So for lambda which is equal to zero.
+Yes here we just verify that is a
+multiple by v is zero. So this eian
+values lies in the null space of A. And
+when coming towards this linear
+dependency of columns kindly just
+observe dear friends as I have already
+specified here it just indeeds to column
+3 which is equal to 2 multiple by column
+2 minus column 1. So here yes these are
+columns are linearly dependent and this
+explains that uh rank deficiency and
+existency of non-trival null space this
+exact interpretations of null vector of
+course kindly just uh observe so for an
+example if we have v as like xyz
+and uh yes then if we just go towards
+the a multiple by so here it would be x
+* column 1 + y * column 2 and plus ez
+multiplied by column 3 which is equal to
+zero. So here the exact v encodes the
+exact linear combination that cancels
+out and when coming towards this uh rank
+functionality. Kindly just observe dear
+friends here as I have already specified
+there is a key rule that is rank of a
+which is equal to number of nonzero egn
+value. So here counting multiplicity for
+diagonalizable cases. So here kindly
+just observe when on just making the
+matrix maps of R3 into 3 here the rank
+equal to two. So image is a 2D plane and
+here one direction is completely
+collapsed and that direction is the null
+space that is AV which is equal to zero.
+And here important things is while the
+rule holds here more preciously that is
+rank which is equal to number of nonzero
+singular values for symmetric or
+diagonalizable matrix this aligns with
+nonzero EGN values and dear friends
+kindly just observe one important
+functionalities yes if we just the
+script establish the chain that is
+linear dependency which is equal towards
+rank of deficiency and which would be
+equal to determinant of a which is zero
+and which implies lambda which is equal
+to zero. So a non-trivial null space
+occurs and yes dear friends this exact
+script yes summarize the matrix yes is a
+singular because its columns are
+linearly dependent. This guarantees at
+least one zero EG value and the
+corresponding EGN vector is a null space
+vector and rank equals the number of
+independent directions preserved by the
+transformation. So this example
+constantly ties together with EGN
+values, null spaces, rank, linear
+dependency into a single coherent
+picture. And towards this let we just
+have a summarization that relationship
+between the matrix that is EGN values
+between matrix rank and EGN values.
+So here if a matrix is a full rank or
+invertible then all of its EG are non
+zero. For an example if the EGN values
+are as like three and minus one neither
+is zero so the matrix is full rank.
+On the other hand if the matrix is rank
+deficient or singular then it has at
+least one EGN value equal to zero. So
+here for an example the EN value five
+and zero indicate that the matrix is
+singular and more generally if the rank
+of an M byN matrix is less than its
+maximum possible rank the matrix has
+zero EGN values corresponding to its
+rank deficiency.
+So for an example consider a matrix of
+size uh three with rank two. So its een
+value could be 10 or minus1 and zero. So
+the presence of the zero een value
+indicates that the matrix is singular.
+Let we discuss on quadratic form and
+definitess. Dear friends, we arrive at
+one of the most practical important
+concept in EGN decomposition. Yes,
+definitess. It sounds intimidating but
+the idea is simple. Okay, towards the
+quadratic form. Dear friends, kindly
+just observe. Let we have a given square
+matrix A. Okay. So and and many vectors
+W. Okay. So here of compatible size. So
+the quadratic form of this would be
+kindly just observe Q which is equal to
+W transpose multiple A multiple W. This
+takes a matrix and a vector and produce
+a single scalar Q. The question is what
+is the sign of Q for all possible vector
+W? Let us connect this to EGN value
+using the EGN value equation. Of course,
+we all know A multiple by V which is
+equal to lambda multiple by V and left
+multiplying by V transpose. What we just
+get? Yes. V transpose multiple by A
+multiple by V which is equal to V
+transpose whole multiple by lambda
+multiple by V. So which is equal to
+kindly just observe lambda multiple by v
+transpose multiple by v. So kindly just
+observe dear friends this would be the v
+noms of square which is greater than
+zero. So here yes the quadratic form is
+would be lambda multiple by norms of v
+noms of the square and here since this v
+n the whole square is always positive we
+exclude v is equal to zero. So the sign
+of quadratic form is determined entirely
+by the sign of the EN value and because
+any vector can be written as a
+combination of EN vectors. The sign of
+all EN values determine the possible
+sign of quadratic form for any vector.
+Okay, let me just discuss that by the
+code. So kindly just observe dear
+friends. So this script illustrate the
+relationship between the agent values
+and definitess of a matrix via quadratic
+form and yes we already have uh
+discussed. So here the quadratic form of
+q of w which is equal to w transpose
+multiple a multiple w and verifies the
+theory empirically using random vector.
+So here kindly just observe dear friends
+we are just going to define the
+quadratic form definition as symmetric
+matrix A and yes here it is what the
+defined one and yes this has an array as
+like a 2 1 and 1 and three and we are
+just defining the EEN values. So both
+EEN values are positive. So kindly just
+observe when we just make use of this
+lambda 1 which would be greater than
+zero and lambda 2 that also would be
+greater than zero. And theoretically of
+course uh if all values are positive we
+always may specify as like w transpose
+multiple a multiple by w that would be
+greater than zero. So a is positive
+definite and when we just do towards
+that empirical test here evaluated
+values for uh 10,000 random vectors and
+here minimum value is still positive and
+yes dear friends this exact loop
+confirms that no direction produces a
+negative or zero value. So the quadratic
+form defines a strictly convex surface
+and onto the result. He has kindly just
+observed here friends the quadratic form
+is a elliptic ball and every direction
+curves upward and here no flat or
+downward directions would be there.
+Okay, we have an second example. So
+which it just specify an indefinite
+matrix. So here we have that indefinite
+matrix minus1 2 and 211 1. And of course
+we are going to have the een value for
+this indefinite matrix. Yes. uh when we
+just describe this one een value would
+be positive another een value would be
+negative. So yes dear friends. So for an
+uh indefinite functionality lambda 1
+that would be greater than zero and
+lambda 2 that would be less than zero.
+And if eian values have mixed sign here
+w transpose multiple by a multiple by w
+can be positive or negative. So here a
+is indefinite. And here we have the
+empirical result. Yes, minimum is
+negative, maximum is positive. So this
+exactly confforms some direction produce
+positive curvature other produce
+negative curvature. So here this exact
+in quadratic form is a saddle surface
+and curves upward is some direction
+downward in another directions. Okay. So
+let me just uh execute and identify the
+uh resultant. So here we have the exact
+positive definite and here we have the
+uh indefinite matrix. And kindly just
+observe dear friends we are just uh
+determining the sign of eian values by
+using the diagonalization. Yes, for
+diagonalizing kindly just observe if a
+which is equal to v multiple by lambda
+multiple vranspose then here we just get
+w transpose multiple by a * w which is
+equal to v transpose multiple by w the
+whole transpose multiple by lambda and
+for vranspose here v transpose and
+multiple by w so Let E is Z which is
+equal to V transpose multiple by W. Then
+what we just get? Yes. Kindly just
+observe Wrpose multiple by A multiple by
+W which is equal to summation of I of
+lambda sub I multiple by is sub I
+squared. So each term is weighted by an
+EG value. Since here is sub I the square
+that is greater than or equal to zero.
+So that the sign depends entirely on
+this lambda subi. And dear friends
+kindly just observe. So with this we are
+just identifying the eian values. And if
+all eian values all greater than zero so
+definitess would be positive definite.
+And if all the een values are less than
+zero it would be negative definite. But
+if it has a mixer sign yes surely it is
+an indefinite functionality and kindly
+just observe dear friends if it is
+greater than or equal to zero that is
+some zeros would be there now. So in
+such a case it would be semi-definite
+functionality. So here with this
+functionality yes here we just get yes
+positive definite it is an uh unique
+minimum and in indefinite so we just get
+a saddle point and dear friends kindly
+just observe in machine learning yes
+hesian matrix determines curvature and
+with using the numerical method yes
+positive definite matrices enable
+efficient algorithm and yes dear friends
+this exact uh code just demonst
+demonstrate positive definite matrix. So
+all eian values here are positive and
+quadratic form always positive and here
+the geometry would be convex bold. And
+when coming towards the example two as
+an indefinite matrix. So we just get
+mixed sign value and here quadratic form
+can be positive or negative and the
+geometry would be saddle surface. So the
+key identity would be yes as we have
+already discussed. So it would be as
+like a W transpose multiple A multiple
+by W which is equal to summation of I of
+lambda subi multiple by sub I squared
+which explains why EGN values completely
+determinine definitess. based on the
+sign of Eian value every square matrix
+falls into one of the five definitess
+categories. So positive definitess all
+the Eian value that is lambda sub i
+would be greater than zero and for
+positive semidefinitness that is all
+lambda sub i would be greater than or
+equal to zero. So in such a case sum
+would be zero also and when coming
+towards indefinitess yeah it would have
+the mixed values of positive and
+negative and going for negative
+semidefinitness
+that is all eg value that is lambda sub
+i that would be less than or equal to
+zero and yes here also some values would
+be zero and last but not least negative
+definitess that is All een value that is
+lambda sub i would be less than zero. If
+why this definitess matters in data
+science or machine learning. It is
+mainly important for yes of course
+optimization. Yes gradient descent
+requires the loss functions heesian
+matrix that is the matrix of second
+derivatives to be positive semidefinite
+at a minimum. If the hesian is
+indefinite you are at a saddle point not
+a minimum. And of course a covariant
+matrix every valid coariance matrix is
+positive semidefinite here positive
+definite if the data is full rank. So if
+you compute a coariance matrix and find
+a negative each value something went
+wrong in your computation. And next
+cheloski decomposition that is the first
+matrix factorization which is a which is
+equal to L multiple by L transpose works
+only on positive definite matrices. It
+is used in Monte Carlo symbolization to
+generate correlated random data. Okay.
+So here let me just visualize the
+quadratic form that is E is which is
+equal to W transpose multiple A multiple
+W. Yes, we are going to visualize this
+quadratic e form as a 3D surface for
+three classes of symmetric matrix. So
+making definitess geometric explicitly.
+So here we are just going to kindly just
+observe dear friends we are just going
+to create 3D subplots. One is for
+positive definite and the next one for
+indefinite and negative definite. So
+here we are defining the matrix and the
+titles. So each matrix is symmetric
+ensuring real eian value orthogonal
+principal directions and here we are
+having the uh grid over input space. So
+that defines the vector and yes towards
+the vector kindly just observe dear
+friends it would be w which is equal to
+w1 and w2. So yes column wise. So
+evaluate the quadratic form over a grid
+in two matrix that is R2. And here we
+are going to compute the quadratic form.
+So this is the expanded form of W
+transpose multiple A multiple W. And for
+symmetric a this simplifies into a sub 1
+* x² + 2 a sub12 * x y + a sub 22 * y²
+and kindly just observe dear friends
+this exact line yes it was for surface
+plotting. So here height is represents
+the exact equation of W transpose
+multiple by A multiple by W. So here
+color map enhances curvature
+visualization. And here we are just
+going to have the EGN values in the
+Titus. So it displays EG values for each
+matrix. So these directly determine the
+surface space and here it reference the
+exact plane that is is equal to0 which
+provides a baseline to compare sine of
+wranspose multiple by a multiple by w.
+So here we have the exact matrix value
+for positive definite indefinite and uh
+negative definite. So let me just first
+of all evaluate the exact een value and
+then we visualize the uh output. So the
+case a yes it is for positive definite.
+So the matrix a which is equal to 2 0.5.
+So here the exact eg value both would be
+greater than zero and yes the surface
+here it just makes upward opening ball
+that is would be elliptical parabol
+right and entirely above is which is is
+equal to zero. So here Wrpose multiple
+by A multiple by W would be greater than
+zero. And when going on to the second
+case yes it is for indefinite. Yeah we
+are having the matrix A which is equal
+to minus1 and 2 and 2 and 1. So here the
+exact EGN value one would be positive
+and another would be negative. So here
+the surface would be saddle space that
+is hyperbolic parabolic and here the
+exact value is would crosses the plane
+the w transpose multiple a multiple w
+would be greater than zero or less than
+zero and towards the case yes we are
+just going to have the negative definite
+yes kindly just observe the matrix a it
+is -3 minus - 0.5 and -0.5 and here it
+is -2. So yes value both would be less
+than zero and here downward opening bowl
+that surface would be downward opening
+ball and entirely below the isert is
+equal to zero and yes dear friends here
+our equations would be that is wrpose
+multiple a multiple w would be less than
+zero. Okay, let me just visualize the
+exact output. So here each surface shows
+the value of W transpose multiple A
+multiple by W as a function of the two
+element vector that is W which has a W1
+and W2 the whole transpose and the gray
+plane makes the iset which is equal to
+zero and here when coming towards this
+positive definite kindly just observe
+difference the lambda value it is 1.8
+and 3.2 2 and here the surface forms a
+upward opening bowl that never touches
+or crosses the gray plane. No matter
+which directions you move in the W1 or
+W2 plane the quadratic form is always
+positive. Next here the indefinite
+kindly just observe the lambda value it
+is minus 2.2 and 2.2. So here the
+surface forms a shadow shape. It curves
+upward in some direction and downward in
+other. So the surface crosses the gray
+plane. Kindly just observe this is what
+the gray plane and meaning that
+quadratic form is positive for some
+vectors and negative for others. And the
+last one it is all about negative
+definite. So both lambda which is equal
+to the eian value it is negative that is
+minus3.2 and minus 1.8. So the surface
+forms a downward opening bowl always
+below the gray scale. So this is the
+plane. Okay. And here that is what below
+the gray plane. So the quadratic form is
+always negative. This is the maximum
+analog of positive definite. And dear
+friends the een value determine the
+shape. So the een value defines the axis
+of the ball saddle and the agent value
+determine the curvature along each axis.
+So larger lambda means tighter
+curvature. That's it. So this code turns
+an abstract algebraic object into a
+geometric one. So quadratic form that
+surfaces in 3D. And here EGN value
+curvature along principal axis. And here
+definitess by position reality to isert
+is equal to zero. So it provides a
+direct visual proof that is een values
+signs always relate with global shape of
+w transpose multiple by a multiple by w
+and furthermore here we have one thing
+dear friends that is always that is a
+transpose multiple by a is always
+positive semidefinite see one of the
+most important fact in applied linear
+algebra that is any matrix of form yes
+which is equal to a transpose multiple
+by a is guaranteed to be a positive
+semidefinite and of course positive
+definite also if a has full column rack
+and here we have the exact proof kindly
+just observe wrpose multiple s multiple
+w
+of course here we are just going to have
+the squared norms of a multiple by w
+that would be greater than or equal to
+zero Because this exact the squared norm
+of a * w is always non zero. That is
+magnitudes cannot be negative. It equals
+zero only when a w which is equal to
+zero. So which happens only when W is in
+the null space of A that is when A is
+singular difference for every coariance
+matrix which is computed as like C which
+is equal to 1 / N minus one whole
+multiple XRpose multiple X here X is the
+mean center data matrix. So therefore
+every co covariant matrix would be a
+positive semidefinite that is which is
+guaranteed that is all eg value that
+would be greater than or equal to zero.
+So variance is never be a negative and
+all een values are real valued all een
+values are orthogonal and the een
+decomposition is numerically stable. So
+let me just discuss that by using the
+code. So here it is what? So dear
+friends this exact script verifies a
+fundamental results in linear algebra
+that is for any real matrix A the matrix
+A transpose A is always symmetric
+positive semidefinite and is positive
+definite if A has a full column rank. So
+let me just set up the test cases. So
+here you are going to evaluate a
+transpose multiple by a across different
+shapes and ranks to show the result is
+universal not dimension specific. So yes
+a tall matrix or wide matrix a square
+matrix and rank deficient. And here we
+are going to construct the matrix that
+is a transpose multiple by a. So here it
+defines the two main key properties that
+one it is all about the symmetry. Yes,
+of course. A transpose multiple by A.
+The whole transpose which is equal to A
+transpose multiple A and second it is
+for quadratic form. So kindly just
+observe X transpose multiple by A
+transpose multiple A whole multiple X
+which is equal to A multiple X whole
+transpose multiple A multiple X. So here
+yes the square norms of a multiple by x
+that is greater than or equal to zero.
+So this immediately implies all EGN
+values are non- negative and here
+exactly kindly just observe this is what
+the EGN value computation and here it EG
+h is used because a transpose A is a
+symmetric. So here it returns real
+sorted region values and here we are
+just going to have the non- negative
+checks that allows for small numerical
+error also. Yes, it just confirms that
+is uh lambda sub i that would be greater
+than or equal to zero. And dear friends
+kindly just observe this one. Yes, we
+are just going to deduct the definitess.
+So here whether it is a positive
+definite or positive semidefinite we are
+going to observe on execution and here
+we are having the exact tall matrix
+kindly just observe. So each cases we
+are just going to have it and each cases
+we have a different uh matrix formation.
+So let me just discuss that and then we
+just go for the execution. So in on just
+case A that is the tall matrix. So it
+has a 5 into3 matrix. So likely full
+column matrix here it would be the rank
+would be three and of course for A
+transpose A it would be a 3 into 3
+matrix and surely it is a positive
+definite and when just going for the B
+cases actually it is a wide matrix and
+it is of 3 into 5 matrix and kindly just
+observe the rank actually it would be
+less than or equal to three and when
+suppose was going for a transpose A.
+Yes, kindly just to see here it would be
+a 5 into 5 matrix and surely it has at
+least two zero EN value. So it would be
+a positive semidefinite. Next the case
+it is all about a square matrix. Yes, it
+is a 4 into 4 matrix and here if it is a
+full rank it should would be a positive
+definite or otherwise it would be a
+semidefinite. So kindly just keep keep
+it in mind. And the last case yes it is
+a ranked deficient matrix. And here
+kindly just observe dear friends here we
+are just having a 2x3 matrix. And yes
+the rank it would be less than or equal
+to two. And when going on for a
+transpose a yes it has at least one zero
+een value that is positive semidefinite
+functionality. And here we are just
+going to have a relation with the
+singular values also. Yes dear friends
+EGN values of a transpose a or kindly
+just observe lambda sub i which is equal
+to sigma sub i the square and here where
+sigma sub i are a singular values of a.
+So thus always non- negative and here
+zero EGN value would be equalized to
+zero singular value which it just
+implies the rank deficiency and here we
+have the rank relationship. So yes dear
+friends rank of A transpose A which is
+equal to rank of A. So number of nonzero
+EGN value would be equal to rank of A.
+So let me execute. So as here we have
+already discussed. So kindly just see
+here dear friends. So yes here we have
+the tall matrix. So the shape of matrix
+it is 5 into 3 and here the rank is
+three. And when on just evaluating the a
+transpose a yes the shape is 3 into 3
+and the eian value yes all the eian
+values are positive and yeah it is a
+category of positive definite and when
+just going for this wide matrix kindly
+just observe we just have 3 into 5 and
+the exact rank yes it is exactly three
+and when going for the eian value kindly
+just observe dear friends we have few
+zeros also that is less than or equal to
+zero and when just going on towards this
+square matrix kindly just observe dear
+friends. So here yes uh it is a 4 into
+four matrix and here we have the uh rank
+it is also four and all the exact een
+values are positive and as it is a full
+rank we just get a positive definite
+functionality. So if it is not a full
+rank we just get a semi definite. Okay.
+So here it is a full rank functionality.
+And last but not least the rank
+deficiency and kindly just observe the
+rank it is two and here we have an uh of
+course at least one zero value here it
+is. So it is a positive semidefinite
+functionality. Dear friends, kindly just
+observe in every test case the EGN value
+of this A transpose A are non- negative.
+Confirming the proof. When A is full
+column rank, all EN values are strictly
+positive. When A is rank definition,
+some EEN values are exactly zero. And
+here the connection towards the
+variances. In PCA the EGN values of
+covariant matrix represents the variance
+captured by each principal component. A
+negative variance would be physically
+meaningless. So it would be like saying
+yes uh the data varies by minus3 unit or
+like that. So here the a transpose a
+structures ensures this never happens.
+And one thing dear friends not all
+symmetric matrices are positive
+semi-defined. So from this the code
+empirically confirms that a transpose a
+is always symmetric positive
+semidefinite and it is positive definite
+if rank a which is equal to number of
+columns and yes dear friends the final
+takeaway functionalities surely I have
+to specify this yes so here xrpose
+multiple by a transpose multiple by a
+multiple x which is equal to yes double
+norms of a multiple x that would be
+greater than or equal to zero. So this
+identity is the entire reasons the
+result holds and it underpins a large
+portion of numerical linear algebra and
+optimization.
+Okay dear friends, let me just discuss
+about generalized EG decomposition. Dear
+friends, standard EN decomposition
+solves a multiple by V which is equal to
+lambda multiple by V. And here
+generalized egent decomposition solves a
+more general problem that is a multiple
+by b which is equal to lambda multiple
+by matrix b multiple by b. Here instead
+of scaling the eian vector by scalar
+that is uh lambda v we are going to
+scale it by another matrix times a
+scalar that is lambda b * v. So the
+resulting here the lambda and v vector
+pair are not eian vectors of matrix a
+alone or b alone. They characterize the
+this relationship between this both the
+matrix. So conceptually you can think of
+generalized eent decomposition as a
+regular egent decomposition of product
+of a multiple by b inverse. So though
+the implementation does not require the
+matrix b to be invertible. So here
+actually this is very much useful in
+data science or machine learning mainly
+in uh fissures linear discriminant
+analysis. Yes a classification
+techniques finds the projections that
+maximize the between class variation
+relationships to the within class
+variance. So this is formulated as a
+generalized egent decomposition of two
+covariance matrix. And here the standard
+requirement is that this exact B yes is
+a positive definite which is a
+guaranteed when B is a coariance matrix.
+Okay, let me just discuss it by code.
+Kindly just observe dear friends. So the
+exact script demonstrate the generalized
+eian decomposition problem and
+mathematically specified as like a
+multiple b which is equal to lambda
+multiple b * v for symmetric positive
+definite matrix of a and b and verifies
+its properties numerically. So here we
+are just going to construct the uh SPD
+that is symmetric positive definite
+matrices here and yes kindly just
+observe which is a guaranteed symmetric
+positive definite because here R
+multiple by R inverse is always
+symmetric and positive semidefinite and
+this exact matrix when we just add with
+of course A / 10 this ensures a strict
+positive definitess B and better
+numerical conditioning. So here both A
+and B satisfies that is Xrpose A * X
+that would be greater than zero and
+Xrpose B * X that would be greater than
+zero and here when we just go towards
+the generalized EGN problem we define
+here this AGN vectors and Eian values.
+So yes this exactly solves yeah as to
+the same a multiple b sub i which is
+equal to lambda sub i multiple by b * v
+sub i and here kindly just observe dear
+friends this eian value yes it is a
+generalized eian value and towards the
+vectors yes it is a generalized uh eian
+vectors towards the column and when we
+just interpret for this generalized is
+the EGN decomposition. Dear friends,
+kindly just observe unlike standardized
+EGN decomposition that is a V which is
+equal to lambda V, this generalized EG
+decomposition measures scaling relative
+to B. So here we just get lambda which
+is equal to V transpose A * V divided by
+V transpose B * V. So this is a
+generalized ray like quotient and yes we
+are just going to have a verification
+check that is here with this loop. Yes,
+we are just going to have the
+verification and by using the lambda
+functionality it just going to check the
+equation a multiple by v sub i that
+would equals with lambda sub i b * v sub
+i and here yes kindly just observe this
+all close formula confirms numerical
+correctness and for symmetric positive
+definitess for b this eian vector
+satisfied that is V sub I transpose
+multiple by V * V subj which is equal to
+if I which is equal to J it would be 1
+and if I which is not equal to J it
+would be zero so here EN vectors are
+orthonormal under the B that is inner
+product not the standard dot product
+kindly have a note and when we just go
+towards the reduction to standard EGN
+decomposition here GED that is
+generalized EGN decomposition can be
+converted to a standard problem. So
+since the exact standard problem for uh
+this B matrix here B which is equal to C
+multiple by C transpose that is using
+Cholleski formula and here then we are
+just going to define a A tile that is C
+inverse multiple by A multiple by C
+inverse the whole transpose and we are
+just going to solve this by A multiple
+by U which is equal to lambda U and it
+just recovers that V which is equal to C
+inverse the whole transpose multiple by
+U and of course we just have this EGN H
+so which performs this transformation
+internally and kindly just observe dear
+friends it has a connection to a
+standard EN decomposition yes by using
+EG and H and here kindly just observe
+when we have B is equal to identity okay
+when we just have B is equal to identity
+Our GED that is generalized agent
+decomposition reduced to a multiple by V
+which is equal to lambda multiple by V.
+And here you can just check this by
+using this all close functionality. And
+yes we are just going to get a
+generalized solver matches standard
+agent decomposition. And here let I just
+execute. And dear friends kindly just
+observe this is what the matrix A. Okay.
+So here it is a symmetric and positive
+definite and the matrix B. Yes, this is
+also a symmetric positive uh definite
+and here we just get the generalized EEN
+value and we just uh have the
+generalized EEN vectors towards the
+column and when we just interpret with
+generalized EG decomposition that is
+GED. Yes, here we just get the
+verification of this the lambda
+functionality that is by using this.
+Yeah, we are having that is a v which is
+equal to lambda b * vi. So here this is
+what the a and yes this one it just
+makes the b * v which both are kindly
+just observe both are equalizing. So
+this confirms numerical correctness and
+when we just go towards the connection
+to standardized uh agent decomposition.
+Kindly just observe dear friends here
+when B is equal to identity the GED with
+this functionality it also equalize the
+exact value. So yes both are same and it
+just confirm generalized solver matches
+standard Eian decomposition and yes dear
+friends by using this code yes this
+exact code demonstrate solving the
+generalized
+problem that is a v which is equal to
+lambda multiple by b * v yes verifying
+correctness numerically and showing
+equalence to standard egent
+decomposition when b is equal equal to
+identity and here implicitly it using
+the fact that B defines a metric. Egen
+vectors are orthogonal under that metric
+and one thing I have to add on dear
+friends. So generalized Egent
+decomposition answers a deeper question
+that the standard case that is in which
+direction does A dominate relative to B.
+So this make it fundamental in problem
+involving ratios of uh quadratic form
+not just absolute scaling. So before we
+conclude let us verify two beautiful
+mathematical relationship that connect
+agent value to quantities we already
+know. One of course the summation of
+agian values and in mathematically
+summation from i = 1 to m of lambda sub
+i which is equals to the trace of a and
+second one yes the product of eian
+values that is the product form of i
+which is equals to 1 to m of lambda sub
+i which is equal to determinant of a. So
+let we just have the experimental setup
+that is we are just going to have a
+random square matrix of varying uh 3
+into three size and four into four size
+and five into five size and here values
+may be real or complex and computation
+uses floating point arithmetic and uh
+dear friends kindly just observe here we
+are just going to have the uh trace and
+summation of each values that is trace
+versus summation of each values and
+Theoretically it just results trace of A
+which is equal to summation of I of
+lambda sub I and dear friends this trace
+is the sum of diagonal elements and here
+always equals the sum of EN values that
+is continuing multiplicity. Here we are
+just having it with a dot real that is
+complex EN values occurs in conjugate
+pair. Uh for an example uh let just give
+like this. So here uh a + b i plus a
+minus b i which is equal to 2 a and here
+imaginary part cancels. So the total is
+real and uh dear friends kindly just
+observe this uh determinant of a and
+product evaluation. So theoretically it
+just specify yes uh as I have already
+specified. So kindly just see
+determinant of A which is equal to
+product of I which is equal to 1 to M of
+lambda sub I. So here determinant
+encodes total volume scaling values
+represents scaling along principal
+director. So product combines these
+effect and yes dear friends numerically
+we have yes comparison we are just going
+to have yes uses tolerance based
+comparison due to floating points
+rounding and numerical eg decomposition
+errors. So let me just execute and uh
+when we just go towards this uh trial
+one. Yes. Here we have 5 into 5 matrix
+and here 4 into 4 matrix. The sum of all
+the roots which is equal to the trace
+and here the product of the roots which
+is equal to the determinant. Actually
+this comes directly from the
+characteristic polomial of determinant
+of a minus lambda I. And dear friends
+actually from polomial theory here the
+sum of roots which is equal to trace and
+the product of roots which is equal to
+determinant. So from that yes kindly
+just observe this is what the trace and
+here sum of the roots which is equal to
+trace and yes we get the determinant of
+a and here product of that EN value that
+is the roots which equals the the
+determinant value. So yes it matches all
+the same and yes dear friends these
+properties holds for any square matrix
+that is non just symmetric real or
+complex matrix even if matrix is not
+diagnizable or egen values are complex
+and yes dear friends from this we are
+able to say that is trace totally linear
+scaling effect and yes the trace is sum
+of directional stretch factors and when
+coming towards determinant. It is total
+volume scaling effect and it includes
+orientation that is sign [snorts] and
+yes from the script the confirms
+experimental that trace which is equal
+to sum of EN value and determinant which
+is equal to product of EN value. So
+these are not coincident but structural
+invariance derived from the
+characteristic polomial and they remain
+valid across all square matrix
+regardless of symmetry or
+diagonalizability.
+And that's a wrap dear friends. Today we
+explored one of the most elegant concept
+in mathematics and data science. We
+begin with a simple question. What
+happens when a matrix transforms a
+vector? And that questions less us into
+the fascinating world of Egen values and
+Egen vectors. We have discussed Egen
+vectors are special directions that
+remains unchanged in orientation. Egen
+values tells us how much those
+directions stretch or shrink. And here
+the most important lesson is yes each
+decomposition is not about mattresses.
+It is about finding hidden patterns.
+When data becomes complicated, egen
+vector reveals the important direction.
+When data set becomes highdimensional,
+PCA uses EEN vector to simplify them.
+When noise hides useful information, EG
+values helps separate signals from
+noise. So that's why Egen decomposition
+powers PCA, machine learning, computer
+vision, signal processing, network
+analysis, financial modeling, scientific
+computing. Of course, dear friends,
+every time a machine learning model
+discovers hidden structure in data,
+agent decomposition is often working
+quietly behind the scenes. I hope I
+think so this session would be very much
+useful. Yes, dear friends, the true
+power of mathematics lies not in solving
+equation but in discovering the hidden
+patents behind them. So, thanks for
+watching. See you in the next session
+dear friends. Happy learning.

@@ -1,0 +1,303 @@
+# SjNait8gv6Y
+# https://youtu.be/SjNait8gv6Y
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on Eigen decomposition, which
+is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure, that
+is a set of special direction, which we
+just to say Eigen vectors. An associated
+scaling factor, yes, that is what Eigen
+value. The two together tells us
+everything about what the matrix does.
+And yes, dear friends, here it is what a
+simple-looking
+equation, A multiple by V, which equals
+lambda multiple by V. It looks small,
+but this single equation powers, yes,
+principal component analysis, noise
+reduction, data compression, graphic
+analysis, dynamical systems, yes, of
+course, a lot and lot. And this exact
+equation, yes, when matrix A multiplies
+with a special vector V, the result is
+simply that same vector scaled by this
+number, that is lambda. Here the vector
+V is an Eigen vector and the scale
+lambda is its corresponding Eigen value.
+Finding all such pairs, that is lambda
+and V, is what Eigen decomposition is
+all about. And dear friends, of course,
+there is a prerequisite also. Yes, you
+should be comfortable with the matrix
+multiplication, determinants, the null
+space, a matrix rank, and we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover, yes, what Eigen values and
+Eigen vector really mean, and why Eigen
+decomposition works only for square
+matrix, the geometric interpretations of
+stretching without rotating, how Eigen
+value reveals see
+patterns in data, the characteristic
+polynomial, finding eigen vectors using
+the null space, and matrix
+diagonalization. And last, yes, why
+symmetric matrices are the superheroes
+of linear algebra. And added, yes, we
+will see why eigen decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Let me
+first let me discuss diagonalizing a
+square matrix. Each eigen value and
+eigen vector pair gives us one equation.
+Yes, mathematically it is A multiplied
+by V sub I, which is equal to lambda sub
+I multiplied by V sub I. For an M into M
+matrix, we have M such equations. We can
+combine them all into a single elegant
+matrix equation. Now, let collect all
+eigen vector as column of matrix V, and
+all eigen values in a diagonal matrix of
+lambda. So, with this, observe let me
+just have a matrix as like. Here, if we
+have A multiplied by V matrix, that is
+eigen vectors, so here it would be V1,
+V2, V3 till VM matrix. And this would be
+equal to, yes, as such, V1, V2, V3 till
+VM. This is the vec- vectors. And here,
+the eigen values in a diagonal matrix.
+So, lambda 1, 0, 0 till to the last
+column, and 0, lambda 2, and 0 till to
+the last column. Yes, as such, we have 0
+till lambda M. This is what our V eigen
+vectors, and this is what the lambda
+eigen values. So, this gives us, yes, A
+multiplied by V, which is equal to V
+multiplied by lambda. The magic of
+diagonal matrix on the right. Yes, when
+V is post multiplied by this lambda,
+each column of V gets scaled by the
+corresponding diagonal entry. And he
+column I, of course, of V is multiple by
+all these lambda I. Exactly what the
+eigen value equation says. And here,
+when on just a rearranging, kindly just
+to see here, dear friends, when on just
+rearranging, if I just go for V, which
+is equal to V multiple by lambda
+multiple by V inverse. And dear friends,
+this is called the eigen decomposition
+or diagonalization of A. So, it
+decomposes the matrix into three
+factors. One, a changes of basis, that
+is V inverse. A simple diagonal scaling,
+lambda. And the inverse changes of the
+base V. And dear friends, in the
+standard basis, A is a complex matrix
+with entries everywhere. But from a
+perspective of an eigen vector basis, A
+is simply a diagonal matrix. All it does
+is a scale each axis independently. And
+here the eigen decomposition reveals the
+natural coordinate system in which the
+matrix has the simplest possible form.
+Let we just discuss by the code. Kindly
+just observe here, dears. This exact
+script demonstrate matrix
+diagonalization, verifying both the
+forward relation, A multiple by V, which
+is equal to V multiple by lambda. And
+the reconstruction form, that is A,
+which is equal to V multiple by lambda
+and multiple by V inverse. So, here let
+we just to define the matrix. So, here A
+is a 2 into 2 matrix. And here we have
+the eval and ecalc, that is eigen value
+lambda one and lambda two. And here
+eigen vector, that is matrix V, whose
+columns are eigen vectors. And dear
+friends, kindly just observe, here is
+the constructing of the diagonal matrix.
+So, this matrix contains only scaling
+factor along its diagonal. So, when we
+just do lambda, yes, we just get lambda,
+which is equal to lambda one zero zero
+and lambda two. So, this is what the
+exact. So, this matrix contains only
+scaling factors along a diagonal. So,
+here it is what the core exact core
+identity, that is AV which is equal to V
+multiplied by lambda. So, when we just
+make it mathematically, kindly just
+observe. We, of course, we have two
+vectors, V1 and V2. And if we just
+multiply by A, so here we just get AV1
+and AV2. Using the eigen value property,
+kindly just observe AV sub I which is
+equal to lambda sub I multiplied by VI.
+This would be happens as like AV which
+is equal to lambda one V1 and lambda two
+V2. Actually, this is what V multiplied
+by lambda.
+And dear friends, kindly just observe
+this exact left hand side which we just
+have this. Yes.
+Apply transformation to each eigen
+vectors.
+And each right side, yes, it just scales
+eigen vector. So, this produce the same
+result confirming that AV which is equal
+to V lambda. And coming towards the
+reconstruction, kindly just observe dear
+friends, when on just reconstructing,
+yes, what we just have is
+A which is equal to V multiplied by
+lambda multiplied by V inverse.
+So, here
+we are just changing the bases and we
+are just going to scale it and change
+back with the V. Yeah, we are just going
+to have this. And actually, why this
+works is, yeah, when on just making
+towards this particular, kindly just
+observe dear friends, if we just have
+this is what the base. Okay? So, this is
+what the base. If we multiple both the
+sides by V inverse, what happens? So,
+this V and multiple by V inverse, so
+here we just have A and V lambda V
+inverse. Here, diagonalizing
+decomposition at transformation into
+three steps.
+Yes, we want to check whether we have
+any rotation, that is changes
+coordination is there or not. Yes, that
+is done by V inverse.
+Do we have any scale independently along
+the principal direction? Yes, that is
+what the lambda.
+And transform back to the original
+basis. Yes, that is what the V, the
+eigen vectors.
+And for verification, yes, we are just
+going to have this all close. Yes, we
+are just going to have your both the
+things, that is A multiple by V, which
+is equal to V multiple by lambda. This
+is one. And here's the second one, A,
+which is equal to V multiple by lambda
+multiple by V inverse. So, numerical
+tolerance is required due to floating
+point arithmetic
+arithmetic. So, yeah, we are just going
+to discuss this. Let we execute and view
+the output.
+So, kindly just observe dear friends,
+this is what our matrix A. And here we
+just identifying the eigen values. When
+we just have towards the eigen vectors,
+V,
+when on multiplying the both, yeah, we
+just get with a lambda function, that is
+diagonal matrix lambda function.
+On verifying, kindly just observe, the
+resultant of A multiple by V, which is
+equal to V multiple by lambda. So, both
+are equal. Yes, of course, it is true.
+And even on reconstruction, kindly just
+observe dear friends, A which is equal
+to V multiplied by lambda and multiplied
+by V inverse. So here that too we just
+get the same exact matching. So this is
+what the resultant and we just have our
+original A. So both are equal. And
+difference kindly just observe
+difference this exact functionality has
+three equivalent forms of
+diagonalization. Yes, starting from this
+A multiplied by V which is equal to V
+multiplied by lambda, we can rearrange
+to get these three equations. So that is
+A multiplied by V which is equal to V
+multiplied by lambda and A which is
+equal to V multiplied by lambda
+multiplied by V inverse and lambda which
+is equal to V inverse multiplied by A
+and multiplied by V.
+So here kindly just observe the second
+form. This exact decomposes the matrix
+into its eigen structure. And here the
+third form, yes, it shows that A becomes
+diagonal when we transform it into the
+eigen vector basis.
+This is why the process is called
+diagonalization.
+The matrix A is dense and complicated in
+the standard basis but diagonal and
+trivial in its eigen basis. Difference
+the eigen vector form a new coordinate
+system that is V inverse converts a
+vector from the standard basis to the
+eigen vector basis.
+So in this new coordinate system the
+matrix A is diagonal. It simply
+stretches each axis by corresponding
+eigen value. Then V converts back to the
+standard basis. So matrix multiplication
+by A is fundamentally just stretching
+along M independent directions.
+So yes difference this exact code
+verifies two fundamental identities.
+Yes, the one it is A multiplied by V
+which is equal to V multiplied by
+lambda.
+And the decomposition that is A which is
+equal to V multiplied by lambda
+multiplied by V inverse. So, it shows
+that a linear transformation can be
+understood as a change of basis into
+agent vector coordinates. An independent
+scaling along those direction and a
+transformation back to the original
+space. So, this is the core structural
+insights behind agent decomposition. We
+have discussed agent vectors are special
+directions that remains unchanged in
+orientation. Agent values tells us how
+much those directions stretch or shrink.
+The characteristic equation helps us
+uncover agent values and agent vectors.
+A emerges from the null space of shifted
+matrices. And here the most important
+lesson is, yes, agent decomposition is
+not about matrices. It is about finding
+hidden patterns. When data becomes
+complicated, agent vector are reveals
+the important direction. When data set
+becomes high dimensional, PCA uses agent
+vector to simplify them. When noise
+higher hides useful information, agent
+values helps separate signals from
+noise. So, that's why agent
+decomposition powers PCA, machine
+learning, computer vision, signal
+processing, network analysis, financial
+modeling, scientific computing. Of
+course, dear friends, every time a
+machine learning model discovers hidden
+structure in data, agent decomposition
+is often working quietly behind the
+scenes. Hope I think all this session
+would be very much useful. Yes, dear
+friends, the true power of mathematics
+lies not in solving equation, but in
+discovering the hidden patterns behind
+them. So, thanks for watching. See you
+in the next session, dear friends. Happy
+learning.

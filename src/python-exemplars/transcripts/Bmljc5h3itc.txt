@@ -1,0 +1,278 @@
+# Machine Learning Mathematics Ep 38 | Singular Matrices | Zero Eigenvalue, Rank & Eigendecomposition
+# https://youtu.be/Bmljc5h3itc
+
+Happy morning, dear friends. Here's your
+Dr. Rajendra. Welcome to Demystify with
+Ajay. Dear friends, today we are going
+to discuss on Eigen decomposition, which
+is one of the most powerful and
+beautiful ideas in all of linear
+algebra. It takes a square matrix and
+reveals its fundamental structure, that
+is a set of special direction, which we
+just to say Eigen vectors. An associated
+scaling factor, yes, that is what Eigen
+value. The two together tells us
+everything about what the matrix does.
+And yes, dear friends, here it is what a
+simple-looking
+equation, A multiple by V, which equals
+lambda multiple by V. It looks small,
+but this single equation powers, yes,
+principal component analysis, noise
+reduction, data compression, graphic
+analysis, dynamical systems, yes, of
+course, a lot and lot. And this exact
+equation, yes, when matrix A multiplies
+with a special vector V, the result is
+simply that same vector scaled by this
+number, that is lambda. Here the vector
+V is an Eigen vector and the scale
+lambda is its corresponding Eigen value.
+Finding all such pairs, that is lambda
+and V, is what Eigen decomposition is
+all about. And dear friends, of course,
+there is a prerequisite also. Yes, you
+should be comfortable with the matrix
+multiplication, determinants, the null
+space, a matrix rank, and we will also
+use the concept of matrix shifting. And
+dear friends, in this session, we will
+uncover, yes, what Eigen values and
+Eigen vector really mean, and why Eigen
+decomposition works only for square
+matrix, the geometric interpretations of
+stretching without rotating, how Eigen
+value reveals see
+patterns in data, the characteristic
+polynomial, finding eigen vectors using
+the null space, and matrix
+diagonalization. And last, yes, why
+symmetric matrices are the superheroes
+of linear algebra. And added, yes, we
+will see why eigen decomposition is the
+mathematical engine behind PCA and many
+machine learning algorithms. Okay, now
+let me just to discuss on singular
+matrix. Dear friends, a common
+misconception is always there. That is
+learner sometimes think that singular,
+that is non-invertible matrices, cannot
+be eigen decomposed. This is completely
+wrong. Eigen decomposition works
+perfectly well on singular matrix. And
+here the special property is that at
+least one eigen value is guaranteed to
+be zero. But think about why. See, a
+singular matrix has a non-trivial null
+space, meaning there exists a non-zero
+V. So, such that AV, which is is equal
+to zero. Now, comparing with
+AB, which is equal to lambda V, we see
+that this lambda, which is equal to
+zero, and V is the null space vector.
+So, that we just get this exact
+equation. Yes, conversely, if all eigen
+values are non-zero, the matrix must be
+full rank, that is invertible. Let me
+just discuss this by using the code. So,
+here, yes, this exact script analyze the
+eigen decomposition of a singular matrix
+and connects eigen value, rank, and
+linear dependency. Let me just start
+defining the matrix A, so which is 147,
+258, and 369. Okay? And here we are
+defining the rank and the determinant.
+And kindly just observe, here of course
+we have a 3 into 3 matrix, but
+uh uh
+it won't out of uh three. Okay, let me
+just see. And uh let me just determine
+what is the determinant, too.
+And uh dear friends, kindly just observe
+here. We are just uh uh defining the
+eigen values and eigen vector. Yes, of
+course, typically, eigen values uh one
+eigen value would be uh zero. And uh
+here, two eigen values are uh non-zero.
+And uh yes, dear friends, uh here we
+just uh uh going to have the null space
+uh via eigen value for lambda, which is
+equal to zero. So, this extracts the uh
+eigen vector corresponding to the uh
+lambda, which is equal to zero. And uh
+here, we are just going to have the
+verification. Yes, that exact
+verification, this confirms uh AV, which
+is equal to zero. And uh kindly just
+observe, dear friends, here we are just
+uh having the linear dependency of the
+column. So, here the exact uh code that
+inspects the relationship between the
+columns. And uh here, of course, kindly
+just observe, two into column two minus
+column one. Yes, which equals the column
+three. Okay, so yes, columns are
+linearly dependent. So, this explains uh
+rank deficiency and existency of an
+non-trivial null space. So, kindly just
+observe, dear friends, on execution. So,
+yes, here we have the matrix uh A.
+Okay. And uh kindly just observe, the
+rank, it is uh two. And here,
+determinant, it is zero. Yes, it just
+says A is singular, that is
+non-invertible.
+And when we just come towards these
+eigen values, yes, kindly just observe,
+dears, one eigen value is zero.
+So, two eigen values are non-zeros.
+Okay, so kindly just observe that.
+And this exactly specifies uh that
+kindly just observe a matrix is singular
+if and only if the determinant of A
+which is equal to zero.
+And we have already discussed and
+product of agent values that is
+a product from I which is equal to one
+to M of lambda sub I which is equal to
+determinant of A.
+So here if the determinant is zero, at
+least one agent must be zero.
+So yes, dear friends, that is what here
+determinant is zero and we have one
+agent is zero. And then coming towards
+this
+null space
+agent vector, so for a lambda which is
+equal to zero, yes, here we just verify
+that is A multiple by V which is zero.
+So this agent values lies in the null
+space of A.
+And when coming towards this linear
+dependency of columns, kindly just
+observe dear friends as I have already
+specified, here it just indeed to column
+three which is equal to two multiple by
+column two minus column one. So here
+yes, these all columns are linearly
+dependent and this explains that
+uh rank deficiency and existence of
+non-trivial null space. This exact
+interpretations of uh null vector. Of
+course, kindly just
+observe. So for an example, if we have a
+V as like X Y Z and uh yes, then if we
+just go towards the A multiple by V, so
+here it would be X multiple by column
+one plus Y multiple by column three and
+plus Z multiple by column three which is
+equal to zero. So here the exact V
+encodes the exact linear combination
+that cancels out. And when coming
+towards this rank functionality, kindly
+just observe, dear friends, here as I
+have already specified, there is a key
+rule that is
+rank of A, which is equal to number of
+non-zero eigenvalue. So, here counting
+multiplicity for diagonalizable cases.
+So, here kindly just observe when on
+just making making the matrix maps of R
+3 into 3, here the rank equal to 2. So,
+image is a 2D plane. And here one
+direction is completely collapsed, and
+that direction is the null space. That
+is AV, which is equal to zero. And here
+important things is while the rule holds
+here more preciously, that is rank,
+which is equal to number of non-zero
+singular values. For symmetric or
+diagonalizable matrix, this aligns with
+non-zero eigenvalues.
+And dear friends, kindly just observe
+one important functionalities. Yes, if
+we just the script establish the chain,
+that is linear dependency, which is
+equal towards rank of deficiency. And
+which would be equal to determinant of
+A, which is zero. And which implies
+lambda, which is equal to zero. So, a
+non-trivial null space occurs. And yes,
+dear friends, this exact script, yes,
+summarize the matrix, yes, is a singular
+because its columns are linearly
+dependent.
+This guarantees at least one zero
+eigenvalue, and the corresponding
+eigenvector is a null space vector.
+And rank equals the number of
+independent directions preserved by the
+transformation. So, this example
+concentrately ties together with the
+eigen values, null spaces, rank, linear
+dependency into a single coherent
+picture. And towards this, let me just
+have a summarization that relationship
+between the matrix, that is eigen
+values, between matrix rank and eigen
+values.
+So, here if a matrix is a full rank
+or invertible, then all of its eigen are
+non-zero. For an example, if the eigen
+values are as like three and minus one.
+Neither is zero, so the matrix is full
+rank.
+On the other hand, if the matrix is rank
+deficient or singular, then it has at
+least one eigen value equal to zero. So,
+here for an example, the eigen value
+five and zero indicate that the matrix
+is singular.
+And more generally, if the rank of an m
+by n matrix is less than its maximum
+possible rank, the matrix has zero eigen
+values corresponding to its rank
+deficiency.
+So, for an example, consider a matrix of
+size
+three with rank two. So, its eigen value
+could be
+10 or minus one and zero. So, the
+presence of the zero eigen value
+indicates that the matrix is singular.
+[snorts]
+We have discussed eigen vectors are
+special directions that remains
+unchanged in orientation. Eigen values
+tells us how much those directions
+stretch or shrink. The characteristic
+equation helps us uncover eigen values
+and eigen vectors emerges from the null
+space of shifted matrices. And here, the
+most important lesson is yes, eigen
+decomposition is not about matrices. It
+is about finding hidden patterns. When
+data becomes complicated, Eigenvector
+reveals the important direction. When
+data set becomes high dimensional, PCA
+uses Eigenvector to simplify them. When
+noise higher hides useful information,
+Eigenvalues helps separate signals from
+noise. So, that's why Eigen
+decomposition powers PCA, machine
+learning, computer vision, signal
+processing, network analysis, financial
+modeling, scientific computing, Of
+course, dear friends, every time a
+machine learning model discovers hidden
+structure in data, Eigen decomposition
+is often working quietly behind the
+scenes. I hope I think so this session
+would be very much useful. Yes, dear
+friends, the true power of mathematics
+lies not in solving equation, but in
+discovering the hidden patterns behind
+them. So, thanks for watching. See you
+in the next session, dear friends. Happy
+learning.
