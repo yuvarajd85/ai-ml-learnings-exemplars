@@ -5,6 +5,8 @@
 notebooks/.ipynb_checkpoints/*
 notebooks/*/.ipynb_checkpoints/*
 .env
+**/.env
+.codex/config.toml
 venv
 venv/*
 src/*/__pycache__
